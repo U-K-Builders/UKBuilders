@@ -100,6 +100,7 @@ export default function Footer() {
         <Link to="/timeline" className="text-text-muted hover:text-gold transition-colors duration-300">Timeline</Link>
         <Link to="/our-story" className="text-text-muted hover:text-gold transition-colors duration-300">Our Legacy</Link>
         <Link to="/contact" className="text-text-muted hover:text-gold transition-colors duration-300">Contact</Link>
+        <Link to="/owner-portal" className="text-text-muted hover:text-gold transition-colors duration-300">Owner Portal</Link>
       </div>
 
       <p className="mt-2 text-xs opacity-60">&copy; 2026 U.K. Builders. All rights reserved. RERA Registered.</p>
