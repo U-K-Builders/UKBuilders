@@ -89,6 +89,105 @@ function ProgressStepper({ steps }) {
   );
 }
 
+function BellIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 shrink-0" aria-hidden="true">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function MilestoneSubscribeForm({ projectName, nextMilestone }) {
+  const [fields, setFields] = useState({ name: '', email: '' });
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFields((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errs = {};
+    if (!fields.name.trim()) errs.name = 'Name is required.';
+    if (!fields.email.trim()) errs.email = 'Email is required.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email address.';
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    setSubmitted(true);
+  };
+
+  if (submitted) {
+    return (
+      <div className="bg-navy border border-gold mt-10 px-8 py-10 flex flex-col md:flex-row items-center gap-6">
+        <div className="w-12 h-12 rounded-full bg-gold/20 border border-gold flex items-center justify-center shrink-0 text-gold">
+          <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <div>
+          <p className="text-gold text-sm font-bold uppercase tracking-[2px] mb-1">You&apos;re subscribed</p>
+          <p className="text-text-light text-sm leading-[1.8]">
+            We&apos;ll notify you at <span className="text-white">{fields.email}</span> whenever {projectName} reaches a new construction milestone.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-navy border border-gold/40 mt-10 px-8 py-10">
+      <div className="flex items-start gap-4 mb-6">
+        <span className="text-gold mt-0.5"><BellIcon /></span>
+        <div>
+          <h4 className="text-white font-serif text-xl tracking-[1px] mb-1">Stay Updated on Construction Progress</h4>
+          <p className="text-text-muted text-sm leading-[1.8]">
+            Receive an email notification each time {projectName} hits a major construction milestone
+            {nextMilestone ? ` — next up: ${nextMilestone}` : ''}.
+          </p>
+        </div>
+      </div>
+      <form onSubmit={handleSubmit} noValidate>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex-1">
+            <input
+              name="name"
+              type="text"
+              autoComplete="name"
+              value={fields.name}
+              onChange={handleChange}
+              placeholder="Your name"
+              className={`w-full bg-white/5 border px-4 py-3 text-white text-sm placeholder-text-muted focus:outline-none focus:border-gold transition-colors duration-300 ${errors.name ? 'border-red-400' : 'border-white/20'}`}
+            />
+            {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+          </div>
+          <div className="flex-1">
+            <input
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={fields.email}
+              onChange={handleChange}
+              placeholder="your@email.com"
+              className={`w-full bg-white/5 border px-4 py-3 text-white text-sm placeholder-text-muted focus:outline-none focus:border-gold transition-colors duration-300 ${errors.email ? 'border-red-400' : 'border-white/20'}`}
+            />
+            {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+          </div>
+          <button
+            type="submit"
+            className="shrink-0 bg-gold text-white px-8 py-3 text-[11px] uppercase tracking-[2px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300"
+          >
+            Notify Me
+          </button>
+        </div>
+        <p className="text-text-muted text-[10px] mt-3 uppercase tracking-[1px]">No spam — milestone updates only. Unsubscribe at any time.</p>
+      </form>
+    </div>
+  );
+}
+
 function BookVisitForm({ projectName }) {
   const [fields, setFields] = useState({ name: '', phone: '', email: '' });
   const [errors, setErrors] = useState({});
@@ -353,6 +452,10 @@ export default function ProjectDetailPage() {
             <section>
               <SectionHeading>Construction Progress</SectionHeading>
               <ProgressStepper steps={project.progress} />
+              <MilestoneSubscribeForm
+                projectName={project.name}
+                nextMilestone={project.progress.find((s) => s.status === 'upcoming')?.label}
+              />
             </section>
           )}
 
