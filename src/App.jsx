@@ -17,6 +17,9 @@ import VirtualCallPage from './pages/VirtualCallPage';
 import GalleryPage from './pages/GalleryPage';
 import ResourcesPage from './pages/ResourcesPage';
 import OwnerPortalPage from './pages/OwnerPortalPage';
+import InvestorsPage from './pages/InvestorsPage';
+import RedevelopmentPage from './pages/RedevelopmentPage';
+import ContractorsPage from './pages/ContractorsPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -45,6 +48,9 @@ export default function App() {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/owner-portal" element={<OwnerPortalPage />} />
+        <Route path="/investors" element={<InvestorsPage />} />
+        <Route path="/redevelopment" element={<RedevelopmentPage />} />
+        <Route path="/contractors" element={<ContractorsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

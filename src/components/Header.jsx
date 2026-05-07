@@ -11,7 +11,7 @@ export default function Header() {
 
   const isActive = (path) => location.pathname === path;
   const isProjectsActive = location.pathname.startsWith('/projects') || location.pathname === '/timeline';
-  const isContactActive = location.pathname === '/contact' || location.pathname === '/book-a-call';
+  const isContactActive = ['/contact', '/book-a-call', '/investors', '/redevelopment', '/contractors'].includes(location.pathname);
 
   const navLinkClass = (active) =>
     `text-[13px] tracking-[1px] uppercase no-underline pb-1 transition-all duration-300 border-b-2 leading-none ${
@@ -68,11 +68,13 @@ export default function Header() {
         >
           <span className={`${navLinkClass(isContactActive)} cursor-pointer`}>Contact</span>
           {contactOpen && (
-            <div className="absolute top-full right-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+            <div className="absolute top-full right-0 mt-[1px] bg-navy min-w-[240px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
               <Link to="/contact" className={dropdownLinkClass}>Contact Us</Link>
-              <Link to="/book-a-call" className="block px-5 py-4 text-[13px] tracking-[1px] uppercase no-underline text-gold hover:bg-white/5 transition-all duration-300">
-                Book a Video Call
-              </Link>
+              <Link to="/book-a-call" className={dropdownLinkClass}>Book a Video Call</Link>
+              <div className="border-t border-white/10 mx-5 my-1" />
+              <Link to="/investors" className={dropdownLinkClass}>For Investors</Link>
+              <Link to="/redevelopment" className={dropdownLinkClass}>For Redevelopment</Link>
+              <Link to="/contractors" className={dropdownLinkClass}>For Contractors</Link>
             </div>
           )}
         </div>
@@ -160,7 +162,10 @@ export default function Header() {
             {mobileContactOpen && (
               <div className="bg-white/5">
                 <Link to="/contact" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Contact Us</Link>
-                <Link to="/book-a-call" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-gold hover:text-gold/70 transition-all duration-300">Book a Video Call</Link>
+                <Link to="/book-a-call" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Book a Video Call</Link>
+                <Link to="/investors" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Investors</Link>
+                <Link to="/redevelopment" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Redevelopment</Link>
+                <Link to="/contractors" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300">For Contractors</Link>
               </div>
             )}
           </div>
