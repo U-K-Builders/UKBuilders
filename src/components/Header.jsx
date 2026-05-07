@@ -23,13 +23,16 @@ export default function Header() {
   const location = useLocation();
   const [dark, toggleDark] = useTheme();
   const [projectsOpen, setProjectsOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false);
+  const [mobileHistoryOpen, setMobileHistoryOpen] = useState(false);
   const [mobileContactOpen, setMobileContactOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
-  const isProjectsActive = location.pathname.startsWith('/projects') || location.pathname === '/timeline';
+  const isProjectsActive = location.pathname.startsWith('/projects');
+  const isHistoryActive = location.pathname === '/history' || location.pathname === '/timeline';
   const isContactActive = ['/contact', '/book-a-call', '/investors', '/redevelopment', '/contractors'].includes(location.pathname);
 
   const navLinkClass = (active) =>
@@ -42,6 +45,7 @@ export default function Header() {
   const closeMobile = () => {
     setMobileOpen(false);
     setMobileProjectsOpen(false);
+    setMobileHistoryOpen(false);
     setMobileContactOpen(false);
   };
 
@@ -70,14 +74,26 @@ export default function Header() {
                 <Link to="/projects/ongoing" className={dropdownLinkClass}>Ongoing Projects</Link>
                 <Link to="/projects/upcoming" className={dropdownLinkClass}>Upcoming Projects</Link>
                 <Link to="/projects/completed" className={dropdownLinkClass}>Completed Projects</Link>
+              </div>
+            )}
+          </div>
+
+          {/* Company History dropdown */}
+          <div
+            className="relative flex items-center"
+            onMouseEnter={() => setHistoryOpen(true)}
+            onMouseLeave={() => setHistoryOpen(false)}
+          >
+            <span className={`${navLinkClass(isHistoryActive)} cursor-pointer`}>Company History</span>
+            {historyOpen && (
+              <div className="absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+                <Link to="/history" className={dropdownLinkClass}>Company History</Link>
                 <Link to="/timeline" className="block px-5 py-4 text-[13px] tracking-[1px] uppercase no-underline text-white hover:bg-white/5 hover:text-gold transition-all duration-300">
                   Project Timeline
                 </Link>
               </div>
             )}
           </div>
-
-          <Link to="/history" className={navLinkClass(isActive('/history'))}>Company History</Link>
           <Link to="/our-story" className={navLinkClass(isActive('/our-story'))}>Our Legacy</Link>
 
           {/* Contact dropdown */}
@@ -154,20 +170,27 @@ export default function Header() {
                 <Link to="/projects/ongoing" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300">Ongoing Projects</Link>
                 <Link to="/projects/upcoming" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Upcoming Projects</Link>
                 <Link to="/projects/completed" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Completed Projects</Link>
-                <Link to="/timeline" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Project Timeline</Link>
               </div>
             )}
           </div>
 
-          <Link
-            to="/history"
-            onClick={closeMobile}
-            className={`block px-6 py-4 text-[13px] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
-              isActive('/history') ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
-            }`}
-          >
-            Company History
-          </Link>
+          {/* Mobile Company History */}
+          <div>
+            <button
+              onClick={() => setMobileHistoryOpen(!mobileHistoryOpen)}
+              className={`w-full text-left px-6 py-4 text-[13px] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer transition-all duration-300 ${
+                isHistoryActive ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
+              }`}
+            >
+              Company History
+            </button>
+            {mobileHistoryOpen && (
+              <div className="bg-white/5">
+                <Link to="/history" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Company History</Link>
+                <Link to="/timeline" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Project Timeline</Link>
+              </div>
+            )}
+          </div>
 
           <Link
             to="/our-story"
