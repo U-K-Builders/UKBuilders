@@ -25,8 +25,8 @@ export default function HomePage() {
       <div className="py-24 px-5 bg-surface-subtle">
         <div className="max-w-[1200px] mx-auto">
           <SectionTitle>Legacy Projects</SectionTitle>
-          <Carousel interval={10000} visibleCount={3}>
-            {completedProjects.slice(0, 9).map((project) => (
+          <Carousel interval={5000} visibleCount={3}>
+            {completedProjects.filter((p) => p.image).map((project) => (
               <SignatureCard key={`${project.name}-${project.year}`} project={project} className="h-full" />
             ))}
           </Carousel>
