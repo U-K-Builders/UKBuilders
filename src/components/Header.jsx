@@ -1,8 +1,27 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
+
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" aria-hidden="true">
+      <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" />
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export default function Header() {
   const location = useLocation();
+  const [dark, toggleDark] = useTheme();
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -34,55 +53,65 @@ export default function Header() {
         </h1>
       </Link>
 
-      {/* Desktop Nav */}
-      <nav className="hidden md:flex gap-6 items-center">
-        <Link to="/" className={navLinkClass(isActive('/'))}>Home</Link>
+      <div className="flex items-center gap-3">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-6 items-center">
+          <Link to="/" className={navLinkClass(isActive('/'))}>Home</Link>
 
-        {/* Projects dropdown */}
-        <div
-          className="relative flex items-center"
-          onMouseEnter={() => setProjectsOpen(true)}
-          onMouseLeave={() => setProjectsOpen(false)}
+          {/* Projects dropdown */}
+          <div
+            className="relative flex items-center"
+            onMouseEnter={() => setProjectsOpen(true)}
+            onMouseLeave={() => setProjectsOpen(false)}
+          >
+            <span className={`${navLinkClass(isProjectsActive)} cursor-pointer`}>Projects</span>
+            {projectsOpen && (
+              <div className="absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+                <Link to="/projects/ongoing" className={dropdownLinkClass}>Ongoing Projects</Link>
+                <Link to="/projects/upcoming" className={dropdownLinkClass}>Upcoming Projects</Link>
+                <Link to="/projects/completed" className={dropdownLinkClass}>Completed Projects</Link>
+                <Link to="/timeline" className="block px-5 py-4 text-[13px] tracking-[1px] uppercase no-underline text-white hover:bg-white/5 hover:text-gold transition-all duration-300">
+                  Project Timeline
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <Link to="/history" className={navLinkClass(isActive('/history'))}>Company History</Link>
+          <Link to="/our-story" className={navLinkClass(isActive('/our-story'))}>Our Legacy</Link>
+
+          {/* Contact dropdown */}
+          <div
+            className="relative flex items-center"
+            onMouseEnter={() => setContactOpen(true)}
+            onMouseLeave={() => setContactOpen(false)}
+          >
+            <span className={`${navLinkClass(isContactActive)} cursor-pointer`}>Contact</span>
+            {contactOpen && (
+              <div className="absolute top-full right-0 mt-[1px] bg-navy min-w-[240px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+                <Link to="/contact" className={dropdownLinkClass}>Contact Us</Link>
+                <Link to="/book-a-call" className={dropdownLinkClass}>Book a Video Call</Link>
+                <div className="border-t border-white/10 mx-5 my-1" />
+                <Link to="/investors" className={dropdownLinkClass}>For Investors</Link>
+                <Link to="/redevelopment" className={dropdownLinkClass}>For Redevelopment</Link>
+                <Link to="/contractors" className={dropdownLinkClass}>For Contractors</Link>
+              </div>
+            )}
+          </div>
+        </nav>
+
+        {/* Theme toggle */}
+        <button
+          onClick={toggleDark}
+          className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-gold transition-colors duration-300 bg-transparent border-none cursor-pointer shrink-0"
+          aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          <span className={`${navLinkClass(isProjectsActive)} cursor-pointer`}>Projects</span>
-          {projectsOpen && (
-            <div className="absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
-              <Link to="/projects/ongoing" className={dropdownLinkClass}>Ongoing Projects</Link>
-              <Link to="/projects/upcoming" className={dropdownLinkClass}>Upcoming Projects</Link>
-              <Link to="/projects/completed" className={dropdownLinkClass}>Completed Projects</Link>
-              <Link to="/timeline" className="block px-5 py-4 text-[13px] tracking-[1px] uppercase no-underline text-white hover:bg-white/5 hover:text-gold transition-all duration-300">
-                Project Timeline
-              </Link>
-            </div>
-          )}
-        </div>
+          {dark ? <SunIcon /> : <MoonIcon />}
+        </button>
 
-        <Link to="/history" className={navLinkClass(isActive('/history'))}>Company History</Link>
-        <Link to="/our-story" className={navLinkClass(isActive('/our-story'))}>Our Legacy</Link>
-
-        {/* Contact dropdown */}
-        <div
-          className="relative flex items-center"
-          onMouseEnter={() => setContactOpen(true)}
-          onMouseLeave={() => setContactOpen(false)}
-        >
-          <span className={`${navLinkClass(isContactActive)} cursor-pointer`}>Contact</span>
-          {contactOpen && (
-            <div className="absolute top-full right-0 mt-[1px] bg-navy min-w-[240px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
-              <Link to="/contact" className={dropdownLinkClass}>Contact Us</Link>
-              <Link to="/book-a-call" className={dropdownLinkClass}>Book a Video Call</Link>
-              <div className="border-t border-white/10 mx-5 my-1" />
-              <Link to="/investors" className={dropdownLinkClass}>For Investors</Link>
-              <Link to="/redevelopment" className={dropdownLinkClass}>For Redevelopment</Link>
-              <Link to="/contractors" className={dropdownLinkClass}>For Contractors</Link>
-            </div>
-          )}
-        </div>
-      </nav>
-
-      {/* Mobile Hamburger */}
-      <button
-        className="md:hidden flex flex-col gap-[5px] bg-transparent border-none cursor-pointer p-2"
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden flex flex-col gap-[5px] bg-transparent border-none cursor-pointer p-2"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label="Toggle menu"
       >
@@ -90,6 +119,7 @@ export default function Header() {
         <span className={`block w-6 h-[2px] bg-gold transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
         <span className={`block w-6 h-[2px] bg-gold transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
       </button>
+      </div>{/* end right-side flex group */}
 
       {/* Click-outside overlay */}
       {mobileOpen && (
