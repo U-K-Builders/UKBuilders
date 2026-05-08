@@ -13,30 +13,30 @@ const AMENITIES = [
 
 const ORLEM_NEIGHBOURHOOD = {
   schools: [
-    { name: 'Pinnacle High International School', lat: 19.1960, lng: 72.8348, distance: '~0.2 km' },
-    { name: 'Shri Balaji International School', lat: 19.1968, lng: 72.8353, distance: '~0.2 km' },
-    { name: "St. Joseph's High School", lat: 19.1942, lng: 72.8378, distance: '~0.3 km' },
-    { name: "St. Anne's High School & Junior College", lat: 19.1985, lng: 72.8360, distance: '~0.4 km' },
-    { name: 'Ramniwas Bajaj English High School', lat: 19.1860, lng: 72.8410, distance: '~1.1 km' },
+    { name: 'Pinnacle High International School', lat: 19.1958, lng: 72.8355, distance: '~0.1 km', icon: '🏫' },
+    { name: 'Shri Balaji International School',   lat: 19.1748, lng: 72.8357, distance: '~2.2 km', icon: '🏫' },
+    { name: "St. Joseph's High School",           lat: 19.1958, lng: 72.8380, distance: '~0.3 km', icon: '🏫' },
+    { name: "St. Anne's High School & Junior College", lat: 19.1962, lng: 72.8362, distance: '~0.2 km', icon: '🏫' },
+    { name: 'Ramniwas Bajaj English High School', lat: 19.1858, lng: 72.8447, distance: '~1.4 km', icon: '🏫' },
   ],
   hospitals: [
-    { name: 'Neon Critical Care Children\'s Hospital', lat: 19.1945, lng: 72.8375, distance: '~0.3 km' },
-    { name: 'Adarsh Hospital', lat: 19.1938, lng: 72.8382, distance: '~0.4 km' },
-    { name: 'Surana Hospital & Research Centre', lat: 19.1930, lng: 72.8388, distance: '~0.5 km' },
+    { name: "Neon Critical Care Children's Hospital", lat: 19.1956, lng: 72.8374, distance: '~0.2 km', icon: '🏥' },
+    { name: 'Adarsh Hospital',                        lat: 19.1963, lng: 72.8370, distance: '~0.2 km', icon: '🏥' },
+    { name: 'Surana Hospital & Research Centre',      lat: 19.2005, lng: 72.8380, distance: '~0.7 km', icon: '🏥' },
   ],
   religious: [
-    { name: 'Our Lady of Lourdes Church (Orlem Church)', lat: 19.1940, lng: 72.8382, distance: '~0.4 km' },
-    { name: "St. Peter's Jacobite Syrian Orthodox Church", lat: 19.1980, lng: 72.8345, distance: '~0.35 km' },
-    { name: "St. Anne's Church", lat: 19.1988, lng: 72.8362, distance: '~0.4 km' },
-    { name: 'Jama Masjid', lat: 19.1870, lng: 72.8430, distance: '~1.1 km' },
-    { name: 'Shree Icchapurti Hanuman Mandir', lat: 19.1820, lng: 72.8340, distance: '~1.4 km' },
+    { name: 'Our Lady of Lourdes Church (Orlem Church)',     lat: 19.1954, lng: 72.8376, distance: '~0.2 km', icon: '⛪' },
+    { name: "St. Peter's Jacobite Syrian Orthodox Church",   lat: 19.1968, lng: 72.8368, distance: '~0.2 km', icon: '⛪' },
+    { name: "St. Anne's Church",                             lat: 19.1962, lng: 72.8362, distance: '~0.2 km', icon: '⛪' },
+    { name: 'Jama Masjid',                                   lat: 19.1862, lng: 72.8408, distance: '~1.1 km', icon: '🕌' },
+    { name: 'Shree Icchapurti Hanuman Mandir',               lat: 19.1755, lng: 72.8354, distance: '~2.2 km', icon: '🛕' },
   ],
   landmarks: [
-    { name: 'Malad West Metro Station', lat: 19.1872, lng: 72.8367, distance: '~0.9 km' },
-    { name: 'Malad Railway Station', lat: 19.1867, lng: 72.8486, distance: '~1.5 km' },
-    { name: 'Infiniti Mall', lat: 19.1848, lng: 72.8341, distance: '~1.2 km' },
-    { name: 'Inorbit Mall', lat: 19.1730, lng: 72.8358, distance: '~2.4 km' },
-    { name: 'Malad BEST Bus Depot', lat: 19.1842, lng: 72.8349, distance: '~1.2 km' },
+    { name: 'Malad West Metro Station', lat: 19.1854, lng: 72.8358, distance: '~1.1 km', icon: '🚇' },
+    { name: 'Malad Railway Station',    lat: 19.1868, lng: 72.8486, distance: '~1.6 km', icon: '🚉' },
+    { name: 'Infiniti Mall',            lat: 19.1848, lng: 72.8341, distance: '~1.1 km', icon: '🛍️' },
+    { name: 'Inorbit Mall',             lat: 19.1702, lng: 72.8354, distance: '~2.8 km', icon: '🛍️' },
+    { name: 'Malad BEST Bus Depot',     lat: 19.1836, lng: 72.8357, distance: '~1.3 km', icon: '🚌' },
   ],
 };
 
