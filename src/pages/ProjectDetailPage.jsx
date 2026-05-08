@@ -4,6 +4,7 @@ import { projectDetails } from '../data/projectDetails';
 import Lightbox from '../components/Lightbox';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
+const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
 
 function CheckIcon() {
   return (
@@ -444,6 +445,77 @@ export default function ProjectDetailPage() {
                   Open in Google Maps ↗
                 </a>
               </p>
+            </section>
+          )}
+
+          {/* Neighbourhood Guide */}
+          {project.neighbourhood && (
+            <section>
+              <SectionHeading>Neighbourhood Guide</SectionHeading>
+              <p className="text-text-tertiary text-sm -mt-4 mb-6">
+                Key schools and hospitals within walking and driving distance of {project.name}.
+              </p>
+
+              {/* Map */}
+              <div className="w-full h-[420px] border border-border-light overflow-hidden mb-4">
+                <Suspense fallback={<div className="w-full h-full bg-surface-subtle flex items-center justify-center text-text-muted text-sm">Loading map…</div>}>
+                  <NeighbourhoodMap
+                    name={project.name}
+                    lat={project.lat}
+                    lng={project.lng}
+                    neighbourhood={project.neighbourhood}
+                  />
+                </Suspense>
+              </div>
+
+              {/* Legend */}
+              <div className="flex flex-wrap gap-5 text-xs uppercase tracking-[1px] text-text-muted mb-8">
+                <span className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-gold shrink-0" />Project
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-blue-500 shrink-0" />Schools
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full bg-red-500 shrink-0" />Hospitals
+                </span>
+                <span className="ml-auto italic normal-case tracking-normal">Distances are approximate</span>
+              </div>
+
+              {/* POI lists */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Schools */}
+                <div className="border border-border-light bg-surface-light p-6">
+                  <h4 className="text-navy text-[11px] uppercase tracking-[3px] font-bold mb-4 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-blue-500 shrink-0" />
+                    Schools
+                  </h4>
+                  <ul className="flex flex-col gap-3">
+                    {project.neighbourhood.schools.map((s) => (
+                      <li key={s.name} className="flex items-center justify-between gap-4">
+                        <span className="text-text-secondary text-sm">{s.name}</span>
+                        <span className="text-text-muted text-xs shrink-0">{s.distance}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Hospitals */}
+                <div className="border border-border-light bg-surface-light p-6">
+                  <h4 className="text-navy text-[11px] uppercase tracking-[3px] font-bold mb-4 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500 shrink-0" />
+                    Hospitals
+                  </h4>
+                  <ul className="flex flex-col gap-3">
+                    {project.neighbourhood.hospitals.map((h) => (
+                      <li key={h.name} className="flex items-center justify-between gap-4">
+                        <span className="text-text-secondary text-sm">{h.name}</span>
+                        <span className="text-text-muted text-xs shrink-0">{h.distance}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </section>
           )}
 

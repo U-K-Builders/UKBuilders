@@ -11,6 +11,23 @@ const AMENITIES = [
   'Premium Branded Fittings',
 ];
 
+const ORLEM_NEIGHBOURHOOD = {
+  schools: [
+    { name: 'Our Lady of Remedies High School', lat: 19.1793, lng: 72.8487, distance: '~0.2 km' },
+    { name: "St. Francis D'Assisi High School", lat: 19.1770, lng: 72.8464, distance: '~0.5 km' },
+    { name: 'Holy Cross High School', lat: 19.1779, lng: 72.8512, distance: '~0.4 km' },
+    { name: 'Ryan International School', lat: 19.1856, lng: 72.8422, distance: '~1.2 km' },
+    { name: 'Orchid International School', lat: 19.1832, lng: 72.8396, distance: '~1.1 km' },
+  ],
+  hospitals: [
+    { name: 'Holy Cross Hospital', lat: 19.1783, lng: 72.8512, distance: '~0.4 km' },
+    { name: 'Lifeline Hospital', lat: 19.1821, lng: 72.8442, distance: '~0.5 km' },
+    { name: 'Zenith Multispeciality Hospital', lat: 19.1846, lng: 72.8432, distance: '~1.1 km' },
+    { name: 'Bhagwati Municipal Hospital', lat: 19.1858, lng: 72.8449, distance: '~1.3 km' },
+    { name: 'Criticare Asia Hospital', lat: 19.1876, lng: 72.8415, distance: '~1.4 km' },
+  ],
+};
+
 export const projectDetails = {
   justin: {
     name: 'Justin',
@@ -39,6 +56,7 @@ export const projectDetails = {
       { type: 'Retail Shop', carpet: '430 sq.ft.' },
     ],
     constructionPhotos: [],
+    neighbourhood: ORLEM_NEIGHBOURHOOD,
     progress: [
       { label: 'Foundation & Excavation', date: 'Q1 2023', status: 'done' },
       { label: 'Plinth Level', date: 'Q3 2023', status: 'done' },
@@ -83,6 +101,7 @@ export const projectDetails = {
       { type: 'Shop 5', carpet: '350 sq.ft.' },
     ],
     constructionPhotos: [],
+    neighbourhood: ORLEM_NEIGHBOURHOOD,
     progress: [
       { label: 'Foundation & Excavation', date: 'Q2 2023', status: 'done' },
       { label: 'Plinth Level', date: 'Q4 2023', status: 'done' },
