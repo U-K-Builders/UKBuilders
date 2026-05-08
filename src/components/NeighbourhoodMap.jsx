@@ -1,35 +1,16 @@
 import { useEffect } from 'react';
-import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const CATEGORIES = [
-  { key: 'schools',   label: 'School'    },
-  { key: 'hospitals', label: 'Hospital'  },
-  { key: 'religious', label: 'Religious' },
-  { key: 'landmarks', label: 'Landmark'  },
+  { key: 'schools',   fill: '#3B82F6', stroke: '#1D4ED8', label: 'School'    },
+  { key: 'hospitals', fill: '#EF4444', stroke: '#B91C1C', label: 'Hospital'  },
+  { key: 'religious', fill: '#8B5CF6', stroke: '#6D28D9', label: 'Religious' },
+  { key: 'landmarks', fill: '#F59E0B', stroke: '#B45309', label: 'Landmark'  },
 ];
 
 const popupStyle = { fontFamily: 'Georgia, serif', fontSize: '12px', color: '#0B1D3A', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' };
 const subStyle   = { fontFamily: 'Helvetica Neue, Arial, sans-serif', fontSize: '11px', color: '#666', fontWeight: 'normal', textTransform: 'none', letterSpacing: 0, marginTop: '2px' };
-
-function makeIcon(emoji, size = 22) {
-  return L.divIcon({
-    html: `<div style="font-size:${size}px;line-height:1;text-align:center;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.4));">${emoji}</div>`,
-    className: '',
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
-    popupAnchor: [0, -(size / 2) - 4],
-  });
-}
-
-const PROJECT_ICON = L.divIcon({
-  html: `<div style="width:28px;height:28px;background:#C5A059;border:2.5px solid #0B1D3A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,0.35);">🏠</div>`,
-  className: '',
-  iconSize: [28, 28],
-  iconAnchor: [14, 14],
-  popupAnchor: [0, -18],
-});
 
 function FitBounds({ lat, lng, neighbourhood }) {
   const map = useMap();
@@ -57,26 +38,31 @@ export default function NeighbourhoodMap({ name, lat, lng, neighbourhood }) {
       <FitBounds lat={lat} lng={lng} neighbourhood={neighbourhood} />
 
       {/* Project pin */}
-      <Marker position={[lat, lng]} icon={PROJECT_ICON}>
+      <CircleMarker
+        center={[lat, lng]}
+        radius={12}
+        pathOptions={{ fillColor: '#C5A059', fillOpacity: 1, color: '#0B1D3A', weight: 2 }}
+      >
         <Popup>
           <span style={popupStyle}>{name}</span>
           <div style={{ ...subStyle, color: '#C5A059' }}>U.K. Builders</div>
         </Popup>
-      </Marker>
+      </CircleMarker>
 
       {/* POI pins */}
-      {CATEGORIES.map(({ key, label }) =>
+      {CATEGORIES.map(({ key, fill, stroke, label }) =>
         (neighbourhood[key] || []).map((poi) => (
-          <Marker
+          <CircleMarker
             key={poi.name}
-            position={[poi.lat, poi.lng]}
-            icon={makeIcon(poi.icon)}
+            center={[poi.lat, poi.lng]}
+            radius={8}
+            pathOptions={{ fillColor: fill, fillOpacity: 0.9, color: stroke, weight: 2 }}
           >
             <Popup>
               <span style={popupStyle}>{poi.name}</span>
               <div style={subStyle}>{label} · {poi.distance} from project</div>
             </Popup>
-          </Marker>
+          </CircleMarker>
         ))
       )}
     </MapContainer>
