@@ -78,8 +78,6 @@ export default function Header() {
             )}
           </div>
 
-          <Link to="/careers" className={navLinkClass(isActive('/careers'))}>Careers</Link>
-
           {/* Our Legacy dropdown */}
           <div
             className="relative flex items-center"
@@ -97,6 +95,8 @@ export default function Header() {
               </div>
             )}
           </div>
+
+          <Link to="/careers" className={navLinkClass(isActive('/careers'))}>Careers</Link>
 
           {/* Contact dropdown */}
           <div
@@ -176,16 +176,6 @@ export default function Header() {
             )}
           </div>
 
-          <Link
-            to="/careers"
-            onClick={closeMobile}
-            className={`block px-6 py-4 text-[13px] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
-              isActive('/careers') ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
-            }`}
-          >
-            Careers
-          </Link>
-
           {/* Mobile Our Legacy */}
           <div>
             <button
@@ -204,6 +194,16 @@ export default function Header() {
               </div>
             )}
           </div>
+
+          <Link
+            to="/careers"
+            onClick={closeMobile}
+            className={`block px-6 py-4 text-[13px] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
+              isActive('/careers') ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
+            }`}
+          >
+            Careers
+          </Link>
 
           {/* Mobile Contact */}
           <div>
