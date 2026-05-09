@@ -76,7 +76,7 @@ export default function Footer() {
           alt="U.K. Builders Logo"
           className="h-[60px] w-auto mix-blend-screen brightness-110"
         />
-        <h2 className="text-white m-0 uppercase tracking-[2px] text-[28px] font-serif md:translate-y-[15px]">
+        <h2 className="text-white m-0 uppercase tracking-[2px] text-[1.75rem] font-serif md:translate-y-[15px]">
           U.K. Builders
         </h2>
       </div>
@@ -116,13 +116,13 @@ export default function Footer() {
         {NAV_COLS.map(({ heading, links }) => (
           <div key={heading}>
             <div className="mb-5">
-              <h4 className="font-serif text-[15px] tracking-[1px] text-gold font-normal m-0 mb-2">{heading}</h4>
+              <h4 className="font-serif text-[0.9375rem] tracking-[1px] text-gold font-normal m-0 mb-2">{heading}</h4>
               <div className="w-6 h-[1px] bg-gold/40" />
             </div>
             <ul className="flex flex-col gap-3 list-none m-0 p-0">
               {links.map(({ to, label }) => (
                 <li key={to}>
-                  <Link to={to} className="text-text-muted hover:text-gold text-[12px] tracking-[1px] uppercase no-underline transition-colors duration-300">
+                  <Link to={to} className="text-text-muted hover:text-gold text-[0.75rem] tracking-[1px] uppercase no-underline transition-colors duration-300">
                     {label}
                   </Link>
                 </li>
@@ -133,7 +133,7 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="border-t border-white/8 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[900px] mx-auto text-[11px] tracking-[0.5px] text-white/25">
+      <div className="border-t border-white/8 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[900px] mx-auto text-[0.6875rem] tracking-[0.5px] text-white/25">
         <span>&copy; {new Date().getFullYear()} U.K. Builders. All rights reserved.</span>
         <span>MahaRERA Registration Pending · Orlem, Malad West</span>
       </div>

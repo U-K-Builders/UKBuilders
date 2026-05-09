@@ -6,7 +6,7 @@ export default function ProjectCard({ project }) {
   return (
     <div className="bg-white border border-gold p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(197,160,89,0.15)]">
       <div className="mb-4">
-        <h3 className="gradient-text font-serif text-3xl md:text-[46px] font-black uppercase tracking-[4px] md:tracking-[8px] m-0">
+        <h3 className="gradient-text font-serif text-3xl md:text-[2.875rem] font-black uppercase tracking-[4px] md:tracking-[8px] m-0">
           {project.name}
         </h3>
         <span className="block text-xs tracking-[5px] text-text-muted uppercase mt-2">
@@ -27,18 +27,18 @@ export default function ProjectCard({ project }) {
 
       <div className="mt-8 text-left">
         <div className="mb-6">
-          <span className="block text-navy text-[13px] font-extrabold uppercase tracking-[3px] mb-2 border-b-2 border-gold pb-1 w-fit">
+          <span className="block text-navy text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-2 border-b-2 border-gold pb-1 w-fit">
             Configurations
           </span>
-          <span className="block text-lg md:text-[22px] text-text-dark font-serif font-normal py-1">
+          <span className="block text-lg md:text-[1.375rem] text-text-dark font-serif font-normal py-1">
             {project.configs}
           </span>
         </div>
         <div className="mb-8">
-          <span className="block text-navy text-[13px] font-extrabold uppercase tracking-[3px] mb-2 border-b-2 border-gold pb-1 w-fit">
+          <span className="block text-navy text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-2 border-b-2 border-gold pb-1 w-fit">
             Location
           </span>
-          <span className="block text-lg md:text-[22px] text-text-dark font-serif font-normal py-1">
+          <span className="block text-lg md:text-[1.375rem] text-text-dark font-serif font-normal py-1">
             {project.location}
           </span>
         </div>

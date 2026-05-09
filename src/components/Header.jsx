@@ -37,11 +37,11 @@ export default function Header() {
   const isContactActive = ['/contact', '/book-a-call', '/investors', '/redevelopment', '/contractors'].includes(location.pathname);
 
   const navLinkClass = (active) =>
-    `text-[13px] tracking-[1px] uppercase no-underline pb-1 transition-all duration-300 border-b-2 leading-none ${
+    `text-[0.8125rem] tracking-[1px] uppercase no-underline pb-1 transition-all duration-300 border-b-2 leading-none ${
       active ? 'text-gold border-gold' : 'text-white border-transparent hover:text-gold hover:border-gold'
     }`;
 
-  const dropdownLinkClass = 'block px-5 py-4 text-[13px] tracking-[1px] uppercase no-underline text-white border-b border-white/5 hover:bg-white/5 hover:text-gold transition-all duration-300';
+  const dropdownLinkClass = 'block px-5 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white border-b border-white/5 hover:bg-white/5 hover:text-gold transition-all duration-300';
 
   const closeMobile = () => {
     setMobileOpen(false);
@@ -90,7 +90,7 @@ export default function Header() {
               <div className="absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
                 <Link to="/our-story" className={dropdownLinkClass}>Our Legacy</Link>
                 <Link to="/history" className={dropdownLinkClass}>Company History</Link>
-                <Link to="/timeline" className="block px-5 py-4 text-[13px] tracking-[1px] uppercase no-underline text-white hover:bg-white/5 hover:text-gold transition-all duration-300">
+                <Link to="/timeline" className="block px-5 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white hover:bg-white/5 hover:text-gold transition-all duration-300">
                   Project Timeline
                 </Link>
               </div>
@@ -157,7 +157,7 @@ export default function Header() {
           <Link
             to="/"
             onClick={closeMobile}
-            className={`block px-6 py-4 text-[13px] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
+            className={`block px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
               isActive('/') ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
             }`}
           >
@@ -168,7 +168,7 @@ export default function Header() {
           <div>
             <button
               onClick={() => setMobileProjectsOpen(!mobileProjectsOpen)}
-              className={`w-full text-left px-6 py-4 text-[13px] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer transition-all duration-300 ${
                 isProjectsActive ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
               }`}
             >
@@ -176,9 +176,9 @@ export default function Header() {
             </button>
             {mobileProjectsOpen && (
               <div className="bg-white/5">
-                <Link to="/projects/ongoing" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Ongoing Projects</Link>
-                <Link to="/projects/upcoming" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Upcoming Projects</Link>
-                <Link to="/projects/completed" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Completed Projects</Link>
+                <Link to="/projects/ongoing" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Ongoing Projects</Link>
+                <Link to="/projects/upcoming" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Upcoming Projects</Link>
+                <Link to="/projects/completed" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Completed Projects</Link>
               </div>
             )}
           </div>
@@ -187,7 +187,7 @@ export default function Header() {
           <div>
             <button
               onClick={() => setMobileLegacyOpen(!mobileLegacyOpen)}
-              className={`w-full text-left px-6 py-4 text-[13px] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer transition-all duration-300 ${
                 isLegacyActive ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
               }`}
             >
@@ -195,9 +195,9 @@ export default function Header() {
             </button>
             {mobileLegacyOpen && (
               <div className="bg-white/5">
-                <Link to="/our-story" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Our Legacy</Link>
-                <Link to="/history" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Company History</Link>
-                <Link to="/timeline" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Project Timeline</Link>
+                <Link to="/our-story" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Our Legacy</Link>
+                <Link to="/history" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Company History</Link>
+                <Link to="/timeline" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Project Timeline</Link>
               </div>
             )}
           </div>
@@ -205,7 +205,7 @@ export default function Header() {
           <Link
             to="/careers"
             onClick={closeMobile}
-            className={`block px-6 py-4 text-[13px] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
+            className={`block px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
               isActive('/careers') ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
             }`}
           >
@@ -216,7 +216,7 @@ export default function Header() {
           <div>
             <button
               onClick={() => setMobileContactOpen(!mobileContactOpen)}
-              className={`w-full text-left px-6 py-4 text-[13px] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer transition-all duration-300 ${
+              className={`w-full text-left px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer transition-all duration-300 ${
                 isContactActive ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
               }`}
             >
@@ -224,11 +224,11 @@ export default function Header() {
             </button>
             {mobileContactOpen && (
               <div className="bg-white/5">
-                <Link to="/contact" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Contact Us</Link>
-                <Link to="/book-a-call" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Book a Video Call</Link>
-                <Link to="/investors" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Investors</Link>
-                <Link to="/redevelopment" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Redevelopment</Link>
-                <Link to="/contractors" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300">For Contractors</Link>
+                <Link to="/contact" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Contact Us</Link>
+                <Link to="/book-a-call" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Book a Video Call</Link>
+                <Link to="/investors" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Investors</Link>
+                <Link to="/redevelopment" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Redevelopment</Link>
+                <Link to="/contractors" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300">For Contractors</Link>
               </div>
             )}
           </div>
@@ -236,7 +236,7 @@ export default function Header() {
           <Link
             to="/owner-portal"
             onClick={closeMobile}
-            className={`block px-6 py-4 text-[13px] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
+            className={`block px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
               isActive('/owner-portal') ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
             }`}
           >

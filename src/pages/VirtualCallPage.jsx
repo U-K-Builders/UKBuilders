@@ -125,7 +125,7 @@ export default function VirtualCallPage() {
       errors[field] ? 'border-red-400' : 'border-border-light'
     }`;
 
-  const labelClass = 'block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2';
+  const labelClass = 'block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2';
 
   if (submitted) {
     const chosenSlot = IST_SLOTS.find(s => s.label === fields.slot);
@@ -150,20 +150,20 @@ export default function VirtualCallPage() {
             </p>
             <div className="bg-navy text-white p-6 mb-8 text-left grid grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="block text-[10px] uppercase tracking-[2px] text-text-muted mb-1">Project</span>
+                <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Project</span>
                 <span>{fields.project}</span>
               </div>
               <div>
-                <span className="block text-[10px] uppercase tracking-[2px] text-text-muted mb-1">Date</span>
+                <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Date</span>
                 <span>{new Date(fields.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
               </div>
               <div>
-                <span className="block text-[10px] uppercase tracking-[2px] text-text-muted mb-1">Time (IST)</span>
+                <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Time (IST)</span>
                 <span>{fields.slot}</span>
               </div>
               {showLocalTime && chosenSlot && (
                 <div>
-                  <span className="block text-[10px] uppercase tracking-[2px] text-text-muted mb-1">Your Local Time</span>
+                  <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Your Local Time</span>
                   <span>{toLocalTime(chosenSlot.minutes, selectedTz.offset)}</span>
                 </div>
               )}
@@ -182,7 +182,7 @@ export default function VirtualCallPage() {
             </button>
           </div>
           <div className="mt-8">
-            <Link to="/" className="text-[11px] uppercase tracking-[3px] text-gold hover:underline">← Back to Home</Link>
+            <Link to="/" className="text-[0.6875rem] uppercase tracking-[3px] text-gold hover:underline">← Back to Home</Link>
           </div>
         </div>
       </div>
@@ -193,7 +193,7 @@ export default function VirtualCallPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <p className="text-[11px] uppercase tracking-[4px] text-gold mb-3">Virtual Site Visit</p>
+        <p className="text-[0.6875rem] uppercase tracking-[4px] text-gold mb-3">Virtual Site Visit</p>
         <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Book a Video Call
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
@@ -270,7 +270,7 @@ export default function VirtualCallPage() {
                   <label className={labelClass}>Preferred Date <span className="text-gold">*</span></label>
                   <input name="date" type="date" min={getMinDate()} value={fields.date} onChange={handleChange} className={inputClass('date')} />
                   {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
-                  <p className="text-text-muted text-[10px] mt-1">Monday – Saturday only</p>
+                  <p className="text-text-muted text-[0.625rem] mt-1">Monday – Saturday only</p>
                 </div>
                 <div>
                   <label className={labelClass}>Your Timezone</label>
@@ -298,7 +298,7 @@ export default function VirtualCallPage() {
                     >
                       <span className="block font-bold">{slot.label} IST</span>
                       {showLocalTime && (
-                        <span className="block text-[10px] mt-0.5 opacity-80">{slot.localLabel}</span>
+                        <span className="block text-[0.625rem] mt-0.5 opacity-80">{slot.localLabel}</span>
                       )}
                     </button>
                   ))}
@@ -320,7 +320,7 @@ export default function VirtualCallPage() {
           {/* Sidebar */}
           <div className="flex flex-col gap-6">
             <div className="bg-navy text-white p-8 border border-gold">
-              <span className="block text-[11px] uppercase tracking-[3px] text-gold mb-5">What to Expect</span>
+              <span className="block text-[0.6875rem] uppercase tracking-[3px] text-gold mb-5">What to Expect</span>
               <ul className="flex flex-col gap-4">
                 <CheckItem>Live video walkthrough of the building site and surroundings</CheckItem>
                 <CheckItem>Tour of the sample flat and common areas</CheckItem>
@@ -332,7 +332,7 @@ export default function VirtualCallPage() {
             </div>
 
             <div className="bg-surface-light border border-border-light p-8">
-              <span className="block text-[11px] uppercase tracking-[3px] text-navy font-bold mb-3">Prefer to Call Us?</span>
+              <span className="block text-[0.6875rem] uppercase tracking-[3px] text-navy font-bold mb-3">Prefer to Call Us?</span>
               <p className="text-text-secondary text-sm leading-[1.8] mb-4">Available Mon–Sat, 10 AM to 6 PM IST.</p>
               <a href="tel:+919820311177" className="flex items-center gap-2 text-gold font-serif text-lg hover:underline mb-2">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0" aria-hidden="true">
@@ -346,7 +346,7 @@ export default function VirtualCallPage() {
             </div>
 
             <div className="bg-gold/10 border border-gold/40 p-6">
-              <span className="block text-[11px] uppercase tracking-[3px] text-gold font-bold mb-2">NRI Buyers</span>
+              <span className="block text-[0.6875rem] uppercase tracking-[3px] text-gold font-bold mb-2">NRI Buyers</span>
               <p className="text-text-secondary text-sm leading-[1.7]">
                 We guide NRI buyers through the full process remotely — documentation, power of attorney, and registration. Our team speaks English, Hindi, and Gujarati.
               </p>

@@ -4,7 +4,7 @@ export default function TestimonialCard({ testimonial }) {
       <p className="italic text-base mb-5 leading-[1.8] text-text-light">
         &ldquo;{testimonial.quote}&rdquo;
       </p>
-      <p className="font-bold text-gold uppercase tracking-[1px] text-[13px]">
+      <p className="font-bold text-gold uppercase tracking-[1px] text-[0.8125rem]">
         — {testimonial.clientName}
       </p>
     </div>

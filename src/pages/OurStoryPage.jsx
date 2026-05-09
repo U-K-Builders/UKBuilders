@@ -107,7 +107,7 @@ export default function OurStoryPage() {
                     </div>
                     <h3 className="font-serif text-navy text-2xl font-normal mb-1">{person.name}</h3>
                     {person.title && (
-                      <span className="text-gold text-[11px] uppercase tracking-[3px] mb-7 block">{person.title}</span>
+                      <span className="text-gold text-[0.6875rem] uppercase tracking-[3px] mb-7 block">{person.title}</span>
                     )}
                     <p className="text-text-secondary text-sm leading-[1.9] text-left">{person.bio}</p>
                   </div>

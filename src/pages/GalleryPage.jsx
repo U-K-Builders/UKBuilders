@@ -25,7 +25,7 @@ function PhotoCard({ photo, onClick }) {
         className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/40 transition-all duration-300 flex items-center justify-center">
-        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white text-white text-[10px] uppercase tracking-[3px] px-4 py-2">
+        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-white text-white text-[0.625rem] uppercase tracking-[3px] px-4 py-2">
           View
         </span>
       </div>
@@ -75,7 +75,7 @@ export default function GalleryPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(i)}
-              className={`shrink-0 px-8 py-5 text-[12px] uppercase tracking-[2px] border-b-2 transition-all duration-300 bg-transparent cursor-pointer ${
+              className={`shrink-0 px-8 py-5 text-[0.75rem] uppercase tracking-[2px] border-b-2 transition-all duration-300 bg-transparent cursor-pointer ${
                 activeTab === i
                   ? 'border-gold text-gold font-bold'
                   : 'border-transparent text-text-muted hover:text-navy hover:border-navy/20'

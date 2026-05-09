@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function NotFoundPage() {
   return (
     <div className="animate-fade-in min-h-[70vh] flex flex-col items-center justify-center text-center py-24 px-5">
-      <span className="block text-[80px] md:text-[120px] font-serif font-black text-border-light leading-none select-none">
+      <span className="block text-[5rem] md:text-[7.5rem] font-serif font-black text-border-light leading-none select-none">
         404
       </span>
       <h2 className="text-2xl md:text-3xl text-navy uppercase tracking-[4px] font-serif font-normal mt-4 mb-2">

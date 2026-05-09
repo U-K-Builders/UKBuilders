@@ -80,24 +80,24 @@ export default function AccessibilityPanel() {
         {open && (
           <div className="absolute top-full right-0 mt-2 w-72 bg-navy border border-gold/30 shadow-[0_12px_40px_rgba(0,0,0,0.5)] z-[60]">
             <div className="px-4 py-3 border-b border-white/10">
-              <p className="text-[10px] tracking-[2.5px] uppercase text-gold m-0">Accessibility</p>
+              <p className="text-[0.625rem] tracking-[2.5px] uppercase text-gold m-0">Accessibility</p>
             </div>
 
             {/* Dark mode */}
             <div className="px-4 py-4 border-b border-white/10">
-              <p className="text-[10px] tracking-[2px] uppercase text-white/50 mb-3">Display</p>
+              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Display</p>
               <button
                 onClick={toggleDark}
                 className="w-full flex items-center justify-between px-3 py-2.5 border border-white/10 hover:border-gold/50 hover:text-white text-white/60 transition-all duration-200 bg-transparent cursor-pointer"
               >
-                <span className="text-[12px] tracking-[0.5px]">{dark ? 'Light Mode' : 'Dark Mode'}</span>
+                <span className="text-[0.75rem] tracking-[0.5px]">{dark ? 'Light Mode' : 'Dark Mode'}</span>
                 {dark ? <SunIcon /> : <MoonIcon />}
               </button>
             </div>
 
             {/* Text size */}
             <div className="px-4 py-4 border-b border-white/10">
-              <p className="text-[10px] tracking-[2px] uppercase text-white/50 mb-3">Text Size — {SIZE_LABELS[textSize]}</p>
+              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Text Size — {SIZE_LABELS[textSize]}</p>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setTextSize(textSize - 1)}
@@ -123,7 +123,7 @@ export default function AccessibilityPanel() {
 
             {/* Colour vision */}
             <div className="px-4 py-4">
-              <p className="text-[10px] tracking-[2px] uppercase text-white/50 mb-3">Colour Vision</p>
+              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Colour Vision</p>
               <div className="flex flex-col gap-1.5">
                 {COLOR_MODES.map((mode, i) => (
                   <button
@@ -135,8 +135,8 @@ export default function AccessibilityPanel() {
                         : 'border-white/10 text-white/60 hover:border-gold/50 hover:text-white'
                     }`}
                   >
-                    <span className="block text-[12px] tracking-[0.5px]">{mode.label}</span>
-                    <span className="block text-[10px] opacity-60 mt-0.5">{mode.desc}</span>
+                    <span className="block text-[0.75rem] tracking-[0.5px]">{mode.label}</span>
+                    <span className="block text-[0.625rem] opacity-60 mt-0.5">{mode.desc}</span>
                   </button>
                 ))}
               </div>

@@ -8,7 +8,7 @@ export default function HeroSection() {
         backgroundImage: `linear-gradient(rgba(11, 29, 58, 0.7), rgba(11, 29, 58, 0.7)), url('/images/Building/La Serena.jpg')`,
       }}
     >
-      <h2 className="text-[56px] mb-4 font-serif font-normal">Crafting Legacy Residences</h2>
+      <h2 className="text-[3.5rem] mb-4 font-serif font-normal">Crafting Legacy Residences</h2>
       <p className="text-xl text-[#e0e0e0] max-w-[700px] mx-auto mb-10">
         Experience unparalleled luxury and architectural excellence in the heart of Mumbai.
       </p>

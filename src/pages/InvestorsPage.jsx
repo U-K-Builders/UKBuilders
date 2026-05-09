@@ -91,36 +91,36 @@ function InquiryForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">Full Name <span className="text-gold">*</span></label>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Full Name <span className="text-gold">*</span></label>
         <input name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Your name" />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
+          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
           <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
           {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
         </div>
         <div>
-          <label className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
+          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
           <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
           {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">Investment Budget</label>
+          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Investment Budget</label>
           <select name="budget" value={fields.budget} onChange={handleChange} className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
             {BUDGET_OPTIONS.map((o) => <option key={o}>{o}</option>)}
           </select>
         </div>
         <div>
-          <label className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">Project of Interest</label>
+          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Project of Interest</label>
           <input name="project" type="text" value={fields.project} onChange={handleChange} className={inputClass('project')} placeholder="Justin, Christina, Any…" />
         </div>
       </div>
       <div>
-        <label className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">Message <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Message <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
         <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Tell us about your investment goals…" />
       </div>
       <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
@@ -135,7 +135,7 @@ export default function InvestorsPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-navy py-20 px-5 text-center border-b border-gold/30">
-        <span className="text-gold text-[11px] uppercase tracking-[4px] mb-4 block">Investment Opportunities</span>
+        <span className="text-gold text-[0.6875rem] uppercase tracking-[4px] mb-4 block">Investment Opportunities</span>
         <h1 className="font-serif text-white text-4xl md:text-5xl font-normal uppercase tracking-[4px] mb-4">
           Invest With U.K. Builders
         </h1>
@@ -154,7 +154,7 @@ export default function InvestorsPage() {
               {HIGHLIGHTS.map((h) => (
                 <div key={h.stat} className="border border-border-light bg-white p-8 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 text-center">
                   <span className="block gradient-text font-serif text-4xl font-black mb-2">{h.stat}</span>
-                  <span className="block text-navy text-[11px] uppercase tracking-[2px] mb-3 font-bold">{h.label}</span>
+                  <span className="block text-navy text-[0.6875rem] uppercase tracking-[2px] mb-3 font-bold">{h.label}</span>
                   <p className="text-text-tertiary text-xs leading-[1.8]">{h.desc}</p>
                 </div>
               ))}
@@ -190,7 +190,7 @@ export default function InvestorsPage() {
                 { name: 'Elvira', config: '1 & 2 BHK', possession: '2027', carpet: '400 – 725 sq.ft.', note: 'Compact investment entry' },
               ].map((p) => (
                 <div key={p.name} className="border border-gold/40 bg-navy text-white p-8 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300">
-                  <span className="block text-[10px] uppercase tracking-[3px] text-gold mb-1">{p.note}</span>
+                  <span className="block text-[0.625rem] uppercase tracking-[3px] text-gold mb-1">{p.note}</span>
                   <span className="block font-serif text-3xl text-white mb-4">{p.name}</span>
                   <div className="flex flex-col gap-1 text-sm text-text-muted mb-6">
                     <span>{p.config}</span>
@@ -199,7 +199,7 @@ export default function InvestorsPage() {
                   </div>
                   <Link
                     to={`/projects/${p.name.toLowerCase()}`}
-                    className="inline-block text-[11px] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+                    className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
                   >
                     View Details
                   </Link>
@@ -220,7 +220,7 @@ export default function InvestorsPage() {
                   Share your investment brief and our team will prepare a customised project briefing — including indicative pricing, payment plans, and rental yield projections.
                 </p>
                 <div className="bg-navy text-white p-8 border border-gold">
-                  <span className="block text-[11px] uppercase tracking-[3px] text-gold mb-4">Direct Line</span>
+                  <span className="block text-[0.6875rem] uppercase tracking-[3px] text-gold mb-4">Direct Line</span>
                   <p className="text-text-light text-sm mb-1"><a href="tel:+919820311177" className="hover:text-gold transition-colors duration-300">+91 98203 11177</a></p>
                   <p className="text-text-light text-sm"><a href="mailto:u.k.builders1981@gmail.com" className="hover:text-gold transition-colors duration-300">u.k.builders1981@gmail.com</a></p>
                 </div>
