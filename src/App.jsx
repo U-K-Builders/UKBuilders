@@ -20,6 +20,7 @@ import OwnerPortalPage from './pages/OwnerPortalPage';
 import InvestorsPage from './pages/InvestorsPage';
 import RedevelopmentPage from './pages/RedevelopmentPage';
 import ContractorsPage from './pages/ContractorsPage';
+import CareersPage from './pages/CareersPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/investors" element={<InvestorsPage />} />
         <Route path="/redevelopment" element={<RedevelopmentPage />} />
         <Route path="/contractors" element={<ContractorsPage />} />
+        <Route path="/careers" element={<CareersPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

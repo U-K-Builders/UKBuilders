@@ -33,7 +33,7 @@ export default function Header() {
   const isActive = (path) => location.pathname === path;
   const isProjectsActive = location.pathname.startsWith('/projects');
   const isHistoryActive = location.pathname === '/history' || location.pathname === '/timeline';
-  const isContactActive = ['/contact', '/book-a-call', '/investors', '/redevelopment', '/contractors'].includes(location.pathname);
+  const isContactActive = ['/contact', '/book-a-call', '/investors', '/redevelopment', '/contractors', '/careers'].includes(location.pathname);
 
   const navLinkClass = (active) =>
     `text-[13px] tracking-[1px] uppercase no-underline pb-1 transition-all duration-300 border-b-2 leading-none ${
@@ -111,6 +111,7 @@ export default function Header() {
                 <Link to="/investors" className={dropdownLinkClass}>For Investors</Link>
                 <Link to="/redevelopment" className={dropdownLinkClass}>For Redevelopment</Link>
                 <Link to="/contractors" className={dropdownLinkClass}>For Contractors</Link>
+                <Link to="/careers" className={dropdownLinkClass}>Careers</Link>
               </div>
             )}
           </div>
@@ -218,7 +219,8 @@ export default function Header() {
                 <Link to="/book-a-call" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Book a Video Call</Link>
                 <Link to="/investors" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Investors</Link>
                 <Link to="/redevelopment" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Redevelopment</Link>
-                <Link to="/contractors" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300">For Contractors</Link>
+                <Link to="/contractors" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">For Contractors</Link>
+                <Link to="/careers" onClick={closeMobile} className="block px-10 py-3 text-[13px] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300">Careers</Link>
               </div>
             )}
           </div>
