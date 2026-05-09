@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
+import AccessibilityPanel from './AccessibilityPanel';
 
 function SunIcon() {
   return (
@@ -120,6 +121,9 @@ export default function Header() {
 
           <Link to="/owner-portal" className={navLinkClass(isActive('/owner-portal'))}>Owner Portal</Link>
         </nav>
+
+        {/* Accessibility panel */}
+        <AccessibilityPanel />
 
         {/* Theme toggle */}
         <button

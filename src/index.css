@@ -86,3 +86,13 @@ body {
 /* Form placeholders */
 .dark input::placeholder,
 .dark textarea::placeholder { color: #4a4438; }
+
+/* ─── Accessibility: text size ─────────────────────────────────────── */
+.acc-text-lg body { font-size: 112%; }
+.acc-text-xl body { font-size: 128%; }
+
+/* ─── Accessibility: colour vision filters ──────────────────────────── */
+.acc-deuteranopia body { filter: url(#acc-deuteranopia); }
+.acc-protanopia   body { filter: url(#acc-protanopia);   }
+.acc-tritanopia   body { filter: url(#acc-tritanopia);   }
+.acc-greyscale    body { filter: grayscale(100%);        }
