@@ -99,6 +99,7 @@ export default function Header() {
           <Link to="/careers" className={navLinkClass(isActive('/careers'))}>Careers</Link>
 
           {/* Contact dropdown */}
+
           <div
             className="relative flex items-center"
             onMouseEnter={() => setContactOpen(true)}
@@ -116,6 +117,8 @@ export default function Header() {
               </div>
             )}
           </div>
+
+          <Link to="/owner-portal" className={navLinkClass(isActive('/owner-portal'))}>Owner Portal</Link>
         </nav>
 
         {/* Theme toggle */}
@@ -225,6 +228,16 @@ export default function Header() {
               </div>
             )}
           </div>
+
+          <Link
+            to="/owner-portal"
+            onClick={closeMobile}
+            className={`block px-6 py-4 text-[13px] tracking-[1px] uppercase no-underline border-b border-white/5 transition-all duration-300 ${
+              isActive('/owner-portal') ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
+            }`}
+          >
+            Owner Portal
+          </Link>
         </div>
       )}
     </header>
