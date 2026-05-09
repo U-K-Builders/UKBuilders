@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy:      #0A1828;
-  --color-navy-dark: #050e1a;
-  --color-gold:      #C9963A;
-  --color-gold-dark: #E2B84B;
+  --color-navy: #0B1D3A;
+  --color-navy-dark: #061124;
+  --color-gold: #C5A059;
+  --color-gold-dark: #D4AF37;
   --font-serif: 'Georgia', serif;
   /* Neutral text scale */
-  --color-text-dark:      #2a2a2a;
-  --color-text-primary:   #3a3a3a;
-  --color-text-secondary: #505050;
-  --color-text-tertiary:  #666666;
-  --color-text-muted:     #888888;
-  --color-text-light:     #e8e0d0;
+  --color-text-dark: #333333;
+  --color-text-primary: #444444;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #666666;
+  --color-text-muted: #888888;
+  --color-text-light: #e0e0e0;
   /* Surfaces & borders */
-  --color-surface-light:  #f8f5f0;
-  --color-surface-subtle: #f3ede4;
-  --color-border-light:   #e2d9cc;
+  --color-surface-light: #f9f9f9;
+  --color-surface-subtle: #fcfcfc;
+  --color-border-light: #eaeaea;
 }
 
 html {
@@ -31,50 +31,58 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(105deg, #0A1828 0%, #4a3010 40%, #C9963A 100%);
+  background: linear-gradient(to right, #0B1D3A 20%, #C5A059 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0);    }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.7s ease forwards;
+  animation: fadeIn 0.6s forwards;
 }
 
-/* ─── Dark mode ──────────────────────────────────────────────────────── */
+/* ─── Dark mode ────────────────────────────────────────────────────────────
+   Written outside @layer so these rules beat Tailwind utility classes
+   (unlayered CSS has higher implicit cascade priority than @layer utilities).
+   ───────────────────────────────────────────────────────────────────────── */
 
 body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.dark body { background-color: #050e1a; }
+.dark body { background-color: #061124; }
 
-.dark .bg-white           { background-color: #0c1e38; }
-.dark .bg-surface-light   { background-color: #0c1e38; }
-.dark .bg-surface-subtle  { background-color: #081428; }
+/* Backgrounds */
+.dark .bg-white           { background-color: #0d2040; }
+.dark .bg-surface-light   { background-color: #0d2040; }
+.dark .bg-surface-subtle  { background-color: #091628; }
 
-.dark .text-navy          { color: #ecdfc8; }
-.dark .text-text-dark     { color: #ecdfc8; }
-.dark .text-text-primary  { color: #ecdfc8; }
-.dark .text-text-secondary{ color: #c8b898; }
-.dark .text-text-tertiary { color: #9a8a70; }
+/* Text */
+.dark .text-navy          { color: #e8dfc8; }
+.dark .text-text-dark     { color: #e8dfc8; }
+.dark .text-text-primary  { color: #e8dfc8; }
+.dark .text-text-secondary{ color: #c8bfa8; }
+.dark .text-text-tertiary { color: #a09080; }
 .dark .text-text-muted    { color: #6e6258; }
 
-.dark .border-border-light               { border-color: #1e3560; }
-.dark .divide-border-light > * + *       { border-color: #1e3560; }
-.dark .border-dashed.border-border-light { border-color: #1e3560; }
+/* Borders & dividers */
+.dark .border-border-light                  { border-color: #1e3560; }
+.dark .divide-border-light > * + *          { border-color: #1e3560; }
+.dark .border-dashed.border-border-light    { border-color: #1e3560; }
 
+/* Gradient heading — navy→gold becomes cream→gold on dark bg */
 .dark .gradient-text {
-  background: linear-gradient(105deg, #ecdfc8 0%, #C9963A 100%);
+  background: linear-gradient(to right, #e8e0cc 20%, #C5A059 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* Form placeholders */
 .dark input::placeholder,
 .dark textarea::placeholder { color: #4a4438; }

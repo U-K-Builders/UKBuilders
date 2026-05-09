@@ -1,17 +1,8 @@
-export default function SectionTitle({ children, overline, className = '' }) {
+export default function SectionTitle({ children, className = '' }) {
   return (
-    <div className={`text-center mb-16 ${className}`}>
-      {overline && (
-        <p className="text-gold text-[10px] tracking-[5px] uppercase mb-3 font-light">{overline}</p>
-      )}
-      <h2 className="text-navy text-4xl md:text-[42px] uppercase tracking-[3px] font-serif font-normal m-0 leading-tight">
-        {children}
-      </h2>
-      <div className="flex items-center justify-center gap-3 mt-5">
-        <div className="w-12 h-[1px] bg-gold/40" />
-        <div className="w-8 h-[3px] bg-gold" />
-        <div className="w-12 h-[1px] bg-gold/40" />
-      </div>
-    </div>
+    <h2 className={`text-center text-4xl text-navy mb-16 uppercase tracking-[3px] font-serif font-normal ${className}`}>
+      {children}
+      <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
+    </h2>
   );
 }
