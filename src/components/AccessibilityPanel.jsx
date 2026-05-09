@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAccessibility } from '../hooks/useAccessibility';
+import { useTheme } from '../hooks/useTheme';
 
 const COLOR_MODES = [
-  { label: 'Normal',        desc: 'Default colours'        },
-  { label: 'Deuteranopia',  desc: 'Red-green (green weak)' },
-  { label: 'Protanopia',    desc: 'Red-green (red weak)'   },
-  { label: 'Tritanopia',    desc: 'Blue-yellow'            },
-  { label: 'Greyscale',     desc: 'No colour'              },
+  { label: 'Normal',       desc: 'Default colours'        },
+  { label: 'Deuteranopia', desc: 'Red-green (green weak)' },
+  { label: 'Protanopia',   desc: 'Red-green (red weak)'   },
+  { label: 'Tritanopia',   desc: 'Blue-yellow'            },
+  { label: 'Greyscale',    desc: 'No colour'              },
 ];
 
 const SIZE_LABELS = ['Normal', 'Large', 'X-Large'];
@@ -20,9 +21,27 @@ function AccessibilityIcon() {
   );
 }
 
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" aria-hidden="true">
+      <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2" />
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function AccessibilityPanel() {
   const [open, setOpen] = useState(false);
   const { textSize, colorMode, setTextSize, setColorMode } = useAccessibility();
+  const [dark, toggleDark] = useTheme();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -37,22 +56,13 @@ export default function AccessibilityPanel() {
       <svg style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
         <defs>
           <filter id="acc-deuteranopia">
-            <feColorMatrix type="matrix" values="0.625 0.375 0     0 0
-                                                  0.7   0.3   0     0 0
-                                                  0     0.3   0.7   0 0
-                                                  0     0     0     1 0" />
+            <feColorMatrix type="matrix" values="0.625 0.375 0     0 0  0.7   0.3   0     0 0  0     0.3   0.7   0 0  0     0     0     1 0" />
           </filter>
           <filter id="acc-protanopia">
-            <feColorMatrix type="matrix" values="0.567 0.433 0     0 0
-                                                  0.558 0.442 0     0 0
-                                                  0     0.242 0.758 0 0
-                                                  0     0     0     1 0" />
+            <feColorMatrix type="matrix" values="0.567 0.433 0     0 0  0.558 0.442 0     0 0  0     0.242 0.758 0 0  0     0     0     1 0" />
           </filter>
           <filter id="acc-tritanopia">
-            <feColorMatrix type="matrix" values="0.95  0.05  0     0 0
-                                                  0     0.433 0.567 0 0
-                                                  0     0.475 0.525 0 0
-                                                  0     0     0     1 0" />
+            <feColorMatrix type="matrix" values="0.95  0.05  0     0 0  0     0.433 0.567 0 0  0     0.475 0.525 0 0  0     0     0     1 0" />
           </filter>
         </defs>
       </svg>
@@ -73,6 +83,18 @@ export default function AccessibilityPanel() {
               <p className="text-[10px] tracking-[2.5px] uppercase text-gold m-0">Accessibility</p>
             </div>
 
+            {/* Dark mode */}
+            <div className="px-4 py-4 border-b border-white/10">
+              <p className="text-[10px] tracking-[2px] uppercase text-white/50 mb-3">Display</p>
+              <button
+                onClick={toggleDark}
+                className="w-full flex items-center justify-between px-3 py-2.5 border border-white/10 hover:border-gold/50 hover:text-white text-white/60 transition-all duration-200 bg-transparent cursor-pointer"
+              >
+                <span className="text-[12px] tracking-[0.5px]">{dark ? 'Light Mode' : 'Dark Mode'}</span>
+                {dark ? <SunIcon /> : <MoonIcon />}
+              </button>
+            </div>
+
             {/* Text size */}
             <div className="px-4 py-4 border-b border-white/10">
               <p className="text-[10px] tracking-[2px] uppercase text-white/50 mb-3">Text Size — {SIZE_LABELS[textSize]}</p>
@@ -80,19 +102,19 @@ export default function AccessibilityPanel() {
                 <button
                   onClick={() => setTextSize(textSize - 1)}
                   disabled={textSize === 0}
-                  className="w-9 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer text-lg font-light"
+                  className="w-10 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer font-serif font-bold"
                 >
                   A−
                 </button>
                 <div className="flex-1 flex gap-1">
                   {[0, 1, 2].map(i => (
-                    <div key={i} className={`flex-1 h-1 rounded-full transition-colors duration-200 ${i <= textSize ? 'bg-gold' : 'bg-white/15'}`} />
+                    <div key={i} className={`flex-1 h-1 transition-colors duration-200 ${i <= textSize ? 'bg-gold' : 'bg-white/15'}`} />
                   ))}
                 </div>
                 <button
                   onClick={() => setTextSize(textSize + 1)}
                   disabled={textSize === 2}
-                  className="w-9 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer text-lg font-light"
+                  className="w-10 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer font-serif font-bold"
                 >
                   A+
                 </button>

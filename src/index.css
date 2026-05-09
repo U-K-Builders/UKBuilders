@@ -87,9 +87,9 @@ body {
 .dark input::placeholder,
 .dark textarea::placeholder { color: #4a4438; }
 
-/* ─── Accessibility: text size ─────────────────────────────────────── */
-.acc-text-lg body { font-size: 112%; }
-.acc-text-xl body { font-size: 128%; }
+/* ─── Accessibility: text size (scale html root so all rem units cascade) ── */
+.acc-text-lg { font-size: 112%; }
+.acc-text-xl { font-size: 128%; }
 
 /* ─── Accessibility: colour vision filters ──────────────────────────── */
 .acc-deuteranopia body { filter: url(#acc-deuteranopia); }
