@@ -92,18 +92,63 @@ export default function Footer() {
         </a>
       </div>
 
-      {/* Quick links */}
-      <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-6 mb-4 text-xs uppercase tracking-[1.5px]">
-        <Link to="/gallery" className="text-text-muted hover:text-gold transition-colors duration-300">Gallery</Link>
-        <Link to="/resources" className="text-text-muted hover:text-gold transition-colors duration-300">Knowledge Hub</Link>
-        <Link to="/book-a-call" className="text-text-muted hover:text-gold transition-colors duration-300">Book a Call</Link>
-        <Link to="/timeline" className="text-text-muted hover:text-gold transition-colors duration-300">Timeline</Link>
-        <Link to="/our-story" className="text-text-muted hover:text-gold transition-colors duration-300">Our Legacy</Link>
-        <Link to="/contact" className="text-text-muted hover:text-gold transition-colors duration-300">Contact</Link>
-        <Link to="/owner-portal" className="text-text-muted hover:text-gold transition-colors duration-300">Owner Portal</Link>
+      {/* Column menu */}
+      <div className="border-t border-white/10 mt-10 pt-10 max-w-[900px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-left">
+        <div>
+          <h4 className="text-white text-xs tracking-[2.5px] uppercase mb-4">Projects</h4>
+          <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+            {[
+              { to: '/projects/ongoing',   label: 'Ongoing'   },
+              { to: '/projects/upcoming',  label: 'Upcoming'  },
+              { to: '/projects/completed', label: 'Completed' },
+              { to: '/gallery',            label: 'Gallery'   },
+              { to: '/timeline',           label: 'Timeline'  },
+            ].map(({ to, label }) => (
+              <li key={to}><Link to={to} className="text-text-muted hover:text-gold text-xs tracking-[0.5px] no-underline transition-colors duration-300">{label}</Link></li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-white text-xs tracking-[2.5px] uppercase mb-4">Company</h4>
+          <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+            {[
+              { to: '/our-story',     label: 'Our Legacy'      },
+              { to: '/history',       label: 'Company History' },
+              { to: '/investors',     label: 'Investors'       },
+              { to: '/redevelopment', label: 'Redevelopment'   },
+              { to: '/contractors',   label: 'Contractors'     },
+              { to: '/careers',       label: 'Careers'         },
+            ].map(({ to, label }) => (
+              <li key={to}><Link to={to} className="text-text-muted hover:text-gold text-xs tracking-[0.5px] no-underline transition-colors duration-300">{label}</Link></li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-white text-xs tracking-[2.5px] uppercase mb-4">Resources</h4>
+          <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+            {[
+              { to: '/resources',    label: 'Knowledge Hub' },
+              { to: '/book-a-call',  label: 'Book a Call'   },
+              { to: '/owner-portal', label: 'Owner Portal'  },
+              { to: '/contact',      label: 'Contact Us'    },
+            ].map(({ to, label }) => (
+              <li key={to}><Link to={to} className="text-text-muted hover:text-gold text-xs tracking-[0.5px] no-underline transition-colors duration-300">{label}</Link></li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-white text-xs tracking-[2.5px] uppercase mb-4">Legal</h4>
+          <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+            <li><span className="text-text-muted text-xs">MahaRERA Registration Pending</span></li>
+            <li><span className="text-text-muted text-xs">Projects in Orlem, Malad West, Mumbai</span></li>
+          </ul>
+        </div>
       </div>
 
-      <p className="mt-2 text-xs opacity-60">&copy; 2026 U.K. Builders. All rights reserved. RERA Registered.</p>
+      <p className="mt-10 text-xs opacity-60">&copy; 2026 U.K. Builders. All rights reserved.</p>
     </footer>
   );
 }
