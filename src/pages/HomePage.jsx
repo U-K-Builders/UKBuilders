@@ -13,7 +13,7 @@ export default function HomePage() {
     <div className="animate-fade-in">
       <HeroSection />
 
-      <div className="py-24 px-5" style={{ background: 'linear-gradient(180deg, #faf6ef 0%, #f5ede0 100%)' }}>
+      <div className="py-24 px-5">
         <div className="max-w-[1200px] mx-auto">
         <SectionTitle>Ongoing Masterpieces</SectionTitle>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
