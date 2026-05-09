@@ -9,8 +9,11 @@
       (function(){
         var t=localStorage.getItem('ukb-theme');
         if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}
+        var sz=['','acc-text-lg','acc-text-xl'];
         var cm=['','acc-deuteranopia','acc-protanopia','acc-tritanopia','acc-greyscale'];
+        var si=parseInt(localStorage.getItem('ukb-textsize')||'0',10);
         var ci=parseInt(localStorage.getItem('ukb-colormode')||'0',10);
+        if(sz[si])document.documentElement.classList.add(sz[si]);
         if(cm[ci])document.documentElement.classList.add(cm[ci]);
       })();
     </script>
