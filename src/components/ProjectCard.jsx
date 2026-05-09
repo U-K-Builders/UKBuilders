@@ -4,7 +4,7 @@ export default function ProjectCard({ project }) {
   const slug = project.name.toLowerCase().replace(/\s+/g, '-');
 
   return (
-    <div className="bg-white border border-border-light p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.05)]">
+    <div className="bg-white border-2 border-gold p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(197,160,89,0.15)]">
       <div className="mb-4">
         <h3 className="gradient-text font-serif text-3xl md:text-[46px] font-black uppercase tracking-[4px] md:tracking-[8px] m-0">
           {project.name}
