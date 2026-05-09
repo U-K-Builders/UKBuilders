@@ -86,3 +86,13 @@ body {
 /* Form placeholders */
 .dark input::placeholder,
 .dark textarea::placeholder { color: #4a4438; }
+
+/* ─── Large text mode ──────────────────────────────────────────────────── */
+.text-large body          { font-size: 112%; }
+.text-large p,
+.text-large li,
+.text-large span,
+.text-large a             { font-size: 1.08em; }
+.text-large h1            { font-size: 1.1em; }
+.text-large h2            { font-size: 1.1em; }
+.text-large h3            { font-size: 1.08em; }

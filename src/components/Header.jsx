@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
+import { useTextSize } from '../hooks/useTextSize';
 
 function SunIcon() {
   return (
@@ -22,6 +23,7 @@ function MoonIcon() {
 export default function Header() {
   const location = useLocation();
   const [dark, toggleDark] = useTheme();
+  const [largeText, toggleTextSize] = useTextSize();
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [legacyOpen, setLegacyOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
@@ -120,6 +122,18 @@ export default function Header() {
 
           <Link to="/owner-portal" className={navLinkClass(isActive('/owner-portal'))}>Owner Portal</Link>
         </nav>
+
+        {/* Text size toggle */}
+        <button
+          onClick={toggleTextSize}
+          className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-gold transition-colors duration-300 bg-transparent border-none cursor-pointer shrink-0"
+          aria-label={largeText ? 'Decrease text size' : 'Increase text size'}
+          title={largeText ? 'Decrease text size' : 'Increase text size'}
+        >
+          <span className="font-serif leading-none select-none" style={{ fontSize: largeText ? '17px' : '14px', fontWeight: 700, letterSpacing: '-0.5px' }}>
+            {largeText ? 'A−' : 'A+'}
+          </span>
+        </button>
 
         {/* Theme toggle */}
         <button
