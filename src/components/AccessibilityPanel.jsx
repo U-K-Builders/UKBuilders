@@ -97,27 +97,29 @@ export default function AccessibilityPanel() {
 
             {/* Text size */}
             <div className="px-4 py-4 border-b border-white/10">
-              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Text Size — {SIZE_LABELS[textSize]}</p>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setTextSize(textSize - 1)}
-                  disabled={textSize === 0}
-                  className="w-10 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer font-serif font-bold"
-                >
-                  A−
-                </button>
-                <div className="flex-1 flex gap-1">
-                  {[0, 1, 2].map(i => (
-                    <div key={i} className={`flex-1 h-1 transition-colors duration-200 ${i <= textSize ? 'bg-gold' : 'bg-white/15'}`} />
-                  ))}
-                </div>
-                <button
-                  onClick={() => setTextSize(textSize + 1)}
-                  disabled={textSize === 2}
-                  className="w-10 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer font-serif font-bold"
-                >
-                  A+
-                </button>
+              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Text Size</p>
+              <div className="flex gap-2">
+                {SIZE_LABELS.map((label, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setTextSize(i)}
+                    className={`flex-1 py-2.5 border transition-all duration-200 bg-transparent cursor-pointer font-serif font-bold ${
+                      textSize === i
+                        ? 'border-gold bg-gold/10 text-gold'
+                        : 'border-white/10 text-white/60 hover:border-gold/50 hover:text-white'
+                    }`}
+                    style={{ fontSize: i === 0 ? '0.8125rem' : i === 1 ? '0.9375rem' : '1.0625rem' }}
+                  >
+                    A
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-2 mt-1.5">
+                {SIZE_LABELS.map((label, i) => (
+                  <span key={i} className={`flex-1 text-center text-[0.5625rem] tracking-[0.5px] uppercase transition-colors duration-200 ${textSize === i ? 'text-gold' : 'text-white/30'}`}>
+                    {label}
+                  </span>
+                ))}
               </div>
             </div>
 
