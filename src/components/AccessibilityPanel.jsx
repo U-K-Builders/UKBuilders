@@ -10,8 +10,6 @@ const COLOR_MODES = [
   { label: 'Greyscale',    desc: 'No colour'              },
 ];
 
-const SIZE_LABELS = ['Normal', 'Large', 'X-Large'];
-
 function AccessibilityIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" className="w-[18px] h-[18px]" aria-hidden="true">
@@ -40,7 +38,7 @@ function MoonIcon() {
 
 export default function AccessibilityPanel() {
   const [open, setOpen] = useState(false);
-  const { textSize, colorMode, setTextSize, setColorMode } = useAccessibility();
+  const { colorMode, setColorMode } = useAccessibility();
   const [dark, toggleDark] = useTheme();
   const ref = useRef(null);
 
@@ -93,32 +91,6 @@ export default function AccessibilityPanel() {
                 <span className="text-[0.75rem] tracking-[0.5px]">{dark ? 'Light Mode' : 'Dark Mode'}</span>
                 {dark ? <SunIcon /> : <MoonIcon />}
               </button>
-            </div>
-
-            {/* Text size */}
-            <div className="px-4 py-4 border-b border-white/10">
-              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Text Size — {SIZE_LABELS[textSize]}</p>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setTextSize(textSize - 1)}
-                  disabled={textSize === 0}
-                  className="w-10 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer font-serif font-bold"
-                >
-                  A−
-                </button>
-                <div className="flex-1 flex gap-1">
-                  {[0, 1, 2].map(i => (
-                    <div key={i} className={`flex-1 h-1 transition-colors duration-200 ${i <= textSize ? 'bg-gold' : 'bg-white/15'}`} />
-                  ))}
-                </div>
-                <button
-                  onClick={() => setTextSize(textSize + 1)}
-                  disabled={textSize === 2}
-                  className="w-10 h-9 border border-gold/30 text-white/70 hover:border-gold hover:text-gold disabled:opacity-25 disabled:cursor-not-allowed transition-all duration-200 bg-transparent cursor-pointer font-serif font-bold"
-                >
-                  A+
-                </button>
-              </div>
             </div>
 
             {/* Colour vision */}
