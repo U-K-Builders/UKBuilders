@@ -84,7 +84,7 @@ export default function Header() {
             onMouseEnter={() => setLegacyOpen(true)}
             onMouseLeave={() => setLegacyOpen(false)}
           >
-            <span className={`${navLinkClass(isLegacyActive)} cursor-pointer`}>Our Legacy</span>
+            <span className={`${navLinkClass(isLegacyActive)} cursor-pointer`}>About Us</span>
             {legacyOpen && (
               <div className="absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
                 <Link to="/our-story" className={dropdownLinkClass}>Our Legacy</Link>
@@ -184,7 +184,7 @@ export default function Header() {
                 isLegacyActive ? 'text-gold' : 'text-white hover:text-gold hover:bg-white/5'
               }`}
             >
-              Our Legacy
+              About Us
             </button>
             {mobileLegacyOpen && (
               <div className="bg-white/5">
