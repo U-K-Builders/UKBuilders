@@ -24,7 +24,7 @@ export const ongoingProjects = [
     alt: 'Elvira Building View',
     configs: 'Exclusive 1 & 2 BHK',
     location: "D'Monte Ln, Orlem, Malad West",
-    lat: 19.19257, lng: 72.8392,
+    lat: 19.192972, lng: 72.837889,
   },
 ];
 
