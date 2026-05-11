@@ -6,7 +6,7 @@ export const ongoingProjects = [
     alt: 'Justin Building Night View',
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Sunder Cross Lane, Orlem, Malad West',
-    lat: 19.1810, lng: 72.8482,
+    lat: 19.1950, lng: 72.8355,
   },
   {
     name: 'Christina',
@@ -15,7 +15,7 @@ export const ongoingProjects = [
     alt: 'Christina Building Night View',
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Dominic Colony, Orlem, Malad West',
-    lat: 19.1822, lng: 72.8511,
+    lat: 19.1970, lng: 72.8399,
   },
   {
     name: 'Elvira',
