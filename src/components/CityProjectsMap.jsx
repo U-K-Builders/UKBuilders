@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import Map, { Marker, Popup, NavigationControl } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 const FILTERS = ['All', 'Ongoing', 'Upcoming', 'Completed'];
 
-const MARKER = {
-  ongoing:   { fillColor: '#D4A84E', color: '#fff', fillOpacity: 1,   weight: 2, radius: 11 },
-  upcoming:  { fillColor: '#D4A84E', color: '#fff', fillOpacity: 0.45, weight: 1.5, radius: 8 },
-  completed: { fillColor: '#8a8070', color: '#fff', fillOpacity: 0.65, weight: 1,  radius: 6 },
+const STYLE = {
+  ongoing:   { bg: '#D4A84E', size: 16, glow: true,  opacity: 1    },
+  upcoming:  { bg: '#D4A84E', size: 12, glow: false, opacity: 0.45 },
+  completed: { bg: '#8a8070', size: 9,  glow: false, opacity: 0.65 },
 };
 
 const LEGEND = [
@@ -17,7 +17,8 @@ const LEGEND = [
 ];
 
 export default function CityProjectsMap({ ongoing, upcoming, completed }) {
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter]     = useState('All');
+  const [popupInfo, setPopupInfo] = useState(null);
 
   const all = [
     ...ongoing.map(p => ({ ...p, type: 'ongoing',   status: 'Ongoing'   })),
@@ -47,50 +48,72 @@ export default function CityProjectsMap({ ongoing, upcoming, completed }) {
       </div>
 
       {/* Map */}
-      <div className="h-[520px] w-full">
-        <MapContainer
-          center={[19.182, 72.848]}
-          zoom={13}
-          style={{ height: '100%', width: '100%' }}
-          scrollWheelZoom={false}
-          zoomControl={true}
+      <div className="h-[520px] w-full overflow-hidden">
+        <Map
+          initialViewState={{ longitude: 72.848, latitude: 19.182, zoom: 13 }}
+          style={{ width: '100%', height: '100%' }}
+          mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
+          scrollZoom={false}
+          onClick={() => setPopupInfo(null)}
         >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-            subdomains="abcd"
-            maxZoom={20}
-          />
-          {visible.map((p, i) => (
-            <CircleMarker
-              key={`${p.name}-${p.type}-${i}`}
-              center={[p.lat, p.lng]}
-              radius={MARKER[p.type].radius}
-              pathOptions={MARKER[p.type]}
+          <NavigationControl position="top-right" />
+
+          {visible.map((p, i) => {
+            const s = STYLE[p.type];
+            return (
+              <Marker
+                key={`${p.name}-${p.type}-${i}`}
+                longitude={p.lng}
+                latitude={p.lat}
+                anchor="center"
+                onClick={e => { e.originalEvent.stopPropagation(); setPopupInfo(p); }}
+              >
+                <div
+                  style={{
+                    width:           s.size,
+                    height:          s.size,
+                    borderRadius:    '50%',
+                    backgroundColor: s.bg,
+                    opacity:         s.opacity,
+                    border:          '1.5px solid rgba(255,255,255,0.5)',
+                    cursor:          'pointer',
+                    boxShadow:       s.glow ? '0 0 8px 3px rgba(212,168,78,0.5)' : 'none',
+                  }}
+                />
+              </Marker>
+            );
+          })}
+
+          {popupInfo && (
+            <Popup
+              longitude={popupInfo.lng}
+              latitude={popupInfo.lat}
+              anchor="bottom"
+              onClose={() => setPopupInfo(null)}
+              closeOnClick={false}
+              offset={12}
             >
-              <Popup>
-                <div style={{ fontFamily: 'Georgia, serif', minWidth: '180px', padding: '4px 2px' }}>
-                  <div style={{ fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', color: '#0A1828', letterSpacing: '1.5px', marginBottom: '4px' }}>
-                    {p.name}
-                  </div>
-                  <div style={{ color: '#D4A84E', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '6px' }}>
-                    {p.status}
-                  </div>
-                  {p.location && (
-                    <div style={{ fontSize: '11px', color: '#666', lineHeight: '1.5' }}>
-                      {p.location}
-                    </div>
-                  )}
-                  {p.description && (
-                    <div style={{ fontSize: '11px', color: '#777', lineHeight: '1.6', marginTop: '6px' }}>
-                      {p.description.slice(0, 90)}…
-                    </div>
-                  )}
-                </div>
-              </Popup>
-            </CircleMarker>
-          ))}
-        </MapContainer>
+              <div style={{ fontFamily: 'Georgia, serif', minWidth: '180px', padding: '4px 2px' }}>
+                <p style={{ fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', color: '#0A1828', letterSpacing: '1.5px', margin: '0 0 4px' }}>
+                  {popupInfo.name}
+                </p>
+                <p style={{ color: '#D4A84E', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '1.5px', margin: '0 0 6px' }}>
+                  {popupInfo.status}
+                </p>
+                {popupInfo.location && (
+                  <p style={{ fontSize: '11px', color: '#666', lineHeight: '1.5', margin: 0 }}>
+                    {popupInfo.location}
+                  </p>
+                )}
+                {popupInfo.description && (
+                  <p style={{ fontSize: '11px', color: '#777', lineHeight: '1.6', margin: '6px 0 0' }}>
+                    {popupInfo.description.slice(0, 90)}…
+                  </p>
+                )}
+              </div>
+            </Popup>
+          )}
+        </Map>
       </div>
 
       {/* Legend */}
@@ -99,7 +122,7 @@ export default function CityProjectsMap({ ongoing, upcoming, completed }) {
           <span key={type} className="flex items-center gap-2 text-[0.625rem] tracking-[1.5px] uppercase text-white/50">
             <span
               className="block w-2.5 h-2.5 rounded-full shrink-0"
-              style={{ backgroundColor: MARKER[type].fillColor, opacity: MARKER[type].fillOpacity }}
+              style={{ backgroundColor: STYLE[type].bg, opacity: STYLE[type].opacity }}
             />
             {label}
           </span>
