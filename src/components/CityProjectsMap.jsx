@@ -6,8 +6,8 @@ const FILTERS = ['All', 'Ongoing', 'Upcoming', 'Completed'];
 
 const STYLE = {
   ongoing:   { bg: '#D4A84E', size: 16, glow: true,  opacity: 1    },
-  upcoming:  { bg: '#D4A84E', size: 12, glow: false, opacity: 0.45 },
-  completed: { bg: '#8a8070', size: 9,  glow: false, opacity: 0.65 },
+  upcoming:  { bg: '#3B82F6', size: 12, glow: false, opacity: 0.85 },
+  completed: { bg: '#22C55E', size: 9,  glow: false, opacity: 0.75 },
 };
 
 const LEGEND = [
