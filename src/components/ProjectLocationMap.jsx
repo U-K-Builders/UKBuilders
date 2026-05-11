@@ -1,41 +1,48 @@
-import { useEffect } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useState } from 'react';
+import Map, { Marker, Popup } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
-function CenterMap({ lat, lng }) {
-  const map = useMap();
-  useEffect(() => {
-    map.setView([lat, lng], 16);
-  }, [map, lat, lng]);
-  return null;
-}
+const STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
 export default function ProjectLocationMap({ name, lat, lng }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <MapContainer
-      center={[lat, lng]}
-      zoom={16}
-      style={{ height: '100%', width: '100%' }}
-      scrollWheelZoom={false}
+    <Map
+      initialViewState={{ longitude: lng, latitude: lat, zoom: 16 }}
+      style={{ width: '100%', height: '100%' }}
+      mapStyle={STYLE}
+      scrollZoom={false}
     >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-        subdomains="abcd"
-        maxZoom={20}
-      />
-      <CenterMap lat={lat} lng={lng} />
-      <CircleMarker
-        center={[lat, lng]}
-        radius={10}
-        pathOptions={{ fillColor: '#C5A059', fillOpacity: 1, color: '#0B1D3A', weight: 2 }}
+      <Marker
+        longitude={lng}
+        latitude={lat}
+        anchor="center"
+        onClick={() => setOpen(true)}
       >
-        <Popup>
-          <span style={{ fontFamily: 'Georgia, serif', fontWeight: 'bold', color: '#0B1D3A', textTransform: 'uppercase', fontSize: '12px' }}>
+        <div
+          style={{
+            width: 20, height: 20, borderRadius: '50%',
+            backgroundColor: '#C5A059', border: '2px solid #0B1D3A',
+            cursor: 'pointer',
+            boxShadow: '0 0 0 4px rgba(197,160,89,0.25)',
+          }}
+        />
+      </Marker>
+
+      {open && (
+        <Popup
+          longitude={lng}
+          latitude={lat}
+          anchor="bottom"
+          onClose={() => setOpen(false)}
+          offset={14}
+        >
+          <span style={{ fontFamily: 'Georgia, serif', fontWeight: 'bold', color: '#0B1D3A', textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px' }}>
             {name}
           </span>
         </Popup>
-      </CircleMarker>
-    </MapContainer>
+      )}
+    </Map>
   );
 }
