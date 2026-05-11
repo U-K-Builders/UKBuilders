@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import HomePage from './pages/HomePage';
 import OngoingProjectsPage from './pages/OngoingProjectsPage';
 import CompletedProjectsPage from './pages/CompletedProjectsPage';
@@ -56,6 +58,8 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
+      <WhatsAppButton />
+      <ScrollToTopButton />
     </>
   );
 }

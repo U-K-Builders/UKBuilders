@@ -7,6 +7,7 @@ import SignatureCard from '../components/SignatureCard';
 import TestimonialCard from '../components/TestimonialCard';
 import Carousel from '../components/Carousel';
 import AnimatedCounter from '../components/AnimatedCounter';
+import TrustPillars from '../components/TrustPillars';
 import { ongoingProjects, upcomingProjects, completedProjects } from '../data/projects';
 import { testimonials } from '../data/testimonials';
 import { useInView } from '../hooks/useInView';
@@ -51,6 +52,9 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
+      {/* ── Trust pillars ────────────────────────────────────────────────── */}
+      <TrustPillars />
 
       {/* ── Ongoing projects ─────────────────────────────────────────────── */}
       <div className="py-24 px-5" ref={ongoingRef}>
