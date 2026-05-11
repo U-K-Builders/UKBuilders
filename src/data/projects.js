@@ -6,6 +6,7 @@ export const ongoingProjects = [
     alt: 'Justin Building Night View',
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Sunder Cross Lane, Orlem, Malad West',
+    lat: 19.1810, lng: 72.8482,
   },
   {
     name: 'Christina',
@@ -14,6 +15,7 @@ export const ongoingProjects = [
     alt: 'Christina Building Night View',
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Dominic Colony, Orlem, Malad West',
+    lat: 19.1822, lng: 72.8511,
   },
   {
     name: 'Elvira',
@@ -22,6 +24,7 @@ export const ongoingProjects = [
     alt: 'Elvira Building View',
     configs: 'Exclusive 1 & 2 BHK',
     location: 'Orlem, Malad West',
+    lat: 19.1802, lng: 72.8492,
   },
 ];
 
@@ -33,6 +36,7 @@ export const upcomingProjects = [
     alt: 'New Life Building View',
     configs: 'Exclusive 2 & 3 BHK',
     location: 'Lourdes Colony, Orlem, Malad West',
+    lat: 19.1768, lng: 72.8476,
   },
   {
     name: 'Madonna',
@@ -41,6 +45,7 @@ export const upcomingProjects = [
     alt: 'Madonna Building View',
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: "D'Monte Lane, Orlem, Malad West",
+    lat: 19.1795, lng: 72.8500,
   },
 ];
 

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import SectionTitle from '../components/SectionTitle';
@@ -6,9 +7,11 @@ import SignatureCard from '../components/SignatureCard';
 import TestimonialCard from '../components/TestimonialCard';
 import Carousel from '../components/Carousel';
 import AnimatedCounter from '../components/AnimatedCounter';
-import { ongoingProjects, completedProjects } from '../data/projects';
+import { ongoingProjects, upcomingProjects, completedProjects } from '../data/projects';
 import { testimonials } from '../data/testimonials';
 import { useInView } from '../hooks/useInView';
+
+const CityProjectsMap = lazy(() => import('../components/CityProjectsMap'));
 
 const STATS = [
   { target: 55,   suffix: '+', label: 'Years of Legacy'    },
@@ -27,6 +30,7 @@ function slide(inView, delay = 0) {
 export default function HomePage() {
   const [statsRef,        statsInView]        = useInView(0.3);
   const [ongoingRef,      ongoingInView]      = useInView(0.1);
+  const [mapRef,          mapInView]          = useInView(0.1);
   const [legacyRef,       legacyInView]       = useInView(0.1);
   const [testimonialsRef, testimonialsInView] = useInView(0.1);
 
@@ -60,6 +64,27 @@ export default function HomePage() {
                 <ProjectCard project={project} />
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── City map ─────────────────────────────────────────────────────── */}
+      <div className="bg-navy py-24 px-5" ref={mapRef}>
+        <div className="max-w-[1100px] mx-auto">
+          <div style={slide(mapInView)}>
+            <SectionTitle className="!text-white">Our Presence Across Mumbai</SectionTitle>
+            <p className="text-center text-white/50 text-sm tracking-[0.5px] -mt-10 mb-10 max-w-[560px] mx-auto">
+              Over 55 years, 50+ projects spanning Malad, Kandivali, Andheri, Khar and beyond.
+            </p>
+          </div>
+          <div style={slide(mapInView, 200)}>
+            <Suspense fallback={<div className="h-[520px] bg-white/5 animate-pulse" />}>
+              <CityProjectsMap
+                ongoing={ongoingProjects}
+                upcoming={upcomingProjects}
+                completed={completedProjects}
+              />
+            </Suspense>
           </div>
         </div>
       </div>
