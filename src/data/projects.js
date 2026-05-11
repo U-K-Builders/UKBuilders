@@ -23,8 +23,8 @@ export const ongoingProjects = [
     image: null,
     alt: 'Elvira Building View',
     configs: 'Exclusive 1 & 2 BHK',
-    location: 'Orlem, Malad West',
-    lat: 19.1802, lng: 72.8492,
+    location: "D'Monte Ln, Orlem, Malad West",
+    lat: 19.19257, lng: 72.8392,
   },
 ];
 
