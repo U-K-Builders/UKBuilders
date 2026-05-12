@@ -13,16 +13,18 @@ export default function HomePage() {
     <div className="animate-fade-in">
       <HeroSection />
 
-      <div className="py-24 px-5 max-w-[1200px] mx-auto">
-        <SectionTitle>Ongoing Masterpieces</SectionTitle>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {ongoingProjects.map((project) => (
-            <ProjectCard key={project.name} project={project} />
-          ))}
+      <div className="section-gradient-top py-24 px-5">
+        <div className="max-w-[1200px] mx-auto">
+          <SectionTitle>Ongoing Masterpieces</SectionTitle>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {ongoingProjects.map((project) => (
+              <ProjectCard key={project.name} project={project} />
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="py-24 px-5 bg-surface-subtle">
+      <div className="section-gradient-bottom py-24 px-5 bg-surface-subtle">
         <div className="max-w-[1200px] mx-auto">
           <SectionTitle>Legacy Projects</SectionTitle>
           <Carousel interval={5000} visibleCount={3}>
@@ -42,12 +44,14 @@ export default function HomePage() {
       </div>
 
       <div className="bg-navy text-white py-24 overflow-hidden">
-        <SectionTitle className="!text-white">Client Experiences</SectionTitle>
-        <Carousel interval={5000} visibleCount={3}>
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={i} testimonial={t} />
-          ))}
-        </Carousel>
+        <div className="max-w-[1200px] mx-auto">
+          <SectionTitle className="!text-white">Client Experiences</SectionTitle>
+          <Carousel interval={5000} visibleCount={3}>
+            {testimonials.map((t, i) => (
+              <TestimonialCard key={i} testimonial={t} />
+            ))}
+          </Carousel>
+        </div>
       </div>
     </div>
   );

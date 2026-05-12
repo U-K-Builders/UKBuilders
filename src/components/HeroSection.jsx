@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 export default function HeroSection() {
   return (
     <div
-      className="py-32 px-5 text-center text-white bg-fixed bg-cover bg-center"
+      className="py-32 px-5 text-center text-white bg-fixed bg-cover bg-center hero-dark-overlay"
       style={{
         backgroundImage: `linear-gradient(rgba(11, 29, 58, 0.7), rgba(11, 29, 58, 0.7)), url('/images/Building/La Serena.jpg')`,
       }}

@@ -5,6 +5,7 @@
   --color-navy-dark: #061124;
   --color-gold: #C5A059;
   --color-gold-dark: #D4AF37;
+  --color-terracotta: #C4714A;
   --font-serif: 'Georgia', serif;
   /* Neutral text scale */
   --color-text-dark: #333333;
@@ -17,6 +18,7 @@
   --color-surface-light: #f9f9f9;
   --color-surface-subtle: #fcfcfc;
   --color-border-light: #eaeaea;
+  --color-bg-warm-white: #F7F3EE;
 }
 
 html {
@@ -86,3 +88,27 @@ body {
 /* Form placeholders */
 .dark input::placeholder,
 .dark textarea::placeholder { color: #4a4438; }
+
+/* Dark mode hero image — darker overlay */
+.dark .hero-dark-overlay {
+  background-image: linear-gradient(rgba(6, 17, 36, 0.85), rgba(6, 17, 36, 0.85)), url('/images/Building/La Serena.jpg') !important;
+}
+
+/* Section gradient dividers — smooth transitions instead of hard cuts */
+.section-gradient-top {
+  position: relative;
+  background: linear-gradient(to bottom, #ffffff, #F7F3EE);
+}
+
+.dark .section-gradient-top {
+  background: linear-gradient(to bottom, #061124, #0d2040);
+}
+
+.section-gradient-bottom {
+  position: relative;
+  background: linear-gradient(to bottom, #F7F3EE, #ffffff);
+}
+
+.dark .section-gradient-bottom {
+  background: linear-gradient(to bottom, #0d2040, #061124);
+}
