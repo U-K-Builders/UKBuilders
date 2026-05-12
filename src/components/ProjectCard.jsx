@@ -34,10 +34,10 @@ function ProgressRing({ percent }) {
   );
 }
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, showCountdown = true }) {
   const slug = project.name.toLowerCase().replace(/\s+/g, '-');
-  const months = getMonthsToHandover(project.possession);
-  const percent = getMilestonePercent(project.name);
+  const months = showCountdown ? getMonthsToHandover(project.possession) : null;
+  const percent = showCountdown ? getMilestonePercent(project.name) : null;
 
   return (
     <div className="bg-white border border-gold p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(197,160,89,0.15)]">

@@ -65,7 +65,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {ongoingProjects.map((project, i) => (
               <div key={project.name} style={slide(ongoingInView, 150 + i * 150)}>
-                <ProjectCard project={project} />
+                <ProjectCard project={project} showCountdown={false} />
               </div>
             ))}
           </div>
