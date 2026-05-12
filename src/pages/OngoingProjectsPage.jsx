@@ -1,19 +1,28 @@
 import { useState, useMemo } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import { ongoingProjects } from '../data/projects';
+import { projectDetails } from '../data/projectDetails';
 
 function getBHKTypes(configs) {
   const nums = configs.match(/\d+/g);
   return nums ? nums.map((n) => `${n} BHK`) : [];
 }
 
-const ALL_BHK = ['All', ...Array.from(
+function projectHasShops(name) {
+  const slug = name.toLowerCase().replace(/\s+/g, '-');
+  return projectDetails[slug]?.shops?.length > 0;
+}
+
+const BHK_OPTIONS = ['All', ...Array.from(
   new Set(ongoingProjects.flatMap((p) => getBHKTypes(p.configs)))
 ).sort((a, b) => parseInt(a) - parseInt(b))];
 
+const HAS_ANY_SHOPS = ongoingProjects.some((p) => projectHasShops(p.name));
+
 export default function OngoingProjectsPage() {
-  const [query, setQuery]     = useState('');
-  const [bhk, setBhk]         = useState('All');
+  const [query, setQuery]       = useState('');
+  const [bhk, setBhk]           = useState('All');
+  const [shopsOnly, setShopsOnly] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
@@ -24,9 +33,11 @@ export default function OngoingProjectsPage() {
         p.location.toLowerCase().includes(q);
       const matchesBHK =
         bhk === 'All' || getBHKTypes(p.configs).includes(bhk);
-      return matchesSearch && matchesBHK;
+      const matchesShops =
+        !shopsOnly || projectHasShops(p.name);
+      return matchesSearch && matchesBHK && matchesShops;
     });
-  }, [query, bhk]);
+  }, [query, bhk, shopsOnly]);
 
   return (
     <div className="animate-fade-in">
@@ -70,9 +81,9 @@ export default function OngoingProjectsPage() {
             )}
           </div>
 
-          {/* BHK filter */}
+          {/* BHK + Shops filters */}
           <div className="flex flex-wrap justify-center gap-2">
-            {ALL_BHK.map((type) => (
+            {BHK_OPTIONS.map((type) => (
               <button
                 key={type}
                 onClick={() => setBhk(type)}
@@ -85,6 +96,18 @@ export default function OngoingProjectsPage() {
                 {type}
               </button>
             ))}
+            {HAS_ANY_SHOPS && (
+              <button
+                onClick={() => setShopsOnly((v) => !v)}
+                className={`px-5 py-2 text-[0.6875rem] uppercase tracking-[2px] border transition-all duration-200 cursor-pointer ${
+                  shopsOnly
+                    ? 'bg-navy border-navy text-white'
+                    : 'bg-white border-border-light text-text-muted hover:border-navy hover:text-navy'
+                }`}
+              >
+                Shops / Commercial
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -102,7 +125,7 @@ export default function OngoingProjectsPage() {
               <p className="text-text-muted uppercase tracking-[3px] text-sm mb-3">No projects found</p>
               <p className="text-text-muted text-sm mb-6">Try adjusting your search or filter.</p>
               <button
-                onClick={() => { setQuery(''); setBhk('All'); }}
+                onClick={() => { setQuery(''); setBhk('All'); setShopsOnly(false); }}
                 className="text-gold border border-gold px-6 py-2 text-sm uppercase tracking-[2px] hover:bg-gold hover:text-white transition-all duration-300"
               >
                 Clear Filters
