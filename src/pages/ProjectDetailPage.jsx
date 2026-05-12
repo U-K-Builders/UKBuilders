@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 import Lightbox from '../components/Lightbox';
+import EnquiryModal from '../components/EnquiryModal';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
@@ -268,6 +269,7 @@ export default function ProjectDetailPage() {
   const { slug } = useParams();
   const project = projectDetails[slug];
   const [lightboxSrc, setLightboxSrc] = useState(null);
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   if (!project) {
     return (
@@ -299,7 +301,7 @@ export default function ProjectDetailPage() {
         </div>
       </div>
 
-      {/* Stats bar */}
+      {/* Stats bar + Register Interest CTA */}
       <div className="bg-navy-dark border-b border-gold/30">
         {(() => {
           const stats = project.buildingSpec ? [
@@ -319,14 +321,24 @@ export default function ProjectDetailPage() {
             ? 'grid-cols-2 md:grid-cols-3'
             : 'grid-cols-2 md:grid-cols-4';
           return (
-            <div className={`max-w-[1100px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
-              {stats.map(({ label, value }) => (
-                <div key={label} className="px-6 py-6 text-center">
-                  <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">{label}</span>
-                  <span className="block text-white text-sm font-serif">{value}</span>
-                </div>
-              ))}
-            </div>
+            <>
+              <div className={`max-w-[1100px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
+                {stats.map(({ label, value }) => (
+                  <div key={label} className="px-6 py-6 text-center">
+                    <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">{label}</span>
+                    <span className="block text-white text-sm font-serif">{value}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-gold/20 py-4 text-center">
+                <button
+                  onClick={() => setEnquiryOpen(true)}
+                  className="bg-gold text-white px-10 py-3 text-[0.6875rem] uppercase tracking-[3px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 cursor-pointer"
+                >
+                  Register Interest
+                </button>
+              </div>
+            </>
           );
         })()}
       </div>
@@ -559,6 +571,14 @@ export default function ProjectDetailPage() {
 
       {lightboxSrc && (
         <Lightbox src={lightboxSrc.src} alt={lightboxSrc.alt} onClose={() => setLightboxSrc(null)} />
+      )}
+
+      {enquiryOpen && (
+        <EnquiryModal
+          projectName={project.name}
+          floorPlans={project.floorPlans}
+          onClose={() => setEnquiryOpen(false)}
+        />
       )}
     </div>
   );

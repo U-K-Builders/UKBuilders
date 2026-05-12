@@ -22,6 +22,7 @@ import InvestorsPage from './pages/InvestorsPage';
 import RedevelopmentPage from './pages/RedevelopmentPage';
 import ContractorsPage from './pages/ContractorsPage';
 import CareersPage from './pages/CareersPage';
+import PageTransition from './components/PageTransition';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <PageTransition />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
