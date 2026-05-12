@@ -229,6 +229,7 @@ export const projectDetails = {
     ],
     shops: null,
     constructionPhotos: [],
+    neighbourhood: ORLEM_NEIGHBOURHOOD,
     progress: [
       { label: 'Foundation & Excavation', date: 'Q2 2024', status: 'done' },
       { label: 'Plinth Level', date: 'Q4 2024', status: 'done' },
