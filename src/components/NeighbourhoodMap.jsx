@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import Map, { Marker, Popup } from 'react-map-gl/maplibre';
+import Map, { Marker, Popup, NavigationControl } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 const STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
@@ -37,6 +37,7 @@ export default function NeighbourhoodMap({ name, lat, lng, neighbourhood }) {
       onLoad={handleLoad}
       onClick={() => setPopupInfo(null)}
     >
+      <NavigationControl position="top-right" />
       {/* Project marker */}
       <Marker
         longitude={lng}
