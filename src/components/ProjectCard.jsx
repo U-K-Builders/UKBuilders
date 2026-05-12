@@ -1,7 +1,43 @@
 import { Link } from 'react-router-dom';
+import { projectDetails } from '../data/projectDetails';
+
+function getMonthsToHandover(possessionYear) {
+  if (!possessionYear) return null;
+  const now = new Date();
+  const target = new Date(parseInt(possessionYear), 11, 31);
+  const months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
+  return Math.max(0, months);
+}
+
+function getMilestonePercent(name) {
+  const slug = name.toLowerCase().replace(/\s+/g, '-');
+  const progress = projectDetails[slug]?.progress;
+  if (!progress) return null;
+  const done = progress.filter((s) => s.status === 'done').length;
+  return Math.round((done / progress.length) * 100);
+}
+
+function ProgressRing({ percent }) {
+  const r = 22;
+  const circ = 2 * Math.PI * r;
+  const dash = (percent / 100) * circ;
+  return (
+    <svg width="56" height="56" className="-rotate-90" aria-hidden="true">
+      <circle cx="28" cy="28" r={r} fill="none" stroke="rgba(212,168,78,0.18)" strokeWidth="4" />
+      <circle
+        cx="28" cy="28" r={r} fill="none"
+        stroke="#D4A84E" strokeWidth="4"
+        strokeDasharray={`${dash} ${circ}`}
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
 export default function ProjectCard({ project }) {
   const slug = project.name.toLowerCase().replace(/\s+/g, '-');
+  const months = getMonthsToHandover(project.possession);
+  const percent = getMilestonePercent(project.name);
 
   return (
     <div className="bg-white border border-gold p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(197,160,89,0.15)]">
@@ -14,6 +50,31 @@ export default function ProjectCard({ project }) {
         </span>
         <div className="w-[50px] h-[3px] bg-gold mx-auto mt-5 mb-8" />
       </div>
+
+      {/* Possession countdown + progress ring */}
+      {(months !== null || percent !== null) && (
+        <div className="flex items-center justify-center gap-5 mb-8 py-4 border-y border-border-light">
+          {percent !== null && (
+            <div className="relative shrink-0">
+              <ProgressRing percent={percent} />
+              <span className="absolute inset-0 flex items-center justify-center text-[0.625rem] font-bold text-gold rotate-0">
+                {percent}%
+              </span>
+            </div>
+          )}
+          <div className="text-left">
+            {months !== null && (
+              <>
+                <p className="text-2xl md:text-3xl font-serif text-navy font-black leading-none">{months}</p>
+                <p className="text-[0.625rem] uppercase tracking-[1.5px] text-text-muted mt-1">months to possession</p>
+              </>
+            )}
+            {percent !== null && (
+              <p className="text-[0.625rem] uppercase tracking-[1.5px] text-text-muted mt-1">construction complete</p>
+            )}
+          </div>
+        </div>
+      )}
 
       {project.image && (
         <div className="inline-block mb-6 border border-gold-dark p-2 bg-white overflow-hidden">

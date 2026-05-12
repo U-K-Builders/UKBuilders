@@ -1,7 +1,12 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
+import WaitlistModal from '../components/WaitlistModal';
 import { upcomingProjects } from '../data/projects';
 
 export default function UpcomingProjectsPage() {
+  const [waitlistProject, setWaitlistProject] = useState(null);
+
   return (
     <div className="animate-fade-in">
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
@@ -15,12 +20,37 @@ export default function UpcomingProjectsPage() {
       </div>
 
       <div className="py-16 md:py-24 px-5 bg-surface-subtle">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="max-w-[1200px] mx-auto flex flex-col gap-16">
           {upcomingProjects.map((project) => (
-            <ProjectCard key={project.name} project={project} />
+            <div key={project.name} className="flex flex-col gap-4">
+              <ProjectCard project={project} />
+
+              {/* Waitlist CTA */}
+              <div className="bg-navy border border-gold/30 px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                  <p className="text-gold text-[0.6875rem] uppercase tracking-[3px] font-bold mb-1">Pre-launch Waitlist Open</p>
+                  <p className="text-text-light text-sm leading-[1.7]">
+                    Be the first to receive pricing, floor plans and early-bird availability for {project.name}.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setWaitlistProject(project.name)}
+                  className="shrink-0 bg-gold text-white px-8 py-3 text-[0.6875rem] uppercase tracking-[3px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 cursor-pointer"
+                >
+                  Notify Me
+                </button>
+              </div>
+            </div>
           ))}
         </div>
       </div>
+
+      {waitlistProject && (
+        <WaitlistModal
+          projectName={waitlistProject}
+          onClose={() => setWaitlistProject(null)}
+        />
+      )}
     </div>
   );
 }

@@ -7,6 +7,7 @@ export const ongoingProjects = [
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Sunder Cross Lane, Orlem, Malad West',
     lat: 19.1950, lng: 72.8355,
+    possession: '2027',
   },
   {
     name: 'Christina',
@@ -16,6 +17,7 @@ export const ongoingProjects = [
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Dominic Colony, Orlem, Malad West',
     lat: 19.1970, lng: 72.8399,
+    possession: '2027',
   },
   {
     name: 'Elvira',
@@ -25,6 +27,7 @@ export const ongoingProjects = [
     configs: 'Exclusive 1 & 2 BHK',
     location: "D'Monte Ln, Orlem, Malad West",
     lat: 19.192972, lng: 72.837889,
+    possession: '2027',
   },
 ];
 
@@ -37,6 +40,7 @@ export const upcomingProjects = [
     configs: 'Exclusive 2 & 3 BHK',
     location: 'Lourdes Colony, Orlem, Malad West',
     lat: 19.1768, lng: 72.8476,
+    possession: '2028',
   },
   {
     name: 'Madonna',
@@ -46,6 +50,7 @@ export const upcomingProjects = [
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: "D'Monte Lane, Orlem, Malad West",
     lat: 19.1795, lng: 72.8500,
+    possession: '2028',
   },
 ];
 

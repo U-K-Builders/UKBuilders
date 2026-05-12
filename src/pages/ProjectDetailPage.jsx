@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 import Lightbox from '../components/Lightbox';
 import EnquiryModal from '../components/EnquiryModal';
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
@@ -383,6 +384,46 @@ export default function ProjectDetailPage() {
               ))}
             </div>
           </section>
+
+          {/* Interior Finishes / Mood Board */}
+          {project.moodBoard && (
+            <section>
+              <SectionHeading>Interior Finishes</SectionHeading>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {project.moodBoard.map((item) => (
+                  <div key={item.label} className="border border-border-light bg-white hover:border-gold hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)] transition-all duration-300 overflow-hidden">
+                    {item.image ? (
+                      <img src={item.image} alt={item.label} className="w-full h-36 object-cover" />
+                    ) : (
+                      <div className="w-full h-36 bg-surface-subtle flex items-center justify-center">
+                        <span className="text-4xl text-gold/40 select-none">{item.icon}</span>
+                      </div>
+                    )}
+                    <div className="p-4">
+                      <p className="text-navy text-[0.6875rem] uppercase tracking-[2px] font-bold mb-1">{item.label}</p>
+                      <p className="text-text-tertiary text-xs leading-[1.6]">{item.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Before / After Slider */}
+          {project.beforeAfterPhotos?.before?.src && project.beforeAfterPhotos?.after?.src && (
+            <section>
+              <SectionHeading>Before &amp; After</SectionHeading>
+              <div className="w-full h-[420px] border border-border-light overflow-hidden">
+                <BeforeAfterSlider
+                  before={project.beforeAfterPhotos.before}
+                  after={project.beforeAfterPhotos.after}
+                  beforeLabel={project.beforeAfterPhotos.beforeLabel || 'Before'}
+                  afterLabel={project.beforeAfterPhotos.afterLabel || 'After'}
+                />
+              </div>
+              <p className="text-text-muted text-xs mt-2">Drag the handle to compare</p>
+            </section>
+          )}
 
           {/* Commercial Shops */}
           {project.shops && (

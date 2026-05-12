@@ -40,6 +40,84 @@ const ORLEM_NEIGHBOURHOOD = {
   ],
 };
 
+const SIGNATURE_MOOD_BOARD = [
+  {
+    label: 'Flooring',
+    detail: 'Italian marble in living areas, engineered hardwood in bedrooms',
+    icon: '▦',
+    image: null,
+  },
+  {
+    label: 'Kitchen',
+    detail: 'Modular kitchen with quartz countertops & branded hardware',
+    icon: '◈',
+    image: null,
+  },
+  {
+    label: 'Bathrooms',
+    detail: 'Branded sanitary ware, rainfall shower, anti-skid finish',
+    icon: '◉',
+    image: null,
+  },
+  {
+    label: 'Living Area',
+    detail: 'Soaring ceilings, large-format glazing, curated lighting zones',
+    icon: '◻',
+    image: null,
+  },
+  {
+    label: 'Doors & Windows',
+    detail: 'Powder-coated aluminium frames with double-glazed panes',
+    icon: '⊞',
+    image: null,
+  },
+  {
+    label: 'Electrical',
+    detail: 'Modular switches by Legrand / Schneider throughout',
+    icon: '⚡',
+    image: null,
+  },
+];
+
+const PREMIUM_MOOD_BOARD = [
+  {
+    label: 'Flooring',
+    detail: 'Vitrified tiles in living & dining, laminate wood in bedrooms',
+    icon: '▦',
+    image: null,
+  },
+  {
+    label: 'Kitchen',
+    detail: 'Semi-modular kitchen with granite countertops',
+    icon: '◈',
+    image: null,
+  },
+  {
+    label: 'Bathrooms',
+    detail: 'Premium ceramic fittings, wall-hung WC, hot & cold mixer',
+    icon: '◉',
+    image: null,
+  },
+  {
+    label: 'Living Area',
+    detail: 'Generous proportions, cross-ventilated layout, VRV-ready ducts',
+    icon: '◻',
+    image: null,
+  },
+  {
+    label: 'Doors & Windows',
+    detail: 'Solid-core flush doors, UPVC sliding windows with mesh',
+    icon: '⊞',
+    image: null,
+  },
+  {
+    label: 'Electrical',
+    detail: 'Concealed wiring, MCB-protected distribution board',
+    icon: '⚡',
+    image: null,
+  },
+];
+
 export const projectDetails = {
   justin: {
     name: 'Justin',
@@ -57,6 +135,8 @@ export const projectDetails = {
     floors: 14,
     possession: '2027',
     amenities: AMENITIES,
+    moodBoard: SIGNATURE_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK — Type A', carpet: '620 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK — Type B', carpet: '678 sq.ft.', beds: 2, baths: 2 },
@@ -97,6 +177,8 @@ export const projectDetails = {
     floors: 14,
     possession: '2027',
     amenities: AMENITIES,
+    moodBoard: SIGNATURE_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK — Type A', carpet: '650 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK — Type B', carpet: '671 sq.ft.', beds: 2, baths: 2 },
@@ -139,6 +221,8 @@ export const projectDetails = {
     floors: 14,
     possession: '2027',
     amenities: AMENITIES,
+    moodBoard: PREMIUM_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '1 BHK', carpet: '400 – 450 sq.ft.', beds: 1, baths: 1 },
       { type: '2 BHK', carpet: '655 – 725 sq.ft.', beds: 2, baths: 2 },
@@ -169,6 +253,8 @@ export const projectDetails = {
     floors: 12,
     possession: '2028',
     amenities: AMENITIES,
+    moodBoard: PREMIUM_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', carpet: '620 – 690 sq.ft.', beds: 2, baths: 2 },
       { type: '3 BHK', carpet: '920 – 1,010 sq.ft.', beds: 3, baths: 3 },
@@ -181,7 +267,7 @@ export const projectDetails = {
     name: 'Madonna',
     slug: 'madonna',
     subtitle: 'Luxury Residences',
-    tagline: 'A statement in luxury living on D\'Monte Lane — bold architecture, timeless interiors, unmatched quality.',
+    tagline: "A statement in luxury living on D'Monte Lane — bold architecture, timeless interiors, unmatched quality.",
     image: null,
     location: "D'Monte Lane, Orlem, Malad West",
     lat: 19.1793,
@@ -191,6 +277,8 @@ export const projectDetails = {
     floors: 14,
     possession: '2028',
     amenities: AMENITIES,
+    moodBoard: SIGNATURE_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', carpet: '650 – 730 sq.ft.', beds: 2, baths: 2 },
       { type: '3 BHK', carpet: '960 – 1,080 sq.ft.', beds: 3, baths: 3 },

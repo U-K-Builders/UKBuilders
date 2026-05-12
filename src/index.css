@@ -6,6 +6,7 @@
   --color-gold:      #D4A84E;
   --color-gold-dark: #E2B84B;
   --font-serif: 'Georgia', serif;
+  --font-display: 'Playfair Display', Georgia, serif;
   /* Neutral text scale */
   --color-text-dark: #333333;
   --color-text-primary: #444444;
@@ -107,9 +108,28 @@ body {
   background-clip: text;
 }
 
-/* Form placeholders */
+/* Light-background inputs/selects in light sections of the page */
+.dark input:not([class*="bg-"]),
+.dark select:not([class*="bg-"]),
+.dark textarea:not([class*="bg-"]) {
+  background-color: #0d2040;
+  color: #e8dfc8;
+  border-color: #1e3560;
+}
 .dark input::placeholder,
 .dark textarea::placeholder { color: #4a4438; }
+
+/* White cards (floor plan cards, mood board cards, amenity chips) */
+.dark .bg-white.border            { background-color: #0d2040; }
+.dark .bg-white.p-8               { background-color: #0d2040; }
+.dark .bg-surface-light.border    { background-color: #0d2040; }
+.dark .bg-surface-light.p-6       { background-color: #0d2040; }
+
+/* ProjectCard */
+.dark .border-gold.bg-white       { background-color: #0d2040; }
+
+/* Mood board placeholder bg */
+.dark .bg-surface-subtle          { background-color: #091628; }
 
 /* ─── Accessibility: text size (scales all rem units via html root) ─── */
 .acc-text-lg { font-size: 112%; }
