@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import HomePage from './pages/HomePage';
 import OngoingProjectsPage from './pages/OngoingProjectsPage';
 import CompletedProjectsPage from './pages/CompletedProjectsPage';
@@ -20,6 +21,8 @@ import OwnerPortalPage from './pages/OwnerPortalPage';
 import InvestorsPage from './pages/InvestorsPage';
 import RedevelopmentPage from './pages/RedevelopmentPage';
 import ContractorsPage from './pages/ContractorsPage';
+import CareersPage from './pages/CareersPage';
+import PageTransition from './components/PageTransition';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -33,6 +36,7 @@ export default function App() {
   return (
     <>
       <ScrollToTop />
+      <PageTransition />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -51,9 +55,11 @@ export default function App() {
         <Route path="/investors" element={<InvestorsPage />} />
         <Route path="/redevelopment" element={<RedevelopmentPage />} />
         <Route path="/contractors" element={<ContractorsPage />} />
+        <Route path="/careers" element={<CareersPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
+      <ScrollToTopButton />
     </>
   );
 }

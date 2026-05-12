@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #0B1D3A;
-  --color-navy-dark: #061124;
-  --color-gold: #C5A059;
-  --color-gold-dark: #D4AF37;
-  --color-terracotta: #C4714A;
+  --color-navy:      #0A1828;
+  --color-navy-dark: #050e1a;
+  --color-gold:      #D4A84E;
+  --color-gold-dark: #E2B84B;
   --font-serif: 'Georgia', serif;
+  --font-display: 'Playfair Display', Georgia, serif;
   /* Neutral text scale */
   --color-text-dark: #333333;
   --color-text-primary: #444444;
@@ -15,10 +15,9 @@
   --color-text-muted: #888888;
   --color-text-light: #e0e0e0;
   /* Surfaces & borders */
-  --color-surface-light: #f9f9f9;
-  --color-surface-subtle: #fcfcfc;
-  --color-border-light: #eaeaea;
-  --color-bg-warm-white: #F7F3EE;
+  --color-surface-light:  #f8f5f0;
+  --color-surface-subtle: #f3ede4;
+  --color-border-light:   #e2d9cc;
 }
 
 html {
@@ -47,6 +46,30 @@ body {
 .animate-fade-in {
   animation: fadeIn 0.6s forwards;
 }
+
+/* ─── Hero stagger animations ──────────────────────────────────────────── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-item {
+  opacity: 0;
+  animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes scrollDrop {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(220%); opacity: 0; }
+}
+
+/* ─── Custom scrollbar (webkit) ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(212, 168, 78, 0.35); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(212, 168, 78, 0.65); }
 
 /* ─── Dark mode ────────────────────────────────────────────────────────────
    Written outside @layer so these rules beat Tailwind utility classes
@@ -85,30 +108,35 @@ body {
   background-clip: text;
 }
 
-/* Form placeholders */
+/* Light-background inputs/selects in light sections of the page */
+.dark input:not([class*="bg-"]),
+.dark select:not([class*="bg-"]),
+.dark textarea:not([class*="bg-"]) {
+  background-color: #0d2040;
+  color: #e8dfc8;
+  border-color: #1e3560;
+}
 .dark input::placeholder,
 .dark textarea::placeholder { color: #4a4438; }
 
-/* Dark mode hero image — darker overlay */
-.dark .hero-dark-overlay {
-  background-image: linear-gradient(rgba(6, 17, 36, 0.85), rgba(6, 17, 36, 0.85)), url('/images/Building/La Serena.jpg') !important;
-}
+/* White cards (floor plan cards, mood board cards, amenity chips) */
+.dark .bg-white.border            { background-color: #0d2040; }
+.dark .bg-white.p-8               { background-color: #0d2040; }
+.dark .bg-surface-light.border    { background-color: #0d2040; }
+.dark .bg-surface-light.p-6       { background-color: #0d2040; }
 
-/* Section gradient dividers — smooth transitions instead of hard cuts */
-.section-gradient-top {
-  position: relative;
-  background: linear-gradient(to bottom, #ffffff, #F7F3EE);
-}
+/* ProjectCard */
+.dark .border-gold.bg-white       { background-color: #0d2040; }
 
-.dark .section-gradient-top {
-  background: linear-gradient(to bottom, #061124, #0d2040);
-}
+/* Mood board placeholder bg */
+.dark .bg-surface-subtle          { background-color: #091628; }
 
-.section-gradient-bottom {
-  position: relative;
-  background: linear-gradient(to bottom, #F7F3EE, #ffffff);
-}
+/* ─── Accessibility: text size (scales all rem units via html root) ─── */
+.acc-text-lg { font-size: 112%; }
+.acc-text-xl { font-size: 128%; }
 
-.dark .section-gradient-bottom {
-  background: linear-gradient(to bottom, #0d2040, #061124);
-}
+/* ─── Accessibility: colour vision filters ──────────────────────────── */
+.acc-deuteranopia body { filter: url(#acc-deuteranopia); }
+.acc-protanopia   body { filter: url(#acc-protanopia);   }
+.acc-tritanopia   body { filter: url(#acc-tritanopia);   }
+.acc-greyscale    body { filter: grayscale(100%);        }

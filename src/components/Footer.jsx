@@ -32,16 +32,51 @@ function WhatsAppIcon() {
   );
 }
 
+const NAV_COLS = [
+  {
+    heading: 'Projects',
+    links: [
+      { to: '/projects/ongoing',   label: 'Ongoing Projects'   },
+      { to: '/projects/upcoming',  label: 'Upcoming Projects'  },
+      { to: '/projects/completed', label: 'Completed Projects' },
+      { to: '/gallery',            label: 'Photo Gallery'      },
+      { to: '/timeline',           label: 'Project Timeline'   },
+    ],
+  },
+  {
+    heading: 'Company',
+    links: [
+      { to: '/our-story',     label: 'Our Legacy'      },
+      { to: '/history',       label: 'Company History' },
+      { to: '/investors',     label: 'For Investors'   },
+      { to: '/redevelopment', label: 'Redevelopment'   },
+      { to: '/contractors',   label: 'For Contractors' },
+      { to: '/careers',       label: 'Careers'         },
+    ],
+  },
+  {
+    heading: 'Resources',
+    links: [
+      { to: '/resources',    label: 'Knowledge Hub' },
+      { to: '/book-a-call',  label: 'Book a Call'   },
+      { to: '/owner-portal', label: 'Owner Portal'  },
+      { to: '/contact',      label: 'Contact Us'    },
+    ],
+  },
+];
+
 export default function Footer() {
   return (
     <footer id="contact" className="bg-navy-dark text-text-muted text-center py-16 px-5 text-sm">
+
+      {/* ── Original top section ── */}
       <div className="flex flex-row items-center justify-center gap-4 mb-6 flex-wrap">
         <img
           src="/images/company/logo/U.K. Builders Logo (Square) copy.jpg"
           alt="U.K. Builders Logo"
           className="h-[60px] w-auto mix-blend-screen brightness-110"
         />
-        <h2 className="text-white m-0 uppercase tracking-[2px] text-[28px] font-serif md:translate-y-[15px]">
+        <h2 className="text-white m-0 uppercase tracking-[2px] text-[1.75rem] font-serif md:translate-y-[15px]">
           U.K. Builders
         </h2>
       </div>
@@ -61,49 +96,47 @@ export default function Footer() {
         Inquiries: <span className="text-gold font-bold">u.k.builders1981@gmail.com</span> | <span className="text-gold font-bold">+91 98203 11177</span>
       </p>
 
-      {/* Social links */}
       <div className="flex justify-center gap-4 mt-8 mb-6">
-        <a
-          href={SOCIAL.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Follow us on Instagram"
-          className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300"
-        >
+        <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram"
+          className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300">
           <InstagramIcon />
         </a>
-        <a
-          href={SOCIAL.facebook}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Follow us on Facebook"
-          className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300"
-        >
+        <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook"
+          className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300">
           <FacebookIcon />
         </a>
-        <a
-          href={SOCIAL.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat with us on WhatsApp"
-          className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300"
-        >
+        <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"
+          className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300">
           <WhatsAppIcon />
         </a>
       </div>
 
-      {/* Quick links */}
-      <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-6 mb-4 text-xs uppercase tracking-[1.5px]">
-        <Link to="/gallery" className="text-text-muted hover:text-gold transition-colors duration-300">Gallery</Link>
-        <Link to="/resources" className="text-text-muted hover:text-gold transition-colors duration-300">Knowledge Hub</Link>
-        <Link to="/book-a-call" className="text-text-muted hover:text-gold transition-colors duration-300">Book a Call</Link>
-        <Link to="/timeline" className="text-text-muted hover:text-gold transition-colors duration-300">Timeline</Link>
-        <Link to="/our-story" className="text-text-muted hover:text-gold transition-colors duration-300">Our Legacy</Link>
-        <Link to="/contact" className="text-text-muted hover:text-gold transition-colors duration-300">Contact</Link>
-        <Link to="/owner-portal" className="text-text-muted hover:text-gold transition-colors duration-300">Owner Portal</Link>
+      {/* ── Nav columns ── */}
+      <div className="border-t border-white/10 mt-10 pt-12 max-w-[900px] mx-auto grid grid-cols-2 md:grid-cols-3 gap-10 text-left">
+        {NAV_COLS.map(({ heading, links }) => (
+          <div key={heading}>
+            <div className="mb-5">
+              <h4 className="font-serif text-[0.9375rem] tracking-[1px] text-gold font-normal m-0 mb-2">{heading}</h4>
+              <div className="w-6 h-[1px] bg-gold/40" />
+            </div>
+            <ul className="flex flex-col gap-3 list-none m-0 p-0">
+              {links.map(({ to, label }) => (
+                <li key={to}>
+                  <Link to={to} className="text-text-muted hover:text-gold text-[0.75rem] tracking-[1px] uppercase no-underline transition-colors duration-300">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
-      <p className="mt-2 text-xs opacity-60">&copy; 2026 U.K. Builders. All rights reserved. RERA Registered.</p>
+      {/* ── Bottom bar ── */}
+      <div className="border-t border-white/8 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[900px] mx-auto text-[0.6875rem] tracking-[0.5px] text-white/25">
+        <span>&copy; {new Date().getFullYear()} U.K. Builders. All rights reserved.</span>
+        <span>MahaRERA Registration Pending · Orlem, Malad West</span>
+      </div>
     </footer>
   );
 }

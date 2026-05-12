@@ -1,57 +1,69 @@
-import { useEffect } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useState, useCallback } from 'react';
+import Map, { Marker, Popup } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
-function FitBounds({ coords }) {
-  const map = useMap();
-  useEffect(() => {
-    if (coords.length >= 2) map.fitBounds(coords, { padding: [40, 40] });
-  }, [map]);
-  return null;
-}
+const STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
 export default function ProjectMap({ projects }) {
   const located = projects.filter((p) => p.lat && p.lng);
-  const coords = located.map((p) => [p.lat, p.lng]);
+  const [popupInfo, setPopupInfo] = useState(null);
+
+  const handleLoad = useCallback(({ target: map }) => {
+    if (located.length < 2) return;
+    const lngs = located.map((p) => p.lng);
+    const lats = located.map((p) => p.lat);
+    map.fitBounds(
+      [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]],
+      { padding: 40, duration: 0 },
+    );
+  }, [located]);
 
   return (
-    <MapContainer
-      center={[19.18, 72.848]}
-      zoom={12}
-      style={{ height: '100%', width: '100%' }}
-      scrollWheelZoom={false}
+    <Map
+      initialViewState={{ longitude: 72.848, latitude: 19.18, zoom: 12 }}
+      style={{ width: '100%', height: '100%' }}
+      mapStyle={STYLE}
+      scrollZoom={false}
+      onLoad={handleLoad}
+      onClick={() => setPopupInfo(null)}
     >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-        subdomains="abcd"
-        maxZoom={20}
-      />
-      <FitBounds coords={coords} />
       {located.map((project) => (
-        <CircleMarker
+        <Marker
           key={`${project.name}-${project.year}`}
-          center={[project.lat, project.lng]}
-          radius={7}
-          pathOptions={{
-            fillColor: '#C5A059',
-            fillOpacity: 0.9,
-            color: '#0B1D3A',
-            weight: 1.5,
-          }}
+          longitude={project.lng}
+          latitude={project.lat}
+          anchor="center"
+          onClick={(e) => { e.originalEvent.stopPropagation(); setPopupInfo(project); }}
         >
-          <Popup>
-            <div style={{ fontFamily: 'Georgia, serif', minWidth: '140px' }}>
-              <div style={{ color: '#0B1D3A', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', marginBottom: '2px' }}>
-                {project.name}
-              </div>
-              <div style={{ color: '#C5A059', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                {project.year} &middot; {project.builder}
-              </div>
-            </div>
-          </Popup>
-        </CircleMarker>
+          <div
+            style={{
+              width: 14, height: 14, borderRadius: '50%',
+              backgroundColor: '#C5A059', border: '1.5px solid #0B1D3A',
+              cursor: 'pointer', opacity: 0.9,
+            }}
+          />
+        </Marker>
       ))}
-    </MapContainer>
+
+      {popupInfo && (
+        <Popup
+          longitude={popupInfo.lng}
+          latitude={popupInfo.lat}
+          anchor="bottom"
+          onClose={() => setPopupInfo(null)}
+          closeOnClick={false}
+          offset={10}
+        >
+          <div style={{ fontFamily: 'Georgia, serif', minWidth: '140px' }}>
+            <p style={{ color: '#0B1D3A', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '13px', margin: '0 0 2px' }}>
+              {popupInfo.name}
+            </p>
+            <p style={{ color: '#C5A059', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
+              {popupInfo.year} &middot; {popupInfo.builder}
+            </p>
+          </div>
+        </Popup>
+      )}
+    </Map>
   );
 }

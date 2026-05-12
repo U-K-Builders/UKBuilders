@@ -13,32 +13,110 @@ const AMENITIES = [
 
 const ORLEM_NEIGHBOURHOOD = {
   schools: [
-    { name: 'Pinnacle High International School', lat: 19.1960, lng: 72.8348, distance: '~0.2 km' },
-    { name: 'Shri Balaji International School', lat: 19.1968, lng: 72.8353, distance: '~0.2 km' },
-    { name: "St. Joseph's High School", lat: 19.1942, lng: 72.8378, distance: '~0.3 km' },
-    { name: "St. Anne's High School & Junior College", lat: 19.1985, lng: 72.8360, distance: '~0.4 km' },
-    { name: 'Ramniwas Bajaj English High School', lat: 19.1860, lng: 72.8410, distance: '~1.1 km' },
+    { name: 'Pinnacle High International School',      lat: 19.1942, lng: 72.8381, distance: '~0.4 km' },
+    { name: 'Shri Balaji International School',        lat: 19.1942, lng: 72.8363, distance: '~0.3 km' },
+    { name: "St. Joseph's High School",                lat: 19.2162, lng: 72.8306, distance: '~2.4 km' },
+    { name: "St. Anne's High School & Junior College", lat: 19.1943, lng: 72.8381, distance: '~0.4 km' },
+    { name: 'Ramniwas Bajaj English High School',      lat: 19.1765, lng: 72.8455, distance: '~2.1 km' },
   ],
   hospitals: [
-    { name: 'Neon Critical Care Children\'s Hospital', lat: 19.1945, lng: 72.8375, distance: '~0.3 km' },
-    { name: 'Adarsh Hospital', lat: 19.1938, lng: 72.8382, distance: '~0.4 km' },
-    { name: 'Surana Hospital & Research Centre', lat: 19.1930, lng: 72.8388, distance: '~0.5 km' },
+    { name: "Neon Critical Care Children's Hospital", lat: 19.1956, lng: 72.8374, distance: '~0.2 km' },
+    { name: 'Adarsh Hospital',                        lat: 19.1963, lng: 72.8370, distance: '~0.2 km' },
+    { name: 'Surana Hospital & Research Centre',      lat: 19.2005, lng: 72.8380, distance: '~0.7 km' },
   ],
   religious: [
-    { name: 'Our Lady of Lourdes Church (Orlem Church)', lat: 19.1940, lng: 72.8382, distance: '~0.4 km' },
-    { name: "St. Peter's Jacobite Syrian Orthodox Church", lat: 19.1980, lng: 72.8345, distance: '~0.35 km' },
-    { name: "St. Anne's Church", lat: 19.1988, lng: 72.8362, distance: '~0.4 km' },
-    { name: 'Jama Masjid', lat: 19.1870, lng: 72.8430, distance: '~1.1 km' },
-    { name: 'Shree Icchapurti Hanuman Mandir', lat: 19.1820, lng: 72.8340, distance: '~1.4 km' },
+    { name: 'Our Lady of Lourdes Church (Orlem Church)',   lat: 19.1954, lng: 72.8376, distance: '~0.2 km' },
+    { name: "St. Peter's Jacobite Syrian Orthodox Church", lat: 19.1968, lng: 72.8368, distance: '~0.2 km' },
+    { name: "St. Anne's Church",                           lat: 19.1962, lng: 72.8362, distance: '~0.2 km' },
+    { name: 'Jama Masjid',                                 lat: 19.1862, lng: 72.8408, distance: '~1.1 km' },
+    { name: 'Shree Icchapurti Hanuman Mandir',             lat: 19.1755, lng: 72.8354, distance: '~2.2 km' },
   ],
   landmarks: [
-    { name: 'Malad West Metro Station', lat: 19.1872, lng: 72.8367, distance: '~0.9 km' },
-    { name: 'Malad Railway Station', lat: 19.1867, lng: 72.8486, distance: '~1.5 km' },
-    { name: 'Infiniti Mall', lat: 19.1848, lng: 72.8341, distance: '~1.2 km' },
-    { name: 'Inorbit Mall', lat: 19.1730, lng: 72.8358, distance: '~2.4 km' },
-    { name: 'Malad BEST Bus Depot', lat: 19.1842, lng: 72.8349, distance: '~1.2 km' },
+    { name: 'Malad West Metro Station', lat: 19.1854, lng: 72.8358, distance: '~1.1 km' },
+    { name: 'Malad Railway Station',    lat: 19.1868, lng: 72.8486, distance: '~1.6 km' },
+    { name: 'Infiniti Mall',            lat: 19.1848, lng: 72.8341, distance: '~1.1 km' },
+    { name: 'Inorbit Mall',             lat: 19.1702, lng: 72.8354, distance: '~2.8 km' },
+    { name: 'Malad BEST Bus Depot',     lat: 19.1836, lng: 72.8357, distance: '~1.3 km' },
   ],
 };
+
+const SIGNATURE_MOOD_BOARD = [
+  {
+    label: 'Flooring',
+    detail: 'Italian marble in living areas, engineered hardwood in bedrooms',
+    icon: '▦',
+    image: null,
+  },
+  {
+    label: 'Kitchen',
+    detail: 'Modular kitchen with quartz countertops & branded hardware',
+    icon: '◈',
+    image: null,
+  },
+  {
+    label: 'Bathrooms',
+    detail: 'Branded sanitary ware, rainfall shower, anti-skid finish',
+    icon: '◉',
+    image: null,
+  },
+  {
+    label: 'Living Area',
+    detail: 'Soaring ceilings, large-format glazing, curated lighting zones',
+    icon: '◻',
+    image: null,
+  },
+  {
+    label: 'Doors & Windows',
+    detail: 'Powder-coated aluminium frames with double-glazed panes',
+    icon: '⊞',
+    image: null,
+  },
+  {
+    label: 'Electrical',
+    detail: 'Modular switches by Legrand / Schneider throughout',
+    icon: '⚡',
+    image: null,
+  },
+];
+
+const PREMIUM_MOOD_BOARD = [
+  {
+    label: 'Flooring',
+    detail: 'Vitrified tiles in living & dining, laminate wood in bedrooms',
+    icon: '▦',
+    image: null,
+  },
+  {
+    label: 'Kitchen',
+    detail: 'Semi-modular kitchen with granite countertops',
+    icon: '◈',
+    image: null,
+  },
+  {
+    label: 'Bathrooms',
+    detail: 'Premium ceramic fittings, wall-hung WC, hot & cold mixer',
+    icon: '◉',
+    image: null,
+  },
+  {
+    label: 'Living Area',
+    detail: 'Generous proportions, cross-ventilated layout, VRV-ready ducts',
+    icon: '◻',
+    image: null,
+  },
+  {
+    label: 'Doors & Windows',
+    detail: 'Solid-core flush doors, UPVC sliding windows with mesh',
+    icon: '⊞',
+    image: null,
+  },
+  {
+    label: 'Electrical',
+    detail: 'Concealed wiring, MCB-protected distribution board',
+    icon: '⚡',
+    image: null,
+  },
+];
 
 export const projectDetails = {
   justin: {
@@ -57,6 +135,8 @@ export const projectDetails = {
     floors: 14,
     possession: '2027',
     amenities: AMENITIES,
+    moodBoard: SIGNATURE_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK — Type A', carpet: '620 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK — Type B', carpet: '678 sq.ft.', beds: 2, baths: 2 },
@@ -97,6 +177,8 @@ export const projectDetails = {
     floors: 14,
     possession: '2027',
     amenities: AMENITIES,
+    moodBoard: SIGNATURE_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK — Type A', carpet: '650 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK — Type B', carpet: '671 sq.ft.', beds: 2, baths: 2 },
@@ -131,20 +213,23 @@ export const projectDetails = {
     subtitle: 'Premium Residences',
     tagline: 'Another signature address in Orlem — premium living crafted with the hallmark quality of U.K. Builders.',
     image: null,
-    location: 'Orlem, Malad West',
-    lat: 19.1815,
-    lng: 72.8490,
+    location: "D'Monte Ln, Orlem, Malad West",
+    lat: 19.192972,
+    lng: 72.837889,
     rera: null,
     configs: '1 & 2 BHK',
     floors: 14,
     possession: '2027',
     amenities: AMENITIES,
+    moodBoard: PREMIUM_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '1 BHK', carpet: '400 – 450 sq.ft.', beds: 1, baths: 1 },
       { type: '2 BHK', carpet: '655 – 725 sq.ft.', beds: 2, baths: 2 },
     ],
     shops: null,
     constructionPhotos: [],
+    neighbourhood: ORLEM_NEIGHBOURHOOD,
     progress: [
       { label: 'Foundation & Excavation', date: 'Q2 2024', status: 'done' },
       { label: 'Plinth Level', date: 'Q4 2024', status: 'done' },
@@ -169,6 +254,8 @@ export const projectDetails = {
     floors: 12,
     possession: '2028',
     amenities: AMENITIES,
+    moodBoard: PREMIUM_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', carpet: '620 – 690 sq.ft.', beds: 2, baths: 2 },
       { type: '3 BHK', carpet: '920 – 1,010 sq.ft.', beds: 3, baths: 3 },
@@ -181,7 +268,7 @@ export const projectDetails = {
     name: 'Madonna',
     slug: 'madonna',
     subtitle: 'Luxury Residences',
-    tagline: 'A statement in luxury living on D\'Monte Lane — bold architecture, timeless interiors, unmatched quality.',
+    tagline: "A statement in luxury living on D'Monte Lane — bold architecture, timeless interiors, unmatched quality.",
     image: null,
     location: "D'Monte Lane, Orlem, Malad West",
     lat: 19.1793,
@@ -191,6 +278,8 @@ export const projectDetails = {
     floors: 14,
     possession: '2028',
     amenities: AMENITIES,
+    moodBoard: SIGNATURE_MOOD_BOARD,
+    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', carpet: '650 – 730 sq.ft.', beds: 2, baths: 2 },
       { type: '3 BHK', carpet: '960 – 1,080 sq.ft.', beds: 3, baths: 3 },

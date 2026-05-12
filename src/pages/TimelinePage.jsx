@@ -23,7 +23,7 @@ function TimelineCard({ project, align, isOngoing }) {
       </h3>
       {isOngoing ? (
         <>
-          <span className="text-gold text-[11px] uppercase tracking-[2px] font-bold mb-2 block">
+          <span className="text-gold text-[0.6875rem] uppercase tracking-[2px] font-bold mb-2 block">
             {project.subtitle}
           </span>
           <p className="text-text-secondary text-sm leading-[1.7] mb-1">{project.configs}</p>
@@ -31,7 +31,7 @@ function TimelineCard({ project, align, isOngoing }) {
         </>
       ) : (
         <>
-          <span className="text-gold text-[11px] uppercase tracking-[2px] font-bold mb-3 block">
+          <span className="text-gold text-[0.6875rem] uppercase tracking-[2px] font-bold mb-3 block">
             {project.year} · {project.builder}
           </span>
           <p className="text-text-secondary text-sm leading-[1.7]">{project.description}</p>

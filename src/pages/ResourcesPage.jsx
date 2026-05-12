@@ -108,7 +108,7 @@ function DownloadCard({ guide }) {
 
         {open && !done && (
           <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 border-t border-border-light pt-6">
-            <p className="text-[10px] uppercase tracking-[2px] text-text-muted mb-1">Enter details to receive your guide</p>
+            <p className="text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Enter details to receive your guide</p>
             <div>
               <input
                 name="name"
@@ -186,7 +186,7 @@ export default function ResourcesPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <p className="text-[11px] uppercase tracking-[4px] text-gold mb-3">Buyer Education</p>
+        <p className="text-[0.6875rem] uppercase tracking-[4px] text-gold mb-3">Buyer Education</p>
         <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Knowledge Hub
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />

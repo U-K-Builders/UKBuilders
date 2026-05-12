@@ -2,6 +2,8 @@ import { useState, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 import Lightbox from '../components/Lightbox';
+import EnquiryModal from '../components/EnquiryModal';
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
@@ -45,10 +47,10 @@ function ProgressStepper({ steps }) {
                   )}
                   {active && <div className="w-2.5 h-2.5 rounded-full bg-gold" />}
                 </div>
-                <p className={`mt-2 text-center text-[10px] uppercase tracking-[1px] leading-tight max-w-[80px] ${
+                <p className={`mt-2 text-center text-[0.625rem] uppercase tracking-[1px] leading-tight max-w-[80px] ${
                   active ? 'text-navy font-bold' : done ? 'text-text-secondary' : 'text-text-muted'
                 }`}>{step.label}</p>
-                <p className="text-[10px] text-text-muted mt-0.5">{step.date}</p>
+                <p className="text-[0.625rem] text-text-muted mt-0.5">{step.date}</p>
               </div>
             );
           })}
@@ -178,12 +180,12 @@ function MilestoneSubscribeForm({ projectName, nextMilestone }) {
           </div>
           <button
             type="submit"
-            className="shrink-0 bg-gold text-white px-8 py-3 text-[11px] uppercase tracking-[2px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300"
+            className="shrink-0 bg-gold text-white px-8 py-3 text-[0.6875rem] uppercase tracking-[2px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300"
           >
             Notify Me
           </button>
         </div>
-        <p className="text-text-muted text-[10px] mt-3 uppercase tracking-[1px]">No spam — milestone updates only. Unsubscribe at any time.</p>
+        <p className="text-text-muted text-[0.625rem] mt-3 uppercase tracking-[1px]">No spam — milestone updates only. Unsubscribe at any time.</p>
       </form>
     </div>
   );
@@ -237,21 +239,21 @@ function BookVisitForm({ projectName }) {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label htmlFor="visit-name" className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label htmlFor="visit-name" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
           Full Name <span className="text-gold">*</span>
         </label>
         <input id="visit-name" name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Your name" />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
       <div>
-        <label htmlFor="visit-phone" className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label htmlFor="visit-phone" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
           Phone Number <span className="text-gold">*</span>
         </label>
         <input id="visit-phone" name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
       <div>
-        <label htmlFor="visit-email" className="block text-[11px] uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label htmlFor="visit-email" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
           Email Address <span className="text-gold">*</span>
         </label>
         <input id="visit-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
@@ -268,6 +270,7 @@ export default function ProjectDetailPage() {
   const { slug } = useParams();
   const project = projectDetails[slug];
   const [lightboxSrc, setLightboxSrc] = useState(null);
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   if (!project) {
     return (
@@ -290,7 +293,7 @@ export default function ProjectDetailPage() {
           <div className="w-full h-[40vh] md:h-[50vh]" />
         )}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5">
-          <span className="text-gold text-[11px] uppercase tracking-[4px] mb-3">{project.subtitle}</span>
+          <span className="text-gold text-[0.6875rem] uppercase tracking-[4px] mb-3">{project.subtitle}</span>
           <h1 className="font-serif text-white text-5xl md:text-7xl font-black uppercase tracking-[6px] md:tracking-[10px]">
             {project.name}
           </h1>
@@ -299,7 +302,7 @@ export default function ProjectDetailPage() {
         </div>
       </div>
 
-      {/* Stats bar */}
+      {/* Stats bar + Register Interest CTA */}
       <div className="bg-navy-dark border-b border-gold/30">
         {(() => {
           const stats = project.buildingSpec ? [
@@ -319,14 +322,24 @@ export default function ProjectDetailPage() {
             ? 'grid-cols-2 md:grid-cols-3'
             : 'grid-cols-2 md:grid-cols-4';
           return (
-            <div className={`max-w-[1100px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
-              {stats.map(({ label, value }) => (
-                <div key={label} className="px-6 py-6 text-center">
-                  <span className="block text-[10px] uppercase tracking-[2px] text-text-muted mb-1">{label}</span>
-                  <span className="block text-white text-sm font-serif">{value}</span>
-                </div>
-              ))}
-            </div>
+            <>
+              <div className={`max-w-[1100px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
+                {stats.map(({ label, value }) => (
+                  <div key={label} className="px-6 py-6 text-center">
+                    <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">{label}</span>
+                    <span className="block text-white text-sm font-serif">{value}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-gold/20 py-4 text-center">
+                <button
+                  onClick={() => setEnquiryOpen(true)}
+                  className="bg-gold text-white px-10 py-3 text-[0.6875rem] uppercase tracking-[3px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 cursor-pointer"
+                >
+                  Register Interest
+                </button>
+              </div>
+            </>
           );
         })()}
       </div>
@@ -363,7 +376,7 @@ export default function ProjectDetailPage() {
                   </div>
                   <a
                     href="mailto:u.k.builders1981@gmail.com"
-                    className="inline-block text-[11px] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+                    className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
                   >
                     Request Floor Plan
                   </a>
@@ -371,6 +384,46 @@ export default function ProjectDetailPage() {
               ))}
             </div>
           </section>
+
+          {/* Interior Finishes / Mood Board */}
+          {project.moodBoard && (
+            <section>
+              <SectionHeading>Interior Finishes</SectionHeading>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {project.moodBoard.map((item) => (
+                  <div key={item.label} className="border border-border-light bg-white hover:border-gold hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)] transition-all duration-300 overflow-hidden">
+                    {item.image ? (
+                      <img src={item.image} alt={item.label} className="w-full h-36 object-cover" />
+                    ) : (
+                      <div className="w-full h-36 bg-surface-subtle flex items-center justify-center">
+                        <span className="text-4xl text-gold/40 select-none">{item.icon}</span>
+                      </div>
+                    )}
+                    <div className="p-4">
+                      <p className="text-navy text-[0.6875rem] uppercase tracking-[2px] font-bold mb-1">{item.label}</p>
+                      <p className="text-text-tertiary text-xs leading-[1.6]">{item.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Before / After Slider */}
+          {project.beforeAfterPhotos?.before?.src && project.beforeAfterPhotos?.after?.src && (
+            <section>
+              <SectionHeading>Before &amp; After</SectionHeading>
+              <div className="w-full h-[420px] border border-border-light overflow-hidden">
+                <BeforeAfterSlider
+                  before={project.beforeAfterPhotos.before}
+                  after={project.beforeAfterPhotos.after}
+                  beforeLabel={project.beforeAfterPhotos.beforeLabel || 'Before'}
+                  afterLabel={project.beforeAfterPhotos.afterLabel || 'After'}
+                />
+              </div>
+              <p className="text-text-muted text-xs mt-2">Drag the handle to compare</p>
+            </section>
+          )}
 
           {/* Commercial Shops */}
           {project.shops && (
@@ -385,7 +438,7 @@ export default function ProjectDetailPage() {
                     <p className="text-text-light text-base font-serif mb-6">{shop.carpet}</p>
                     <a
                       href="mailto:u.k.builders1981@gmail.com"
-                      className="inline-block text-[11px] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+                      className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
                     >
                       Enquire Now
                     </a>
@@ -410,7 +463,7 @@ export default function ProjectDetailPage() {
                       <img src={photo.src} alt={photo.caption} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                       {photo.caption && (
                         <div className="absolute bottom-0 left-0 right-0 bg-navy/70 px-3 py-2">
-                          <p className="text-white text-[10px] uppercase tracking-[1px]">{photo.caption}</p>
+                          <p className="text-white text-[0.625rem] uppercase tracking-[1px]">{photo.caption}</p>
                         </div>
                       )}
                     </div>
@@ -493,7 +546,7 @@ export default function ProjectDetailPage() {
                   { key: 'landmarks', color: 'bg-amber-400',  label: 'Landmarks & Transit'},
                 ].map(({ key, color, label }) => (
                   <div key={key} className="border border-border-light bg-surface-light p-6">
-                    <h4 className="text-navy text-[11px] uppercase tracking-[3px] font-bold mb-4 flex items-center gap-2">
+                    <h4 className="text-navy text-[0.6875rem] uppercase tracking-[3px] font-bold mb-4 flex items-center gap-2">
                       <span className={`w-2.5 h-2.5 rounded-full ${color} shrink-0`} />
                       {label}
                     </h4>
@@ -532,7 +585,7 @@ export default function ProjectDetailPage() {
                   Experience {project.name} in person. Fill in your details and our team will schedule a visit at your convenience.
                 </p>
                 <div className="bg-navy text-white p-8 border border-gold">
-                  <span className="block text-[11px] uppercase tracking-[3px] text-gold mb-4">Get in Touch</span>
+                  <span className="block text-[0.6875rem] uppercase tracking-[3px] text-gold mb-4">Get in Touch</span>
                   <p className="text-text-light text-sm leading-[1.8] mb-2">
                     <a href="tel:+919820311177" className="hover:text-gold transition-colors duration-300">+91 98203 11177</a>
                   </p>
@@ -552,13 +605,21 @@ export default function ProjectDetailPage() {
 
       {/* Back link */}
       <div className="py-8 px-5 border-t border-border-light text-center">
-        <Link to="/projects/ongoing" className="text-[11px] uppercase tracking-[3px] text-gold hover:underline">
+        <Link to="/projects/ongoing" className="text-[0.6875rem] uppercase tracking-[3px] text-gold hover:underline">
           ← Back to All Projects
         </Link>
       </div>
 
       {lightboxSrc && (
         <Lightbox src={lightboxSrc.src} alt={lightboxSrc.alt} onClose={() => setLightboxSrc(null)} />
+      )}
+
+      {enquiryOpen && (
+        <EnquiryModal
+          projectName={project.name}
+          floorPlans={project.floorPlans}
+          onClose={() => setEnquiryOpen(false)}
+        />
       )}
     </div>
   );
