@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const MAPS_URL = 'https://maps.google.com/?q=F-34+Sej+Plaza+Marve+Road+Malad+West+Mumbai+400064';
+const MAPS_URL = 'https://www.google.com/maps/place/U.K.+Builders/@19.1919081,72.8456841,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b7c9ca97e5d3:0x1a74ea6695565d49!8m2!3d19.1919081!4d72.8456841!16s%2Fg%2F11z7lgtw7p!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D';
 
 const SOCIAL = {
   instagram: 'https://www.instagram.com/u.k.builders',
