@@ -5,6 +5,7 @@ const MAPS_URL = 'https://www.google.com/maps/place/U.K.+Builders/@19.1919081,72
 const SOCIAL = {
   instagram: 'https://www.instagram.com/u.k.builders',
   facebook: 'https://www.facebook.com/people/UK-Builders/100089528300390/',
+  linkedin: 'https://www.linkedin.com/company/u-k-builders/',
   whatsapp: 'https://wa.me/919820311177',
 };
 
@@ -20,6 +21,14 @@ function FacebookIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.731-2.004 1.437-.103.249-.13.597-.13.945v5.423h-3.554s.05-8.736 0-9.646h3.554v1.348c.429-.665 1.191-1.609 2.894-1.609 2.113 0 3.695 1.381 3.695 4.369v5.538zM5.337 8.855c-1.144 0-1.915-.762-1.915-1.715 0-.953.77-1.715 1.958-1.715 1.187 0 1.927.762 1.927 1.715 0 .953-.74 1.715-1.97 1.715zm1.946 11.597H3.392V9.142h3.891v11.31zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
     </svg>
   );
 }
@@ -104,6 +113,10 @@ export default function Footer() {
         <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook"
           className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300">
           <FacebookIcon />
+        </a>
+        <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Connect with us on LinkedIn"
+          className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300">
+          <LinkedInIcon />
         </a>
         <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp"
           className="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center text-text-muted hover:text-gold hover:border-gold transition-all duration-300">
