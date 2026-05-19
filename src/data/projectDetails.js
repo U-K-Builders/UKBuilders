@@ -143,7 +143,7 @@ export const projectDetails = {
     lng: 72.8355,
     rera: 'PR1180002500760',
     progressPercent: 60,
-    configs: '2, 3 & 4 BHK',
+    configs: '2 BHK & 3 BHK\nType A, Type B, Type C & Jodi',
     buildingSpec: '5 Podium + 13 Storey',
     builtUpArea: '7,530 sq.mtrs',
     floors: 13,
