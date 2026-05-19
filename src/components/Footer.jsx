@@ -6,7 +6,7 @@ const SOCIAL = {
   instagram: 'https://www.instagram.com/u.k.builders',
   facebook: 'https://www.facebook.com/people/UK-Builders/100089528300390/',
   linkedin: 'https://www.linkedin.com/company/u-k-builders/',
-  whatsapp: 'https://wa.me/919820311177',
+  whatsapp: 'https://wa.me/917710038007',
 };
 
 function InstagramIcon() {
