@@ -94,8 +94,10 @@ export default function ProjectCard({ project, showCountdown = true }) {
           <span className="block text-navy text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-2 border-b-2 border-gold pb-1 w-fit">
             Configurations
           </span>
-          <span className="block text-lg md:text-[1.375rem] text-text-dark font-serif font-normal py-1 whitespace-pre-line">
-            {project.configs}
+          <span className="block text-lg md:text-[1.375rem] text-text-dark font-serif font-normal py-1">
+            {project.configs.split('\n').map((line, i) => (
+              <span key={i} className="block">{line}</span>
+            ))}
           </span>
         </div>
         <div className="mb-8">

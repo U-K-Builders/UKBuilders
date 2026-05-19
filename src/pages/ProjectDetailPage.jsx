@@ -327,7 +327,11 @@ export default function ProjectDetailPage() {
                 {stats.map(({ label, value }) => (
                   <div key={label} className="px-6 py-6 text-center">
                     <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">{label}</span>
-                    <span className="block text-white text-sm font-serif whitespace-pre-line">{value}</span>
+                    <span className="block text-white text-sm font-serif">
+                      {typeof value === 'string' && value.includes('\n')
+                        ? value.split('\n').map((line, i) => <span key={i} className="block">{line}</span>)
+                        : value}
+                    </span>
                   </div>
                 ))}
               </div>
