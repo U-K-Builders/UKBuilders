@@ -143,7 +143,7 @@ export const projectDetails = {
     lng: 72.8355,
     rera: 'PR1180002500760',
     progressPercent: 60,
-    configs: '2 BHK & 3 BHK',
+    configs: '2, 3 & 4 BHK',
     buildingSpec: '5 Podium + 13 Storey',
     builtUpArea: '7,530 sq.mtrs',
     floors: 13,
@@ -156,7 +156,7 @@ export const projectDetails = {
       { type: '2 BHK', subType: 'Type B', carpet: '678 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK', subType: 'Type C', carpet: '689 sq.ft.', beds: 2, baths: 2 },
       { type: '3 BHK', carpet: '843 sq.ft.', beds: 3, baths: 3 },
-      { type: '2 BHK + 2 BHK', subType: 'Jodi', carpet: '1,367 sq.ft.', beds: 4, baths: 4 },
+      { type: '4 BHK', subType: '2 + 2 Jodi', carpet: '1,367 sq.ft.', beds: 4, baths: 4 },
     ],
     shops: [
       { type: 'Retail Shop', carpet: '430 sq.ft.' },
