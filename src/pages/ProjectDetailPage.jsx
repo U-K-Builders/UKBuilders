@@ -327,11 +327,7 @@ export default function ProjectDetailPage() {
                 {stats.map(({ label, value }) => (
                   <div key={label} className="px-6 py-6 text-center">
                     <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">{label}</span>
-                    <span className="block text-white text-sm font-serif">
-                      {typeof value === 'string' && value.includes('\n')
-                        ? value.split('\n').map((line, i) => <span key={i} className="block">{line}</span>)
-                        : value}
-                    </span>
+                    <span className="block text-white text-sm font-serif">{value}</span>
                   </div>
                 ))}
               </div>
@@ -369,8 +365,11 @@ export default function ProjectDetailPage() {
             <SectionHeading>Floor Plans</SectionHeading>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {project.floorPlans.map((plan) => (
-                <div key={plan.type} className="border border-border-light bg-white p-8 text-center hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
-                  <span className="block gradient-text font-serif text-4xl font-black tracking-[2px] mb-1">{plan.type}</span>
+                <div key={`${plan.type}-${plan.subType || ''}`} className="border border-border-light bg-white p-8 text-center hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+                  <span className="block gradient-text font-serif text-3xl font-black tracking-[2px]">{plan.type}</span>
+                  {plan.subType && (
+                    <span className="block text-text-tertiary text-xs uppercase tracking-[3px] mt-2">{plan.subType}</span>
+                  )}
                   <div className="w-10 h-[2px] bg-gold mx-auto my-4" />
                   <p className="text-text-tertiary text-xs uppercase tracking-[2px] mb-1">Carpet Area</p>
                   <p className="text-text-primary text-base font-serif mb-5">{plan.carpet}</p>

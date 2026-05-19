@@ -4,7 +4,7 @@ export const ongoingProjects = [
     subtitle: 'Signature Collection',
     image: '/images/Building/Justin Night View.jpg',
     alt: 'Justin Building Night View',
-    configs: 'Exclusive 2 BHK & 3 BHK\nType A, Type B, Type C & Jodi',
+    configs: 'Exclusive 2 BHK & 3 BHK',
     location: 'Sunder Cross Lane, Orlem, Malad West',
     lat: 19.1950, lng: 72.8355,
     possession: '2027',

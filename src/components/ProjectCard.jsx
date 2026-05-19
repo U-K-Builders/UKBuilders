@@ -95,9 +95,7 @@ export default function ProjectCard({ project, showCountdown = true }) {
             Configurations
           </span>
           <span className="block text-lg md:text-[1.375rem] text-text-dark font-serif font-normal py-1">
-            {project.configs.split('\n').map((line, i) => (
-              <span key={i} className="block">{line}</span>
-            ))}
+            {project.configs}
           </span>
         </div>
         <div className="mb-8">
