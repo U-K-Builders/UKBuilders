@@ -11,6 +11,19 @@ const AMENITIES = [
   'Premium Branded Fittings',
 ];
 
+const JUSTIN_AMENITIES = [
+  'High-Speed Elevators',
+  '24/7 Security & CCTV',
+  'Covered Car Parking',
+  'State-of-the-Art Gym',
+  'Landscaped Garden',
+  "Children's Play Area",
+  'Vastu Compliant',
+  'Rainwater Harvesting',
+  'Video Door Phone',
+  'Premium Branded Fittings',
+];
+
 const ORLEM_NEIGHBOURHOOD = {
   schools: [
     { name: 'Pinnacle High International School',      lat: 19.1942, lng: 72.8381, distance: '~0.4 km' },
@@ -128,13 +141,13 @@ export const projectDetails = {
     location: 'C.T.S. No. 390/B, Sunder Cross Lane, Orlem, Malad West',
     lat: 19.1950,
     lng: 72.8355,
-    rera: null,
+    rera: 'PR1180002500760',
     configs: '2, 3 & 4 BHK',
-    buildingSpec: '4 Podium + 14 Storey',
-    builtUpArea: '~70,000 sq.ft.',
-    floors: 14,
-    possession: '2027',
-    amenities: AMENITIES,
+    buildingSpec: '5 Podium + 13 Storey',
+    builtUpArea: '7,530 sq.mtrs',
+    floors: 13,
+    possession: 'December 2027',
+    amenities: JUSTIN_AMENITIES,
     moodBoard: SIGNATURE_MOOD_BOARD,
     beforeAfterPhotos: null,
     floorPlans: [
