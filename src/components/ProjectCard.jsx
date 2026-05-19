@@ -11,7 +11,10 @@ function getMonthsToHandover(possessionYear) {
 
 function getMilestonePercent(name) {
   const slug = name.toLowerCase().replace(/\s+/g, '-');
-  const progress = projectDetails[slug]?.progress;
+  const detail = projectDetails[slug];
+  if (!detail) return null;
+  if (detail.progressPercent != null) return detail.progressPercent;
+  const { progress } = detail;
   if (!progress) return null;
   const done = progress.filter((s) => s.status === 'done').length;
   return Math.round((done / progress.length) * 100);
