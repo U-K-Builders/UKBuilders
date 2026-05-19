@@ -77,14 +77,12 @@ export default function ProjectCard({ project, showCountdown = true }) {
       )}
 
       {project.image && (
-        <div className="mb-6 border border-gold-dark p-2 bg-white overflow-hidden">
-          <div className="w-full h-[260px] flex items-center justify-center overflow-hidden">
-            <img
-              src={project.image}
-              alt={project.alt}
-              className="max-w-full max-h-full object-contain transition-transform duration-500 hover:scale-[1.03]"
-            />
-          </div>
+        <div className="inline-block mb-6 border border-gold-dark p-2 bg-white overflow-hidden">
+          <img
+            src={project.image}
+            alt={project.alt}
+            className="block max-w-full object-contain transition-transform duration-500 hover:scale-[1.03]"
+          />
         </div>
       )}
 
