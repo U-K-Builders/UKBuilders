@@ -112,9 +112,10 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
                   className="w-full bg-navy border border-white/20 px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-gold transition-colors duration-300"
                 >
                   <option value="">BHK preference (optional)</option>
-                  {floorPlans.map((plan) => (
-                    <option key={plan.type} value={plan.type}>{plan.type}</option>
-                  ))}
+                  {floorPlans.map((plan) => {
+                    const label = plan.subType ? `${plan.type} — ${plan.subType}` : plan.type;
+                    return <option key={label} value={label}>{label}</option>;
+                  })}
                 </select>
               )}
               <textarea
