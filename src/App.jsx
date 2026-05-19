@@ -12,7 +12,6 @@ import TimelinePage from './pages/TimelinePage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import OurStoryPage from './pages/OurStoryPage';
-import UpcomingProjectsPage from './pages/UpcomingProjectsPage';
 
 import VirtualCallPage from './pages/VirtualCallPage';
 import GalleryPage from './pages/GalleryPage';
@@ -41,8 +40,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects/ongoing" element={<OngoingProjectsPage />} />
-        <Route path="/projects/upcoming" element={<UpcomingProjectsPage />} />
-        <Route path="/projects/completed" element={<CompletedProjectsPage />} />
+<Route path="/projects/completed" element={<CompletedProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/our-story" element={<OurStoryPage />} />

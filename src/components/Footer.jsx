@@ -46,7 +46,6 @@ const NAV_COLS = [
     heading: 'Projects',
     links: [
       { to: '/projects/ongoing',   label: 'Ongoing Projects'   },
-      { to: '/projects/upcoming',  label: 'Upcoming Projects'  },
       { to: '/projects/completed', label: 'Completed Projects' },
       { to: '/gallery',            label: 'Photo Gallery'      },
       { to: '/timeline',           label: 'Project Timeline'   },
