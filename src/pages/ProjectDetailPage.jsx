@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 import Lightbox from '../components/Lightbox';
@@ -310,6 +310,16 @@ export default function ProjectDetailPage() {
   const project = projectDetails[slug];
   const [lightboxSrc, setLightboxSrc] = useState(null);
   const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const heroImgRef = useRef(null);
+  useEffect(() => {
+    const handler = () => {
+      if (heroImgRef.current) {
+        heroImgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+      }
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
   if (!project) {
     return (
@@ -325,11 +335,17 @@ export default function ProjectDetailPage() {
   return (
     <div className="animate-fade-in">
       {/* Hero */}
-      <div className="relative bg-navy overflow-hidden">
+      <div className="relative bg-navy overflow-hidden h-[50vh] md:h-[60vh]">
         {project.image ? (
-          <img src={project.image} alt={project.name} className="w-full h-[50vh] md:h-[60vh] object-cover opacity-60" />
+          <img
+            ref={heroImgRef}
+            src={project.image}
+            alt={project.name}
+            className="absolute inset-0 w-full h-[130%] object-cover opacity-60 will-change-transform"
+            style={{ top: '-15%' }}
+          />
         ) : (
-          <div className="w-full h-[40vh] md:h-[50vh]" />
+          <div className="w-full h-full" />
         )}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5">
           <span className="text-gold text-[0.6875rem] uppercase tracking-[4px] mb-3">{project.subtitle}</span>
@@ -364,7 +380,7 @@ export default function ProjectDetailPage() {
             <>
               <div className={`max-w-[1400px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
                 {stats.map(({ label, value }) => (
-                  <div key={label} className="px-8 py-10 text-center flex flex-col justify-center">
+                  <div key={label} className="px-8 py-10 text-center flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(212,168,78,0.18)] cursor-default">
                     <span className="block text-xs md:text-sm uppercase tracking-[3px] text-gold mb-3 font-semibold">{label}</span>
                     <span className="block text-white text-base md:text-lg font-serif leading-snug">{value}</span>
                   </div>
