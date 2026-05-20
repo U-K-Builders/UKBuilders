@@ -371,7 +371,7 @@ export default function ProjectDetailPage() {
                       Sold Out
                     </span>
                   )}
-                  <span className={`block gradient-text font-serif font-black whitespace-nowrap ${plan.type.length > 7 ? 'text-2xl tracking-[1px]' : 'text-4xl tracking-[2px]'}`}>{plan.type}</span>
+                  <span className="block gradient-text font-serif text-2xl md:text-3xl font-black tracking-[1.5px] whitespace-nowrap">{plan.type}</span>
                   <span className={`block text-sm font-semibold uppercase tracking-[3px] mt-2 ${plan.subType ? 'text-gold' : 'invisible'}`}>{plan.subType || '—'}</span>
                   <div className="w-12 h-[2px] bg-gold mx-auto my-4" />
                   <p className="text-gold text-sm uppercase tracking-[2px] font-semibold mb-1">Carpet Area</p>
