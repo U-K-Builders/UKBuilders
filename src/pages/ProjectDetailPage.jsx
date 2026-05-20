@@ -371,14 +371,14 @@ export default function ProjectDetailPage() {
                       Sold Out
                     </span>
                   )}
-                  <span className="block gradient-text font-serif text-3xl font-black tracking-[2px]">{plan.type}</span>
+                  <span className="block gradient-text font-serif text-4xl font-black tracking-[2px]">{plan.type}</span>
                   {plan.subType && (
-                    <span className="block text-text-tertiary text-xs uppercase tracking-[3px] mt-2">{plan.subType}</span>
+                    <span className="block text-gold text-sm font-semibold uppercase tracking-[3px] mt-2">{plan.subType}</span>
                   )}
-                  <div className="w-10 h-[2px] bg-gold mx-auto my-4" />
-                  <p className="text-text-tertiary text-xs uppercase tracking-[2px] mb-1">Carpet Area</p>
-                  <p className="text-text-primary text-base font-serif mb-5">{plan.carpet}</p>
-                  <div className="flex justify-center gap-6 text-text-muted text-sm mb-6">
+                  <div className="w-12 h-[2px] bg-gold mx-auto my-4" />
+                  <p className="text-gold text-sm uppercase tracking-[2px] font-semibold mb-1">Carpet Area</p>
+                  <p className="text-navy text-xl font-serif font-bold mb-5">{plan.carpet}</p>
+                  <div className="flex justify-center gap-6 text-navy text-base font-semibold mb-6">
                     <span>{plan.beds} Bed</span>
                     <span>{plan.baths} Bath</span>
                   </div>
