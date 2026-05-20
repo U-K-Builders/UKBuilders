@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 
-function getMonthsToHandover(possessionYear) {
-  if (!possessionYear) return null;
+function getMonthsToHandover(possession) {
+  if (!possession) return null;
   const now = new Date();
-  const target = new Date(parseInt(possessionYear), 11, 31);
+  const target = /^\d{4}-\d{2}$/.test(possession)
+    ? new Date(parseInt(possession), parseInt(possession.split('-')[1]) - 1, 1)
+    : new Date(parseInt(possession), 11, 31);
   const months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
   return Math.max(0, months);
 }
