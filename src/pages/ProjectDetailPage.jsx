@@ -365,9 +365,9 @@ export default function ProjectDetailPage() {
             <SectionHeading>Floor Plans</SectionHeading>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {project.floorPlans.map((plan) => (
-                <div key={`${plan.type}-${plan.subType || ''}`} className={`relative border bg-white p-8 text-center transition-all duration-300 ${plan.soldOut ? 'border-border-light opacity-90' : 'border-border-light hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]'}`}>
+                <div key={`${plan.type}-${plan.subType || ''}`} className={`relative border bg-surface-subtle p-8 text-center transition-all duration-300 ${plan.soldOut ? 'border-border-light opacity-90' : 'border-border-light hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]'}`}>
                   {plan.soldOut && (
-                    <span className="absolute top-3 right-3 text-[0.625rem] uppercase tracking-[2px] font-bold text-red-600 border border-red-600 px-2 py-1 bg-white">
+                    <span className="absolute top-3 right-3 text-[0.625rem] uppercase tracking-[2px] font-bold text-red-600 border border-red-600 px-2 py-1 bg-surface-subtle">
                       Sold Out
                     </span>
                   )}
