@@ -145,7 +145,7 @@ export const projectDetails = {
     progressPercent: 60,
     configs: '2, 3 & 4 BHK',
     buildingSpec: '6 Podium + 12 Storey',
-    builtUpArea: '7,530 sq.mtrs',
+    builtUpArea: '81,000 sq.ft.',
     floors: 12,
     possession: 'December 2027',
     amenities: JUSTIN_AMENITIES,
