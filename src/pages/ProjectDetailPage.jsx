@@ -365,7 +365,12 @@ export default function ProjectDetailPage() {
             <SectionHeading>Floor Plans</SectionHeading>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {project.floorPlans.map((plan) => (
-                <div key={`${plan.type}-${plan.subType || ''}`} className="border border-border-light bg-white p-8 text-center hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300">
+                <div key={`${plan.type}-${plan.subType || ''}`} className={`relative border bg-white p-8 text-center transition-all duration-300 ${plan.soldOut ? 'border-border-light opacity-90' : 'border-border-light hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]'}`}>
+                  {plan.soldOut && (
+                    <span className="absolute top-3 right-3 text-[0.625rem] uppercase tracking-[2px] font-bold text-red-600 border border-red-600 px-2 py-1 bg-white">
+                      Sold Out
+                    </span>
+                  )}
                   <span className="block gradient-text font-serif text-3xl font-black tracking-[2px]">{plan.type}</span>
                   {plan.subType && (
                     <span className="block text-text-tertiary text-xs uppercase tracking-[3px] mt-2">{plan.subType}</span>
@@ -377,12 +382,18 @@ export default function ProjectDetailPage() {
                     <span>{plan.beds} Bed</span>
                     <span>{plan.baths} Bath</span>
                   </div>
-                  <a
-                    href="mailto:u.k.builders1981@gmail.com"
-                    className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
-                  >
-                    Request Floor Plan
-                  </a>
+                  {plan.soldOut ? (
+                    <span className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-text-muted border border-border-light px-5 py-2 cursor-not-allowed">
+                      Unavailable
+                    </span>
+                  ) : (
+                    <a
+                      href="mailto:u.k.builders1981@gmail.com"
+                      className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+                    >
+                      Request Floor Plan
+                    </a>
+                  )}
                 </div>
               ))}
             </div>

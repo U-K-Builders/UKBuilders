@@ -155,7 +155,7 @@ export const projectDetails = {
       { type: '2 BHK', subType: 'Type A', carpet: '620 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK', subType: 'Type B', carpet: '678 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK', subType: 'Type C', carpet: '689 sq.ft.', beds: 2, baths: 2 },
-      { type: '3 BHK', carpet: '843 sq.ft.', beds: 3, baths: 3 },
+      { type: '3 BHK', carpet: '843 sq.ft.', beds: 3, baths: 3, soldOut: true },
       { type: '2 BHK + 2 BHK', subType: 'Jodi', carpet: '1,367 sq.ft.', beds: 4, baths: 4 },
     ],
     shops: [
