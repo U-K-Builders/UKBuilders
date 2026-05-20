@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 import Lightbox from '../components/Lightbox';
@@ -7,6 +7,45 @@ import BeforeAfterSlider from '../components/BeforeAfterSlider';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
+
+function PossessionCountdown({ targetDate }) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const target = new Date(targetDate);
+  const diff = Math.max(0, target.getTime() - now.getTime());
+  const days = Math.floor(diff / 86_400_000);
+  const hours = Math.floor((diff / 3_600_000) % 24);
+  const mins = Math.floor((diff / 60_000) % 60);
+  const secs = Math.floor((diff / 1000) % 60);
+  const units = [
+    { value: days, label: 'Days' },
+    { value: hours, label: 'Hours' },
+    { value: mins, label: 'Minutes' },
+    { value: secs, label: 'Seconds' },
+  ];
+  return (
+    <div className="border-t border-gold/20 py-6 px-5">
+      <span className="block text-center text-[0.625rem] uppercase tracking-[4px] text-gold mb-4">
+        Live Countdown to Possession
+      </span>
+      <div className="flex justify-center gap-3 md:gap-6">
+        {units.map(({ value, label }) => (
+          <div key={label} className="bg-navy border border-gold/40 px-3 md:px-6 py-3 min-w-[68px] md:min-w-[96px] text-center">
+            <span className="block text-white font-serif text-2xl md:text-4xl font-black tabular-nums leading-none">
+              {String(value).padStart(2, '0')}
+            </span>
+            <span className="block text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[2px] text-gold mt-2">
+              {label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function CheckIcon() {
   return (
@@ -331,6 +370,7 @@ export default function ProjectDetailPage() {
                   </div>
                 ))}
               </div>
+              {project.possessionDate && <PossessionCountdown targetDate={project.possessionDate} />}
               <div className="border-t border-gold/20 py-4 text-center">
                 <button
                   onClick={() => setEnquiryOpen(true)}
