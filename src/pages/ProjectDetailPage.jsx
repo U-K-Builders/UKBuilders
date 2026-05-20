@@ -362,11 +362,11 @@ export default function ProjectDetailPage() {
             : 'grid-cols-2 md:grid-cols-4';
           return (
             <>
-              <div className={`max-w-[1100px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
+              <div className={`max-w-[1400px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
                 {stats.map(({ label, value }) => (
-                  <div key={label} className="px-6 py-7 text-center">
-                    <span className="block text-xs md:text-sm uppercase tracking-[3px] text-gold mb-2 font-semibold">{label}</span>
-                    <span className="block text-white text-base md:text-xl font-serif leading-snug">{value}</span>
+                  <div key={label} className="px-8 py-10 text-center flex flex-col justify-center">
+                    <span className="block text-xs md:text-sm uppercase tracking-[3px] text-gold mb-3 font-semibold">{label}</span>
+                    <span className="block text-white text-base md:text-lg font-serif leading-snug">{value}</span>
                   </div>
                 ))}
               </div>
