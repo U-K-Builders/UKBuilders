@@ -360,6 +360,29 @@ export default function ProjectDetailPage() {
             </div>
           </section>
 
+          {/* Commercial Shops */}
+          {project.shops && (
+            <section>
+              <SectionHeading>Commercial Shops</SectionHeading>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                {project.shops.map((shop, i) => (
+                  <div key={i} className="border border-gold/40 bg-navy text-white p-8 text-center hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300">
+                    <span className="block font-serif text-4xl font-black tracking-[2px] mb-1 text-gold">{shop.type}</span>
+                    <div className="w-10 h-[2px] bg-gold mx-auto my-4" />
+                    <p className="text-text-muted text-xs uppercase tracking-[2px] mb-1">Carpet Area</p>
+                    <p className="text-text-light text-base font-serif mb-6">{shop.carpet}</p>
+                    <a
+                      href="mailto:u.k.builders1981@gmail.com"
+                      className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+                    >
+                      Enquire Now
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Floor Plans */}
           <section>
             <SectionHeading>Floor Plans</SectionHeading>
@@ -434,29 +457,6 @@ export default function ProjectDetailPage() {
                 />
               </div>
               <p className="text-text-muted text-xs mt-2">Drag the handle to compare</p>
-            </section>
-          )}
-
-          {/* Commercial Shops */}
-          {project.shops && (
-            <section>
-              <SectionHeading>Commercial Shops</SectionHeading>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-                {project.shops.map((shop, i) => (
-                  <div key={i} className="border border-gold/40 bg-navy text-white p-8 text-center hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300">
-                    <span className="block font-serif text-4xl font-black tracking-[2px] mb-1 text-gold">{shop.type}</span>
-                    <div className="w-10 h-[2px] bg-gold mx-auto my-4" />
-                    <p className="text-text-muted text-xs uppercase tracking-[2px] mb-1">Carpet Area</p>
-                    <p className="text-text-light text-base font-serif mb-6">{shop.carpet}</p>
-                    <a
-                      href="mailto:u.k.builders1981@gmail.com"
-                      className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
-                    >
-                      Enquire Now
-                    </a>
-                  </div>
-                ))}
-              </div>
             </section>
           )}
 
