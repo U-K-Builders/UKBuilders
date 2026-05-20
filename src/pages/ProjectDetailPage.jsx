@@ -8,6 +8,21 @@ import BeforeAfterSlider from '../components/BeforeAfterSlider';
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
 
+function useInView(threshold = 0.15) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setInView(true); obs.disconnect(); }
+    }, { threshold });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, inView];
+}
+
 function PossessionCountdown({ targetDate }) {
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
@@ -16,15 +31,11 @@ function PossessionCountdown({ targetDate }) {
   }, []);
   const target = new Date(targetDate);
   const diff = Math.max(0, target.getTime() - now.getTime());
-  const days = Math.floor(diff / 86_400_000);
-  const hours = Math.floor((diff / 3_600_000) % 24);
-  const mins = Math.floor((diff / 60_000) % 60);
-  const secs = Math.floor((diff / 1000) % 60);
   const units = [
-    { value: days, label: 'Days' },
-    { value: hours, label: 'Hours' },
-    { value: mins, label: 'Minutes' },
-    { value: secs, label: 'Seconds' },
+    { value: Math.floor(diff / 86_400_000),       label: 'Days'    },
+    { value: Math.floor((diff / 3_600_000) % 24), label: 'Hours'   },
+    { value: Math.floor((diff / 60_000) % 60),    label: 'Minutes' },
+    { value: Math.floor((diff / 1000) % 60),      label: 'Seconds' },
   ];
   return (
     <div className="border-t border-gold/20 py-6 px-5">
@@ -33,8 +44,11 @@ function PossessionCountdown({ targetDate }) {
       </span>
       <div className="flex justify-center gap-3 md:gap-6">
         {units.map(({ value, label }) => (
-          <div key={label} className="bg-navy border border-gold/40 px-3 md:px-6 py-3 min-w-[68px] md:min-w-[96px] text-center">
-            <span className="block text-white font-serif text-2xl md:text-4xl font-black tabular-nums leading-none">
+          <div key={label} className="bg-navy border border-gold/40 px-3 md:px-6 py-3 min-w-[68px] md:min-w-[96px] text-center overflow-hidden">
+            <span
+              key={`${label}-${String(value).padStart(2, '0')}`}
+              className="animate-digit-flip text-white font-serif text-2xl md:text-4xl font-black tabular-nums leading-none"
+            >
               {String(value).padStart(2, '0')}
             </span>
             <span className="block text-[0.5625rem] md:text-[0.625rem] uppercase tracking-[2px] text-gold mt-2">
@@ -64,18 +78,22 @@ function SectionHeading({ children }) {
   );
 }
 
-function ProgressStepper({ steps }) {
+function ProgressStepper({ steps, inView = false }) {
   return (
     <>
       {/* Desktop: horizontal */}
       <div className="hidden md:block relative pt-2 pb-6">
-        <div className="absolute top-[22px] left-0 right-0 h-[2px] bg-border-light" />
+        <div className={`absolute top-[22px] left-0 right-0 h-[2px] bg-border-light ${inView ? 'animate-line-grow' : 'scale-x-0'}`} />
         <div className="flex justify-between">
           {steps.map((step, i) => {
             const done = step.status === 'done';
             const active = step.status === 'active';
             return (
-              <div key={i} className="flex flex-col items-center flex-1 relative">
+              <div
+                key={i}
+                className={`flex flex-col items-center flex-1 relative ${inView ? 'animate-step-reveal' : 'opacity-0'}`}
+                style={{ animationDelay: `${0.25 + i * 0.1}s` }}
+              >
                 <div className={`w-8 h-8 rounded-full border-2 z-10 flex items-center justify-center shrink-0 ${
                   done ? 'bg-gold border-gold' : active ? 'bg-navy border-gold ring-4 ring-gold/25' : 'bg-white border-border-light'
                 }`}>
@@ -103,7 +121,11 @@ function ProgressStepper({ steps }) {
           const active = step.status === 'active';
           const isLast = i === steps.length - 1;
           return (
-            <div key={i} className="flex gap-4 items-start">
+            <div
+              key={i}
+              className={`flex gap-4 items-start ${inView ? 'animate-step-reveal' : 'opacity-0'}`}
+              style={{ animationDelay: `${i * 0.12}s` }}
+            >
               <div className="flex flex-col items-center">
                 <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center shrink-0 ${
                   done ? 'bg-gold border-gold' : active ? 'bg-navy border-gold ring-4 ring-gold/25' : 'bg-white border-border-light'
@@ -115,7 +137,7 @@ function ProgressStepper({ steps }) {
                   )}
                   {active && <div className="w-2.5 h-2.5 rounded-full bg-gold" />}
                 </div>
-                {!isLast && <div className={`w-[2px] h-8 ${done ? 'bg-gold/40' : 'bg-border-light'}`} />}
+                {!isLast && <div className={`w-[2px] h-8 ${done ? 'bg-gold/40' : 'bg-border-light'} ${inView ? 'animate-line-grow-y' : 'scale-y-0'}`} style={{ animationDelay: `${i * 0.12 + 0.3}s` }} />}
               </div>
               <div className="pb-6">
                 <p className={`text-sm uppercase tracking-[1px] leading-tight ${active ? 'text-navy font-bold' : done ? 'text-text-secondary' : 'text-text-muted'}`}>
@@ -128,6 +150,62 @@ function ProgressStepper({ steps }) {
         })}
       </div>
     </>
+  );
+}
+
+function FloorPlansSection({ floorPlans }) {
+  const [ref, inView] = useInView(0.1);
+  return (
+    <section ref={ref}>
+      <SectionHeading>Floor Plans</SectionHeading>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        {floorPlans.map((plan, i) => (
+          <div
+            key={`${plan.type}-${plan.subType || ''}`}
+            className={`relative border bg-surface-light p-8 text-center transition-all duration-300 ${plan.soldOut ? 'border-border-light opacity-90' : 'border-border-light hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]'} ${inView ? 'animate-card-reveal' : 'opacity-0'}`}
+            style={{ animationDelay: `${i * 0.1}s` }}
+          >
+            {plan.soldOut && (
+              <span className="absolute top-3 right-3 text-[0.625rem] uppercase tracking-[2px] font-bold text-red-600 border border-red-600 px-2 py-1 bg-surface-light">
+                Sold Out
+              </span>
+            )}
+            <span className="block gradient-text font-serif text-2xl md:text-3xl font-black tracking-[1.5px] whitespace-nowrap">{plan.type}</span>
+            <span className={`block text-sm font-semibold uppercase tracking-[3px] mt-2 ${plan.subType ? 'text-gold' : 'invisible'}`}>{plan.subType || '—'}</span>
+            <div className="w-12 h-[2px] bg-gold mx-auto my-4" />
+            <p className="text-gold text-sm uppercase tracking-[2px] font-semibold mb-1">Carpet Area</p>
+            <p className="text-navy text-xl font-serif font-bold mb-5">{plan.carpet}</p>
+            <div className="flex justify-center gap-6 text-navy text-base font-semibold mb-6">
+              <span>{plan.beds} Bed</span>
+              <span>{plan.baths} Bath</span>
+            </div>
+            {plan.soldOut ? (
+              <span className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-text-muted border border-border-light px-5 py-2 cursor-not-allowed">
+                Unavailable
+              </span>
+            ) : (
+              <a
+                href="mailto:u.k.builders1981@gmail.com"
+                className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+              >
+                Request Floor Plan
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TimelineSection({ steps, projectName, nextMilestone }) {
+  const [ref, inView] = useInView(0.1);
+  return (
+    <section ref={ref}>
+      <SectionHeading>Construction Progress</SectionHeading>
+      <ProgressStepper steps={steps} inView={inView} />
+      <MilestoneSubscribeForm projectName={projectName} nextMilestone={nextMilestone} />
+    </section>
   );
 }
 
@@ -310,6 +388,16 @@ export default function ProjectDetailPage() {
   const project = projectDetails[slug];
   const [lightboxSrc, setLightboxSrc] = useState(null);
   const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const heroImgRef = useRef(null);
+  useEffect(() => {
+    const handler = () => {
+      if (heroImgRef.current) {
+        heroImgRef.current.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+      }
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
   if (!project) {
     return (
@@ -325,11 +413,17 @@ export default function ProjectDetailPage() {
   return (
     <div className="animate-fade-in">
       {/* Hero */}
-      <div className="relative bg-navy overflow-hidden">
+      <div className="relative bg-navy overflow-hidden h-[50vh] md:h-[60vh]">
         {project.image ? (
-          <img src={project.image} alt={project.name} className="w-full h-[50vh] md:h-[60vh] object-cover opacity-60" />
+          <img
+            ref={heroImgRef}
+            src={project.image}
+            alt={project.name}
+            className="absolute inset-0 w-full h-[130%] object-cover opacity-60 will-change-transform"
+            style={{ top: '-15%' }}
+          />
         ) : (
-          <div className="w-full h-[40vh] md:h-[50vh]" />
+          <div className="w-full h-full" />
         )}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-5">
           <span className="text-gold text-[0.6875rem] uppercase tracking-[4px] mb-3">{project.subtitle}</span>
@@ -424,41 +518,7 @@ export default function ProjectDetailPage() {
           )}
 
           {/* Floor Plans */}
-          <section>
-            <SectionHeading>Floor Plans</SectionHeading>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {project.floorPlans.map((plan) => (
-                <div key={`${plan.type}-${plan.subType || ''}`} className={`relative border bg-surface-light p-8 text-center transition-all duration-300 ${plan.soldOut ? 'border-border-light opacity-90' : 'border-border-light hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]'}`}>
-                  {plan.soldOut && (
-                    <span className="absolute top-3 right-3 text-[0.625rem] uppercase tracking-[2px] font-bold text-red-600 border border-red-600 px-2 py-1 bg-surface-light">
-                      Sold Out
-                    </span>
-                  )}
-                  <span className="block gradient-text font-serif text-2xl md:text-3xl font-black tracking-[1.5px] whitespace-nowrap">{plan.type}</span>
-                  <span className={`block text-sm font-semibold uppercase tracking-[3px] mt-2 ${plan.subType ? 'text-gold' : 'invisible'}`}>{plan.subType || '—'}</span>
-                  <div className="w-12 h-[2px] bg-gold mx-auto my-4" />
-                  <p className="text-gold text-sm uppercase tracking-[2px] font-semibold mb-1">Carpet Area</p>
-                  <p className="text-navy text-xl font-serif font-bold mb-5">{plan.carpet}</p>
-                  <div className="flex justify-center gap-6 text-navy text-base font-semibold mb-6">
-                    <span>{plan.beds} Bed</span>
-                    <span>{plan.baths} Bath</span>
-                  </div>
-                  {plan.soldOut ? (
-                    <span className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-text-muted border border-border-light px-5 py-2 cursor-not-allowed">
-                      Unavailable
-                    </span>
-                  ) : (
-                    <a
-                      href="mailto:u.k.builders1981@gmail.com"
-                      className="inline-block text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-white transition-all duration-300"
-                    >
-                      Request Floor Plan
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          </section>
+          <FloorPlansSection floorPlans={project.floorPlans} />
 
           {/* Interior Finishes / Mood Board */}
           {project.moodBoard && (
@@ -618,14 +678,7 @@ export default function ProjectDetailPage() {
 
           {/* Construction Progress */}
           {project.progress && (
-            <section>
-              <SectionHeading>Construction Progress</SectionHeading>
-              <ProgressStepper steps={project.progress} />
-              <MilestoneSubscribeForm
-                projectName={project.name}
-                nextMilestone={project.progress.find((s) => s.status === 'upcoming')?.label}
-              />
-            </section>
+            <TimelineSection steps={project.progress} projectName={project.name} nextMilestone={project.progress.find((s) => s.status === 'upcoming')?.label} />
           )}
 
           {/* Book a Site Visit */}
