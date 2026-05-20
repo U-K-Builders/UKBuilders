@@ -364,9 +364,9 @@ export default function ProjectDetailPage() {
             <>
               <div className={`max-w-[1100px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
                 {stats.map(({ label, value }) => (
-                  <div key={label} className="px-6 py-6 text-center">
-                    <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">{label}</span>
-                    <span className="block text-white text-sm font-serif">{value}</span>
+                  <div key={label} className="px-6 py-7 text-center">
+                    <span className="block text-xs md:text-sm uppercase tracking-[3px] text-gold mb-2 font-semibold">{label}</span>
+                    <span className="block text-white text-base md:text-xl font-serif leading-snug">{value}</span>
                   </div>
                 ))}
               </div>
