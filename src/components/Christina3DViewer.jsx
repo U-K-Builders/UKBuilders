@@ -137,6 +137,22 @@ function buildPodiumTexture(canvasW, canvasH, night) {
   return new THREE.CanvasTexture(canvas);
 }
 
+// ── Plot polygon (from concession plans) ─────────────────────────────────────
+// Irregular pentagon with an inward V-notch on the north boundary and an
+// angled NW edge. Dimensions are in metres. South edge sits along the road.
+function buildPlotShape() {
+  const s = new THREE.Shape();
+  // Going counter-clockwise. +Y = north, -Y = south (road frontage).
+  s.moveTo(-17, -22);   // SW corner (start, on road)
+  s.lineTo( 17, -22);   // SE corner (road end, widest edge)
+  s.lineTo( 17,  14);   // E side going up
+  s.lineTo(  9,  22);   // NE diagonal peak
+  s.lineTo(  1,  16);   // V-notch inward point
+  s.lineTo( -7,  22);   // continue NW past notch
+  s.lineTo(-17,  14);   // NW corner
+  return s;
+}
+
 export default function Christina3DViewer() {
   const mountRef    = useRef(null);
   const sceneRef    = useRef(null);
@@ -160,7 +176,7 @@ export default function Christina3DViewer() {
     // ── Camera ────────────────────────────────────────────────────────
     const W = mount.clientWidth, H = mount.clientHeight;
     const camera = new THREE.PerspectiveCamera(42, W / H, 0.1, 500);
-    camera.position.set(38, 28, 52);
+    camera.position.set(48, 32, 60);
 
     // ── Renderer ──────────────────────────────────────────────────────
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -180,9 +196,9 @@ export default function Christina3DViewer() {
     controls.autoRotate       = true;
     controls.autoRotateSpeed  = 0.7;
     controls.maxPolarAngle    = Math.PI / 2.05;
-    controls.minDistance      = 20;
-    controls.maxDistance      = 120;
-    controls.target.set(0, 20, 0);
+    controls.minDistance      = 25;
+    controls.maxDistance      = 140;
+    controls.target.set(0, 22, 4);
     controls.update();
     controlsRef.current = controls;
 
@@ -213,37 +229,76 @@ export default function Christina3DViewer() {
 
     // ── Tower material array (per face: +x, -x, +y, -y, +z, -z) ──────
     const towerMats = [
-      mkM(daySide),                   // right  (+x)
-      mkM(daySide),                   // left   (-x)
+      mkM(daySide),                   // right  (+x) east
+      mkM(daySide),                   // left   (-x) west
       flatM(0xede5d2, 0.5),           // top    (+y)
       flatM(0xd8ccb4, 0.65),          // bottom (-y)
-      mkM(dayFront),                  // front  (+z)
-      mkM(dayFront),                  // back   (-z)
+      mkM(dayFront),                  // front  (+z) south — road side
+      mkM(dayFront),                  // back   (-z) north
     ];
     scene.userData.towerMats = towerMats;
 
-    const towerY = 16;
+    // Tower sits on the SOUTH portion of the podium (closer to the road)
+    const towerY       = 16;
+    const towerCenterZ = 10;
     const towerMesh = new THREE.Mesh(new THREE.BoxGeometry(20, 41.6, 14), towerMats);
-    towerMesh.position.set(0, towerY + 41.6 / 2, 0);
+    towerMesh.position.set(0, towerY + 41.6 / 2, towerCenterZ);
     towerMesh.castShadow = towerMesh.receiveShadow = true;
     scene.add(towerMesh);
 
-    // ── Podium material array ─────────────────────────────────────────
+    // ── Podium: extruded from the actual plot polygon ─────────────────
     const podiumSide  = flatM(0xc4b89a, 0.7);
+    const podiumTopM  = flatM(0xddd8c4, 0.65);  // hidden under garden anyway
     const podiumFront = mkM(dayPod);
     scene.userData.podiumFront = podiumFront;
 
-    const podiumMats = [
-      podiumSide, podiumSide,
-      flatM(0xddd8c4, 0.6),
-      podiumSide,
-      podiumFront,
-      podiumSide,
-    ];
-    const podiumMesh = new THREE.Mesh(new THREE.BoxGeometry(26, 16, 22), podiumMats);
-    podiumMesh.position.set(0, 8, 0);
+    const plotShape = buildPlotShape();
+    const podiumGeo = new THREE.ExtrudeGeometry(plotShape, {
+      depth: 16,
+      bevelEnabled: false,
+      curveSegments: 4,
+    });
+    // ExtrudeGeometry creates 2 material groups: 0 = caps (top + bottom), 1 = side walls
+    const podiumMesh = new THREE.Mesh(podiumGeo, [podiumTopM, podiumSide]);
+    podiumMesh.rotation.x = -Math.PI / 2; // lay flat: shape XY → world XZ, depth → +Y
     podiumMesh.castShadow = podiumMesh.receiveShadow = true;
     scene.add(podiumMesh);
+
+    // Commercial frontage strip along the south face (textured podium front)
+    const podiumFrontPanel = new THREE.Mesh(
+      new THREE.PlaneGeometry(34, 5),
+      podiumFront
+    );
+    podiumFrontPanel.position.set(0, 2.6, 22.01);
+    podiumFrontPanel.receiveShadow = true;
+    scene.add(podiumFrontPanel);
+
+    // ── Sloped parking ramp on the west side (the podium "slope") ─────
+    // A triangular wedge that ramps up from ground to podium roof, visible
+    // on the west boundary where the two-way ramp emerges.
+    const rampMat = flatM(0xb8ad90, 0.85);
+    const rampShape = new THREE.Shape();
+    rampShape.moveTo(0, 0);
+    rampShape.lineTo(20, 0);
+    rampShape.lineTo(20, 16);  // top edge at podium height
+    rampShape.lineTo(0, 0.5);
+    const rampGeo = new THREE.ExtrudeGeometry(rampShape, {
+      depth: 5,
+      bevelEnabled: false,
+    });
+    const rampWedge = new THREE.Mesh(rampGeo, rampMat);
+    rampWedge.rotation.y = Math.PI / 2;
+    rampWedge.position.set(-17.05, 0, -8);
+    rampWedge.castShadow = rampWedge.receiveShadow = true;
+    scene.add(rampWedge);
+
+    // Curved ramp wall (the wrap-around guard on the spiral ramp)
+    const rampWallGeo = new THREE.TorusGeometry(5, 0.4, 8, 24, Math.PI * 1.1);
+    const rampWall = new THREE.Mesh(rampWallGeo, podiumSide);
+    rampWall.position.set(-13, 8, -3);
+    rampWall.rotation.set(Math.PI / 2, 0, -Math.PI / 4);
+    rampWall.castShadow = true;
+    scene.add(rampWall);
 
     // ── Box helper ────────────────────────────────────────────────────
     const box = (bw, bh, bd, mat, x = 0, y = 0, z = 0) => {
@@ -277,48 +332,140 @@ export default function Christina3DViewer() {
     road.position.set(0, 0.01, 22);
     scene.add(road);
 
-    // ── Podium rooftop terrace ────────────────────────────────────────
-    box(24, 0.4, 20, greenM, 0, 16, 0);
-    // Pergola
-    box(6, 0.2, 4, fin,  7, 16.6, -3);
-    box(6, 0.2, 4, fin,  7, 17.4, -3);
-    for (let i = -2.5; i <= 2.5; i += 1.25) box(0.12, 1.5, 4, fin, 7 + i, 16.5, -3);
-    // Kids area
-    box(7, 0.3, 6, kidsM, -6, 16.2, -2);
+    // ── Rooftop garden on north portion of podium ─────────────────────
+    // Sits between tower (south, around z=10) and the plot's north edge.
+    const lawnM   = new THREE.MeshStandardMaterial({ color: 0x4a7c4e, roughness: 0.95 });
+    const pathM   = new THREE.MeshStandardMaterial({ color: 0xd8c896, roughness: 0.9 });
+    const decking = new THREE.MeshStandardMaterial({ color: 0x9a7048, roughness: 0.85 });
+    const poolM   = new THREE.MeshStandardMaterial({ color: 0x4a90b8, roughness: 0.2, metalness: 0.3 });
 
-    // ── Vertical bronze fins (front + back, protruding from facade) ───
+    // Lawn footprint covering the north podium top (clipped roughly to plot)
+    const lawn = new THREE.Mesh(new THREE.PlaneGeometry(32, 22), lawnM);
+    lawn.rotation.x = -Math.PI / 2;
+    lawn.position.set(0, 16.05, -8);
+    lawn.receiveShadow = true;
+    scene.add(lawn);
+
+    // Central pathway (N-S spine)
+    const pathNS = new THREE.Mesh(new THREE.PlaneGeometry(3, 22), pathM);
+    pathNS.rotation.x = -Math.PI / 2;
+    pathNS.position.set(0, 16.06, -8);
+    scene.add(pathNS);
+
+    // Cross pathway (E-W)
+    const pathEW = new THREE.Mesh(new THREE.PlaneGeometry(28, 2.5), pathM);
+    pathEW.rotation.x = -Math.PI / 2;
+    pathEW.position.set(0, 16.06, -10);
+    scene.add(pathEW);
+
+    // Multi-purpose pavilion (north-central)
+    const pavilion = new THREE.Mesh(new THREE.BoxGeometry(8, 3, 5), white);
+    pavilion.position.set(-1, 17.5, -16);
+    pavilion.castShadow = true;
+    scene.add(pavilion);
+    // Pavilion roof slab
+    box(9, 0.3, 6, white, -1, 19, -16);
+
+    // Curved fitness centre (half-cylinder on west)
+    const fitnessGeo = new THREE.CylinderGeometry(3.2, 3.2, 2.8, 24, 1, false, 0, Math.PI);
+    const fitness = new THREE.Mesh(fitnessGeo, white);
+    fitness.position.set(-11, 17.45, -6);
+    fitness.rotation.y = -Math.PI / 2;
+    fitness.castShadow = true;
+    scene.add(fitness);
+
+    // Indoor play area (yellow surface) east
+    const kidsArea = new THREE.Mesh(new THREE.PlaneGeometry(6, 5), kidsM);
+    kidsArea.rotation.x = -Math.PI / 2;
+    kidsArea.position.set(10, 16.07, -5);
+    scene.add(kidsArea);
+
+    // Swimming-pool style water feature (north-east lawn)
+    const pool = new THREE.Mesh(new THREE.PlaneGeometry(7, 3), poolM);
+    pool.rotation.x = -Math.PI / 2;
+    pool.position.set(8, 16.07, -16);
+    scene.add(pool);
+    // Pool deck surround
+    box(8.5, 0.18, 4, decking, 8, 16, -16);
+
+    // Pergola (north-west, over the seating zone)
+    box(6, 0.2, 4, fin,  8, 18.6, -2);   // top frame
+    for (let i = -2.5; i <= 2.5; i += 1.25) {
+      box(0.12, 2.6, 4, fin, 8 + i, 16, -2);
+    }
+    for (let i = -2; i <= 2; i += 1) {
+      box(6, 0.1, 0.1, fin, 8, 18.7, -2 + i);
+    }
+
+    // Boundary hedge / planters along plot perimeter (north portion)
+    const hedgeM = new THREE.MeshStandardMaterial({ color: 0x3a5c3a, roughness: 0.9 });
+    const hedgeRing = [
+      [-17, 14], [-14, 19], [-7, 22], [-1, 16], [9, 22], [17, 14], [17, 4],
+    ];
+    for (const [x, z] of hedgeRing) {
+      box(2, 0.8, 1.4, hedgeM, x, 16, -z);
+    }
+
+    // Trees scattered around the garden (cylinder trunks + sphere foliage)
+    const trunkM   = new THREE.MeshStandardMaterial({ color: 0x6b4423, roughness: 0.9 });
+    const foliageM = new THREE.MeshStandardMaterial({ color: 0x3f6f3e, roughness: 0.9 });
+    function addTree(x, z, scale = 1) {
+      const trunk = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.18 * scale, 0.24 * scale, 1.6 * scale, 6),
+        trunkM
+      );
+      trunk.position.set(x, 16 + 0.8 * scale, z);
+      trunk.castShadow = true;
+      scene.add(trunk);
+      const foliage = new THREE.Mesh(
+        new THREE.SphereGeometry(1.3 * scale, 8, 6),
+        foliageM
+      );
+      foliage.position.set(x, 16 + 1.9 * scale, z);
+      foliage.castShadow = true;
+      scene.add(foliage);
+    }
+    const treePositions = [
+      [-14, -3, 1.0], [-14, -10, 1.1], [-14, -16, 1.0],   // west perimeter
+      [14, -3,  1.0], [14, -10,  1.1], [14, -16,  1.0],   // east perimeter
+      [-9, -20, 0.9], [-3, -19, 0.95], [4, -19, 1.0], [12, -20, 0.9],  // north perimeter
+      [-5, -6, 0.85], [5, -10, 0.8],   // interior accents
+    ];
+    treePositions.forEach(([x, z, s]) => addTree(x, z, s));
+
+    // ── Vertical bronze fins on tower (front + back, protruding) ──────
     const finGeo = new THREE.BoxGeometry(0.42, 41.0, 0.65);
     for (const fx of [-8, -4, 0, 4, 8]) {
       const mf = new THREE.Mesh(finGeo, fin);
-      mf.position.set(fx, towerY + 41.6 / 2, 7.35);
+      mf.position.set(fx, towerY + 41.6 / 2, towerCenterZ + 7.35);
       mf.castShadow = true;
       scene.add(mf);
       const mb = new THREE.Mesh(finGeo, fin);
-      mb.position.set(fx, towerY + 41.6 / 2, -7.35);
+      mb.position.set(fx, towerY + 41.6 / 2, towerCenterZ - 7.35);
       scene.add(mb);
     }
 
-    // ── Balcony slabs + top railings ──────────────────────────────────
+    // ── Balcony slabs + railings on tower south face ──────────────────
     for (let floor = 0; floor < 13; floor++) {
       const slabY = towerY + floor * 3.2;
       const slab  = new THREE.Mesh(new THREE.BoxGeometry(22, 0.22, 1.4), white);
-      slab.position.set(0, slabY, 7.7);
+      slab.position.set(0, slabY, towerCenterZ + 7.7);
       slab.castShadow = true;
       scene.add(slab);
       const rail = new THREE.Mesh(new THREE.BoxGeometry(22, 0.1, 0.06), white);
-      rail.position.set(0, slabY + 1.05, 8.3);
+      rail.position.set(0, slabY + 1.05, towerCenterZ + 8.3);
       scene.add(rail);
     }
 
-    // ── Parapet / crown ───────────────────────────────────────────────
-    box(21.5, 1.2, 15, white, 0, towerY + 41.6, 0);
-    box(20, 0.35, 14, white, 0, towerY + 42.8, 0);
+    // ── Parapet / crown on top of tower ──────────────────────────────
+    box(21.5, 1.2, 15, white, 0, towerY + 41.6, towerCenterZ);
+    box(20, 0.35, 14, white, 0, towerY + 42.8, towerCenterZ);
 
-    // ── Entrance pillars ──────────────────────────────────────────────
-    box(1.2, 6, 1.2, white,  12, 0, 14);
-    box(1.2, 6, 1.2, white, -12, 0, 14);
-    box(2.5, 0.4, 1.2, white,  12, 6, 14);
-    box(2.5, 0.4, 1.2, white, -12, 6, 14);
+    // ── Entrance pillars in front of tower (south side) ───────────────
+    box(1.2, 6, 1.2, white,  12, 0, towerCenterZ + 11);
+    box(1.2, 6, 1.2, white, -12, 0, towerCenterZ + 11);
+    box(2.5, 0.4, 1.2, white,  12, 6, towerCenterZ + 11);
+    box(2.5, 0.4, 1.2, white, -12, 6, towerCenterZ + 11);
 
     // ── Lighting ──────────────────────────────────────────────────────
     const ambient = new THREE.AmbientLight(0xfff5e0, 0.9);
