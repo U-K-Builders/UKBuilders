@@ -48,6 +48,7 @@ export default function App() {
   return (
     <>
       <ScrollProgressBar />
+      <div className="noise-overlay" aria-hidden="true" />
       <ScrollToTop />
       <PageTransition />
       <Header />

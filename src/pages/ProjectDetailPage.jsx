@@ -56,10 +56,21 @@ function CheckIcon() {
 }
 
 function SectionHeading({ children }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setVisible(true); obs.disconnect(); }
+    }, { threshold: 0.6 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
   return (
-    <h3 className="font-serif text-navy text-2xl md:text-3xl font-normal uppercase tracking-[2px] mb-2">
+    <h3 ref={ref} className="font-serif text-navy text-2xl md:text-3xl font-normal uppercase tracking-[2px] mb-2">
       {children}
-      <span className="block w-[50px] h-[2px] bg-gold mt-3 mb-8" />
+      <span className={`block h-[2px] bg-gold mt-3 mb-8 ${visible ? 'animate-underline-draw' : 'w-0'}`} />
     </h3>
   );
 }

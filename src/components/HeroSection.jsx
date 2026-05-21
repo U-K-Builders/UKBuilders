@@ -24,7 +24,7 @@ export default function HeroSection() {
   return (
     <div
       ref={heroRef}
-      className="min-h-screen flex flex-col items-center justify-center relative px-5 text-center text-white bg-cover bg-center overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center relative px-5 text-center text-white bg-cover bg-center overflow-hidden hero-ken-burns"
       style={{
         backgroundImage: `linear-gradient(rgba(10,24,40,0.48), rgba(10,24,40,0.78)), url('/images/Building/La Serena.jpg')`,
       }}
