@@ -7,6 +7,7 @@ import BeforeAfterSlider from '../components/BeforeAfterSlider';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
+const Christina3DViewer = lazy(() => import('../components/Christina3DViewer'));
 
 function PossessionCountdown({ targetDate }) {
   const [now, setNow] = useState(() => new Date());
@@ -413,6 +414,25 @@ export default function ProjectDetailPage() {
 
       <div className="py-16 md:py-24 px-5">
         <div className="max-w-[1100px] mx-auto flex flex-col gap-20">
+
+          {/* 3D Building Preview — Christina only */}
+          {slug === 'christina' && (
+            <section>
+              <SectionHeading>3D Building Preview</SectionHeading>
+              <p className="text-text-tertiary text-sm -mt-4 mb-6">
+                Explore Christina in three dimensions. Drag to orbit 360°, scroll to zoom, and toggle between day and night.
+              </p>
+              <div className="border border-border-light overflow-hidden">
+                <Suspense fallback={
+                  <div className="w-full flex items-center justify-center bg-navy" style={{ height: '600px' }}>
+                    <p className="text-gold text-xs uppercase tracking-[3px]">Loading 3D Model…</p>
+                  </div>
+                }>
+                  <Christina3DViewer />
+                </Suspense>
+              </div>
+            </section>
+          )}
 
           {/* Amenities */}
           <section>
