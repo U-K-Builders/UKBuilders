@@ -65,6 +65,36 @@ body {
   100% { transform: translateY(220%); opacity: 0; }
 }
 
+/* ─── Scroll progress bar ───────────────────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: #D4A84E;
+  z-index: 600;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+/* ─── Button press feedback ─────────────────────────────────────────────── */
+a.bg-gold:active,
+button.bg-gold:active,
+a[class*="bg-gold"]:active,
+button[class*="bg-gold"]:active {
+  transform: scale(0.96);
+  transition: transform 0.08s ease;
+}
+
+/* ─── Mega-menu fade + slide ────────────────────────────────────────────── */
+@keyframes dropdownIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-dropdown {
+  animation: dropdownIn 0.18s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
 /* ─── Custom scrollbar (webkit) ────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }

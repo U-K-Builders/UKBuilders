@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 
@@ -43,9 +44,34 @@ export default function ProjectCard({ project, showCountdown = true }) {
   const slug = project.name.toLowerCase().replace(/\s+/g, '-');
   const months = showCountdown ? getMonthsToHandover(project.possession) : null;
   const percent = showCountdown ? getMilestonePercent(project.name) : null;
+  const cardRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotX = (-y / rect.height) * 6;
+    const rotY = (x / rect.width) * 6;
+    card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(6px)`;
+    card.style.transition = 'transform 0.05s ease-out, box-shadow 0.05s ease-out';
+  };
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.transform = '';
+    card.style.transition = 'transform 0.4s ease-out, box-shadow 0.4s ease-out';
+  };
 
   return (
-    <div className="bg-white border border-gold p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(197,160,89,0.15)]">
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="bg-white border border-gold p-6 md:p-10 box-border text-center will-change-transform hover:shadow-[0_20px_40px_rgba(197,160,89,0.2)]"
+    >
       <div className="mb-4">
         <h3 className="gradient-text font-serif text-3xl md:text-[2.875rem] font-black uppercase tracking-[4px] md:tracking-[8px] m-0">
           {project.name}

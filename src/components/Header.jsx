@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 import AccessibilityPanel from './AccessibilityPanel';
@@ -30,6 +30,13 @@ export default function Header() {
   const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false);
   const [mobileLegacyOpen, setMobileLegacyOpen] = useState(false);
   const [mobileContactOpen, setMobileContactOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
 
   const isActive = (path) => location.pathname === path;
   const isProjectsActive = location.pathname.startsWith('/projects');
@@ -51,7 +58,7 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-navy text-gold px-6 md:px-12 py-5 flex justify-between items-center sticky top-0 z-50 shadow-[0_2px_15px_rgba(0,0,0,0.2)]">
+    <header className={`text-gold px-6 md:px-12 flex justify-between items-center sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'py-3 bg-navy/95 backdrop-blur-md shadow-[0_2px_20px_rgba(0,0,0,0.35)]' : 'py-5 bg-navy shadow-[0_2px_15px_rgba(0,0,0,0.2)]'}`}>
       <Link to="/" className="no-underline" onClick={closeMobile}>
         <h1 className="m-0 text-xl md:text-2xl tracking-[2px] uppercase font-serif text-gold cursor-pointer">
           U.K. Builders
@@ -71,7 +78,7 @@ export default function Header() {
           >
             <span className={`${navLinkClass(isProjectsActive)} cursor-pointer`}>Projects</span>
             {projectsOpen && (
-              <div className="absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+              <div className="animate-dropdown absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
                 <Link to="/projects/ongoing" className={dropdownLinkClass}>Ongoing Projects</Link>
                 <Link to="/projects/completed" className={dropdownLinkClass}>Completed Projects</Link>
               </div>
@@ -86,7 +93,7 @@ export default function Header() {
           >
             <span className={`${navLinkClass(isLegacyActive)} cursor-pointer`}>About Us</span>
             {legacyOpen && (
-              <div className="absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+              <div className="animate-dropdown absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
                 <Link to="/our-story" className={dropdownLinkClass}>Our Legacy</Link>
                 <Link to="/history" className={dropdownLinkClass}>Company History</Link>
                 <Link to="/timeline" className="block px-5 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white hover:bg-white/5 hover:text-gold transition-all duration-300">
@@ -107,7 +114,7 @@ export default function Header() {
           >
             <span className={`${navLinkClass(isContactActive)} cursor-pointer`}>Contact</span>
             {contactOpen && (
-              <div className="absolute top-full right-0 mt-[1px] bg-navy min-w-[240px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+              <div className="animate-dropdown absolute top-full right-0 mt-[1px] bg-navy min-w-[240px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
                 <Link to="/contact" className={dropdownLinkClass}>Contact Us</Link>
                 <Link to="/book-a-call" className={dropdownLinkClass}>Book a Video Call</Link>
                 <div className="border-t border-white/10 mx-5 my-1" />
