@@ -19,9 +19,12 @@ export const ongoingProjects = [
     lat: 19.1970, lng: 72.8399,
     possession: '2028-06',
   },
+];
+
+export const upcomingProjects = [
   {
     name: 'Elvira',
-    subtitle: 'Premium Residences',
+    subtitle: 'Coming Soon',
     image: null,
     alt: 'Elvira Building View',
     configs: 'Exclusive 1 & 2 BHK',
@@ -29,9 +32,6 @@ export const ongoingProjects = [
     lat: 19.192972, lng: 72.837889,
     possession: '2027',
   },
-];
-
-export const upcomingProjects = [
   {
     name: 'New Life',
     subtitle: 'Modern Living',
@@ -41,6 +41,7 @@ export const upcomingProjects = [
     location: 'Lourdes Colony, Orlem, Malad West',
     lat: 19.1768, lng: 72.8476,
     possession: '2028',
+    hidden: true,
   },
   {
     name: 'Madonna',
@@ -51,6 +52,7 @@ export const upcomingProjects = [
     location: "D'Monte Lane, Orlem, Malad West",
     lat: 19.1795, lng: 72.8500,
     possession: '2028',
+    hidden: true,
   },
 ];
 

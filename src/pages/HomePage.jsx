@@ -31,9 +31,12 @@ function slide(inView, delay = 0) {
 export default function HomePage() {
   const [statsRef,        statsInView]        = useInView(0.3);
   const [ongoingRef,      ongoingInView]      = useInView(0.1);
+  const [upcomingRef,     upcomingInView]     = useInView(0.1);
   const [mapRef,          mapInView]          = useInView(0.1);
   const [legacyRef,       legacyInView]       = useInView(0.1);
   const [testimonialsRef, testimonialsInView] = useInView(0.1);
+
+  const visibleUpcoming = upcomingProjects.filter((p) => !p.hidden);
 
   return (
     <div className="animate-fade-in">
@@ -57,7 +60,7 @@ export default function HomePage() {
       <TrustPillars />
 
       {/* ── Ongoing projects ─────────────────────────────────────────────── */}
-      <div className="py-24 px-5" ref={ongoingRef}>
+      <div className="py-24 px-5 bg-surface-subtle" ref={ongoingRef}>
         <div className="max-w-[1200px] mx-auto">
           <div style={slide(ongoingInView)}>
             <SectionTitle>Ongoing Masterpieces</SectionTitle>
@@ -71,6 +74,24 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* ── Upcoming projects ────────────────────────────────────────────── */}
+      {visibleUpcoming.length > 0 && (
+        <div className="py-24 px-5 bg-surface-subtle border-t border-border-light" ref={upcomingRef}>
+          <div className="max-w-[1200px] mx-auto">
+            <div style={slide(upcomingInView)}>
+              <SectionTitle>Coming Soon</SectionTitle>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {visibleUpcoming.map((project, i) => (
+                <div key={project.name} style={slide(upcomingInView, 150 + i * 150)}>
+                  <ProjectCard project={project} showCountdown={false} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── City map ─────────────────────────────────────────────────────── */}
       <div className="bg-navy py-24 px-5" ref={mapRef}>
