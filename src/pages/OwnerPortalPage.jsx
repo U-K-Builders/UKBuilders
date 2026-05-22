@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import { saveSubmission } from '../utils/submissions';
 
 const PROJECTS = ['Justin', 'Christina', 'Elvira', 'Silver Coin', 'La Serena', 'Aurola-Muriel Villa', 'Cinderella', 'Little Sunflower', 'Other'];
