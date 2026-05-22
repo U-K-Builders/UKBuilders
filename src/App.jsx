@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -23,18 +23,6 @@ import ContractorsPage from './pages/ContractorsPage';
 import CareersPage from './pages/CareersPage';
 import PageTransition from './components/PageTransition';
 
-function ScrollProgressBar() {
-  const [pct, setPct] = useState(0);
-  useEffect(() => {
-    const handler = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      setPct(total > 0 ? (window.scrollY / total) * 100 : 0);
-    };
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
-  return <div id="scroll-progress" style={{ width: `${pct}%` }} />;
-}
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -47,8 +35,7 @@ function ScrollToTop() {
 export default function App() {
   return (
     <>
-      <ScrollProgressBar />
-      <div className="noise-overlay" aria-hidden="true" />
+<div className="noise-overlay" aria-hidden="true" />
       <ScrollToTop />
       <PageTransition />
       <Header />
