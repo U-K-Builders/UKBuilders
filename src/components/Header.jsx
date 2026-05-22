@@ -141,7 +141,7 @@ export default function Header() {
               <span className={`${navLinkClass(false)} cursor-pointer text-gold/70 hover:text-gold`}>Admin</span>
               {adminOpen && (
                 <div className="animate-dropdown absolute top-full right-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
-                  <Link to="/owner-portal" className={dropdownLinkClass}>Dashboard</Link>
+                  <Link to="/admin-dashboard" className={dropdownLinkClass}>Dashboard</Link>
                   <div className="border-t border-white/10 mx-5 my-1" />
                   <button
                     onClick={logout}
@@ -280,7 +280,7 @@ export default function Header() {
           {isAdmin && (
             <>
               <Link
-                to="/owner-portal"
+                to="/admin-dashboard"
                 onClick={closeMobile}
                 className="block px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline border-b border-white/5 text-gold/80 hover:text-gold hover:bg-white/5 transition-all duration-300"
               >

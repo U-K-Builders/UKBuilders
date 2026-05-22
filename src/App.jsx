@@ -23,6 +23,7 @@ import ContractorsPage from './pages/ContractorsPage';
 import CareersPage from './pages/CareersPage';
 import PageTransition from './components/PageTransition';
 import { AuthProvider } from './context/AuthContext';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -57,6 +58,7 @@ export default function App() {
         <Route path="/redevelopment" element={<RedevelopmentPage />} />
         <Route path="/contractors" element={<ContractorsPage />} />
         <Route path="/careers" element={<CareersPage />} />
+        <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
