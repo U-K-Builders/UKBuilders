@@ -67,7 +67,7 @@ app.use('/api/submissions', submissionsRouter);
 if (isProd) {
   const distDir = join(__dirname, '..', 'dist');
   app.use(express.static(distDir));
-  app.get('*', (_req, res) => res.sendFile(join(distDir, 'index.html')));
+  app.get('/{*path}', (_req, res) => res.sendFile(join(distDir, 'index.html')));
 }
 
 app.listen(PORT, () => {
