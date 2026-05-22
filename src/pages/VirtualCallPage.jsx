@@ -114,11 +114,11 @@ export default function VirtualCallPage() {
     if (errors.slot) setErrors(prev => ({ ...prev, slot: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate(fields);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('video_calls', fields);
+    await saveSubmission('video_calls', fields);
     setSubmitted(true);
   };
 

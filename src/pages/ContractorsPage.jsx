@@ -52,7 +52,7 @@ function ContractorForm() {
     if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.company.trim()) errs.company = 'Company name is required.';
@@ -62,7 +62,7 @@ function ContractorForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('contractors', fields);
+    await saveSubmission('contractors', fields);
     setSubmitted(true);
   };
 

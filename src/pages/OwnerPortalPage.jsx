@@ -127,7 +127,7 @@ function RegisterForm() {
     if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.unit.trim()) errs.unit = 'Flat / unit number is required.';
@@ -137,7 +137,7 @@ function RegisterForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone number is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('society', fields);
+    await saveSubmission('society', fields);
     setSubmitted(true);
   };
 
@@ -229,12 +229,11 @@ function AdminPanel() {
     );
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (!login(fields.username.trim(), fields.password)) {
-      setError('Invalid username or password.');
-    }
+    const ok = await login(fields.username.trim(), fields.password);
+    if (!ok) setError('Invalid username or password.');
   };
 
   return (

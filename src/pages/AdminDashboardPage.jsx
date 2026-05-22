@@ -4,13 +4,14 @@ import { useAuth } from '../context/AuthContext';
 import AdminDashboard from '../components/AdminDashboard';
 
 export default function AdminDashboardPage() {
-  const { isAdmin } = useAuth();
+  const { isAdmin, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAdmin) navigate('/owner-portal', { replace: true });
-  }, [isAdmin, navigate]);
+    if (!loading && !isAdmin) navigate('/owner-portal', { replace: true });
+  }, [isAdmin, loading, navigate]);
 
+  if (loading) return <div className="min-h-[60vh] flex items-center justify-center text-text-muted text-sm uppercase tracking-[3px]">Verifying session…</div>;
   if (!isAdmin) return null;
 
   return (

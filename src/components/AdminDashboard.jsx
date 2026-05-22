@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getSubmissions, clearSubmissions } from '../utils/submissions';
 
 const TABS = [
@@ -135,14 +135,24 @@ function formatDate(iso) {
 }
 
 function SubmissionsTable({ tabKey, cols }) {
-  const [data, setData] = useState(() => getSubmissions(tabKey));
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleClear = () => {
+  useEffect(() => {
+    setLoading(true);
+    getSubmissions(tabKey).then(setData).finally(() => setLoading(false));
+  }, [tabKey]);
+
+  const handleClear = async () => {
     if (window.confirm('Clear all entries for this category? This cannot be undone.')) {
-      clearSubmissions(tabKey);
+      await clearSubmissions(tabKey);
       setData([]);
     }
   };
+
+  if (loading) {
+    return <div className="text-center py-16 text-text-muted text-sm uppercase tracking-[2px]">Loading…</div>;
+  }
 
   if (data.length === 0) {
     return (
@@ -198,8 +208,13 @@ function SubmissionsTable({ tabKey, cols }) {
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('buyers');
-  const counts = Object.fromEntries(TABS.map((t) => [t.key, getSubmissions(t.key).length]));
+  const [counts, setCounts] = useState({});
   const current = TABS.find((t) => t.key === activeTab);
+
+  useEffect(() => {
+    Promise.all(TABS.map(t => getSubmissions(t.key).then(d => [t.key, d.length])))
+      .then(entries => setCounts(Object.fromEntries(entries)));
+  }, []);
 
   return (
     <div>

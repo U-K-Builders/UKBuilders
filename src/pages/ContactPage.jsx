@@ -43,14 +43,14 @@ export default function ContactPage() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate(fields);
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
-    saveSubmission('buyers', fields);
+    await saveSubmission('buyers', fields);
     setSubmitted(true);
   };
 

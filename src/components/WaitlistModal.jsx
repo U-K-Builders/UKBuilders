@@ -24,14 +24,14 @@ export default function WaitlistModal({ projectName, onClose }) {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email.';
     if (Object.keys(errs).length) { setErrors(errs); return; }
-    saveSubmission('waitlist', { ...fields, project: projectName });
+    await saveSubmission('waitlist', { ...fields, project: projectName });
     setSubmitted(true);
   };
 

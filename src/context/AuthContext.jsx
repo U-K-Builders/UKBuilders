@@ -1,35 +1,37 @@
-import { createContext, useContext, useState } from 'react';
-import CryptoJS from 'crypto-js';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { apiGet, apiPost } from '../utils/api.js';
 
-const ADMIN_USER = 'admin';
-const ADMIN_HASH = '5616841d9219aca97a7625c96e5114d8f9ed963b378f6aac39a38c2fc5536476';
-const STORAGE_KEY = 'ukb_admin';
-
-const DEFAULT = { isAdmin: false, login: () => false, logout: () => {} };
+const DEFAULT = { isAdmin: false, loading: true, login: async () => false, logout: async () => {} };
 const AuthContext = createContext(DEFAULT);
 
 export function AuthProvider({ children }) {
-  const [isAdmin, setIsAdmin] = useState(() => {
-    try { return localStorage.getItem(STORAGE_KEY) === 'true'; } catch { return false; }
-  });
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const login = (username, password) => {
-    const hash = CryptoJS.SHA256(password).toString();
-    if (username === ADMIN_USER && hash === ADMIN_HASH) {
-      try { localStorage.setItem(STORAGE_KEY, 'true'); } catch {}
+  useEffect(() => {
+    apiGet('/api/auth/verify')
+      .then(({ isAdmin }) => setIsAdmin(Boolean(isAdmin)))
+      .catch(() => setIsAdmin(false))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const login = async (username, password) => {
+    try {
+      await apiPost('/api/auth/login', { username, password });
       setIsAdmin(true);
       return true;
+    } catch {
+      return false;
     }
-    return false;
   };
 
-  const logout = () => {
-    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  const logout = async () => {
+    try { await apiPost('/api/auth/logout', {}); } catch {}
     setIsAdmin(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAdmin, login, logout }}>
+    <AuthContext.Provider value={{ isAdmin, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

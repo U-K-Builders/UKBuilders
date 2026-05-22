@@ -71,14 +71,14 @@ function DownloadCard({ guide }) {
     if (errors[name]) setErrors(p => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email.';
     if (Object.keys(errs).length) { setErrors(errs); return; }
-    saveSubmission('downloads', { ...fields, guide: guide.title });
+    await saveSubmission('downloads', { ...fields, guide: guide.title });
     setDone(true);
   };
 
