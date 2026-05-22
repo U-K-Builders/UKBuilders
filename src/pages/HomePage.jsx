@@ -80,7 +80,7 @@ export default function HomePage() {
         <div className="py-24 px-5 bg-surface-subtle border-t border-border-light" ref={upcomingRef}>
           <div className="max-w-[1200px] mx-auto">
             <div style={slide(upcomingInView)}>
-              <SectionTitle>Coming Soon</SectionTitle>
+              <SectionTitle>Upcoming Projects</SectionTitle>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {visibleUpcoming.map((project, i) => (
