@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { saveSubmission } from '../utils/submissions';
 import { Link } from 'react-router-dom';
 
 const HIGHLIGHTS = [
@@ -71,6 +72,7 @@ function InquiryForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    saveSubmission('investors', fields);
     setSubmitted(true);
   };
 

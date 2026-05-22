@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { saveSubmission } from '../utils/submissions';
 
 const OPENINGS = [
   {
@@ -41,6 +43,81 @@ const VALUES = [
   { title: 'Integrity First', body: 'We build with honesty — in our concrete and in our conversations. Every team member is trusted to act with full integrity.' },
   { title: 'Family Culture', body: 'Many of our staff have been with us for over a decade. We invest in our people the same way we invest in our buildings — for the long term.' },
 ];
+
+function ApplicationForm() {
+  const roleOptions = ['Site Engineer', 'Sales Executive', 'Junior Architect', 'Accounts Executive', 'General Application'];
+  const [fields, setFields] = useState({ name: '', email: '', phone: '', role: roleOptions[0], message: '' });
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFields((p) => ({ ...p, [name]: value }));
+    if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errs = {};
+    if (!fields.name.trim()) errs.name = 'Name is required.';
+    if (!fields.email.trim()) errs.email = 'Email is required.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email.';
+    if (!fields.phone.trim()) errs.phone = 'Phone is required.';
+    else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    saveSubmission('careers', fields);
+    setSubmitted(true);
+  };
+
+  const inputClass = (f) =>
+    `w-full border px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors duration-300 bg-white/10 text-white placeholder-white/30 ${errors[f] ? 'border-red-400' : 'border-white/20'}`;
+
+  if (submitted) {
+    return (
+      <div className="border border-gold bg-gold/10 p-8 text-center max-w-lg mx-auto">
+        <span className="block text-gold font-bold text-sm uppercase tracking-[2px] mb-2">Application Received</span>
+        <p className="text-white/70 text-sm leading-[1.8]">
+          Thank you, <span className="font-bold text-white">{fields.name}</span>. We'll review your application for <span className="font-bold text-white">{fields.role}</span> and be in touch at <span className="font-bold text-white">{fields.email}</span>.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 max-w-lg mx-auto text-left">
+      <div>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-gold mb-2">Role <span className="text-gold">*</span></label>
+        <select name="role" value={fields.role} onChange={handleChange} className="w-full border border-white/20 px-4 py-3 text-sm bg-white/10 text-white focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
+          {roleOptions.map((r) => <option key={r} className="text-navy bg-white">{r}</option>)}
+        </select>
+      </div>
+      <div>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-gold mb-2">Full Name <span className="text-gold">*</span></label>
+        <input name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Your name" />
+        {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-gold mb-2">Email <span className="text-gold">*</span></label>
+          <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
+          {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+        </div>
+        <div>
+          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-gold mb-2">Phone <span className="text-gold">*</span></label>
+          <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
+          {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+        </div>
+      </div>
+      <div>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-gold mb-2">Cover Note <span className="text-white/40 font-normal normal-case tracking-normal">(optional)</span></label>
+        <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Brief note about yourself and your experience…" />
+      </div>
+      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+        Submit Application
+      </button>
+    </form>
+  );
+}
 
 export default function CareersPage() {
   return (
@@ -113,19 +190,14 @@ export default function CareersPage() {
         </div>
       </div>
 
-      {/* General Application */}
-      <div className="py-20 px-5 text-center bg-navy text-white">
-        <p className="text-gold text-xs tracking-[4px] uppercase mb-4">Don't See Your Role?</p>
-        <h2 className="font-serif text-3xl font-normal mb-5">Send Us a General Application</h2>
-        <p className="text-white/70 max-w-lg mx-auto text-sm leading-relaxed mb-10">
-          We are always open to hearing from talented professionals. Send your CV and a brief note about yourself — we'll keep you in mind for future opportunities.
+      {/* Application Form */}
+      <div className="py-20 px-5 bg-navy text-white">
+        <p className="text-gold text-xs tracking-[4px] uppercase mb-4 text-center">Apply Now</p>
+        <h2 className="font-serif text-3xl font-normal mb-5 text-center">Submit Your Application</h2>
+        <p className="text-white/70 max-w-lg mx-auto text-sm leading-relaxed mb-10 text-center">
+          Select the role you're interested in and fill in your details — we'll be in touch within 5 business days.
         </p>
-        <a
-          href="mailto:careers@ukbuilders.in?subject=General Application"
-          className="inline-block border border-gold text-gold px-12 py-4 text-sm tracking-[2px] uppercase no-underline transition-all duration-300 hover:bg-gold hover:text-white"
-        >
-          Email Your CV
-        </a>
+        <ApplicationForm />
       </div>
     </div>
   );

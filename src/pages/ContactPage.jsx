@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { saveSubmission } from '../utils/submissions';
 
 const PROJECT_OPTIONS = [
   'Justin',
@@ -49,6 +50,7 @@ export default function ContactPage() {
       setErrors(errs);
       return;
     }
+    saveSubmission('buyers', fields);
     setSubmitted(true);
   };
 

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { saveSubmission } from '../utils/submissions';
+import AdminDashboard from '../components/AdminDashboard';
 
 const PROJECTS = ['Justin', 'Christina', 'Elvira', 'Silver Coin', 'La Serena', 'Aurola-Muriel Villa', 'Cinderella', 'Little Sunflower', 'Other'];
 
@@ -136,6 +138,7 @@ function RegisterForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone number is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    saveSubmission('society', fields);
     setSubmitted(true);
   };
 
@@ -277,6 +280,7 @@ function AdminPanel() {
 }
 
 export default function OwnerPortalPage() {
+  const { isAdmin } = useAuth();
   const [mode, setMode] = useState('register');
 
   const tabClass = (m) =>
@@ -303,45 +307,55 @@ export default function OwnerPortalPage() {
       <div className="py-16 md:py-24 px-5">
         <div className="max-w-[1100px] mx-auto flex flex-col gap-20">
 
-          {/* Access Panel */}
+          {/* Access Panel / Admin Dashboard */}
           <section>
-            <div className="max-w-[560px] mx-auto">
-              <div className="flex gap-3 mb-8 flex-wrap">
-                <button className={tabClass('login')} onClick={() => setMode('login')}>Existing Member</button>
-                <button className={tabClass('register')} onClick={() => setMode('register')}>Register as Owner</button>
-                <button className={tabClass('admin')} onClick={() => setMode('admin')}>Admin</button>
+            {isAdmin ? (
+              <div>
+                <h2 className="font-serif text-navy text-2xl md:text-3xl font-normal uppercase tracking-[2px] mb-2">
+                  Admin Dashboard
+                  <span className="block w-[50px] h-[2px] bg-gold mt-3 mb-8" />
+                </h2>
+                <AdminDashboard />
               </div>
-
-              {mode === 'login' && (
-                <div>
-                  <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Sign In</h2>
-                  <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
-                    Access your owner dashboard using the credentials sent to you at possession.
-                  </p>
-                  <LoginForm />
+            ) : (
+              <div className="max-w-[560px] mx-auto">
+                <div className="flex gap-3 mb-8 flex-wrap">
+                  <button className={tabClass('login')} onClick={() => setMode('login')}>Existing Member</button>
+                  <button className={tabClass('register')} onClick={() => setMode('register')}>Register as Owner</button>
+                  <button className={tabClass('admin')} onClick={() => setMode('admin')}>Admin</button>
                 </div>
-              )}
 
-              {mode === 'register' && (
-                <div>
-                  <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Register Your Unit</h2>
-                  <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
-                    New to the portal? Submit your details and we&apos;ll verify ownership and send your login credentials within 2 business days.
-                  </p>
-                  <RegisterForm />
-                </div>
-              )}
+                {mode === 'login' && (
+                  <div>
+                    <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Sign In</h2>
+                    <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
+                      Access your owner dashboard using the credentials sent to you at possession.
+                    </p>
+                    <LoginForm />
+                  </div>
+                )}
 
-              {mode === 'admin' && (
-                <div>
-                  <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Admin Access</h2>
-                  <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
-                    Internal access to view all site content including hidden projects.
-                  </p>
-                  <AdminPanel />
-                </div>
-              )}
-            </div>
+                {mode === 'register' && (
+                  <div>
+                    <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Register Your Unit</h2>
+                    <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
+                      New to the portal? Submit your details and we&apos;ll verify ownership and send your login credentials within 2 business days.
+                    </p>
+                    <RegisterForm />
+                  </div>
+                )}
+
+                {mode === 'admin' && (
+                  <div>
+                    <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Admin Access</h2>
+                    <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
+                      Internal access to view all site content including hidden projects.
+                    </p>
+                    <AdminPanel />
+                  </div>
+                )}
+              </div>
+            )}
           </section>
 
           {/* Resources Preview */}
