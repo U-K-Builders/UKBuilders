@@ -24,10 +24,11 @@ function MoonIcon() {
 export default function Header() {
   const location = useLocation();
   const [dark, toggleDark] = useTheme();
-  const { isAdmin } = useAuth();
+  const { isAdmin, logout } = useAuth();
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [legacyOpen, setLegacyOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [adminOpen, setAdminOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false);
   const [mobileLegacyOpen, setMobileLegacyOpen] = useState(false);
@@ -129,6 +130,29 @@ export default function Header() {
           </div>
 
           <Link to="/owner-portal" className={navLinkClass(isActive('/owner-portal'))}>Owner Portal</Link>
+
+          {/* Admin dropdown — only when logged in */}
+          {isAdmin && (
+            <div
+              className="relative flex items-center"
+              onMouseEnter={() => setAdminOpen(true)}
+              onMouseLeave={() => setAdminOpen(false)}
+            >
+              <span className={`${navLinkClass(false)} cursor-pointer text-gold/70 hover:text-gold`}>Admin</span>
+              {adminOpen && (
+                <div className="animate-dropdown absolute top-full right-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
+                  <Link to="/owner-portal" className={dropdownLinkClass}>Dashboard</Link>
+                  <div className="border-t border-white/10 mx-5 my-1" />
+                  <button
+                    onClick={logout}
+                    className="block w-full text-left px-5 py-4 text-[0.8125rem] tracking-[1px] uppercase bg-transparent border-none cursor-pointer text-red-400 hover:bg-white/5 hover:text-red-300 transition-all duration-300"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
 
         </nav>
 
@@ -252,6 +276,24 @@ export default function Header() {
           >
             Owner Portal
           </Link>
+
+          {isAdmin && (
+            <>
+              <Link
+                to="/owner-portal"
+                onClick={closeMobile}
+                className="block px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline border-b border-white/5 text-gold/80 hover:text-gold hover:bg-white/5 transition-all duration-300"
+              >
+                Admin Dashboard
+              </Link>
+              <button
+                onClick={() => { logout(); closeMobile(); }}
+                className="w-full text-left px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer text-red-400 hover:text-red-300 hover:bg-white/5 transition-all duration-300"
+              >
+                Sign Out
+              </button>
+            </>
+          )}
 
         </div>
       )}
