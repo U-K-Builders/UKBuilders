@@ -21,7 +21,7 @@ export default function UpcomingProjectsPage() {
 
       <div className="py-16 md:py-24 px-5 bg-surface-subtle">
         <div className="max-w-[1200px] mx-auto flex flex-col gap-16">
-          {upcomingProjects.map((project) => (
+          {upcomingProjects.filter((p) => !p.hidden).map((project) => (
             <div key={project.name} className="flex flex-col gap-4">
               <ProjectCard project={project} />
 
