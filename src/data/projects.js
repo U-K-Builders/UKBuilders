@@ -41,6 +41,7 @@ export const upcomingProjects = [
     location: 'Lourdes Colony, Orlem, Malad West',
     lat: 19.1768, lng: 72.8476,
     possession: '2028',
+    hidden: true,
   },
   {
     name: 'Madonna',
@@ -51,6 +52,7 @@ export const upcomingProjects = [
     location: "D'Monte Lane, Orlem, Malad West",
     lat: 19.1795, lng: 72.8500,
     possession: '2028',
+    hidden: true,
   },
 ];
 
