@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { saveSubmission } from '../utils/submissions';
 
 export default function WaitlistModal({ projectName, onClose }) {
   const [fields, setFields] = useState({ name: '', email: '', bhk: '' });
@@ -30,6 +31,7 @@ export default function WaitlistModal({ projectName, onClose }) {
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email.';
     if (Object.keys(errs).length) { setErrors(errs); return; }
+    saveSubmission('waitlist', { ...fields, project: projectName });
     setSubmitted(true);
   };
 

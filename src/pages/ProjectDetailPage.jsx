@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
+import { saveSubmission } from '../utils/submissions';
 import Lightbox from '../components/Lightbox';
 import EnquiryModal from '../components/EnquiryModal';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
@@ -169,6 +170,7 @@ function MilestoneSubscribeForm({ projectName, nextMilestone }) {
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email address.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    saveSubmission('milestone_subs', { ...fields, project: projectName });
     setSubmitted(true);
   };
 
@@ -261,6 +263,7 @@ function BookVisitForm({ projectName }) {
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email address.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    saveSubmission('site_visits', { ...fields, project: projectName });
     setSubmitted(true);
   };
 

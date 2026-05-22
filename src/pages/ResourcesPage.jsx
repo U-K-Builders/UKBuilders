@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { saveSubmission } from '../utils/submissions';
 
 const GUIDES = [
   {
@@ -77,6 +78,7 @@ function DownloadCard({ guide }) {
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email.';
     if (Object.keys(errs).length) { setErrors(errs); return; }
+    saveSubmission('downloads', { ...fields, guide: guide.title });
     setDone(true);
   };
 

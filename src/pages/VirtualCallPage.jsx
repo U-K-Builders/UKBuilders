@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { saveSubmission } from '../utils/submissions';
 
 const PROJECTS = ['Justin', 'Christina', 'Elvira', 'New Life', 'Madonna', 'General Enquiry'];
 
@@ -117,6 +118,7 @@ export default function VirtualCallPage() {
     e.preventDefault();
     const errs = validate(fields);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    saveSubmission('video_calls', fields);
     setSubmitted(true);
   };
 

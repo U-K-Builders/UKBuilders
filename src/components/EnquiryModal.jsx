@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { saveSubmission } from '../utils/submissions';
 
 export default function EnquiryModal({ projectName, floorPlans, onClose }) {
   const [fields, setFields] = useState({ name: '', phone: '', bhk: '', message: '' });
@@ -30,6 +31,7 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    saveSubmission('enquiries', { ...fields, project: projectName });
     setSubmitted(true);
   };
 
