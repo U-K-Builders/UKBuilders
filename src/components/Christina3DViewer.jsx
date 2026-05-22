@@ -433,9 +433,10 @@ export default function Christina3DViewer() {
     ];
     treePositions.forEach(([x, z, s]) => addTree(x, z, s));
 
-    // ── Vertical bronze fins on tower (front + back, protruding) ──────
+    // ── Vertical bronze fins flanking balconies (not at centre) ───────
+    // Render shows fins at facade edges and balcony shoulders, not at centre.
     const finGeo = new THREE.BoxGeometry(0.42, 41.0, 0.65);
-    for (const fx of [-8, -4, 0, 4, 8]) {
+    for (const fx of [-9.2, -3.8, 3.8, 9.2]) {
       const mf = new THREE.Mesh(finGeo, fin);
       mf.position.set(fx, towerY + 41.6 / 2, towerCenterZ + 7.35);
       mf.castShadow = true;
@@ -445,16 +446,52 @@ export default function Christina3DViewer() {
       scene.add(mb);
     }
 
-    // ── Balcony slabs + railings on tower south face ──────────────────
+    // ── Glass balcony railing material ────────────────────────────────
+    const balcGlass = new THREE.MeshStandardMaterial({
+      color: 0xb8c8d2,
+      roughness: 0.12,
+      metalness: 0.3,
+      transparent: true,
+      opacity: 0.45,
+    });
+
+    // ── Front balconies: every residential floor (1-13) ──────────────
+    // Slab projection + glass railing + white handrail cap + central divider
     for (let floor = 0; floor < 13; floor++) {
       const slabY = towerY + floor * 3.2;
-      const slab  = new THREE.Mesh(new THREE.BoxGeometry(22, 0.22, 1.4), white);
-      slab.position.set(0, slabY, towerCenterZ + 7.7);
-      slab.castShadow = true;
+      const slab  = new THREE.Mesh(new THREE.BoxGeometry(22, 0.28, 1.5), white);
+      slab.position.set(0, slabY, towerCenterZ + 7.75);
+      slab.castShadow = slab.receiveShadow = true;
       scene.add(slab);
-      const rail = new THREE.Mesh(new THREE.BoxGeometry(22, 0.1, 0.06), white);
-      rail.position.set(0, slabY + 1.05, towerCenterZ + 8.3);
-      scene.add(rail);
+      const glassRail = new THREE.Mesh(new THREE.BoxGeometry(22, 1.05, 0.08), balcGlass);
+      glassRail.position.set(0, slabY + 0.6, towerCenterZ + 8.4);
+      scene.add(glassRail);
+      const cap = new THREE.Mesh(new THREE.BoxGeometry(22, 0.1, 0.16), white);
+      cap.position.set(0, slabY + 1.18, towerCenterZ + 8.4);
+      scene.add(cap);
+      // Central balcony divider (partition between adjacent flats)
+      const divider = new THREE.Mesh(new THREE.BoxGeometry(0.2, 2.6, 1.6), white);
+      divider.position.set(0, slabY + 1.6, towerCenterZ + 8.0);
+      scene.add(divider);
+    }
+
+    // ── Back balconies: only floors 1-9 (below floor 14) ──────────────
+    // Upper floors (above 14) have a flat back facade with windows only.
+    for (let floor = 0; floor < 9; floor++) {
+      const slabY = towerY + floor * 3.2;
+      const slab  = new THREE.Mesh(new THREE.BoxGeometry(22, 0.28, 1.5), white);
+      slab.position.set(0, slabY, towerCenterZ - 7.75);
+      slab.castShadow = slab.receiveShadow = true;
+      scene.add(slab);
+      const glassRail = new THREE.Mesh(new THREE.BoxGeometry(22, 1.05, 0.08), balcGlass);
+      glassRail.position.set(0, slabY + 0.6, towerCenterZ - 8.4);
+      scene.add(glassRail);
+      const cap = new THREE.Mesh(new THREE.BoxGeometry(22, 0.1, 0.16), white);
+      cap.position.set(0, slabY + 1.18, towerCenterZ - 8.4);
+      scene.add(cap);
+      const divider = new THREE.Mesh(new THREE.BoxGeometry(0.2, 2.6, 1.6), white);
+      divider.position.set(0, slabY + 1.6, towerCenterZ - 8.0);
+      scene.add(divider);
     }
 
     // ── Parapet / crown on top of tower ──────────────────────────────
