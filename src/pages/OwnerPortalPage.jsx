@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 const PROJECTS = ['Justin', 'Christina', 'Elvira', 'Silver Coin', 'La Serena', 'Aurola-Muriel Villa', 'Cinderella', 'Little Sunflower', 'Other'];
 
@@ -96,25 +97,18 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
-          Email Address
-        </label>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Email Address</label>
         <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass} placeholder="you@example.com" required />
       </div>
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
-          Password
-        </label>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
         <input name="password" type="password" autoComplete="current-password" value={fields.password} onChange={handleChange} className={inputClass} placeholder="••••••••" required />
       </div>
       <p className="text-text-muted text-xs -mt-1">
         Forgot your password?{' '}
         <a href="mailto:u.k.builders1981@gmail.com" className="text-gold hover:underline">Contact us</a>
       </p>
-      <button
-        type="submit"
-        className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
-      >
+      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Sign In
       </button>
     </form>
@@ -168,12 +162,7 @@ function RegisterForm() {
           <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
             Building <span className="text-gold">*</span>
           </label>
-          <select
-            name="project"
-            value={fields.project}
-            onChange={handleChange}
-            className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer"
-          >
+          <select name="project" value={fields.project} onChange={handleChange} className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
             {PROJECTS.map((p) => <option key={p}>{p}</option>)}
           </select>
         </div>
@@ -206,11 +195,82 @@ function RegisterForm() {
         <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
-      <button
-        type="submit"
-        className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
-      >
+      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Submit Registration
+      </button>
+    </form>
+  );
+}
+
+function AdminPanel() {
+  const { isAdmin, login, logout } = useAuth();
+  const [fields, setFields] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
+  const [showPw, setShowPw] = useState(false);
+
+  const inputClass = 'w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300';
+
+  if (isAdmin) {
+    return (
+      <div className="border border-gold bg-gold/5 p-8 text-center">
+        <span className="block text-gold font-bold text-sm uppercase tracking-[3px] mb-3">Admin Mode Active</span>
+        <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
+          All hidden projects and content are visible across the site.
+        </p>
+        <button
+          onClick={logout}
+          className="bg-transparent text-gold px-8 py-3 text-[0.6875rem] uppercase tracking-[2px] border border-gold hover:bg-gold hover:text-white transition-all duration-300"
+        >
+          Sign Out
+        </button>
+      </div>
+    );
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+    if (!login(fields.username.trim(), fields.password)) {
+      setError('Invalid username or password.');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+      <div>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Username</label>
+        <input
+          type="text"
+          autoComplete="username"
+          value={fields.username}
+          onChange={(e) => setFields((p) => ({ ...p, username: e.target.value }))}
+          className={inputClass}
+          placeholder="admin"
+        />
+      </div>
+      <div>
+        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
+        <div className="relative">
+          <input
+            type={showPw ? 'text' : 'password'}
+            autoComplete="current-password"
+            value={fields.password}
+            onChange={(e) => setFields((p) => ({ ...p, password: e.target.value }))}
+            className={`${inputClass} pr-14`}
+            placeholder="••••••••"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPw((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-gold transition-colors duration-300 bg-transparent border-none cursor-pointer text-xs uppercase tracking-[1px]"
+          >
+            {showPw ? 'Hide' : 'Show'}
+          </button>
+        </div>
+      </div>
+      {error && <p className="text-red-500 text-xs uppercase tracking-[1px]">{error}</p>}
+      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+        Sign In
       </button>
     </form>
   );
@@ -246,13 +306,13 @@ export default function OwnerPortalPage() {
           {/* Access Panel */}
           <section>
             <div className="max-w-[560px] mx-auto">
-              {/* Tabs */}
-              <div className="flex gap-3 mb-8">
+              <div className="flex gap-3 mb-8 flex-wrap">
                 <button className={tabClass('login')} onClick={() => setMode('login')}>Existing Member</button>
                 <button className={tabClass('register')} onClick={() => setMode('register')}>Register as Owner</button>
+                <button className={tabClass('admin')} onClick={() => setMode('admin')}>Admin</button>
               </div>
 
-              {mode === 'login' ? (
+              {mode === 'login' && (
                 <div>
                   <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Sign In</h2>
                   <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
@@ -260,13 +320,25 @@ export default function OwnerPortalPage() {
                   </p>
                   <LoginForm />
                 </div>
-              ) : (
+              )}
+
+              {mode === 'register' && (
                 <div>
                   <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Register Your Unit</h2>
                   <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
                     New to the portal? Submit your details and we&apos;ll verify ownership and send your login credentials within 2 business days.
                   </p>
                   <RegisterForm />
+                </div>
+              )}
+
+              {mode === 'admin' && (
+                <div>
+                  <h2 className="font-serif text-navy text-2xl mb-2 tracking-[1px]">Admin Access</h2>
+                  <p className="text-text-tertiary text-sm leading-[1.8] mb-6">
+                    Internal access to view all site content including hidden projects.
+                  </p>
+                  <AdminPanel />
                 </div>
               )}
             </div>
@@ -280,10 +352,7 @@ export default function OwnerPortalPage() {
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {RESOURCES.map((r) => (
-                <div
-                  key={r.title}
-                  className="border border-border-light bg-white p-6 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 relative"
-                >
+                <div key={r.title} className="border border-border-light bg-white p-6 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 relative">
                   <div className="flex items-start gap-3 mb-3">
                     <span className="text-gold mt-0.5">{r.icon}</span>
                     <h4 className="font-serif text-navy text-lg leading-snug">{r.title}</h4>

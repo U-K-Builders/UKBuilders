@@ -24,7 +24,7 @@ function MoonIcon() {
 export default function Header() {
   const location = useLocation();
   const [dark, toggleDark] = useTheme();
-  const { isAdmin, logout } = useAuth();
+  const { isAdmin } = useAuth();
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [legacyOpen, setLegacyOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
@@ -130,17 +130,6 @@ export default function Header() {
 
           <Link to="/owner-portal" className={navLinkClass(isActive('/owner-portal'))}>Owner Portal</Link>
 
-          {isAdmin && (
-            <div className="flex items-center gap-2 border-l border-white/10 pl-4 ml-1">
-              <span className="text-[0.625rem] uppercase tracking-[2px] text-gold/70">Admin</span>
-              <button
-                onClick={() => logout()}
-                className="text-[0.625rem] uppercase tracking-[1px] text-white/40 hover:text-gold transition-colors duration-300 bg-transparent border-none cursor-pointer"
-              >
-                Sign Out
-              </button>
-            </div>
-          )}
         </nav>
 
         {/* Accessibility panel */}
@@ -264,22 +253,6 @@ export default function Header() {
             Owner Portal
           </Link>
 
-          {isAdmin ? (
-            <button
-              onClick={() => { logout(); closeMobile(); }}
-              className="w-full text-left px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase bg-transparent border-none border-b border-white/5 cursor-pointer text-gold/70 hover:text-gold hover:bg-white/5 transition-all duration-300"
-            >
-              Admin — Sign Out
-            </button>
-          ) : (
-            <Link
-              to="/admin"
-              onClick={closeMobile}
-              className="block px-6 py-4 text-[0.8125rem] tracking-[1px] uppercase no-underline border-b border-white/5 text-white/30 hover:text-gold hover:bg-white/5 transition-all duration-300"
-            >
-              Admin
-            </Link>
-          )}
         </div>
       )}
     </header>
