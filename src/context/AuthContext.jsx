@@ -4,7 +4,8 @@ const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'UKBuilders@2024';
 const STORAGE_KEY = 'ukb_admin';
 
-const AuthContext = createContext(null);
+const DEFAULT = { isAdmin: false, login: () => false, logout: () => {} };
+const AuthContext = createContext(DEFAULT);
 
 export function AuthProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(() => {
@@ -13,7 +14,7 @@ export function AuthProvider({ children }) {
 
   const login = (username, password) => {
     if (username === ADMIN_USER && password === ADMIN_PASS) {
-      localStorage.setItem(STORAGE_KEY, 'true');
+      try { localStorage.setItem(STORAGE_KEY, 'true'); } catch {}
       setIsAdmin(true);
       return true;
     }
@@ -21,7 +22,7 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    localStorage.removeItem(STORAGE_KEY);
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
     setIsAdmin(false);
   };
 
