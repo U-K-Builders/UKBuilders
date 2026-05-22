@@ -13,7 +13,6 @@ import NotFoundPage from './pages/NotFoundPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import UpcomingProjectsPage from './pages/UpcomingProjectsPage';
 import OurStoryPage from './pages/OurStoryPage';
-
 import VirtualCallPage from './pages/VirtualCallPage';
 import GalleryPage from './pages/GalleryPage';
 import ResourcesPage from './pages/ResourcesPage';
@@ -23,7 +22,8 @@ import RedevelopmentPage from './pages/RedevelopmentPage';
 import ContractorsPage from './pages/ContractorsPage';
 import CareersPage from './pages/CareersPage';
 import PageTransition from './components/PageTransition';
-
+import { AuthProvider } from './context/AuthContext';
+import AdminLoginPage from './pages/AdminLoginPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -35,8 +35,8 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <>
-<div className="noise-overlay" aria-hidden="true" />
+    <AuthProvider>
+      <div className="noise-overlay" aria-hidden="true" />
       <ScrollToTop />
       <PageTransition />
       <Header />
@@ -58,10 +58,11 @@ export default function App() {
         <Route path="/redevelopment" element={<RedevelopmentPage />} />
         <Route path="/contractors" element={<ContractorsPage />} />
         <Route path="/careers" element={<CareersPage />} />
+        <Route path="/admin" element={<AdminLoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
       <ScrollToTopButton />
-    </>
+    </AuthProvider>
   );
 }

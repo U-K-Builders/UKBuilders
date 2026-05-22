@@ -11,6 +11,7 @@ import TrustPillars from '../components/TrustPillars';
 import { ongoingProjects, upcomingProjects, completedProjects } from '../data/projects';
 import { testimonials } from '../data/testimonials';
 import { useInView } from '../hooks/useInView';
+import { useAuth } from '../context/AuthContext';
 
 const CityProjectsMap = lazy(() => import('../components/CityProjectsMap'));
 
@@ -29,6 +30,7 @@ function slide(inView, delay = 0) {
 }
 
 export default function HomePage() {
+  const { isAdmin } = useAuth();
   const [statsRef,        statsInView]        = useInView(0.3);
   const [ongoingRef,      ongoingInView]      = useInView(0.1);
   const [upcomingRef,     upcomingInView]     = useInView(0.1);
@@ -36,7 +38,7 @@ export default function HomePage() {
   const [legacyRef,       legacyInView]       = useInView(0.1);
   const [testimonialsRef, testimonialsInView] = useInView(0.1);
 
-  const visibleUpcoming = upcomingProjects.filter((p) => !p.hidden);
+  const visibleUpcoming = isAdmin ? upcomingProjects : upcomingProjects.filter((p) => !p.hidden);
 
   return (
     <div className="animate-fade-in">
@@ -76,7 +78,7 @@ export default function HomePage() {
       </div>
 
       {/* ── Upcoming projects ────────────────────────────────────────────── */}
-      {false && visibleUpcoming.length > 0 && (
+      {isAdmin && visibleUpcoming.length > 0 && (
         <div className="py-24 px-5 bg-surface-subtle border-t border-border-light" ref={upcomingRef}>
           <div className="max-w-[1200px] mx-auto">
             <div style={slide(upcomingInView)}>

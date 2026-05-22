@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
 import WaitlistModal from '../components/WaitlistModal';
 import { upcomingProjects } from '../data/projects';
+import { useAuth } from '../context/AuthContext';
 
 export default function UpcomingProjectsPage() {
+  const { isAdmin } = useAuth();
   const [waitlistProject, setWaitlistProject] = useState(null);
+  const visibleProjects = isAdmin ? upcomingProjects : upcomingProjects.filter((p) => !p.hidden);
 
   return (
     <div className="animate-fade-in">
@@ -21,7 +24,7 @@ export default function UpcomingProjectsPage() {
 
       <div className="py-16 md:py-24 px-5 bg-surface-subtle">
         <div className="max-w-[1200px] mx-auto flex flex-col gap-16">
-          {upcomingProjects.filter((p) => !p.hidden).map((project) => (
+          {visibleProjects.map((project) => (
             <div key={project.name} className="flex flex-col gap-4">
               <ProjectCard project={project} />
 
