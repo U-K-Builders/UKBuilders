@@ -80,7 +80,6 @@ export default function Header() {
             {projectsOpen && (
               <div className="animate-dropdown absolute top-full left-0 mt-[1px] bg-navy min-w-[220px] shadow-[0_8px_16px_rgba(0,0,0,0.4)] border-t-2 border-gold z-50">
                 <Link to="/projects/ongoing" className={dropdownLinkClass}>Ongoing Projects</Link>
-                <Link to="/projects/upcoming" className={dropdownLinkClass}>Upcoming Projects</Link>
                 <Link to="/projects/completed" className={dropdownLinkClass}>Completed Projects</Link>
               </div>
             )}
@@ -184,7 +183,6 @@ export default function Header() {
             {mobileProjectsOpen && (
               <div className="bg-white/5">
                 <Link to="/projects/ongoing" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Ongoing Projects</Link>
-                <Link to="/projects/upcoming" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Upcoming Projects</Link>
                 <Link to="/projects/completed" onClick={closeMobile} className="block px-10 py-3 text-[0.8125rem] tracking-[1px] uppercase no-underline text-white/80 hover:text-gold transition-all duration-300 border-b border-white/5">Completed Projects</Link>
               </div>
             )}

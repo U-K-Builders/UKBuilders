@@ -76,7 +76,7 @@ export default function HomePage() {
       </div>
 
       {/* ── Upcoming projects ────────────────────────────────────────────── */}
-      {visibleUpcoming.length > 0 && (
+      {false && visibleUpcoming.length > 0 && (
         <div className="py-24 px-5 bg-surface-subtle border-t border-border-light" ref={upcomingRef}>
           <div className="max-w-[1200px] mx-auto">
             <div style={slide(upcomingInView)}>
