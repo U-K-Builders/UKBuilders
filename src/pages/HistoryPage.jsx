@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { completedProjects } from '../data/projects';
+import { publicCompletedProjects } from '../data/projects';
 
 const ProjectMap = lazy(() => import('../components/ProjectMap'));
 
@@ -105,7 +105,7 @@ export default function HistoryPage() {
           </p>
           <div className="w-full h-[480px] border border-border-light overflow-hidden">
             <Suspense fallback={<div className="w-full h-full bg-surface-subtle flex items-center justify-center text-text-muted text-sm">Loading map…</div>}>
-              <ProjectMap projects={completedProjects} />
+              <ProjectMap projects={publicCompletedProjects} />
             </Suspense>
           </div>
           <p className="text-center text-xs text-text-muted mt-3">Click any marker to see project details.</p>

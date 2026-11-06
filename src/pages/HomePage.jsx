@@ -7,7 +7,7 @@ import SignatureCard from '../components/SignatureCard';
 import TestimonialCard from '../components/TestimonialCard';
 import Carousel from '../components/Carousel';
 import TrustPillars from '../components/TrustPillars';
-import { ongoingProjects, upcomingProjects, completedProjects } from '../data/projects';
+import { ongoingProjects, upcomingProjects, publicCompletedProjects, completedWithPhotos } from '../data/projects';
 import { testimonials } from '../data/testimonials';
 import { useInView } from '../hooks/useInView';
 
@@ -66,7 +66,7 @@ export default function HomePage() {
               <CityProjectsMap
                 ongoing={ongoingProjects}
                 upcoming={upcomingProjects.filter((p) => !p.hidden)}
-                completed={completedProjects}
+                completed={publicCompletedProjects}
               />
             </Suspense>
           </div>
@@ -81,7 +81,7 @@ export default function HomePage() {
           </div>
           <div style={slide(legacyInView, 150)}>
             <Carousel interval={5000} visibleCount={3}>
-              {completedProjects.filter((p) => p.image).map((project) => (
+              {completedWithPhotos.map((project) => (
                 <SignatureCard key={`${project.name}-${project.year}`} project={project} className="h-full" />
               ))}
             </Carousel>

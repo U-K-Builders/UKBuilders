@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SignatureCard from '../components/SignatureCard';
 import Lightbox from '../components/Lightbox';
-import { completedProjects } from '../data/projects';
+import { completedWithPhotos } from '../data/projects';
 
 export default function CompletedProjectsPage() {
   const [lightbox, setLightbox] = useState(null);
@@ -20,13 +21,24 @@ export default function CompletedProjectsPage() {
 
       <div className="py-16 md:py-24 px-5 bg-surface-subtle">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {completedProjects.map((project) => (
+          {completedWithPhotos.map((project) => (
             <SignatureCard
               key={`${project.name}-${project.year}`}
               project={project}
               onPhotoClick={(p) => setLightbox(p)}
             />
           ))}
+        </div>
+        <div className="max-w-[1200px] mx-auto mt-16 text-center">
+          <p className="text-text-tertiary mb-6">
+            These are a few of our recent buildings. Every project since 1972 is on our timeline.
+          </p>
+          <Link
+            to="/timeline"
+            className="inline-flex items-center min-h-[44px] px-8 py-3 bg-navy text-gold-bright text-sm tracking-[2px] uppercase no-underline border border-navy transition-all duration-300 hover:bg-gold hover:text-navy hover:border-gold"
+          >
+            View the full timeline
+          </Link>
         </div>
       </div>
 

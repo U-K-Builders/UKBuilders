@@ -1,6 +1,6 @@
-import { completedProjects, ongoingProjects, upcomingProjects } from '../data/projects';
+import { publicCompletedProjects, ongoingProjects, upcomingProjects } from '../data/projects';
 
-const chronological = [...completedProjects].sort((a, b) => a.year - b.year);
+const chronological = [...publicCompletedProjects].sort((a, b) => a.year - b.year);
 
 function groupByDecade(projects) {
   const groups = {};
