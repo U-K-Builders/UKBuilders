@@ -1,8 +1,10 @@
 # Photos
 
-Full-resolution copies of every photo the company has in this repository, for
-brochures, social media, listings and print. The website uses smaller copies
-in `public/images/`, so files here don't affect the site.
+Every photo the company has, at full resolution, for brochures, social media,
+listings and print. **This is the only copy.** The website's smaller versions
+are generated from these files automatically (`scripts/build-images.mjs`
+writes them to `public/images/` on every build), so a photo added here is
+ready to use on the site at `/images/<folder>/<name>`.
 
 All files are plain JPEG/PNG (iPhone HEIC files converted) with metadata
 removed, including the GPS location iPhones embed.
@@ -21,5 +23,5 @@ removed, including the GPS location iPhones embed.
 **Missing:** photos of the other completed buildings (Shanti Niketan,
 Ann-O-Lou, Millie Enclave, Bonanza, Helena Villa, Edelweiss and older), site
 progress photos, interiors and floor-plan images. Add them here with
-lowercase-hyphenated names. To put a photo on the website as well, ask Claude
-to add a web-sized copy to `public/images/`.
+lowercase-hyphenated names. To show one on the website, reference it in the
+data files, e.g. `/images/buildings/bonanza.jpg`.

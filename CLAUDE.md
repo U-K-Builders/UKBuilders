@@ -38,7 +38,7 @@ Custom utility classes in `index.css`: `.gradient-text` (navy-to-gold text gradi
 
 ## Images
 
-Static images served from `public/images/`. Referenced in data files as `/images/filename.jpg`. Image filenames have spaces (e.g., `Justin Night View.jpg`).
+See "Leads and security" below: photos live in `photos/`, web copies are generated into `public/images/`.
 
 ## Key Patterns
 
@@ -59,4 +59,4 @@ Static images served from `public/images/`. Referenced in data files as `/images
 - The repo is public: never commit keys, `.env` files or customer data. See `docs/SECURITY.md`.
 - The owner portal and admin live in the private repo `U-K-Builders/UKBuilders_Portal`, not here.
 - Project visibility flags in `src/data/projects.js`: `hidden` (not shown anywhere) and `timelineOnly` (Timeline page only). Completed projects without a photo appear only on the Timeline.
-- Full-resolution photos are in `photos/`; web-sized copies in `public/images/`.
+- Photos live only in `photos/` (full resolution). `scripts/build-images.mjs` generates web copies in `public/images/` before dev/build; that folder is git-ignored. Reference images as `/images/<path under photos>`.

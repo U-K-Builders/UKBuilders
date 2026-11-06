@@ -4,13 +4,13 @@ import Lightbox from '../components/Lightbox';
 const TABS = ['Building Exterior', 'Construction', 'Neighbourhood', 'Events'];
 
 const BUILDING_PHOTOS = [
-  { src: '/images/Building/Justin Night View.jpg', caption: 'Justin — Ongoing', tag: 'Ongoing' },
-  { src: '/images/Building/Christina Night View.jpg', caption: 'Christina — Ongoing', tag: 'Ongoing' },
-  { src: '/images/Building/Silver Coin.jpg', caption: 'Silver Coin — 2024', tag: 'Completed' },
-  { src: '/images/Building/La Serena.jpg', caption: 'La Serena — 2022', tag: 'Completed' },
-  { src: '/images/Building/Aurola-Muriel.jpg', caption: 'Aurola-Muriel Villa — 2016', tag: 'Completed' },
-  { src: '/images/Building/Cinderella.jpg', caption: 'Cinderella — 2013', tag: 'Completed' },
-  { src: '/images/Building/Little Sunflower.jpg', caption: 'Little Sunflower — 2010', tag: 'Completed' },
+  { src: '/images/buildings/justin-night-view.jpg', caption: 'Justin — Ongoing', tag: 'Ongoing' },
+  { src: '/images/buildings/christina-night-view.jpg', caption: 'Christina — Ongoing', tag: 'Ongoing' },
+  { src: '/images/buildings/silver-coin.jpg', caption: 'Silver Coin — 2024', tag: 'Completed' },
+  { src: '/images/buildings/la-serena.jpg', caption: 'La Serena — 2022', tag: 'Completed' },
+  { src: '/images/buildings/aurola-muriel-villa.jpg', caption: 'Aurola-Muriel Villa — 2016', tag: 'Completed' },
+  { src: '/images/buildings/cinderella.jpg', caption: 'Cinderella — 2013', tag: 'Completed' },
+  { src: '/images/buildings/little-sunflower.jpg', caption: 'Little Sunflower — 2010', tag: 'Completed' },
 ];
 
 function PhotoCard({ photo, onClick }) {

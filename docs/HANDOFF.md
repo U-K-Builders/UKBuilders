@@ -68,8 +68,9 @@ Secrets are added by Avi in the dashboards, never pasted into chat or files.
   Madonna) means shown nowhere; `timelineOnly: true` (Shanti Niketan) means
   Timeline only. Completed projects without a photo appear only on the Timeline;
   the Completed page shows the 5 with photos.
-- **Photos:** full-resolution, metadata-stripped originals in `photos/`
-  (see `photos/README.md`); web copies in `public/images/`.
+- **Photos:** live only in `photos/` (full resolution, metadata stripped; see
+  `photos/README.md`). `npm run dev`/`build` generates web copies into
+  `public/images/` (git-ignored) with `scripts/build-images.mjs` (sharp).
 - **Removed from the public site:** `/owner-portal`, `/admin-dashboard`, the
   client-side login and the hardcoded encryption key. They now live in the
   portal repo under `legacy-from-public-site/`.

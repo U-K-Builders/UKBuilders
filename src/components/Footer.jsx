@@ -79,7 +79,7 @@ export default function Footer() {
       {/* ── Original top section ── */}
       <div className="flex flex-row items-center justify-center gap-4 mb-6 flex-wrap">
         <img loading="lazy" decoding="async"
-          src="/images/company/logo/U.K. Builders Logo (Square) copy.jpg"
+          src="/images/logo/uk-builders-logo-square.png"
           alt="U.K. Builders Logo"
           className="h-[60px] w-auto mix-blend-screen brightness-110"
         />

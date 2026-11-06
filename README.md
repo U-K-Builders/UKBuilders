@@ -46,10 +46,10 @@ api/
   lead.js            POST /api/lead: validates, filters spam, stores the lead
 docs/
   SECURITY.md        How leads and secrets are protected
-public/
-  images/Building/   Project photos (filenames contain spaces)
-  images/company/    Logos and company images
-photos/              Full-resolution photos for brochures and social media (not used by the site)
+photos/              ALL photos, full resolution: the only place photos are kept
+scripts/
+  build-images.mjs   Makes web-sized copies of photos/ in public/images/ (generated, git-ignored)
+public/              Static files served as-is (favicon, robots.txt)
 src/
   App.jsx            All routes
   index.css          Tailwind theme tokens and custom utilities
@@ -73,7 +73,7 @@ Most content lives in plain data files, not in the page components. To add or ch
 | `src/data/projectDetails.js` | Detail pages for `justin`, `christina`, `elvira` and `madonna`: RERA numbers, floor plans, amenities, possession dates, construction progress |
 | `src/data/testimonials.js` | Customer testimonials |
 
-**Images:** put them in `public/images/` and reference them from the data files as `/images/Building/Name.jpg`. Use real JPEG or WebP files, resized to around 2000 px on the long side. iPhone photos are often HEIC files: convert them first, because Chrome and Android browsers cannot show HEIC.
+**Images:** add the full-size photo to `photos/` (e.g. `photos/buildings/new-building.jpg`, lowercase with hyphens) and reference it in the data files as `/images/buildings/new-building.jpg`. Every `npm run dev` and `npm run build` makes a web-sized copy in `public/images/` automatically; don't put files there by hand. Use real JPEG or PNG files: iPhone photos are often HEIC, which Chrome and Android cannot show, so convert them first.
 
 **Hidden projects:** set `hidden: true` on a project to show it only to a logged-in admin.
 

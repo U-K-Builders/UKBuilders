@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 import AccessibilityPanel from './AccessibilityPanel';
 
-const LOGO = '/images/company/logo/U.K. Builders Logo (Square) copy.jpg';
+const LOGO = '/images/logo/uk-builders-logo-square.png';
 
 /* Single source of truth for desktop and mobile navigation */
 const NAV = [

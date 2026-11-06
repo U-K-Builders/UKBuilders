@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const HERO_IMAGE = '/images/Building/Justin Night View.jpg';
+const HERO_IMAGE = '/images/buildings/justin-night-view.jpg';
 
 export default function HeroSection() {
   return (

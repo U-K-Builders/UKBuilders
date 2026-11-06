@@ -2,7 +2,7 @@ export const ongoingProjects = [
   {
     name: 'Justin',
     subtitle: 'Signature Collection',
-    image: '/images/Building/Justin Night View.jpg',
+    image: '/images/buildings/justin-night-view.jpg',
     alt: 'Justin Building Night View',
     configs: 'Exclusive 2, 3 & 4 BHK',
     location: 'Sunder Cross Lane, Orlem, Malad West',
@@ -12,7 +12,7 @@ export const ongoingProjects = [
   {
     name: 'Christina',
     subtitle: 'Premium Residences',
-    image: '/images/Building/Christina Night View.jpg',
+    image: '/images/buildings/christina-night-view.jpg',
     alt: 'Christina Building Night View',
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Dominic Colony, Orlem, Malad West',
@@ -57,12 +57,12 @@ export const upcomingProjects = [
 ];
 
 export const completedProjects = [
-  { name: 'Silver Coin', year: 2024, builder: 'U.K. Properties', image: '/images/Building/Silver Coin.jpg', alt: 'Silver Coin Residential Building', lat: 19.1924590, lng: 72.8377730, description: "A towering 12 & 13-storey twin residential complex located in D'Monte Lane, Orlem. It showcases timeless design, utilizing the highest quality of materials and branded furnishings for an unparalleled luxury experience." },
-  { name: 'La Serena', year: 2022, builder: 'U.K. Properties', image: '/images/Building/La Serena.jpg', alt: 'La Serena Residential Building', lat: 19.1943424, lng: 72.8366585, description: 'An elegant 11-storey residential building on Sunder Lane, Orlem. Featuring cross-ventilated layouts, exceptional quality of work, and premium branded fittings that ensure lasting elegance and comfort.' },
-  { name: 'Aurola-Muriel Villa', year: 2016, builder: 'U.K. Properties', image: '/images/Building/Aurola-Muriel.jpg', alt: 'Aurola-Muriel Villa Building', lat: 19.1961229, lng: 72.8365311, description: 'An exclusive 9-storey development offering serene luxury in Lourdes Colony. The project is defined by its meticulous quality of work, incorporating branded furnishings to create a truly timeless living space.' },
-  { name: 'Cinderella', year: 2013, builder: 'U.K. Properties', image: '/images/Building/Cinderella.jpg', alt: 'Cinderella Residential Building', lat: 19.1963195, lng: 72.8358927, description: 'A stately 8-storey residential masterpiece in the peaceful Lourdes Colony. Built with an uncompromising focus on structural integrity, timeless architectural design, and top-tier material quality.' },
+  { name: 'Silver Coin', year: 2024, builder: 'U.K. Properties', image: '/images/buildings/silver-coin.jpg', alt: 'Silver Coin Residential Building', lat: 19.1924590, lng: 72.8377730, description: "A towering 12 & 13-storey twin residential complex located in D'Monte Lane, Orlem. It showcases timeless design, utilizing the highest quality of materials and branded furnishings for an unparalleled luxury experience." },
+  { name: 'La Serena', year: 2022, builder: 'U.K. Properties', image: '/images/buildings/la-serena.jpg', alt: 'La Serena Residential Building', lat: 19.1943424, lng: 72.8366585, description: 'An elegant 11-storey residential building on Sunder Lane, Orlem. Featuring cross-ventilated layouts, exceptional quality of work, and premium branded fittings that ensure lasting elegance and comfort.' },
+  { name: 'Aurola-Muriel Villa', year: 2016, builder: 'U.K. Properties', image: '/images/buildings/aurola-muriel-villa.jpg', alt: 'Aurola-Muriel Villa Building', lat: 19.1961229, lng: 72.8365311, description: 'An exclusive 9-storey development offering serene luxury in Lourdes Colony. The project is defined by its meticulous quality of work, incorporating branded furnishings to create a truly timeless living space.' },
+  { name: 'Cinderella', year: 2013, builder: 'U.K. Properties', image: '/images/buildings/cinderella.jpg', alt: 'Cinderella Residential Building', lat: 19.1963195, lng: 72.8358927, description: 'A stately 8-storey residential masterpiece in the peaceful Lourdes Colony. Built with an uncompromising focus on structural integrity, timeless architectural design, and top-tier material quality.' },
   { name: 'Shanti Niketan', year: 2011, builder: 'Joint Venture', image: null, timelineOnly: true, lat: 19.1963834, lng: 72.8355883, description: 'A collaborative 7-storey residential project in Lourdes Colony. It brings together modern comforts, spacious layouts, and superior quality materials for a refined, enduring aesthetic.' },
-  { name: 'Little Sunflower', year: 2010, builder: 'U.K. Builders', image: '/images/Building/Little Sunflower.jpg', alt: 'Little Sunflower Residential Building', lat: 19.1960883, lng: 72.8352131, description: 'A charming 8-storey building designed with a focus on community. It boasts timeless design elements and high-grade materials, setting a benchmark for quality of work in Lourdes Colony.' },
+  { name: 'Little Sunflower', year: 2010, builder: 'U.K. Builders', image: '/images/buildings/little-sunflower.jpg', alt: 'Little Sunflower Residential Building', lat: 19.1960883, lng: 72.8352131, description: 'A charming 8-storey building designed with a focus on community. It boasts timeless design elements and high-grade materials, setting a benchmark for quality of work in Lourdes Colony.' },
   { name: 'Ann-O-Lou', year: 2008, builder: 'U.K. Builders', image: null, lat: 19.1940229, lng: 72.8373790, description: 'A classic 7-storey complex offering beautifully crafted homes on Sunder Lane. The exquisite quality of materials and branded furnishings ensure a sophisticated and lasting luxury experience.' },
   { name: 'Millie Enclave', year: 2006, builder: 'U.K. Builders', image: null, lat: 19.1952508, lng: 72.8357962, description: 'Standing prominently on Marve Road, this 7-storey development is a testament to our timeless design philosophy, utilizing premium materials and unparalleled quality of work.' },
   { name: 'Bonanza', year: 2004, builder: 'U.K. Builders', image: null, lat: 19.1963755, lng: 72.8353194, description: 'A well-appointed 7-storey building providing comfort and security in Lourdes Colony. Its interiors are graced with branded furnishings and constructed with an uncompromising quality of material.' },
