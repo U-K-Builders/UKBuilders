@@ -46,3 +46,17 @@ Static images served from `public/images/`. Referenced in data files as `/images
 - Completed projects use `SignatureCard` (compact, 3-col grid)
 - Mobile nav is a hamburger menu with collapsible Projects sub-menu (state in `Header.jsx`)
 - All page components apply `.animate-fade-in` on their root div
+
+## Branch workflow (agreed November 2026)
+
+- `main` is the live site; every push deploys to production. Don't commit unfinished work to it.
+- Do new UI and feature work on `ui` (or a branch from it) and test on the Vercel preview.
+- Before merging into `main`, copy the current `main` to `backup/main-YYYY-MM-DD`.
+
+## Leads and security
+
+- All forms submit through `useLeadSubmit` → `api/lead.js` → Supabase table `public.leads`. Never store leads in the browser.
+- The repo is public: never commit keys, `.env` files or customer data. See `docs/SECURITY.md`.
+- The owner portal and admin live in the private repo `U-K-Builders/UKBuilders_Portal`, not here.
+- Project visibility flags in `src/data/projects.js`: `hidden` (not shown anywhere) and `timelineOnly` (Timeline page only). Completed projects without a photo appear only on the Timeline.
+- Full-resolution photos are in `photos/`; web-sized copies in `public/images/`.

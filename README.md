@@ -49,6 +49,7 @@ docs/
 public/
   images/Building/   Project photos (filenames contain spaces)
   images/company/    Logos and company images
+photos/              Full-resolution photos for brochures and social media (not used by the site)
 src/
   App.jsx            All routes
   index.css          Tailwind theme tokens and custom utilities
@@ -119,10 +120,24 @@ Locally, `npm run dev` serves the site but not `api/`, so forms show an error. T
 
 ---
 
-## Branches
+## Branches and workflow
 
 | Branch | Purpose |
 |---|---|
+| `main` | **The live site.** Every push deploys to production. Keep it working. |
+| `ui` | New design and feature work. Every push gets a Vercel preview (Vercel login needed). |
+| `backup/main-YYYY-MM-DD` | A copy of `main` taken just before each release, so you can go back. |
+
+**Releasing new work**
+
+1. Build and test on `ui` (or a branch made from it). Check the Vercel preview on a phone and a laptop.
+2. Save the current live site: create `backup/main-<today's date>` from `main`.
+3. Merge `ui` into `main`. Vercel deploys it.
+4. If something breaks, either promote the previous deployment in Vercel (Deployments → ⋯ → Promote) or reset `main` to the backup branch.
+
+Older branches (`ui-redesign`, `claude/...`) are already merged and can be deleted.
+
+---|---|
 | `main` | The live site |
 | `claude/lucid-euler-o93hnj` | Redesign, accessibility fixes, lead API and page titles, being tested before merging into `main` |
 | `ui-redesign` | The original redesign work, now included in the branch above |
@@ -132,7 +147,7 @@ Locally, `npm run dev` serves the site but not `api/`, so forms show an error. T
 
 ## Known limitations
 
-1. **Lead alerts by email** are built but switched off until `RESEND_API_KEY`, `LEAD_ALERT_EMAIL` and `LEAD_ALERT_FROM` are set. Until then, check leads in Supabase.
+1. **Lead alerts by email** go to u.k.builders1981@gmail.com once `RESEND_API_KEY` is set in Vercel. Until then, check leads in Supabase.
 2. **MahaRERA QR codes are missing** next to the RERA numbers on project pages. MahaRERA requires them on all advertising.
 3. **Link previews use the `vercel.app` address** in `index.html`. Update them, and add a sitemap, once the company domain is connected.
 4. **Lint:** `npm run lint` reports a handful of older errors (empty `catch {}` blocks and similar). They don't break the build.
