@@ -98,12 +98,12 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email Address</label>
-        <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass} placeholder="you@example.com" required />
+        <label htmlFor="ownerportal-email" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email Address</label>
+        <input id="ownerportal-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass} placeholder="you@example.com" required />
       </div>
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
-        <input name="password" type="password" autoComplete="current-password" value={fields.password} onChange={handleChange} className={inputClass} placeholder="••••••••" required />
+        <label htmlFor="ownerportal-password" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
+        <input id="ownerportal-password" name="password" type="password" autoComplete="current-password" value={fields.password} onChange={handleChange} className={inputClass} placeholder="••••••••" required />
       </div>
       <p className="text-text-muted text-xs -mt-1">
         Forgot your password?{' '}
@@ -161,40 +161,40 @@ function RegisterForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-2 sm:col-span-1">
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
+          <label htmlFor="ownerportal-project" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
             Building <span className="text-gold">*</span>
           </label>
-          <select name="project" value={fields.project} onChange={handleChange} className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
+          <select id="ownerportal-project" name="project" value={fields.project} onChange={handleChange} className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
             {PROJECTS.map((p) => <option key={p}>{p}</option>)}
           </select>
         </div>
         <div className="col-span-2 sm:col-span-1">
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
+          <label htmlFor="ownerportal-unit" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
             Flat / Unit No. <span className="text-gold">*</span>
           </label>
-          <input name="unit" type="text" value={fields.unit} onChange={handleChange} className={inputClass('unit')} placeholder="e.g. 8A, 12B" />
+          <input id="ownerportal-unit" name="unit" type="text" value={fields.unit} onChange={handleChange} className={inputClass('unit')} placeholder="e.g. 8A, 12B" />
           {errors.unit && <p className="text-red-500 text-xs mt-1">{errors.unit}</p>}
         </div>
       </div>
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label htmlFor="ownerportal-name" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
           Full Name <span className="text-gold">*</span>
         </label>
-        <input name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="As on sale agreement" />
+        <input id="ownerportal-name" name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="As on sale agreement" />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label htmlFor="ownerportal-email-2" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
           Email Address <span className="text-gold">*</span>
         </label>
-        <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
+        <input id="ownerportal-email-2" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label htmlFor="ownerportal-phone" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
           Phone Number <span className="text-gold">*</span>
         </label>
-        <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
+        <input id="ownerportal-phone" name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
       <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
@@ -240,8 +240,8 @@ function AdminPanel() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Username</label>
-        <input
+        <label htmlFor="ownerportal-field" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Username</label>
+        <input id="ownerportal-field"
           type="text"
           autoComplete="username"
           value={fields.username}
@@ -251,9 +251,9 @@ function AdminPanel() {
         />
       </div>
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
+        <label htmlFor="ownerportal-field-2" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
         <div className="relative">
-          <input
+          <input id="ownerportal-field-2"
             type={showPw ? 'text' : 'password'}
             autoComplete="current-password"
             value={fields.password}

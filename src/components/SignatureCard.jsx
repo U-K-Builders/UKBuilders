@@ -4,24 +4,26 @@ export default function SignatureCard({ project, className = '', onPhotoClick })
       <div className="h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent" />
 
       {project.image && (
-        <div
-          className="self-center inline-block m-6 mb-2 border-2 border-gold/25 group-hover:border-gold p-2 bg-white overflow-hidden cursor-zoom-in relative transition-all duration-500"
+        <button
+          type="button"
+          className="relative block w-full h-[240px] overflow-hidden bg-surface-subtle cursor-zoom-in"
           onClick={() => onPhotoClick && onPhotoClick(project)}
+          aria-label={`View photo of ${project.name}`}
         >
-          <img
+          <img loading="lazy" decoding="async"
             src={project.image}
-            alt={project.alt || project.name}
-            className="block max-w-full h-[220px] object-contain transition-transform duration-700 group-hover:scale-[1.04]"
+            alt=""
+            className="block w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
-          <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors duration-300 flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-navy/80 text-gold text-xs uppercase tracking-[2px] px-3 py-1.5">
+          <span className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors duration-300 flex items-center justify-center">
+            <span className="opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 bg-navy/80 text-gold-bright text-xs uppercase tracking-[2px] px-3 py-1.5">
               View Photo
             </span>
-          </div>
-        </div>
+          </span>
+        </button>
       )}
 
-      <div className="px-6 pb-8 flex flex-col grow">
+      <div className="px-6 pt-4 pb-8 flex flex-col grow">
         <span className="text-xs uppercase tracking-[3px] text-gold/70 block mt-2 mb-1">
           Completed {project.year}
         </span>

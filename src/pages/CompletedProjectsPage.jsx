@@ -9,10 +9,10 @@ export default function CompletedProjectsPage() {
   return (
     <div className="animate-fade-in">
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           A Legacy of Excellence
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[600px] mx-auto">
           Explore our extensive portfolio of over 50 completed masterworks, each a testament to our commitment to structural integrity, timeless design, and unparalleled luxury across Mumbai.
         </p>

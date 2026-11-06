@@ -5,6 +5,7 @@ import { saveSubmission } from '../utils/submissions';
 import Lightbox from '../components/Lightbox';
 import EnquiryModal from '../components/EnquiryModal';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
+import Icon from '../components/Icon';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
@@ -458,9 +459,9 @@ export default function ProjectDetailPage() {
             <SectionHeading>Floor Plans</SectionHeading>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
               {project.floorPlans.map((plan) => (
-                <div key={`${plan.type}-${plan.subType || ''}`} className={`relative border bg-surface-light p-8 text-center transition-all duration-300 ${plan.soldOut ? 'border-border-light opacity-90' : 'border-border-light hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]'}`}>
+                <div key={`${plan.type}-${plan.subType || ''}`} className={`relative border bg-surface-light p-8 text-center transition-all duration-300 ${plan.soldOut ? 'border-border-light' : 'border-border-light hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]'}`}>
                   {plan.soldOut && (
-                    <span className="absolute top-3 right-3 text-xs uppercase tracking-[2px] font-bold text-red-600 border border-red-600 px-2 py-1 bg-surface-light">
+                    <span className="absolute top-3 right-3 text-xs uppercase tracking-[2px] font-bold text-red-700 border border-red-700 px-2 py-1 bg-surface-light">
                       Sold Out
                     </span>
                   )}
@@ -498,10 +499,10 @@ export default function ProjectDetailPage() {
                 {project.moodBoard.map((item) => (
                   <div key={item.label} className="border border-border-light bg-white hover:border-gold hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)] transition-all duration-300 overflow-hidden">
                     {item.image ? (
-                      <img src={item.image} alt={item.label} className="w-full h-36 object-cover" />
+                      <img loading="lazy" decoding="async" src={item.image} alt={item.label} className="w-full h-36 object-cover" />
                     ) : (
                       <div className="w-full h-36 bg-surface-subtle flex items-center justify-center">
-                        <span className="text-4xl text-gold/40 select-none">{item.icon}</span>
+                        <Icon name={item.icon} className="w-10 h-10 text-gold" />
                       </div>
                     )}
                     <div className="p-4">
@@ -542,7 +543,7 @@ export default function ProjectDetailPage() {
                       className="overflow-hidden cursor-zoom-in group relative border border-border-light"
                       onClick={() => setLightboxSrc({ src: photo.src, alt: photo.caption })}
                     >
-                      <img src={photo.src} alt={photo.caption} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <img loading="lazy" decoding="async" src={photo.src} alt={photo.caption} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                       {photo.caption && (
                         <div className="absolute bottom-0 left-0 right-0 bg-navy/70 px-3 py-2">
                           <p className="text-white text-xs uppercase tracking-[1px]">{photo.caption}</p>
@@ -659,7 +660,7 @@ export default function ProjectDetailPage() {
           )}
 
           {/* Book a Site Visit */}
-          <section>
+          <section id="book-visit" className="scroll-mt-24">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
               <div>
                 <SectionHeading>Book a Site Visit</SectionHeading>

@@ -12,6 +12,8 @@
   --color-gold:      #D4A84E;   /* on dark surfaces: 8.1:1 on navy            */
   --color-gold-dark: #E2B84B;   /* hover fill                                  */
   --color-gold-deep: #836830;   /* gold TEXT on light surfaces: 4.5–5.3:1      */
+  --color-gold-bright: #D4A84E; /* always-bright gold: use for gold text on an
+                                   element that itself has a navy background */
 
   --font-serif:   'Cinzel', Georgia, serif;
   --font-display: 'Cinzel', Georgia, serif;
@@ -70,8 +72,9 @@
   color: var(--color-gold);
 }
 
-/* Muted text inside dark containers */
-:is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark) .text-text-muted { color: #9AA3AD; }
+/* Muted text inside (or on) dark containers */
+:is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark) .text-text-muted,
+:is(.bg-navy, .bg-navy-dark, .on-dark).text-text-muted { color: #9AA3AD; }
 
 .gradient-text {
   background: linear-gradient(to right, var(--color-navy) 20%, var(--color-gold-deep) 100%);

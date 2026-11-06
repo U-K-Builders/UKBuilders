@@ -86,31 +86,31 @@ function ApplicationForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 max-w-lg mx-auto text-left">
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-gold mb-2">Role <span className="text-gold">*</span></label>
-        <select name="role" value={fields.role} onChange={handleChange} className="w-full border border-white/20 px-4 py-3 text-sm bg-white/10 text-white focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
+        <label htmlFor="careers-role" className="block text-xs uppercase tracking-[2px] text-gold mb-2">Role <span className="text-gold">*</span></label>
+        <select id="careers-role" name="role" value={fields.role} onChange={handleChange} className="w-full border border-white/20 px-4 py-3 text-sm bg-white/10 text-white focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
           {roleOptions.map((r) => <option key={r} className="text-navy bg-white">{r}</option>)}
         </select>
       </div>
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-gold mb-2">Full Name <span className="text-gold">*</span></label>
-        <input name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Your name" />
+        <label htmlFor="careers-name" className="block text-xs uppercase tracking-[2px] text-gold mb-2">Full Name <span className="text-gold">*</span></label>
+        <input id="careers-name" name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Your name" />
         {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs uppercase tracking-[2px] text-gold mb-2">Email <span className="text-gold">*</span></label>
-          <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
+          <label htmlFor="careers-email" className="block text-xs uppercase tracking-[2px] text-gold mb-2">Email <span className="text-gold">*</span></label>
+          <input id="careers-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
           {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
         </div>
         <div>
-          <label className="block text-xs uppercase tracking-[2px] text-gold mb-2">Phone <span className="text-gold">*</span></label>
-          <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
+          <label htmlFor="careers-phone" className="block text-xs uppercase tracking-[2px] text-gold mb-2">Phone <span className="text-gold">*</span></label>
+          <input id="careers-phone" name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
           {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
         </div>
       </div>
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-gold mb-2">Cover Note <span className="text-white/40 font-normal normal-case tracking-normal">(optional)</span></label>
-        <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Brief note about yourself and your experience…" />
+        <label htmlFor="careers-message" className="block text-xs uppercase tracking-[2px] text-gold mb-2">Cover Note <span className="text-white/70 font-normal normal-case tracking-normal">(optional)</span></label>
+        <textarea id="careers-message" name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Brief note about yourself and your experience…" />
       </div>
       <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Submit Application

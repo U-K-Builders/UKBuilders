@@ -7,10 +7,10 @@ export default function HistoryPage() {
   return (
     <div className="animate-fade-in">
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <h2 className="text-center text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Our Heritage
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[600px] mx-auto">
           Building Trust and Shaping Skylines Since 1969.
         </p>

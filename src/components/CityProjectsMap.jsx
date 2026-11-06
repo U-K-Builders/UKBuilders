@@ -31,15 +31,17 @@ export default function CityProjectsMap({ ongoing, upcoming, completed }) {
   return (
     <div>
       {/* Filter tabs */}
-      <div className="flex justify-center gap-2 mb-6">
+      <div className="flex flex-wrap justify-center gap-2 mb-6">
         {FILTERS.map(f => (
           <button
             key={f}
+            type="button"
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 text-xs tracking-[2px] uppercase border transition-all duration-200 bg-transparent cursor-pointer ${
+            aria-pressed={filter === f}
+            className={`min-h-[44px] px-4 py-2 text-xs tracking-[2px] uppercase border transition-all duration-200 bg-transparent cursor-pointer ${
               filter === f
                 ? 'border-gold text-gold bg-gold/10'
-                : 'border-white/20 text-white/50 hover:border-gold/40 hover:text-white/80'
+                : 'border-white/20 text-white/70 hover:border-gold/40 hover:text-white'
             }`}
           >
             {f}

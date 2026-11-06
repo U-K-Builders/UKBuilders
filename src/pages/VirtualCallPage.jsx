@@ -134,10 +134,10 @@ export default function VirtualCallPage() {
     return (
       <div className="animate-fade-in">
         <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-          <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+          <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
             You&apos;re Booked
             <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-          </h2>
+          </h1>
         </div>
         <div className="py-24 px-5 max-w-[680px] mx-auto text-center">
           <div className="border border-gold bg-gold/5 p-12">
@@ -196,10 +196,10 @@ export default function VirtualCallPage() {
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
         <p className="text-xs uppercase tracking-[4px] text-gold mb-3">Virtual Site Visit</p>
-        <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Book a Video Call
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[600px] mx-auto leading-[1.8]">
           Can&apos;t visit in person? Schedule a live Zoom walkthrough with our sales team — from anywhere in the world.
         </p>
@@ -237,46 +237,46 @@ export default function VirtualCallPage() {
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className={labelClass}>Full Name <span className="text-gold">*</span></label>
-                  <input name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Priya Mehta" />
+                  <label htmlFor="virtualcall-name" className={labelClass}>Full Name <span className="text-gold">*</span></label>
+                  <input id="virtualcall-name" name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Priya Mehta" />
                   {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
                 </div>
                 <div>
-                  <label className={labelClass}>Email Address <span className="text-gold">*</span></label>
-                  <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="priya@example.com" />
+                  <label htmlFor="virtualcall-email" className={labelClass}>Email Address <span className="text-gold">*</span></label>
+                  <input id="virtualcall-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="priya@example.com" />
                   {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className={labelClass}>Phone / WhatsApp <span className="text-gold">*</span></label>
-                  <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
+                  <label htmlFor="virtualcall-phone" className={labelClass}>Phone / WhatsApp <span className="text-gold">*</span></label>
+                  <input id="virtualcall-phone" name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
                   {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                 </div>
                 <div>
-                  <label className={labelClass}>Country of Residence</label>
-                  <input name="country" type="text" value={fields.country} onChange={handleChange} className={inputClass('country')} placeholder="India / UAE / UK…" />
+                  <label htmlFor="virtualcall-country" className={labelClass}>Country of Residence</label>
+                  <input id="virtualcall-country" name="country" type="text" value={fields.country} onChange={handleChange} className={inputClass('country')} placeholder="India / UAE / UK…" />
                 </div>
               </div>
 
               <div>
-                <label className={labelClass}>Project of Interest</label>
-                <select name="project" value={fields.project} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
+                <label htmlFor="virtualcall-project" className={labelClass}>Project of Interest</label>
+                <select id="virtualcall-project" name="project" value={fields.project} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
                   {PROJECTS.map(p => <option key={p} value={p}>{p}</option>)}
                 </select>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className={labelClass}>Preferred Date <span className="text-gold">*</span></label>
-                  <input name="date" type="date" min={getMinDate()} value={fields.date} onChange={handleChange} className={inputClass('date')} />
+                  <label htmlFor="virtualcall-date" className={labelClass}>Preferred Date <span className="text-gold">*</span></label>
+                  <input id="virtualcall-date" name="date" type="date" min={getMinDate()} value={fields.date} onChange={handleChange} className={inputClass('date')} />
                   {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
                   <p className="text-text-muted text-xs mt-1">Monday – Saturday only</p>
                 </div>
                 <div>
-                  <label className={labelClass}>Your Timezone</label>
-                  <select name="timezone" value={fields.timezone} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
+                  <label htmlFor="virtualcall-timezone" className={labelClass}>Your Timezone</label>
+                  <select id="virtualcall-timezone" name="timezone" value={fields.timezone} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
                     {TIMEZONES.map(tz => (
                       <option key={tz.offset} value={String(tz.offset)}>{tz.label}</option>
                     ))}
@@ -309,8 +309,8 @@ export default function VirtualCallPage() {
               </div>
 
               <div>
-                <label className={labelClass}>Questions or Notes <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
-                <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 resize-none" placeholder="Any specific questions about floor plans, pricing, or configurations…" />
+                <label htmlFor="virtualcall-message" className={labelClass}>Questions or Notes <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
+                <textarea id="virtualcall-message" name="message" rows={3} value={fields.message} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 resize-none" placeholder="Any specific questions about floor plans, pricing, or configurations…" />
               </div>
 
               <button type="submit" className="self-start bg-gold text-navy px-12 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">

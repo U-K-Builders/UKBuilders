@@ -1,22 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import useDialog from '../hooks/useDialog';
 import { saveSubmission } from '../utils/submissions';
 
 export default function EnquiryModal({ projectName, floorPlans, onClose }) {
   const [fields, setFields] = useState({ name: '', phone: '', bhk: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const firstFocusRef = useRef(null);
-
-  useEffect(() => {
-    firstFocusRef.current?.focus();
-    const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', handleKey);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handleKey);
-      document.body.style.overflow = '';
-    };
-  }, [onClose]);
+  const panelRef = useDialog(onClose);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,22 +27,28 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
   };
 
   const inputClass = (field) =>
-    `w-full bg-white/5 border px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-gold transition-colors duration-300 ${
+    `w-full bg-white/5 border px-4 py-3 text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors duration-300 ${
       errors[field] ? 'border-red-400' : 'border-white/20'
     }`;
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[300] flex items-center justify-center px-5"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="absolute inset-0 bg-navy-dark/90 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-navy-dark/90 backdrop-blur-sm" aria-hidden="true" onClick={onClose} />
 
-      <div className="relative bg-navy border border-gold/40 w-full max-w-[480px] p-8 md:p-10 animate-fade-in">
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="enquiry-title"
+        className="relative max-h-[90vh] overflow-y-auto bg-navy border border-gold/40 w-full max-w-[480px] p-8 md:p-10 animate-fade-in">
         <button
           onClick={onClose}
+          type="button"
           aria-label="Close"
-          className="absolute top-4 right-4 text-white/40 hover:text-gold transition-colors duration-200 p-1"
+          className="absolute top-2 right-2 w-11 h-11 flex items-center justify-center text-white/70 hover:text-gold transition-colors duration-200"
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="w-5 h-5">
             <path d="M18 6L6 18M6 6l12 12" />
@@ -70,6 +67,7 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
               Our team will reach out to you shortly regarding <span className="text-white font-serif">{projectName}</span>.
             </p>
             <button
+              type="button"
               onClick={onClose}
               className="mt-6 text-sm uppercase tracking-[2px] text-gold border border-gold px-6 py-2 hover:bg-gold hover:text-navy transition-all duration-300"
             >
@@ -79,55 +77,73 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
         ) : (
           <>
             <span className="block text-gold text-xs uppercase tracking-[4px] mb-2">Register Interest</span>
-            <h2 className="text-white font-serif text-2xl font-normal mb-6">{projectName}</h2>
+            <h2 id="enquiry-title" className="text-white font-serif text-2xl font-normal mb-6">{projectName}</h2>
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
               <div>
+                <label htmlFor="enquiry-name" className="block text-xs uppercase tracking-[2px] text-white/80 mb-2">Your name <span aria-hidden="true">*</span></label>
                 <input
-                  ref={firstFocusRef}
+                  id="enquiry-name"
+                  data-autofocus
+                  required
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? 'enquiry-name-error' : undefined}
                   name="name"
                   type="text"
                   autoComplete="name"
                   value={fields.name}
                   onChange={handleChange}
-                  placeholder="Your name *"
+                  placeholder="Full name"
                   className={inputClass('name')}
                 />
-                {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                {errors.name && <p id="enquiry-name-error" className="text-red-300 text-xs mt-1">{errors.name}</p>}
               </div>
               <div>
+                <label htmlFor="enquiry-phone" className="block text-xs uppercase tracking-[2px] text-white/80 mb-2">Phone number <span aria-hidden="true">*</span></label>
                 <input
+                  id="enquiry-phone"
+                  required
+                  aria-invalid={!!errors.phone}
+                  aria-describedby={errors.phone ? 'enquiry-phone-error' : undefined}
                   name="phone"
                   type="tel"
                   autoComplete="tel"
                   value={fields.phone}
                   onChange={handleChange}
-                  placeholder="Phone number *"
+                  placeholder="+91 98765 43210"
                   className={inputClass('phone')}
                 />
-                {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                {errors.phone && <p id="enquiry-phone-error" className="text-red-300 text-xs mt-1">{errors.phone}</p>}
               </div>
               {floorPlans?.length > 0 && (
+                <div>
+                <label htmlFor="enquiry-bhk" className="block text-xs uppercase tracking-[2px] text-white/80 mb-2">BHK preference (optional)</label>
                 <select
+                  id="enquiry-bhk"
                   name="bhk"
                   value={fields.bhk}
                   onChange={handleChange}
                   className="w-full bg-navy border border-white/20 px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-gold transition-colors duration-300"
                 >
-                  <option value="">BHK preference (optional)</option>
+                  <option value="">No preference</option>
                   {floorPlans.filter((plan) => !plan.soldOut).map((plan) => {
                     const label = plan.subType ? `${plan.type} — ${plan.subType}` : plan.type;
                     return <option key={label} value={label}>{label}</option>;
                   })}
                 </select>
+                </div>
               )}
+              <div>
+              <label htmlFor="enquiry-message" className="block text-xs uppercase tracking-[2px] text-white/80 mb-2">Message (optional)</label>
               <textarea
+                id="enquiry-message"
                 name="message"
                 value={fields.message}
                 onChange={handleChange}
-                placeholder="Message (optional)"
+                placeholder="Anything you'd like us to know"
                 rows={3}
-                className="w-full bg-white/5 border border-white/20 px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-gold transition-colors duration-300 resize-none"
+                className="w-full bg-white/5 border border-white/20 px-4 py-3 text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors duration-300 resize-none"
               />
+              </div>
               <button
                 type="submit"
                 className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 mt-1"
@@ -138,6 +154,7 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

@@ -79,46 +79,46 @@ function RedevelopmentForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="sm:col-span-2">
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Society Name <span className="text-gold">*</span></label>
-          <input name="society" type="text" value={fields.society} onChange={handleChange} className={inputClass('society')} placeholder="e.g. Sunshine Co-op Housing Society" />
+          <label htmlFor="redevelopment-society" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Society Name <span className="text-gold">*</span></label>
+          <input id="redevelopment-society" name="society" type="text" value={fields.society} onChange={handleChange} className={inputClass('society')} placeholder="e.g. Sunshine Co-op Housing Society" />
           {errors.society && <p className="text-red-500 text-xs mt-1">{errors.society}</p>}
         </div>
         <div>
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Location / Area</label>
-          <input name="location" type="text" value={fields.location} onChange={handleChange} className={inputClass('location')} placeholder="Malad West, Mumbai…" />
+          <label htmlFor="redevelopment-location" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Location / Area</label>
+          <input id="redevelopment-location" name="location" type="text" value={fields.location} onChange={handleChange} className={inputClass('location')} placeholder="Malad West, Mumbai…" />
         </div>
         <div>
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">No. of Existing Units</label>
-          <input name="units" type="number" min="1" value={fields.units} onChange={handleChange} className={inputClass('units')} placeholder="e.g. 24" />
+          <label htmlFor="redevelopment-units" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">No. of Existing Units</label>
+          <input id="redevelopment-units" name="units" type="number" min="1" value={fields.units} onChange={handleChange} className={inputClass('units')} placeholder="e.g. 24" />
         </div>
         <div className="sm:col-span-2">
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Plot Area (sq.ft.) <span className="text-text-muted font-normal normal-case tracking-normal">(approx.)</span></label>
-          <input name="land" type="text" value={fields.land} onChange={handleChange} className={inputClass('land')} placeholder="e.g. 3,500 sq.ft." />
+          <label htmlFor="redevelopment-land" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Plot Area (sq.ft.) <span className="text-text-muted font-normal normal-case tracking-normal">(approx.)</span></label>
+          <input id="redevelopment-land" name="land" type="text" value={fields.land} onChange={handleChange} className={inputClass('land')} placeholder="e.g. 3,500 sq.ft." />
         </div>
       </div>
       <div className="border-t border-border-light pt-4">
         <p className="text-xs uppercase tracking-[2px] text-text-muted mb-3">Managing Committee Contact</p>
         <div className="flex flex-col gap-4">
           <div>
-            <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Name <span className="text-gold">*</span></label>
-            <input name="contact" type="text" autoComplete="name" value={fields.contact} onChange={handleChange} className={inputClass('contact')} placeholder="Chairman / Secretary" />
+            <label htmlFor="redevelopment-contact" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Name <span className="text-gold">*</span></label>
+            <input id="redevelopment-contact" name="contact" type="text" autoComplete="name" value={fields.contact} onChange={handleChange} className={inputClass('contact')} placeholder="Chairman / Secretary" />
             {errors.contact && <p className="text-red-500 text-xs mt-1">{errors.contact}</p>}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
-              <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
+              <label htmlFor="redevelopment-email" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
+              <input id="redevelopment-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
-              <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
+              <label htmlFor="redevelopment-phone" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
+              <input id="redevelopment-phone" name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Additional Notes <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
-            <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Any specific concerns or questions from the committee…" />
+            <label htmlFor="redevelopment-message" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Additional Notes <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
+            <textarea id="redevelopment-message" name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Any specific concerns or questions from the committee…" />
           </div>
         </div>
       </div>

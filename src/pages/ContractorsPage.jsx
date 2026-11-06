@@ -83,49 +83,49 @@ function ContractorForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Company / Firm Name <span className="text-gold">*</span></label>
-        <input name="company" type="text" value={fields.company} onChange={handleChange} className={inputClass('company')} placeholder="Your company name" />
+        <label htmlFor="contractors-company" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Company / Firm Name <span className="text-gold">*</span></label>
+        <input id="contractors-company" name="company" type="text" value={fields.company} onChange={handleChange} className={inputClass('company')} placeholder="Your company name" />
         {errors.company && <p className="text-red-500 text-xs mt-1">{errors.company}</p>}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Trade Category <span className="text-gold">*</span></label>
-          <select name="category" value={fields.category} onChange={handleChange} className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
+          <label htmlFor="contractors-category" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Trade Category <span className="text-gold">*</span></label>
+          <select id="contractors-category" name="category" value={fields.category} onChange={handleChange} className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
             {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
           </select>
         </div>
         <div>
-          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Years in Business</label>
-          <input name="years" type="number" min="1" value={fields.years} onChange={handleChange} className={inputClass('years')} placeholder="e.g. 12" />
+          <label htmlFor="contractors-years" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Years in Business</label>
+          <input id="contractors-years" name="years" type="number" min="1" value={fields.years} onChange={handleChange} className={inputClass('years')} placeholder="e.g. 12" />
         </div>
       </div>
       <div className="border-t border-border-light pt-4">
         <p className="text-xs uppercase tracking-[2px] text-text-muted mb-3">Primary Contact</p>
         <div className="flex flex-col gap-4">
           <div>
-            <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Contact Person <span className="text-gold">*</span></label>
-            <input name="contact" type="text" autoComplete="name" value={fields.contact} onChange={handleChange} className={inputClass('contact')} placeholder="Director / Partner / Manager" />
+            <label htmlFor="contractors-contact" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Contact Person <span className="text-gold">*</span></label>
+            <input id="contractors-contact" name="contact" type="text" autoComplete="name" value={fields.contact} onChange={handleChange} className={inputClass('contact')} placeholder="Director / Partner / Manager" />
             {errors.contact && <p className="text-red-500 text-xs mt-1">{errors.contact}</p>}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
-              <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@company.com" />
+              <label htmlFor="contractors-email" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
+              <input id="contractors-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@company.com" />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
-              <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
+              <label htmlFor="contractors-phone" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
+              <input id="contractors-phone" name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">PAN / GST No. <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
-            <input name="pan" type="text" value={fields.pan} onChange={handleChange} className={inputClass('pan')} placeholder="For faster empanelment" />
+            <label htmlFor="contractors-pan" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">PAN / GST No. <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
+            <input id="contractors-pan" name="pan" type="text" value={fields.pan} onChange={handleChange} className={inputClass('pan')} placeholder="For faster empanelment" />
           </div>
           <div>
-            <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Past Projects / Portfolio <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
-            <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="List key completed projects and their locations…" />
+            <label htmlFor="contractors-message" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Past Projects / Portfolio <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
+            <textarea id="contractors-message" name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="List key completed projects and their locations…" />
           </div>
         </div>
       </div>

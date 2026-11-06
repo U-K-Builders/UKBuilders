@@ -33,11 +33,11 @@ export default function BeforeAfterSlider({ before, after, beforeLabel = 'Before
       onTouchMove={onTouchMove}
     >
       {/* After image (base layer, full width) */}
-      <img src={after.src} alt={after.alt || afterLabel} className="w-full h-full object-cover block" draggable="false" />
+      <img loading="lazy" decoding="async" src={after.src} alt={after.alt || afterLabel} className="w-full h-full object-cover block" draggable="false" />
 
       {/* Before image (clipped to left of handle) */}
       <div className="absolute inset-0 overflow-hidden" style={{ width: `${position}%` }}>
-        <img
+        <img loading="lazy" decoding="async"
           src={before.src} alt={before.alt || beforeLabel}
           className="absolute inset-0 h-full object-cover block"
           style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100%' }}

@@ -63,10 +63,10 @@ export default function OurStoryPage() {
 
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Our Legacy
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[580px] mx-auto">
           Three generations. One family. An unbroken commitment to building homes that endure.
         </p>
@@ -89,7 +89,7 @@ export default function OurStoryPage() {
               {/* Banner */}
               <div className="flex items-center gap-5 mb-12">
                 <div className="flex-1 h-px bg-gold/25" />
-                <div className="px-8 py-3 bg-navy border border-gold text-gold font-serif font-bold text-sm uppercase tracking-[3px] whitespace-nowrap">
+                <div className="px-8 py-3 bg-navy border border-gold text-gold-bright font-serif font-bold text-sm uppercase tracking-[3px] whitespace-nowrap">
                   {gen.label}
                 </div>
                 <div className="flex-1 h-px bg-gold/25" />

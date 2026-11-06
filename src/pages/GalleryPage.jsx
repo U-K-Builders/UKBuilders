@@ -19,7 +19,7 @@ function PhotoCard({ photo, onClick }) {
       className="group relative overflow-hidden cursor-zoom-in border border-border-light bg-surface-light"
       onClick={() => onClick(photo)}
     >
-      <img
+      <img loading="lazy" decoding="async"
         src={photo.src}
         alt={photo.caption}
         className="w-full h-64 md:h-72 object-cover transition-transform duration-500 group-hover:scale-105"
@@ -59,10 +59,10 @@ export default function GalleryPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Gallery
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[600px] mx-auto">
           Five decades of landmark residences — captured across Orlem, Malad West and beyond.
         </p>

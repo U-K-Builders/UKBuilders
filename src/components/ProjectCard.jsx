@@ -44,7 +44,7 @@ export default function ProjectCard({ project, showCountdown = true }) {
   const months = showCountdown ? getMonthsToHandover(project.possession) : null;
   const percent = showCountdown ? getMilestonePercent(project.name) : null;
   return (
-    <div className="bg-white border border-gold p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(197,160,89,0.15)]">
+    <div className="bg-white border border-border-light hover:border-gold p-6 md:p-10 box-border text-center transition-all duration-400 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(197,160,89,0.15)]">
       <div className="mb-4">
         <h3 className="gradient-text font-serif text-3xl md:text-[2.875rem] font-black uppercase tracking-[4px] md:tracking-[8px] m-0">
           {project.name}
@@ -81,11 +81,11 @@ export default function ProjectCard({ project, showCountdown = true }) {
       )}
 
       {project.image && (
-        <div className="inline-block mb-6 border border-gold-dark p-2 bg-white overflow-hidden">
-          <img
+        <div className="mb-6 overflow-hidden bg-surface-subtle aspect-[4/5]">
+          <img loading="lazy" decoding="async"
             src={project.image}
-            alt={project.alt}
-            className="block max-w-full object-contain transition-transform duration-500 hover:scale-[1.03]"
+            alt={project.alt || project.name}
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100"
           />
         </div>
       )}

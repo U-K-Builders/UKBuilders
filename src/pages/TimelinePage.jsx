@@ -46,7 +46,7 @@ function DecadeBanner({ label, isOngoing }) {
     <div className="relative flex items-center my-10 md:my-14 z-10">
       <div className="flex-1 h-px bg-gold/20" />
       <div className={`mx-4 px-10 py-4 text-base md:text-xl uppercase tracking-[4px] font-bold font-serif border whitespace-nowrap ${
-        isOngoing ? 'bg-gold text-navy border-gold' : 'bg-navy text-gold border-gold'
+        isOngoing ? 'bg-gold text-navy border-gold' : 'bg-navy text-gold-bright border-gold'
       }`}>
         {label}
       </div>
@@ -60,7 +60,7 @@ function Dot({ year, isOngoing }) {
     <div className={`w-24 h-24 rounded-full border-[3px] border-gold flex items-center justify-center flex-shrink-0 z-10 relative ${
       isOngoing ? 'bg-gold' : 'bg-navy'
     }`}>
-      <span className={`text-base font-bold text-center leading-tight ${isOngoing ? 'text-white' : 'text-gold'}`}>
+      <span className={`text-base font-bold text-center leading-tight ${isOngoing ? 'text-navy' : 'text-gold-bright'}`}>
         {isOngoing ? 'NOW' : year}
       </span>
     </div>
@@ -99,10 +99,10 @@ export default function TimelinePage() {
   return (
     <div className="animate-fade-in">
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Project Timeline
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[600px] mx-auto">
           Five decades of crafting landmark residences across Mumbai&apos;s western suburbs — from our earliest foundations to the present day.
         </p>

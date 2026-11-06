@@ -42,10 +42,10 @@ export default function OngoingProjectsPage() {
   return (
     <div className="animate-fade-in">
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Ongoing Masterpieces
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[600px] mx-auto">
           Discover our current developments shaping the future of Mumbai&apos;s skyline with signature luxury and precision.
         </p>
@@ -89,7 +89,7 @@ export default function OngoingProjectsPage() {
                 onClick={() => setBhk(type)}
                 className={`px-5 py-2 text-xs uppercase tracking-[2px] border transition-all duration-200 cursor-pointer ${
                   bhk === type
-                    ? 'bg-gold border-gold text-white'
+                    ? 'bg-gold border-gold text-navy'
                     : 'bg-white border-border-light text-text-muted hover:border-gold hover:text-navy'
                 }`}
               >

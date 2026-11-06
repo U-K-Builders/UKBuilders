@@ -79,7 +79,7 @@ export default function Footer() {
 
       {/* ── Original top section ── */}
       <div className="flex flex-row items-center justify-center gap-4 mb-6 flex-wrap">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/company/logo/U.K. Builders Logo (Square) copy.jpg"
           alt="U.K. Builders Logo"
           className="h-[60px] w-auto mix-blend-screen brightness-110"
@@ -145,7 +145,7 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="border-t border-white/8 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[900px] mx-auto text-xs tracking-[0.5px] text-white/25">
+      <div className="border-t border-white/8 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[900px] mx-auto text-xs tracking-[0.5px] text-white/60">
         <span>&copy; {new Date().getFullYear()} U.K. Builders. All rights reserved.</span>
         <span>MahaRERA Registration Pending · Orlem, Malad West</span>
       </div>

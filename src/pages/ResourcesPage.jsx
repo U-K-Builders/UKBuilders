@@ -1,29 +1,30 @@
 import { useState } from 'react';
 import { saveSubmission } from '../utils/submissions';
+import Icon from '../components/Icon';
 
 const GUIDES = [
   {
     title: 'NRI Buying Guide',
     desc: 'Everything an NRI needs to know — FEMA eligibility, NRE/NRO accounts, power of attorney, repatriation of funds, and step-by-step buying process from abroad.',
-    icon: '🌐',
+    icon: 'globe',
     topics: ['FEMA eligibility rules', 'NRE / NRO account usage', 'Power of attorney process', 'Repatriation of sale proceeds'],
   },
   {
     title: 'RERA Checklist',
     desc: 'A practical checklist of what to verify before signing anything — how to read a RERA certificate, what approvals to check, and your rights as a buyer under MahaRERA.',
-    icon: '✅',
+    icon: 'clipboard-check',
     topics: ['How to verify on MahaRERA portal', 'Key documents to check', 'Builder obligations under RERA', 'Buyer rights & remedies'],
   },
   {
     title: 'Home Loan Basics',
     desc: 'Understand LTV ratios, EMI calculations, processing fees, and which banks offer the best rates for Mumbai residential property — including NRI-specific loan products.',
-    icon: '🏦',
+    icon: 'landmark',
     topics: ['LTV ratios explained', 'EMI calculation method', 'NRI loan products (HDFC, SBI, ICICI)', 'Tax benefits under 80C & 24(b)'],
   },
   {
     title: 'Carpet Area Explained',
     desc: 'A clear breakdown of carpet area, built-up area, and super built-up area — what each means, how they are calculated, and what you are actually paying for.',
-    icon: '📐',
+    icon: 'ruler',
     topics: ['Carpet vs built-up vs super built-up', 'Loading factor explained', 'RERA mandated carpet area disclosure', 'How to compare projects fairly'],
   },
 ];
@@ -85,7 +86,7 @@ function DownloadCard({ guide }) {
   return (
     <div className="border border-border-light bg-white flex flex-col transition-shadow duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
       <div className="p-8 flex-1">
-        <span className="text-3xl mb-4 block">{guide.icon}</span>
+        <span className="mb-5 w-12 h-12 border border-gold/40 flex items-center justify-center text-gold"><Icon name={guide.icon} className="w-6 h-6" /></span>
         <h3 className="font-serif text-navy text-xl uppercase tracking-[2px] mb-3">{guide.title}</h3>
         <p className="text-text-tertiary text-sm leading-[1.8] mb-5">{guide.desc}</p>
         <ul className="flex flex-col gap-2 mb-6">
@@ -102,7 +103,7 @@ function DownloadCard({ guide }) {
         {!open && !done && (
           <button
             onClick={() => setOpen(true)}
-            className="w-full bg-navy text-gold px-6 py-3 text-xs tracking-[2px] uppercase border border-navy transition-all duration-300 hover:bg-gold hover:text-navy hover:border-gold"
+            className="w-full bg-navy text-gold-bright px-6 py-3 text-xs tracking-[2px] uppercase border border-navy transition-all duration-300 hover:bg-gold hover:text-navy hover:border-gold"
           >
             Download Free Guide
           </button>
@@ -189,10 +190,10 @@ export default function ResourcesPage() {
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
         <p className="text-xs uppercase tracking-[4px] text-gold mb-3">Buyer Education</p>
-        <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
+        <h1 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Knowledge Hub
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
-        </h2>
+        </h1>
         <p className="text-text-tertiary max-w-[600px] mx-auto leading-[1.8]">
           Free guides, checklists, and answers to help you make a confident, informed decision — whether you are a first-time buyer, investor, or NRI.
         </p>
