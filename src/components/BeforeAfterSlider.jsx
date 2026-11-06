@@ -61,13 +61,13 @@ export default function BeforeAfterSlider({ before, after, beforeLabel = 'Before
 
       {/* Labels */}
       <span
-        className="absolute top-3 left-3 bg-navy/75 text-white text-[0.625rem] uppercase tracking-[2px] px-2 py-1 transition-opacity duration-200 pointer-events-none"
+        className="absolute top-3 left-3 bg-navy/75 text-white text-xs uppercase tracking-[2px] px-2 py-1 transition-opacity duration-200 pointer-events-none"
         style={{ opacity: position > 12 ? 1 : 0 }}
       >
         {beforeLabel}
       </span>
       <span
-        className="absolute top-3 right-3 bg-navy/75 text-white text-[0.625rem] uppercase tracking-[2px] px-2 py-1 transition-opacity duration-200 pointer-events-none"
+        className="absolute top-3 right-3 bg-navy/75 text-white text-xs uppercase tracking-[2px] px-2 py-1 transition-opacity duration-200 pointer-events-none"
         style={{ opacity: position < 88 ? 1 : 0 }}
       >
         {afterLabel}

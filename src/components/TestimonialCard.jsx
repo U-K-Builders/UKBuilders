@@ -9,11 +9,11 @@ export default function TestimonialCard({ testimonial }) {
       </p>
       <div>
         <div className="w-8 h-[1px] bg-gold/50 mb-3" />
-        <p className="font-bold text-gold uppercase tracking-[2px] text-[0.6875rem]">
+        <p className="font-bold text-gold uppercase tracking-[2px] text-xs">
           {testimonial.clientName}
         </p>
         {testimonial.project && (
-          <p className="text-white/30 text-[0.625rem] uppercase tracking-[1px] mt-1">{testimonial.project}</p>
+          <p className="text-white/30 text-xs uppercase tracking-[1px] mt-1">{testimonial.project}</p>
         )}
       </div>
     </div>

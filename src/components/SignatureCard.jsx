@@ -14,7 +14,7 @@ export default function SignatureCard({ project, className = '', onPhotoClick })
             className="block max-w-full h-[220px] object-contain transition-transform duration-700 group-hover:scale-[1.04]"
           />
           <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/20 transition-colors duration-300 flex items-center justify-center">
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-navy/80 text-gold text-[0.5625rem] uppercase tracking-[2px] px-3 py-1.5">
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-navy/80 text-gold text-xs uppercase tracking-[2px] px-3 py-1.5">
               View Photo
             </span>
           </div>
@@ -22,7 +22,7 @@ export default function SignatureCard({ project, className = '', onPhotoClick })
       )}
 
       <div className="px-6 pb-8 flex flex-col grow">
-        <span className="text-[0.625rem] uppercase tracking-[3px] text-gold/70 block mt-2 mb-1">
+        <span className="text-xs uppercase tracking-[3px] text-gold/70 block mt-2 mb-1">
           Completed {project.year}
         </span>
         <h3 className="gradient-text font-serif text-xl md:text-2xl font-black uppercase tracking-[2px] my-3 text-center">

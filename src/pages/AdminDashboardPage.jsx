@@ -16,7 +16,7 @@ export default function AdminDashboardPage() {
   return (
     <div className="animate-fade-in">
       <div className="bg-navy py-16 px-5 text-center border-b border-gold/30">
-        <span className="text-gold text-[0.6875rem] uppercase tracking-[4px] mb-4 block">Internal</span>
+        <span className="text-gold text-xs uppercase tracking-[4px] mb-4 block">Internal</span>
         <h1 className="font-serif text-white text-4xl md:text-5xl font-normal uppercase tracking-[4px] mb-4">
           Admin Dashboard
         </h1>

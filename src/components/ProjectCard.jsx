@@ -61,7 +61,7 @@ export default function ProjectCard({ project, showCountdown = true }) {
           {percent !== null && (
             <div className="relative shrink-0">
               <ProgressRing percent={percent} />
-              <span className="absolute inset-0 flex items-center justify-center text-[0.625rem] font-bold text-gold rotate-0">
+              <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-gold rotate-0">
                 {percent}%
               </span>
             </div>
@@ -70,11 +70,11 @@ export default function ProjectCard({ project, showCountdown = true }) {
             {months !== null && (
               <>
                 <p className="text-2xl md:text-3xl font-serif text-navy font-black leading-none">{months}</p>
-                <p className="text-[0.625rem] uppercase tracking-[1.5px] text-text-muted mt-1">months to possession</p>
+                <p className="text-xs uppercase tracking-[1.5px] text-text-muted mt-1">months to possession</p>
               </>
             )}
             {percent !== null && (
-              <p className="text-[0.625rem] uppercase tracking-[1.5px] text-text-muted mt-1">construction complete</p>
+              <p className="text-xs uppercase tracking-[1.5px] text-text-muted mt-1">construction complete</p>
             )}
           </div>
         </div>
@@ -112,13 +112,13 @@ export default function ProjectCard({ project, showCountdown = true }) {
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           to={`/projects/${slug}`}
-          className="flex-1 bg-gold text-white px-6 py-3 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold text-center"
+          className="flex-1 bg-gold text-navy px-6 py-3 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold text-center"
         >
           View Details
         </Link>
         <Link
           to={`/projects/${slug}#book-visit`}
-          className="flex-1 bg-transparent text-gold px-6 py-3 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-gold hover:text-white text-center"
+          className="flex-1 bg-transparent text-gold px-6 py-3 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-gold hover:text-navy text-center"
         >
           Book a Visit
         </Link>

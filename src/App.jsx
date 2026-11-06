@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import MobileActionBar from './components/MobileActionBar';
 import HomePage from './pages/HomePage';
 import OngoingProjectsPage from './pages/OngoingProjectsPage';
 import CompletedProjectsPage from './pages/CompletedProjectsPage';
@@ -26,20 +27,29 @@ import { AuthProvider } from './context/AuthContext';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [pathname]);
+    if (hash) {
+      // Wait a frame so the target section has rendered, then jump to it
+      const id = decodeURIComponent(hash.slice(1));
+      const t = setTimeout(() => document.getElementById(id)?.scrollIntoView({ block: 'start' }), 60);
+      return () => clearTimeout(t);
+    }
+    window.scrollTo({ top: 0 });
+  }, [pathname, hash]);
   return null;
 }
 
 export default function App() {
   return (
     <AuthProvider>
-      <div className="noise-overlay" aria-hidden="true" />
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-gold focus:text-navy focus:px-4 focus:py-3 focus:font-semibold">
+        Skip to content
+      </a>
       <ScrollToTop />
       <PageTransition />
       <Header />
+      <main id="main" tabIndex={-1} className="outline-none">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects/ongoing" element={<OngoingProjectsPage />} />
@@ -61,8 +71,10 @@ export default function App() {
         <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </main>
       <Footer />
       <ScrollToTopButton />
+      <MobileActionBar />
     </AuthProvider>
   );
 }

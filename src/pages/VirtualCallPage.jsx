@@ -127,7 +127,7 @@ export default function VirtualCallPage() {
       errors[field] ? 'border-red-400' : 'border-border-light'
     }`;
 
-  const labelClass = 'block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2';
+  const labelClass = 'block text-xs uppercase tracking-[2px] text-navy font-bold mb-2';
 
   if (submitted) {
     const chosenSlot = IST_SLOTS.find(s => s.label === fields.slot);
@@ -152,20 +152,20 @@ export default function VirtualCallPage() {
             </p>
             <div className="bg-navy text-white p-6 mb-8 text-left grid grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Project</span>
+                <span className="block text-xs uppercase tracking-[2px] text-text-muted mb-1">Project</span>
                 <span>{fields.project}</span>
               </div>
               <div>
-                <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Date</span>
+                <span className="block text-xs uppercase tracking-[2px] text-text-muted mb-1">Date</span>
                 <span>{new Date(fields.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
               </div>
               <div>
-                <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Time (IST)</span>
+                <span className="block text-xs uppercase tracking-[2px] text-text-muted mb-1">Time (IST)</span>
                 <span>{fields.slot}</span>
               </div>
               {showLocalTime && chosenSlot && (
                 <div>
-                  <span className="block text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Your Local Time</span>
+                  <span className="block text-xs uppercase tracking-[2px] text-text-muted mb-1">Your Local Time</span>
                   <span>{toLocalTime(chosenSlot.minutes, selectedTz.offset)}</span>
                 </div>
               )}
@@ -178,13 +178,13 @@ export default function VirtualCallPage() {
             </p>
             <button
               onClick={() => { setSubmitted(false); setFields({ name: '', email: '', phone: '', country: '', project: PROJECTS[0], date: '', timezone: '330', slot: '', message: '' }); }}
-              className="text-sm uppercase tracking-[2px] text-gold border border-gold px-8 py-3 hover:bg-gold hover:text-white transition-all duration-300"
+              className="text-sm uppercase tracking-[2px] text-gold border border-gold px-8 py-3 hover:bg-gold hover:text-navy transition-all duration-300"
             >
               Book Another Call
             </button>
           </div>
           <div className="mt-8">
-            <Link to="/" className="text-[0.6875rem] uppercase tracking-[3px] text-gold hover:underline">← Back to Home</Link>
+            <Link to="/" className="text-xs uppercase tracking-[3px] text-gold hover:underline">← Back to Home</Link>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ export default function VirtualCallPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <p className="text-[0.6875rem] uppercase tracking-[4px] text-gold mb-3">Virtual Site Visit</p>
+        <p className="text-xs uppercase tracking-[4px] text-gold mb-3">Virtual Site Visit</p>
         <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Book a Video Call
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
@@ -272,7 +272,7 @@ export default function VirtualCallPage() {
                   <label className={labelClass}>Preferred Date <span className="text-gold">*</span></label>
                   <input name="date" type="date" min={getMinDate()} value={fields.date} onChange={handleChange} className={inputClass('date')} />
                   {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date}</p>}
-                  <p className="text-text-muted text-[0.625rem] mt-1">Monday – Saturday only</p>
+                  <p className="text-text-muted text-xs mt-1">Monday – Saturday only</p>
                 </div>
                 <div>
                   <label className={labelClass}>Your Timezone</label>
@@ -294,13 +294,13 @@ export default function VirtualCallPage() {
                       onClick={() => handleSlot(slot.label)}
                       className={`px-3 py-3 text-center border text-xs transition-all duration-200 ${
                         fields.slot === slot.label
-                          ? 'bg-gold text-white border-gold'
+                          ? 'bg-gold text-navy border-gold'
                           : 'bg-white border-border-light text-text-secondary hover:border-gold hover:text-gold'
                       }`}
                     >
                       <span className="block font-bold">{slot.label} IST</span>
                       {showLocalTime && (
-                        <span className="block text-[0.625rem] mt-0.5 opacity-80">{slot.localLabel}</span>
+                        <span className="block text-xs mt-0.5 opacity-80">{slot.localLabel}</span>
                       )}
                     </button>
                   ))}
@@ -313,7 +313,7 @@ export default function VirtualCallPage() {
                 <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 resize-none" placeholder="Any specific questions about floor plans, pricing, or configurations…" />
               </div>
 
-              <button type="submit" className="self-start bg-gold text-white px-12 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+              <button type="submit" className="self-start bg-gold text-navy px-12 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
                 Request Video Call
               </button>
             </form>
@@ -322,7 +322,7 @@ export default function VirtualCallPage() {
           {/* Sidebar */}
           <div className="flex flex-col gap-6">
             <div className="bg-navy text-white p-8 border border-gold">
-              <span className="block text-[0.6875rem] uppercase tracking-[3px] text-gold mb-5">What to Expect</span>
+              <span className="block text-xs uppercase tracking-[3px] text-gold mb-5">What to Expect</span>
               <ul className="flex flex-col gap-4">
                 <CheckItem>Live video walkthrough of the building site and surroundings</CheckItem>
                 <CheckItem>Tour of the sample flat and common areas</CheckItem>
@@ -334,7 +334,7 @@ export default function VirtualCallPage() {
             </div>
 
             <div className="bg-surface-light border border-border-light p-8">
-              <span className="block text-[0.6875rem] uppercase tracking-[3px] text-navy font-bold mb-3">Prefer to Call Us?</span>
+              <span className="block text-xs uppercase tracking-[3px] text-navy font-bold mb-3">Prefer to Call Us?</span>
               <p className="text-text-secondary text-sm leading-[1.8] mb-4">Available Mon–Sat, 10 AM to 6 PM IST.</p>
               <a href="tel:+919820311177" className="flex items-center gap-2 text-gold font-serif text-lg hover:underline mb-2">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0" aria-hidden="true">
@@ -348,7 +348,7 @@ export default function VirtualCallPage() {
             </div>
 
             <div className="bg-gold/10 border border-gold/40 p-6">
-              <span className="block text-[0.6875rem] uppercase tracking-[3px] text-gold font-bold mb-2">NRI Buyers</span>
+              <span className="block text-xs uppercase tracking-[3px] text-gold font-bold mb-2">NRI Buyers</span>
               <p className="text-text-secondary text-sm leading-[1.7]">
                 We guide NRI buyers through the full process remotely — documentation, power of attorney, and registration. Our team speaks English, Hindi, and Gujarati.
               </p>

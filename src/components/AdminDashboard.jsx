@@ -159,7 +159,7 @@ function SubmissionsTable({ tabKey, cols }) {
         <span className="text-text-muted text-xs uppercase tracking-[2px]">{data.length} {data.length === 1 ? 'entry' : 'entries'}</span>
         <button
           onClick={handleClear}
-          className="text-[0.625rem] uppercase tracking-[1.5px] text-red-400 border border-red-300 px-3 py-1.5 hover:bg-red-50 transition-colors duration-300"
+          className="text-xs uppercase tracking-[1.5px] text-red-400 border border-red-300 px-3 py-1.5 hover:bg-red-50 transition-colors duration-300"
         >
           Clear All
         </button>
@@ -168,10 +168,10 @@ function SubmissionsTable({ tabKey, cols }) {
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="bg-navy text-white">
-              <th className="text-left px-3 py-3 text-[0.625rem] uppercase tracking-[1.5px] font-normal whitespace-nowrap border-r border-white/10">#</th>
-              <th className="text-left px-3 py-3 text-[0.625rem] uppercase tracking-[1.5px] font-normal whitespace-nowrap border-r border-white/10">Date &amp; Time</th>
+              <th className="text-left px-3 py-3 text-xs uppercase tracking-[1.5px] font-normal whitespace-nowrap border-r border-white/10">#</th>
+              <th className="text-left px-3 py-3 text-xs uppercase tracking-[1.5px] font-normal whitespace-nowrap border-r border-white/10">Date &amp; Time</th>
               {cols.map((c) => (
-                <th key={c.key} className="text-left px-3 py-3 text-[0.625rem] uppercase tracking-[1.5px] font-normal whitespace-nowrap border-r border-white/10 last:border-r-0">
+                <th key={c.key} className="text-left px-3 py-3 text-xs uppercase tracking-[1.5px] font-normal whitespace-nowrap border-r border-white/10 last:border-r-0">
                   {c.label}
                 </th>
               ))}
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
             <button
               key={t.key}
               onClick={() => setActiveTab(t.key)}
-              className={`relative px-4 py-3 text-[0.625rem] uppercase tracking-[1.5px] whitespace-nowrap transition-all duration-200 border-b-2 ${
+              className={`relative px-4 py-3 text-xs uppercase tracking-[1.5px] whitespace-nowrap transition-all duration-200 border-b-2 ${
                 activeTab === t.key
                   ? 'border-gold text-navy font-bold'
                   : 'border-transparent text-text-muted hover:text-navy hover:border-border-light'
@@ -225,7 +225,7 @@ export default function AdminDashboard() {
             >
               {t.label}
               {counts[t.key] > 0 && (
-                <span className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-gold text-white text-[0.5rem] font-bold">
+                <span className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-gold text-navy text-xs font-bold">
                   {counts[t.key] > 99 ? '99+' : counts[t.key]}
                 </span>
               )}

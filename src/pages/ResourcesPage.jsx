@@ -102,7 +102,7 @@ function DownloadCard({ guide }) {
         {!open && !done && (
           <button
             onClick={() => setOpen(true)}
-            className="w-full bg-navy text-gold px-6 py-3 text-xs tracking-[2px] uppercase border border-navy transition-all duration-300 hover:bg-gold hover:text-white hover:border-gold"
+            className="w-full bg-navy text-gold px-6 py-3 text-xs tracking-[2px] uppercase border border-navy transition-all duration-300 hover:bg-gold hover:text-navy hover:border-gold"
           >
             Download Free Guide
           </button>
@@ -110,7 +110,7 @@ function DownloadCard({ guide }) {
 
         {open && !done && (
           <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 border-t border-border-light pt-6">
-            <p className="text-[0.625rem] uppercase tracking-[2px] text-text-muted mb-1">Enter details to receive your guide</p>
+            <p className="text-xs uppercase tracking-[2px] text-text-muted mb-1">Enter details to receive your guide</p>
             <div>
               <input
                 name="name"
@@ -134,7 +134,7 @@ function DownloadCard({ guide }) {
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div className="flex gap-2">
-              <button type="submit" className="flex-1 bg-gold text-white px-4 py-2.5 text-xs tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300">
+              <button type="submit" className="flex-1 bg-gold text-navy px-4 py-2.5 text-xs tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300">
                 Send Guide
               </button>
               <button type="button" onClick={() => setOpen(false)} className="px-4 py-2.5 text-xs text-text-muted border border-border-light hover:border-navy hover:text-navy transition-all duration-300">
@@ -188,7 +188,7 @@ export default function ResourcesPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-surface-light py-16 px-5 text-center border-b border-border-light">
-        <p className="text-[0.6875rem] uppercase tracking-[4px] text-gold mb-3">Buyer Education</p>
+        <p className="text-xs uppercase tracking-[4px] text-gold mb-3">Buyer Education</p>
         <h2 className="text-center text-3xl md:text-4xl text-navy mb-5 uppercase tracking-[3px] font-serif font-normal">
           Knowledge Hub
           <span className="block w-[60px] h-[2px] bg-gold mx-auto mt-4" />
@@ -239,13 +239,13 @@ export default function ResourcesPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="tel:+919820311177"
-            className="inline-block bg-gold text-white px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
+            className="inline-block bg-gold text-navy px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
           >
             Call Us
           </a>
           <a
             href="/book-a-call"
-            className="inline-block bg-transparent text-gold px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-gold hover:text-white"
+            className="inline-block bg-transparent text-gold px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-gold hover:text-navy"
           >
             Book a Video Call
           </a>

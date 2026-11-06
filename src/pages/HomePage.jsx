@@ -6,7 +6,6 @@ import ProjectCard from '../components/ProjectCard';
 import SignatureCard from '../components/SignatureCard';
 import TestimonialCard from '../components/TestimonialCard';
 import Carousel from '../components/Carousel';
-import AnimatedCounter from '../components/AnimatedCounter';
 import TrustPillars from '../components/TrustPillars';
 import { ongoingProjects, upcomingProjects, completedProjects } from '../data/projects';
 import { testimonials } from '../data/testimonials';
@@ -14,12 +13,6 @@ import { useInView } from '../hooks/useInView';
 import { useAuth } from '../context/AuthContext';
 
 const CityProjectsMap = lazy(() => import('../components/CityProjectsMap'));
-
-const STATS = [
-  { target: 55,   suffix: '+', label: 'Years of Legacy'    },
-  { target: 50,   suffix: '+', label: 'Projects Delivered' },
-  { target: 3000, suffix: '+', label: 'Families Housed'    },
-];
 
 function slide(inView, delay = 0) {
   return {
@@ -31,7 +24,6 @@ function slide(inView, delay = 0) {
 
 export default function HomePage() {
   const { isAdmin } = useAuth();
-  const [statsRef,        statsInView]        = useInView(0.3);
   const [ongoingRef,      ongoingInView]      = useInView(0.1);
   const [upcomingRef,     upcomingInView]     = useInView(0.1);
   const [mapRef,          mapInView]          = useInView(0.1);
@@ -43,20 +35,6 @@ export default function HomePage() {
   return (
     <div className="animate-fade-in">
       <HeroSection />
-
-      {/* ── Stats strip ─────────────────────────────────────────────────── */}
-      <div className="bg-navy-dark py-16 px-5" ref={statsRef}>
-        <div className="max-w-[900px] mx-auto grid grid-cols-3 divide-x divide-white/10">
-          {STATS.map(({ target, suffix, label }, i) => (
-            <div key={label} className="text-center px-4 sm:px-8" style={slide(statsInView, i * 150)}>
-              <p className="text-4xl sm:text-5xl font-serif text-gold font-normal m-0 mb-2">
-                <AnimatedCounter target={target} suffix={suffix} active={statsInView} duration={1800} />
-              </p>
-              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 m-0">{label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* ── Trust pillars ────────────────────────────────────────────────── */}
       <TrustPillars />
@@ -132,7 +110,7 @@ export default function HomePage() {
           <div className="text-center mt-12" style={slide(legacyInView, 300)}>
             <Link
               to="/projects/completed"
-              className="inline-block bg-gold text-white px-12 py-5 no-underline text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
+              className="inline-block bg-gold text-navy px-12 py-5 no-underline text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
             >
               View All Completed Projects
             </Link>

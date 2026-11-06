@@ -1,144 +1,173 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   U.K. Builders design system
+   Typography: Cinzel (display) + Josefin Sans (body), the ui-ux-pro-max
+   "Real Estate Luxury" pairing. Palette: the existing navy/gold brand, with
+   accessible variants so every text/background pair meets WCAG AA 4.5:1.
+   ═══════════════════════════════════════════════════════════════════════════ */
 @theme {
   --color-navy:      #0A1828;
   --color-navy-dark: #050e1a;
-  --color-gold:      #D4A84E;
-  --color-gold-dark: #E2B84B;
-  --font-serif: 'Georgia', serif;
-  --font-display: 'Playfair Display', Georgia, serif;
-  /* Neutral text scale */
-  --color-text-dark: #333333;
-  --color-text-primary: #444444;
+  --color-gold:      #D4A84E;   /* on dark surfaces: 8.1:1 on navy            */
+  --color-gold-dark: #E2B84B;   /* hover fill                                  */
+  --color-gold-deep: #836830;   /* gold TEXT on light surfaces: 4.5–5.3:1      */
+
+  --font-serif:   'Cinzel', Georgia, serif;
+  --font-display: 'Cinzel', Georgia, serif;
+  --font-sans:    'Josefin Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Neutral text scale (all ≥ 4.5:1 on white and on the cream surfaces) */
+  --color-text-dark:      #333333;
+  --color-text-primary:   #444444;
   --color-text-secondary: #555555;
-  --color-text-tertiary: #666666;
-  --color-text-muted: #888888;
-  --color-text-light: #e0e0e0;
+  --color-text-tertiary:  #5E5E5E;
+  --color-text-muted:     #6B6B6B;
+  --color-text-light:     #e0e0e0;
+
   /* Surfaces & borders */
   --color-surface-light:  #f8f5f0;
   --color-surface-subtle: #f3ede4;
   --color-border-light:   #e2d9cc;
 }
 
-html {
-  scroll-behavior: smooth;
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text-primary);
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-serif); }
+
+  ::selection { background: var(--color-gold); color: var(--color-navy); }
+
+  img { max-width: 100%; }
 }
 
-body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
+/* ─── Adaptive gold ─────────────────────────────────────────────────────────
+   Bright brand gold only passes contrast on dark surfaces. On light surfaces
+   gold text renders as deep gold. Written unlayered so it beats utilities.
+   Any dark container (navy backgrounds, dark mode, or .on-dark) restores the
+   bright gold. */
+.text-gold,
+.hover\:text-gold:hover { color: var(--color-gold-deep); }
+
+[class*="text-gold/"]:not(:is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark, .dark) *) {
+  color: var(--color-gold-deep);
 }
+
+:is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark, .dark) :is(.text-gold, .hover\:text-gold:hover),
+:is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark, .dark) .text-gold:is(:hover, :focus-visible) {
+  color: var(--color-gold);
+}
+
+/* Muted text inside dark containers */
+:is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark) .text-text-muted { color: #9AA3AD; }
 
 .gradient-text {
-  background: linear-gradient(to right, #0B1D3A 20%, #C5A059 100%);
+  background: linear-gradient(to right, var(--color-navy) 20%, var(--color-gold-deep) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* ─── Focus: always visible for keyboard users ─────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 3px;
+}
+:is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark, .dark) :focus-visible {
+  outline-color: var(--color-gold);
+}
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-gold-deep);
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px rgba(131, 104, 48, 0.18);
+}
+
+/* ─── Motion ────────────────────────────────────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s forwards;
-}
-
-/* ─── Hero stagger animations ──────────────────────────────────────────── */
-@keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(22px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-in { animation: fadeIn 0.45s ease-out forwards; }
 
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 .hero-item {
   opacity: 0;
-  animation: heroFadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: heroFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@keyframes scrollDrop {
-  0%   { transform: translateY(-100%); opacity: 0; }
-  20%  { opacity: 1; }
-  80%  { opacity: 1; }
-  100% { transform: translateY(220%); opacity: 0; }
+/* Slow drift on the hero photo: transform only (no background-size repaint) */
+@keyframes heroDrift {
+  from { transform: scale(1.02); }
+  to   { transform: scale(1.08); }
+}
+.hero-drift {
+  animation: heroDrift 24s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
-/* ─── Film grain overlay ────────────────────────────────────────────────── */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 180px 180px;
-}
-
-/* ─── Ken Burns (home hero slow zoom) ──────────────────────────────────── */
-@keyframes kenBurns {
-  0%   { background-size: 108%; }
-  50%  { background-size: 116%; }
-  100% { background-size: 108%; }
-}
-.hero-ken-burns {
-  animation: kenBurns 30s ease-in-out infinite;
-}
-
-/* ─── Section heading underline draw ────────────────────────────────────── */
 @keyframes underlineDraw {
   from { width: 0; }
   to   { width: 50px; }
 }
-.animate-underline-draw {
-  animation: underlineDraw 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
+.animate-underline-draw { animation: underlineDraw 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 
-/* ─── Form field focus glow ─────────────────────────────────────────────── */
-input:focus,
-textarea:focus,
-select:focus {
-  box-shadow: 0 0 0 2px rgba(212, 168, 78, 0.25);
-  outline: none !important;
-}
-
-
-/* ─── Button press feedback ─────────────────────────────────────────────── */
-a.bg-gold:active,
-button.bg-gold:active,
-a[class*="bg-gold"]:active,
-button[class*="bg-gold"]:active {
-  transform: scale(0.96);
-  transition: transform 0.08s ease;
-}
-
-/* ─── Mega-menu fade + slide ────────────────────────────────────────────── */
 @keyframes dropdownIn {
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.animate-dropdown {
-  animation: dropdownIn 0.18s cubic-bezier(0.4, 0, 0.2, 1) both;
+.animate-dropdown { animation: dropdownIn 0.18s cubic-bezier(0.4, 0, 0.2, 1) both; }
+
+/* Button press feedback */
+a[class*="bg-gold"]:active,
+button[class*="bg-gold"]:active {
+  transform: scale(0.97);
+  transition: transform 0.08s ease;
 }
 
-/* ─── Custom scrollbar (webkit) ────────────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero-drift { animation: none; transform: none; }
+}
+
+/* ─── Scrollbar (webkit) ────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(212, 168, 78, 0.35); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(212, 168, 78, 0.65); }
+::-webkit-scrollbar-thumb { background: rgba(131, 104, 48, 0.45); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(131, 104, 48, 0.7); }
+
+/* Leave room for the mobile action bar so it never covers content */
+@media (max-width: 767px) {
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+}
 
 /* ─── Dark mode ────────────────────────────────────────────────────────────
-   Written outside @layer so these rules beat Tailwind utility classes
-   (unlayered CSS has higher implicit cascade priority than @layer utilities).
+   Written outside @layer so these rules beat Tailwind utility classes.
    ───────────────────────────────────────────────────────────────────────── */
+body { transition: background-color 0.25s ease, color 0.25s ease; }
 
-body {
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-.dark body { background-color: #061124; }
+.dark body { background-color: #061124; color: #e8dfc8; }
 
 /* Backgrounds */
 .dark .bg-white           { background-color: #0d2040; }
@@ -150,23 +179,21 @@ body {
 .dark .text-text-dark     { color: #e8dfc8; }
 .dark .text-text-primary  { color: #e8dfc8; }
 .dark .text-text-secondary{ color: #c8bfa8; }
-.dark .text-text-tertiary { color: #a09080; }
-.dark .text-text-muted    { color: #6e6258; }
+.dark .text-text-tertiary { color: #b3a898; }
+.dark .text-text-muted    { color: #A39789; }   /* was #6e6258 (3.2:1) → 6.6:1 */
 
 /* Borders & dividers */
 .dark .border-border-light                  { border-color: #1e3560; }
 .dark .divide-border-light > * + *          { border-color: #1e3560; }
 .dark .border-dashed.border-border-light    { border-color: #1e3560; }
 
-/* Gradient heading — navy→gold becomes cream→gold on dark bg */
 .dark .gradient-text {
-  background: linear-gradient(to right, #e8e0cc 20%, #C5A059 100%);
+  background: linear-gradient(to right, #e8e0cc 20%, var(--color-gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Light-background inputs/selects in light sections of the page */
 .dark input:not([class*="bg-"]),
 .dark select:not([class*="bg-"]),
 .dark textarea:not([class*="bg-"]) {
@@ -175,19 +202,13 @@ body {
   border-color: #1e3560;
 }
 .dark input::placeholder,
-.dark textarea::placeholder { color: #4a4438; }
+.dark textarea::placeholder { color: #8a7f70; }
 
-/* White cards (floor plan cards, mood board cards, amenity chips) */
 .dark .bg-white.border            { background-color: #0d2040; }
 .dark .bg-white.p-8               { background-color: #0d2040; }
 .dark .bg-surface-light.border    { background-color: #0d2040; }
 .dark .bg-surface-light.p-6       { background-color: #0d2040; }
-
-/* ProjectCard */
 .dark .border-gold.bg-white       { background-color: #0d2040; }
-
-/* Mood board placeholder bg */
-.dark .bg-surface-subtle          { background-color: #091628; }
 
 /* ─── Accessibility: text size (scales all rem units via html root) ─── */
 .acc-text-lg { font-size: 112%; }

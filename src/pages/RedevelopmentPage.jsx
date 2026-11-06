@@ -79,50 +79,50 @@ function RedevelopmentForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="sm:col-span-2">
-          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Society Name <span className="text-gold">*</span></label>
+          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Society Name <span className="text-gold">*</span></label>
           <input name="society" type="text" value={fields.society} onChange={handleChange} className={inputClass('society')} placeholder="e.g. Sunshine Co-op Housing Society" />
           {errors.society && <p className="text-red-500 text-xs mt-1">{errors.society}</p>}
         </div>
         <div>
-          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Location / Area</label>
+          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Location / Area</label>
           <input name="location" type="text" value={fields.location} onChange={handleChange} className={inputClass('location')} placeholder="Malad West, Mumbai…" />
         </div>
         <div>
-          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">No. of Existing Units</label>
+          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">No. of Existing Units</label>
           <input name="units" type="number" min="1" value={fields.units} onChange={handleChange} className={inputClass('units')} placeholder="e.g. 24" />
         </div>
         <div className="sm:col-span-2">
-          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Plot Area (sq.ft.) <span className="text-text-muted font-normal normal-case tracking-normal">(approx.)</span></label>
+          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Plot Area (sq.ft.) <span className="text-text-muted font-normal normal-case tracking-normal">(approx.)</span></label>
           <input name="land" type="text" value={fields.land} onChange={handleChange} className={inputClass('land')} placeholder="e.g. 3,500 sq.ft." />
         </div>
       </div>
       <div className="border-t border-border-light pt-4">
-        <p className="text-[0.6875rem] uppercase tracking-[2px] text-text-muted mb-3">Managing Committee Contact</p>
+        <p className="text-xs uppercase tracking-[2px] text-text-muted mb-3">Managing Committee Contact</p>
         <div className="flex flex-col gap-4">
           <div>
-            <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Name <span className="text-gold">*</span></label>
+            <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Name <span className="text-gold">*</span></label>
             <input name="contact" type="text" autoComplete="name" value={fields.contact} onChange={handleChange} className={inputClass('contact')} placeholder="Chairman / Secretary" />
             {errors.contact && <p className="text-red-500 text-xs mt-1">{errors.contact}</p>}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
+              <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email <span className="text-gold">*</span></label>
               <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div>
-              <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
+              <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Phone <span className="text-gold">*</span></label>
               <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
           </div>
           <div>
-            <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Additional Notes <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
+            <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Additional Notes <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
             <textarea name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Any specific concerns or questions from the committee…" />
           </div>
         </div>
       </div>
-      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Request Consultation
       </button>
     </form>
@@ -134,7 +134,7 @@ export default function RedevelopmentPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-navy py-20 px-5 text-center border-b border-gold/30">
-        <span className="text-gold text-[0.6875rem] uppercase tracking-[4px] mb-4 block">For Housing Societies</span>
+        <span className="text-gold text-xs uppercase tracking-[4px] mb-4 block">For Housing Societies</span>
         <h1 className="font-serif text-white text-4xl md:text-5xl font-normal uppercase tracking-[4px] mb-4">
           Redevelop With Us
         </h1>
@@ -194,7 +194,7 @@ export default function RedevelopmentPage() {
                   Share your society&apos;s details and our redevelopment team will visit, assess feasibility, and present a no-obligation proposal to the managing committee.
                 </p>
                 <div className="bg-navy text-white p-8 border border-gold">
-                  <span className="block text-[0.6875rem] uppercase tracking-[3px] text-gold mb-4">Speak to Our Team</span>
+                  <span className="block text-xs uppercase tracking-[3px] text-gold mb-4">Speak to Our Team</span>
                   <p className="text-text-light text-sm mb-1"><a href="tel:+919820311177" className="hover:text-gold transition-colors duration-300">+91 98203 11177</a></p>
                   <p className="text-text-light text-sm"><a href="mailto:u.k.builders1981@gmail.com" className="hover:text-gold transition-colors duration-300">u.k.builders1981@gmail.com</a></p>
                 </div>

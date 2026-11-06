@@ -87,7 +87,7 @@ export default function OngoingProjectsPage() {
               <button
                 key={type}
                 onClick={() => setBhk(type)}
-                className={`px-5 py-2 text-[0.6875rem] uppercase tracking-[2px] border transition-all duration-200 cursor-pointer ${
+                className={`px-5 py-2 text-xs uppercase tracking-[2px] border transition-all duration-200 cursor-pointer ${
                   bhk === type
                     ? 'bg-gold border-gold text-white'
                     : 'bg-white border-border-light text-text-muted hover:border-gold hover:text-navy'
@@ -99,7 +99,7 @@ export default function OngoingProjectsPage() {
             {HAS_ANY_SHOPS && (
               <button
                 onClick={() => setShopsOnly((v) => !v)}
-                className={`px-5 py-2 text-[0.6875rem] uppercase tracking-[2px] border transition-all duration-200 cursor-pointer ${
+                className={`px-5 py-2 text-xs uppercase tracking-[2px] border transition-all duration-200 cursor-pointer ${
                   shopsOnly
                     ? 'bg-navy border-navy text-white'
                     : 'bg-white border-border-light text-text-muted hover:border-navy hover:text-navy'
@@ -126,7 +126,7 @@ export default function OngoingProjectsPage() {
               <p className="text-text-muted text-sm mb-6">Try adjusting your search or filter.</p>
               <button
                 onClick={() => { setQuery(''); setBhk('All'); setShopsOnly(false); }}
-                className="text-gold border border-gold px-6 py-2 text-sm uppercase tracking-[2px] hover:bg-gold hover:text-white transition-all duration-300"
+                className="text-gold border border-gold px-6 py-2 text-sm uppercase tracking-[2px] hover:bg-gold hover:text-navy transition-all duration-300"
               >
                 Clear Filters
               </button>
