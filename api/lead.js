@@ -108,7 +108,7 @@ async function sendAlert(lead) {
     `Page: ${lead.page || '-'}`,
   ];
   try {
-    await fetch('https://api.resend.com/emails', {
+    const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -118,8 +118,10 @@ async function sendAlert(lead) {
         text: lines.join('\n'),
       }),
     });
-  } catch {
+    if (!r.ok) console.error('lead: alert email failed', r.status, (await r.text()).slice(0, 300));
+  } catch (err) {
     // An alert failure must not lose the lead; it is already stored.
+    console.error('lead: alert email error', err);
   }
 }
 
