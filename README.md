@@ -2,9 +2,7 @@
 
 The marketing website for **U.K. Builders**, a residential developer in Orlem, Malad West, Mumbai, building since 1969.
 
-It is a single-page React app, frontend only, hosted on Vercel.
-
-> **Before you start:** the enquiry forms do not send leads anywhere yet. See [Known limitations](#known-limitations).
+It is a single-page React app hosted on Vercel. Its only backend is one serverless function, `api/lead.js`, which stores enquiries in Supabase. See [docs/SECURITY.md](docs/SECURITY.md).
 
 ---
 
@@ -37,12 +35,17 @@ Then open the URL Vite prints (usually `http://localhost:5173`).
 - **Tailwind CSS v4**, through the `@tailwindcss/vite` plugin. There is no `tailwind.config.js`: theme tokens (colours, fonts) live in the `@theme` block in `src/index.css`.
 - **React Router 7** for routing
 - **MapLibre** and **Leaflet** for maps
+- **Supabase** (Postgres) for storing leads, written only by `api/lead.js`
 
 ---
 
 ## Project structure
 
 ```
+api/
+  lead.js            POST /api/lead: validates, filters spam, stores the lead
+docs/
+  SECURITY.md        How leads and secrets are protected
 public/
   images/Building/   Project photos (filenames contain spaces)
   images/company/    Logos and company images
@@ -52,9 +55,8 @@ src/
   components/        Header, Footer, cards, modals, maps, carousel
   pages/             One file per route
   data/              Site content (see below)
-  context/           AuthContext (admin login)
-  hooks/             Theme, accessibility and in-view hooks
-  utils/             submissions.js (form storage)
+  hooks/             useLeadSubmit (forms), useDialog (modals), usePageMeta, theme
+  data/pageMeta.js   Page titles and descriptions for every route
 vercel.json          SPA rewrite and security headers
 ```
 
@@ -91,7 +93,6 @@ Most content lives in plain data files, not in the page components. To add or ch
 | `/contact`, `/book-a-call` | Contact and video-call booking |
 | `/redevelopment` | For housing societies |
 | `/investors`, `/contractors`, `/careers` | Partner and job enquiries |
-| `/owner-portal`, `/admin-dashboard` | Owner registration and admin view (see limitations) |
 
 Any other path shows the 404 page.
 
@@ -101,7 +102,20 @@ Any other path shows the 404 page.
 
 The site deploys to **Vercel**. A push to `main` deploys to production. Other branches get preview deployments.
 
-`vercel.json` rewrites every path to `index.html`, so client-side routes work on refresh, and sets the security headers. `public/_headers` and `public/_redirects` are leftovers from Netlify and are not used.
+`vercel.json` rewrites every path to `index.html`, so client-side routes work on refresh, and sets the security headers. Files in `api/` are deployed as serverless functions.
+
+**Environment variables** (Vercel → Project → Settings → Environment Variables):
+
+| Name | Value | Secret? |
+|---|---|---|
+| `SUPABASE_URL` | `https://<project-ref>.supabase.co` | No |
+| `SUPABASE_SECRET_KEY` | Supabase → Project Settings → API Keys → secret key | **Yes, mark Sensitive** |
+| `ALLOWED_ORIGINS` | e.g. `https://www.example.com` once the domain is live | No |
+| `RESEND_API_KEY`, `LEAD_ALERT_EMAIL`, `LEAD_ALERT_FROM` | Email alerts for new leads (optional) | API key is secret |
+
+Never prefix a secret with `VITE_`: Vite puts `VITE_` variables into the public JavaScript.
+
+Locally, `npm run dev` serves the site but not `api/`, so forms show an error. To test the API locally, use `vercel dev`. `public/_headers` and `public/_redirects` are leftovers from Netlify and are not used.
 
 ---
 
@@ -110,18 +124,20 @@ The site deploys to **Vercel**. A push to `main` deploys to production. Other br
 | Branch | Purpose |
 |---|---|
 | `main` | The live site |
-| `ui-redesign` | Work in progress: a new design, plus fixes for broken and oversized images that are not on `main` yet |
+| `claude/lucid-euler-o93hnj` | Redesign, accessibility fixes, lead API and page titles, being tested before merging into `main` |
+| `ui-redesign` | The original redesign work, now included in the branch above |
+| `archive/owner-portal-admin` | The old owner portal and admin pages, kept until they move to the private portal repo |
 
 ---
 
 ## Known limitations
 
-1. **Enquiries are not delivered.** All forms call `saveSubmission()` in `src/utils/submissions.js`, which only saves to the visitor's own browser (`localStorage`). Nothing reaches the business. The plan is a single server endpoint (for example a Vercel function at `/api/lead`) that validates the form, blocks spam, stores the lead and sends an email alert.
-2. **The admin login is not secure.** `AuthContext.jsx` checks a password hash that ships in the JavaScript bundle, and the encryption key in `submissions.js` is public too. The admin dashboard can only see submissions made in the same browser. Remove both once the lead endpoint exists. Never use this pattern for real customer data: the planned customer and owner portal will be a separate project with real authentication.
-3. **Some images are broken or very large on `main`.** Four photos (including the homepage hero) are HEIC files with a `.jpg` name and don't show in Chrome or on Android. Images total about 29 MB. Both are fixed on `ui-redesign`.
-4. **MahaRERA QR codes are missing** next to the RERA numbers on project pages. MahaRERA requires them on all advertising.
-5. **No SEO metadata.** All pages share one `<title>`, and there is no meta description, Open Graph tags (so WhatsApp link previews are blank), `robots.txt` or `sitemap.xml`.
-6. **Lint:** `npm run lint` reports a handful of known errors (empty `catch {}` blocks and similar). They don't break the build.
+1. **Lead alerts by email** are built but switched off until `RESEND_API_KEY`, `LEAD_ALERT_EMAIL` and `LEAD_ALERT_FROM` are set. Until then, check leads in Supabase.
+2. **MahaRERA QR codes are missing** next to the RERA numbers on project pages. MahaRERA requires them on all advertising.
+3. **Link previews use the `vercel.app` address** in `index.html`. Update them, and add a sitemap, once the company domain is connected.
+4. **Lint:** `npm run lint` reports a handful of older errors (empty `catch {}` blocks and similar). They don't break the build.
+
+Work in progress is tracked in GitHub Issues.
 
 ---
 

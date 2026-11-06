@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 
 const OPENINGS = [
   {
@@ -49,6 +49,7 @@ function ApplicationForm() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', role: roleOptions[0], message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +57,7 @@ function ApplicationForm() {
     if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
@@ -65,7 +66,7 @@ function ApplicationForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('careers', fields);
+    if (!(await lead.submit('career', fields))) return;
     setSubmitted(true);
   };
 
@@ -84,7 +85,8 @@ function ApplicationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 max-w-lg mx-auto text-left">
+    <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-4 max-w-lg mx-auto text-left">
+        <input {...lead.honeypotProps} />
       <div>
         <label htmlFor="careers-role" className="block text-xs uppercase tracking-[2px] text-gold mb-2">Role <span className="text-gold">*</span></label>
         <select id="careers-role" name="role" value={fields.role} onChange={handleChange} className="w-full border border-white/20 px-4 py-3 text-sm bg-white/10 text-white focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
@@ -112,7 +114,8 @@ function ApplicationForm() {
         <label htmlFor="careers-message" className="block text-xs uppercase tracking-[2px] text-gold mb-2">Cover Note <span className="text-white/70 font-normal normal-case tracking-normal">(optional)</span></label>
         <textarea id="careers-message" name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Brief note about yourself and your experience…" />
       </div>
-      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      {lead.error && <p role="alert" className="text-red-300 text-sm">{lead.error}</p>}
+      <button type="submit" disabled={lead.sending} className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Submit Application
       </button>
     </form>

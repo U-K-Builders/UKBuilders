@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
-import { saveSubmission } from '../utils/submissions';
+import { upcomingProjects } from '../data/projects';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 import Lightbox from '../components/Lightbox';
 import EnquiryModal from '../components/EnquiryModal';
 import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import Icon from '../components/Icon';
+import usePageMeta from '../hooks/usePageMeta';
+import { NOT_FOUND_META } from '../data/pageMeta';
 
 const ProjectLocationMap = lazy(() => import('../components/ProjectLocationMap'));
 const NeighbourhoodMap = lazy(() => import('../components/NeighbourhoodMap'));
@@ -157,6 +160,7 @@ function MilestoneSubscribeForm({ projectName, nextMilestone }) {
   const [fields, setFields] = useState({ name: '', email: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -164,14 +168,14 @@ function MilestoneSubscribeForm({ projectName, nextMilestone }) {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email address.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('milestone_subs', { ...fields, project: projectName });
+    if (!(await lead.submit('milestone_updates', { ...fields, project: projectName }))) return;
     setSubmitted(true);
   };
 
@@ -205,7 +209,8 @@ function MilestoneSubscribeForm({ projectName, nextMilestone }) {
           </p>
         </div>
       </div>
-      <form onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate>
+        <input {...lead.honeypotProps} />
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="flex-1">
             <input
@@ -231,8 +236,10 @@ function MilestoneSubscribeForm({ projectName, nextMilestone }) {
             />
             {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
           </div>
+          {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
           <button
             type="submit"
+            disabled={lead.sending}
             className="shrink-0 bg-gold text-navy px-8 py-3 text-xs uppercase tracking-[2px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300"
           >
             Notify Me
@@ -248,6 +255,7 @@ function BookVisitForm({ projectName }) {
   const [fields, setFields] = useState({ name: '', phone: '', email: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -255,7 +263,7 @@ function BookVisitForm({ projectName }) {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
@@ -264,7 +272,7 @@ function BookVisitForm({ projectName }) {
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email address.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('site_visits', { ...fields, project: projectName });
+    if (!(await lead.submit('site_visit', { ...fields, project: projectName }))) return;
     setSubmitted(true);
   };
 
@@ -291,7 +299,8 @@ function BookVisitForm({ projectName }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-4">
+        <input {...lead.honeypotProps} />
       <div>
         <label htmlFor="visit-name" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
           Full Name <span className="text-gold">*</span>
@@ -313,7 +322,8 @@ function BookVisitForm({ projectName }) {
         <input id="visit-email" name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
-      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
+      <button type="submit" disabled={lead.sending} className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Book My Visit
       </button>
     </form>
@@ -322,7 +332,22 @@ function BookVisitForm({ projectName }) {
 
 export default function ProjectDetailPage() {
   const { slug } = useParams();
-  const project = projectDetails[slug];
+  const isHidden = upcomingProjects.some((p) => p.hidden && p.name.toLowerCase().replace(/\s+/g, '-') === slug);
+  const project = isHidden ? undefined : projectDetails[slug];
+  const area = project?.location ? project.location.split(',').slice(-2).join(',').trim() : 'Malad West, Mumbai';
+  usePageMeta(
+    project
+      ? {
+          title: `${project.name}${project.configs ? `: ${project.configs}` : ''} in ${area} | U.K. Builders`,
+          description: [
+            `${project.name} by U.K. Builders${project.configs ? `: ${project.configs} homes` : ''} in ${area}.`,
+            project.rera && `MahaRERA ${project.rera}.`,
+            project.possession && `Possession ${project.possession}.`,
+            'Floor plans, amenities and site visits.',
+          ].filter(Boolean).join(' '),
+        }
+      : NOT_FOUND_META,
+  );
   const [lightboxSrc, setLightboxSrc] = useState(null);
   const [enquiryOpen, setEnquiryOpen] = useState(false);
   const heroImgRef = useRef(null);

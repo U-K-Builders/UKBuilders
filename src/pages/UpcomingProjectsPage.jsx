@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
 import WaitlistModal from '../components/WaitlistModal';
 import { upcomingProjects } from '../data/projects';
-import { useAuth } from '../context/AuthContext';
 
 export default function UpcomingProjectsPage() {
-  const { isAdmin } = useAuth();
   const [waitlistProject, setWaitlistProject] = useState(null);
-  const visibleProjects = isAdmin ? upcomingProjects : upcomingProjects.filter((p) => !p.hidden);
+  const visibleProjects = upcomingProjects.filter((p) => !p.hidden);
 
   return (
     <div className="animate-fade-in">

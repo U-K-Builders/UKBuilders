@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 
 const CATEGORIES = [
   'Civil & Structural',
@@ -45,6 +45,7 @@ function ContractorForm() {
   const [fields, setFields] = useState({ company: '', category: CATEGORIES[0], years: '', contact: '', email: '', phone: '', pan: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +53,7 @@ function ContractorForm() {
     if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.company.trim()) errs.company = 'Company name is required.';
@@ -62,7 +63,7 @@ function ContractorForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('contractors', fields);
+    if (!(await lead.submit('contractor', fields))) return;
     setSubmitted(true);
   };
 
@@ -81,7 +82,8 @@ function ContractorForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-4">
+        <input {...lead.honeypotProps} />
       <div>
         <label htmlFor="contractors-company" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Company / Firm Name <span className="text-gold">*</span></label>
         <input id="contractors-company" name="company" type="text" value={fields.company} onChange={handleChange} className={inputClass('company')} placeholder="Your company name" />
@@ -129,7 +131,8 @@ function ContractorForm() {
           </div>
         </div>
       </div>
-      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
+      <button type="submit" disabled={lead.sending} className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Register as Contractor
       </button>
     </form>

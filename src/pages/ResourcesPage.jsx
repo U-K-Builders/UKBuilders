@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 import Icon from '../components/Icon';
 
 const GUIDES = [
@@ -65,6 +65,7 @@ function DownloadCard({ guide }) {
   const [fields, setFields] = useState({ name: '', email: '' });
   const [errors, setErrors] = useState({});
   const [done, setDone] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,14 +73,14 @@ function DownloadCard({ guide }) {
     if (errors[name]) setErrors(p => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email.';
     if (Object.keys(errs).length) { setErrors(errs); return; }
-    saveSubmission('downloads', { ...fields, guide: guide.title });
+    if (!(await lead.submit('guide_download', { ...fields, guide: guide.title }))) return;
     setDone(true);
   };
 
@@ -110,7 +111,8 @@ function DownloadCard({ guide }) {
         )}
 
         {open && !done && (
-          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 border-t border-border-light pt-6">
+          <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-3 border-t border-border-light pt-6">
+        <input {...lead.honeypotProps} />
             <p className="text-xs uppercase tracking-[2px] text-text-muted mb-1">Enter details to receive your guide</p>
             <div>
               <input
@@ -135,7 +137,8 @@ function DownloadCard({ guide }) {
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div className="flex gap-2">
-              <button type="submit" className="flex-1 bg-gold text-navy px-4 py-2.5 text-xs tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300">
+              {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
+              <button type="submit" disabled={lead.sending} className="flex-1 bg-gold text-navy px-4 py-2.5 text-xs tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300">
                 Send Guide
               </button>
               <button type="button" onClick={() => setOpen(false)} className="px-4 py-2.5 text-xs text-text-muted border border-border-light hover:border-navy hover:text-navy transition-all duration-300">

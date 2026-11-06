@@ -10,7 +10,6 @@ import TrustPillars from '../components/TrustPillars';
 import { ongoingProjects, upcomingProjects, completedProjects } from '../data/projects';
 import { testimonials } from '../data/testimonials';
 import { useInView } from '../hooks/useInView';
-import { useAuth } from '../context/AuthContext';
 
 const CityProjectsMap = lazy(() => import('../components/CityProjectsMap'));
 
@@ -23,14 +22,11 @@ function slide(inView, delay = 0) {
 }
 
 export default function HomePage() {
-  const { isAdmin } = useAuth();
   const [ongoingRef,      ongoingInView]      = useInView(0.1);
-  const [upcomingRef,     upcomingInView]     = useInView(0.1);
   const [mapRef,          mapInView]          = useInView(0.1);
   const [legacyRef,       legacyInView]       = useInView(0.1);
   const [testimonialsRef, testimonialsInView] = useInView(0.1);
 
-  const visibleUpcoming = isAdmin ? upcomingProjects : upcomingProjects.filter((p) => !p.hidden);
 
   return (
     <div className="animate-fade-in">
@@ -55,23 +51,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Upcoming projects ────────────────────────────────────────────── */}
-      {isAdmin && visibleUpcoming.length > 0 && (
-        <div className="py-24 px-5 bg-surface-subtle border-t border-border-light" ref={upcomingRef}>
-          <div className="max-w-[1200px] mx-auto">
-            <div style={slide(upcomingInView)}>
-              <SectionTitle>Upcoming Projects</SectionTitle>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {visibleUpcoming.map((project, i) => (
-                <div key={project.name} style={slide(upcomingInView, 150 + i * 150)}>
-                  <ProjectCard project={project} showCountdown={false} />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* ── City map ─────────────────────────────────────────────────────── */}
       <div className="bg-navy py-24 px-5" ref={mapRef}>
@@ -86,7 +65,7 @@ export default function HomePage() {
             <Suspense fallback={<div className="h-[520px] bg-white/5 animate-pulse" />}>
               <CityProjectsMap
                 ongoing={ongoingProjects}
-                upcoming={upcomingProjects}
+                upcoming={upcomingProjects.filter((p) => !p.hidden)}
                 completed={completedProjects}
               />
             </Suspense>

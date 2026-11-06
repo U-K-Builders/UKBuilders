@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import useDialog from '../hooks/useDialog';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 
 export default function WaitlistModal({ projectName, onClose }) {
   const [fields, setFields] = useState({ name: '', email: '', bhk: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
   const panelRef = useDialog(onClose);
 
   const handleChange = (e) => {
@@ -15,14 +16,14 @@ export default function WaitlistModal({ projectName, onClose }) {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
     if (!fields.email.trim()) errs.email = 'Email is required.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) errs.email = 'Enter a valid email.';
     if (Object.keys(errs).length) { setErrors(errs); return; }
-    saveSubmission('waitlist', { ...fields, project: projectName });
+    if (!(await lead.submit('waitlist', { ...fields, project: projectName }))) return;
     setSubmitted(true);
   };
 
@@ -84,7 +85,8 @@ export default function WaitlistModal({ projectName, onClose }) {
                 Be the first to know when this project launches — pricing, floor plans, and early-bird availability.
               </p>
             </div>
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-4">
+        <input {...lead.honeypotProps} />
               <div>
                 <label htmlFor="waitlist-name" className="block text-xs uppercase tracking-[2px] text-white/80 mb-2">Your name <span aria-hidden="true">*</span></label>
                 <input
@@ -123,8 +125,10 @@ export default function WaitlistModal({ projectName, onClose }) {
                 <option value="4 BHK">4 BHK</option>
               </select>
               </div>
+              {lead.error && <p role="alert" className="text-red-300 text-sm">{lead.error}</p>}
               <button
                 type="submit"
+                disabled={lead.sending}
                 className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 mt-1"
               >
                 Notify Me When It Launches

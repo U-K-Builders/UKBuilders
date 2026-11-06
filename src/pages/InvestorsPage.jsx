@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 import { Link } from 'react-router-dom';
 
 const HIGHLIGHTS = [
@@ -56,6 +56,7 @@ function InquiryForm() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', budget: BUDGET_OPTIONS[0], project: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +64,7 @@ function InquiryForm() {
     if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
@@ -72,7 +73,7 @@ function InquiryForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('investors', fields);
+    if (!(await lead.submit('investor', fields))) return;
     setSubmitted(true);
   };
 
@@ -91,7 +92,8 @@ function InquiryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-4">
+        <input {...lead.honeypotProps} />
       <div>
         <label htmlFor="investors-name" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Full Name <span className="text-gold">*</span></label>
         <input id="investors-name" name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="Your name" />
@@ -125,7 +127,8 @@ function InquiryForm() {
         <label htmlFor="investors-message" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Message <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span></label>
         <textarea id="investors-message" name="message" rows={3} value={fields.message} onChange={handleChange} className={`${inputClass('message')} resize-none`} placeholder="Tell us about your investment goals…" />
       </div>
-      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
+      <button type="submit" disabled={lead.sending} className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Submit Inquiry
       </button>
     </form>

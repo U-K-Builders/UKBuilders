@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useId } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 import AccessibilityPanel from './AccessibilityPanel';
-import { useAuth } from '../context/AuthContext';
 
 const LOGO = '/images/company/logo/U.K. Builders Logo (Square) copy.jpg';
 
@@ -74,11 +73,11 @@ function MoonIcon() {
 }
 
 /* Desktop dropdown: opens on hover, click, or keyboard; closes on Escape / focus leaving */
-function NavDropdown({ group, active, isAdmin }) {
+function NavDropdown({ group, active }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const menuId = useId();
-  const items = group.items.filter((i) => !i.adminOnly || isAdmin);
+  const items = group.items.filter((i) => !i.adminOnly);
 
   useEffect(() => {
     if (!open) return;
@@ -139,7 +138,6 @@ function NavDropdown({ group, active, isAdmin }) {
 export default function Header() {
   const { pathname } = useLocation();
   const [dark, toggleDark] = useTheme();
-  const { isAdmin, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileGroup, setMobileGroup] = useState(null);
   const [scrolled, setScrolled] = useState(false);
@@ -188,29 +186,16 @@ export default function Header() {
         <nav aria-label="Main" className="hidden lg:flex items-center gap-7">
           {NAV.map((entry) =>
             entry.items ? (
-              <NavDropdown key={entry.label} group={entry} active={entry.match(pathname)} isAdmin={isAdmin} />
+              <NavDropdown key={entry.label} group={entry} active={entry.match(pathname)} />
             ) : (
               <Link key={entry.to} to={entry.to} className={linkClass(pathname === entry.to)} aria-current={pathname === entry.to ? 'page' : undefined}>
                 {entry.label}
               </Link>
             )
           )}
-          {isAdmin && (
-            <NavDropdown
-              group={{ label: 'Admin', items: [{ to: '/admin-dashboard', label: 'Dashboard' }, { label: 'Sign Out', onClick: logout }] }}
-              active={pathname === '/admin-dashboard'}
-              isAdmin
-            />
-          )}
         </nav>
 
         <div className="flex items-center gap-1">
-          <Link
-            to="/owner-portal"
-            className="hidden xl:inline-flex items-center min-h-[44px] px-3 text-sm tracking-[0.12em] uppercase text-white/75 no-underline hover:text-gold transition-colors duration-200"
-          >
-            Owner Login
-          </Link>
           <AccessibilityPanel />
           <button onClick={toggleDark} className={iconBtn} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
             {dark ? <SunIcon /> : <MoonIcon />}
@@ -276,7 +261,7 @@ export default function Header() {
                   </button>
                   {open && (
                     <ul id={panelId} className="m-0 p-0 list-none bg-white/5">
-                      {entry.items.filter((i) => !i.adminOnly || isAdmin).map((item) => (
+                      {entry.items.filter((i) => !i.adminOnly).map((item) => (
                         <li key={item.to}>
                           <Link to={item.to} className={`flex items-center min-h-[48px] pl-10 pr-6 text-sm tracking-[0.08em] uppercase no-underline ${pathname === item.to ? 'text-gold' : 'text-white/85'}`}>
                             {item.label}
@@ -288,29 +273,6 @@ export default function Header() {
                 </li>
               );
             })}
-            <li>
-              <Link to="/owner-portal" className="flex items-center min-h-[56px] px-6 text-base tracking-[0.1em] uppercase no-underline text-white/80 border-b border-white/10">
-                Owner Login
-              </Link>
-            </li>
-            {isAdmin && (
-              <>
-                <li>
-                  <Link to="/admin-dashboard" className="flex items-center min-h-[56px] px-6 text-base tracking-[0.1em] uppercase no-underline text-gold border-b border-white/10">
-                    Admin Dashboard
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => { logout(); setMobileOpen(false); }}
-                    className="w-full text-left flex items-center min-h-[56px] px-6 text-base tracking-[0.1em] uppercase bg-transparent border-0 border-b border-white/10 cursor-pointer text-red-300"
-                  >
-                    Sign Out
-                  </button>
-                </li>
-              </>
-            )}
           </ul>
           <div className="px-6 pt-8">
             <Link to="/contact" className="flex items-center justify-center min-h-[52px] bg-gold text-navy text-sm font-semibold tracking-[0.16em] uppercase no-underline">

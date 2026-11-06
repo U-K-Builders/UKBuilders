@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 
 const PROJECT_OPTIONS = [
   'Justin',
@@ -36,6 +36,7 @@ export default function ContactPage() {
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,14 +44,14 @@ export default function ContactPage() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate(fields);
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
-    saveSubmission('buyers', fields);
+    if (!(await lead.submit('contact', fields))) return;
     setSubmitted(true);
   };
 
@@ -98,7 +99,8 @@ export default function ContactPage() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+                <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-5">
+        <input {...lead.honeypotProps} />
                   <div>
                     <label htmlFor="name" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
                       Full Name <span className="text-gold">*</span>
@@ -183,8 +185,10 @@ export default function ContactPage() {
                     {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
                   </div>
 
+                  {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
                   <button
                     type="submit"
+                    disabled={lead.sending}
                     className="self-start bg-gold text-navy px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
                   >
                     Send Message

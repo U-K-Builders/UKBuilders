@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 
 const PROJECTS = ['Justin', 'Christina', 'Elvira', 'New Life', 'Madonna', 'General Enquiry'];
 
@@ -94,6 +94,7 @@ export default function VirtualCallPage() {
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const selectedTz = TIMEZONES.find(tz => String(tz.offset) === fields.timezone) || TIMEZONES[0];
   const showLocalTime = selectedTz.offset !== IST_OFFSET;
@@ -114,11 +115,11 @@ export default function VirtualCallPage() {
     if (errors.slot) setErrors(prev => ({ ...prev, slot: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate(fields);
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('video_calls', fields);
+    if (!(await lead.submit('video_call', fields))) return;
     setSubmitted(true);
   };
 
@@ -234,7 +235,8 @@ export default function VirtualCallPage() {
               All slots are in IST. Select your timezone to see your local equivalent.
             </p>
 
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-5">
+        <input {...lead.honeypotProps} />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label htmlFor="virtualcall-name" className={labelClass}>Full Name <span className="text-gold">*</span></label>
@@ -313,7 +315,8 @@ export default function VirtualCallPage() {
                 <textarea id="virtualcall-message" name="message" rows={3} value={fields.message} onChange={handleChange} className="w-full bg-white border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 resize-none" placeholder="Any specific questions about floor plans, pricing, or configurations…" />
               </div>
 
-              <button type="submit" className="self-start bg-gold text-navy px-12 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+              {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
+              <button type="submit" disabled={lead.sending} className="self-start bg-gold text-navy px-12 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
                 Request Video Call
               </button>
             </form>

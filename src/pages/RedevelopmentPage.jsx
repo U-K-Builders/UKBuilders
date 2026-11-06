@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 
 const PROCESS_STEPS = [
   {
@@ -41,6 +42,7 @@ function RedevelopmentForm() {
   const [fields, setFields] = useState({ society: '', location: '', units: '', land: '', contact: '', email: '', phone: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +50,7 @@ function RedevelopmentForm() {
     if (errors[name]) setErrors((p) => ({ ...p, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.society.trim()) errs.society = 'Society name is required.';
@@ -58,6 +60,7 @@ function RedevelopmentForm() {
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    if (!(await lead.submit('redevelopment', fields))) return;
     setSubmitted(true);
   };
 
@@ -76,7 +79,8 @@ function RedevelopmentForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-4">
+        <input {...lead.honeypotProps} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="sm:col-span-2">
           <label htmlFor="redevelopment-society" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Society Name <span className="text-gold">*</span></label>
@@ -122,7 +126,8 @@ function RedevelopmentForm() {
           </div>
         </div>
       </div>
-      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      {lead.error && <p role="alert" className="text-red-700 text-sm">{lead.error}</p>}
+      <button type="submit" disabled={lead.sending} className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Request Consultation
       </button>
     </form>

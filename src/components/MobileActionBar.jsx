@@ -1,13 +1,10 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const PHONE = '+919820311177';
 const WHATSAPP = 'https://wa.me/917710038007?text=' + encodeURIComponent("Hi U.K. Builders, I'd like to know more about your projects.");
 
 /* Persistent mobile call-to-action bar: Call · WhatsApp · Enquire */
 export default function MobileActionBar() {
-  const { pathname } = useLocation();
-  if (pathname === '/admin-dashboard') return null;
-
   const item = 'flex-1 flex flex-col items-center justify-center gap-1 min-h-[56px] text-xs tracking-[0.12em] uppercase no-underline transition-colors duration-200';
 
   return (

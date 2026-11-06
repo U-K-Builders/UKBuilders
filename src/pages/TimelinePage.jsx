@@ -140,7 +140,7 @@ export default function TimelinePage() {
           ))}
 
           <DecadeBanner label="Upcoming" isOngoing />
-          {upcomingProjects.map((project, idx) => (
+          {upcomingProjects.filter((p) => !p.hidden).map((project, idx) => (
             <TimelineItem
               key={project.name}
               project={project}

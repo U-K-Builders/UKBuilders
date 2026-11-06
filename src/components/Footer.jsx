@@ -67,7 +67,6 @@ const NAV_COLS = [
     links: [
       { to: '/resources',    label: 'Knowledge Hub' },
       { to: '/book-a-call',  label: 'Book a Call'   },
-      { to: '/owner-portal', label: 'Owner Portal'  },
       { to: '/contact',      label: 'Contact Us'    },
     ],
   },

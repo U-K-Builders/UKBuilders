@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import useDialog from '../hooks/useDialog';
-import { saveSubmission } from '../utils/submissions';
+import useLeadSubmit from '../hooks/useLeadSubmit';
 
 export default function EnquiryModal({ projectName, floorPlans, onClose }) {
   const [fields, setFields] = useState({ name: '', phone: '', bhk: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const lead = useLeadSubmit();
   const panelRef = useDialog(onClose);
 
   const handleChange = (e) => {
@@ -15,14 +16,14 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = {};
     if (!fields.name.trim()) errs.name = 'Name is required.';
     if (!fields.phone.trim()) errs.phone = 'Phone is required.';
     else if (!/^[0-9+\-\s()]{7,15}$/.test(fields.phone)) errs.phone = 'Enter a valid phone number.';
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    saveSubmission('enquiries', { ...fields, project: projectName });
+    if (!(await lead.submit('enquiry', { ...fields, project: projectName }))) return;
     setSubmitted(true);
   };
 
@@ -78,7 +79,8 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
           <>
             <span className="block text-gold text-xs uppercase tracking-[4px] mb-2">Register Interest</span>
             <h2 id="enquiry-title" className="text-white font-serif text-2xl font-normal mb-6">{projectName}</h2>
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit} onFocusCapture={lead.markStart} noValidate className="flex flex-col gap-4">
+        <input {...lead.honeypotProps} />
               <div>
                 <label htmlFor="enquiry-name" className="block text-xs uppercase tracking-[2px] text-white/80 mb-2">Your name <span aria-hidden="true">*</span></label>
                 <input
@@ -144,8 +146,10 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
                 className="w-full bg-white/5 border border-white/20 px-4 py-3 text-white text-sm placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors duration-300 resize-none"
               />
               </div>
+              {lead.error && <p role="alert" className="text-red-300 text-sm">{lead.error}</p>}
               <button
                 type="submit"
+                disabled={lead.sending}
                 className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 mt-1"
               >
                 Submit Enquiry
