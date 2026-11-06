@@ -107,7 +107,7 @@ export default function OurStoryPage() {
                     </div>
                     <h3 className="font-serif text-navy text-2xl font-normal mb-1">{person.name}</h3>
                     {person.title && (
-                      <span className="text-gold text-[0.6875rem] uppercase tracking-[3px] mb-7 block">{person.title}</span>
+                      <span className="text-gold text-xs uppercase tracking-[3px] mb-7 block">{person.title}</span>
                     )}
                     <p className="text-text-secondary text-sm leading-[1.9] text-left">{person.bio}</p>
                   </div>
@@ -143,7 +143,7 @@ export default function OurStoryPage() {
         </p>
         <Link
           to="/projects/ongoing"
-          className="inline-block bg-gold text-white px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
+          className="inline-block bg-gold text-navy px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
         >
           Explore Our Projects
         </Link>

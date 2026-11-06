@@ -71,14 +71,14 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
             </p>
             <button
               onClick={onClose}
-              className="mt-6 text-sm uppercase tracking-[2px] text-gold border border-gold px-6 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+              className="mt-6 text-sm uppercase tracking-[2px] text-gold border border-gold px-6 py-2 hover:bg-gold hover:text-navy transition-all duration-300"
             >
               Close
             </button>
           </div>
         ) : (
           <>
-            <span className="block text-gold text-[0.6875rem] uppercase tracking-[4px] mb-2">Register Interest</span>
+            <span className="block text-gold text-xs uppercase tracking-[4px] mb-2">Register Interest</span>
             <h2 className="text-white font-serif text-2xl font-normal mb-6">{projectName}</h2>
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
               <div>
@@ -130,7 +130,7 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
               />
               <button
                 type="submit"
-                className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 mt-1"
+                className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 mt-1"
               >
                 Submit Enquiry
               </button>

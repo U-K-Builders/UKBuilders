@@ -98,18 +98,18 @@ function LoginForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Email Address</label>
+        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Email Address</label>
         <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass} placeholder="you@example.com" required />
       </div>
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
+        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
         <input name="password" type="password" autoComplete="current-password" value={fields.password} onChange={handleChange} className={inputClass} placeholder="••••••••" required />
       </div>
       <p className="text-text-muted text-xs -mt-1">
         Forgot your password?{' '}
         <a href="mailto:u.k.builders1981@gmail.com" className="text-gold hover:underline">Contact us</a>
       </p>
-      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Sign In
       </button>
     </form>
@@ -161,7 +161,7 @@ function RegisterForm() {
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-2 sm:col-span-1">
-          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
             Building <span className="text-gold">*</span>
           </label>
           <select name="project" value={fields.project} onChange={handleChange} className="w-full bg-surface-light border border-border-light px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer">
@@ -169,7 +169,7 @@ function RegisterForm() {
           </select>
         </div>
         <div className="col-span-2 sm:col-span-1">
-          <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+          <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
             Flat / Unit No. <span className="text-gold">*</span>
           </label>
           <input name="unit" type="text" value={fields.unit} onChange={handleChange} className={inputClass('unit')} placeholder="e.g. 8A, 12B" />
@@ -177,27 +177,27 @@ function RegisterForm() {
         </div>
       </div>
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
           Full Name <span className="text-gold">*</span>
         </label>
         <input name="name" type="text" autoComplete="name" value={fields.name} onChange={handleChange} className={inputClass('name')} placeholder="As on sale agreement" />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
           Email Address <span className="text-gold">*</span>
         </label>
         <input name="email" type="email" autoComplete="email" value={fields.email} onChange={handleChange} className={inputClass('email')} placeholder="you@example.com" />
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
           Phone Number <span className="text-gold">*</span>
         </label>
         <input name="phone" type="tel" autoComplete="tel" value={fields.phone} onChange={handleChange} className={inputClass('phone')} placeholder="+91 98765 43210" />
         {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
       </div>
-      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Submit Registration
       </button>
     </form>
@@ -221,7 +221,7 @@ function AdminPanel() {
         </p>
         <button
           onClick={logout}
-          className="bg-transparent text-gold px-8 py-3 text-[0.6875rem] uppercase tracking-[2px] border border-gold hover:bg-gold hover:text-white transition-all duration-300"
+          className="bg-transparent text-gold px-8 py-3 text-xs uppercase tracking-[2px] border border-gold hover:bg-gold hover:text-navy transition-all duration-300"
         >
           Sign Out
         </button>
@@ -240,7 +240,7 @@ function AdminPanel() {
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Username</label>
+        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Username</label>
         <input
           type="text"
           autoComplete="username"
@@ -251,7 +251,7 @@ function AdminPanel() {
         />
       </div>
       <div>
-        <label className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
+        <label className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">Password</label>
         <div className="relative">
           <input
             type={showPw ? 'text' : 'password'}
@@ -271,7 +271,7 @@ function AdminPanel() {
         </div>
       </div>
       {error && <p className="text-red-500 text-xs uppercase tracking-[1px]">{error}</p>}
-      <button type="submit" className="bg-gold text-white px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
+      <button type="submit" className="bg-gold text-navy px-8 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold">
         Sign In
       </button>
     </form>
@@ -282,9 +282,9 @@ export default function OwnerPortalPage() {
   const [mode, setMode] = useState('register');
 
   const tabClass = (m) =>
-    `px-6 py-3 text-[0.6875rem] uppercase tracking-[2px] border transition-all duration-300 cursor-pointer ${
+    `px-6 py-3 text-xs uppercase tracking-[2px] border transition-all duration-300 cursor-pointer ${
       mode === m
-        ? 'bg-gold text-white border-gold'
+        ? 'bg-gold text-navy border-gold'
         : 'bg-transparent text-text-secondary border-border-light hover:border-gold hover:text-gold'
     }`;
 
@@ -292,7 +292,7 @@ export default function OwnerPortalPage() {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="bg-navy py-20 px-5 text-center border-b border-gold/30">
-        <span className="text-gold text-[0.6875rem] uppercase tracking-[4px] mb-4 block">For Existing Homeowners</span>
+        <span className="text-gold text-xs uppercase tracking-[4px] mb-4 block">For Existing Homeowners</span>
         <h1 className="font-serif text-white text-4xl md:text-5xl font-normal uppercase tracking-[4px] mb-4">
           Owner Portal
         </h1>
@@ -360,7 +360,7 @@ export default function OwnerPortalPage() {
                     <h4 className="font-serif text-navy text-lg leading-snug">{r.title}</h4>
                   </div>
                   <p className="text-text-tertiary text-sm leading-[1.8] mb-4">{r.desc}</p>
-                  <span className="inline-flex items-center gap-1.5 text-[0.625rem] uppercase tracking-[1.5px] text-text-muted border border-border-light px-3 py-1.5">
+                  <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[1.5px] text-text-muted border border-border-light px-3 py-1.5">
                     <LockIcon />
                     Members only
                   </span>
@@ -372,15 +372,15 @@ export default function OwnerPortalPage() {
           {/* Support strip */}
           <section className="bg-navy border border-gold/40 p-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
-              <span className="block text-[0.625rem] uppercase tracking-[3px] text-gold mb-2">Post-Handover Support</span>
+              <span className="block text-xs uppercase tracking-[3px] text-gold mb-2">Post-Handover Support</span>
               <p className="text-text-light text-sm leading-[1.8]">Our team is available Mon – Sat, 10 am – 6 pm for all owner queries.</p>
             </div>
             <div>
-              <span className="block text-[0.625rem] uppercase tracking-[3px] text-gold mb-2">Call Us</span>
+              <span className="block text-xs uppercase tracking-[3px] text-gold mb-2">Call Us</span>
               <a href="tel:+919820311177" className="text-white text-sm hover:text-gold transition-colors duration-300">+91 98203 11177</a>
             </div>
             <div>
-              <span className="block text-[0.625rem] uppercase tracking-[3px] text-gold mb-2">Email Us</span>
+              <span className="block text-xs uppercase tracking-[3px] text-gold mb-2">Email Us</span>
               <a href="mailto:u.k.builders1981@gmail.com" className="text-white text-sm hover:text-gold transition-colors duration-300">u.k.builders1981@gmail.com</a>
             </div>
           </section>

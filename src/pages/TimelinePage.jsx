@@ -23,7 +23,7 @@ function TimelineCard({ project, align, isOngoing }) {
       </h3>
       {isOngoing ? (
         <>
-          <span className="text-gold text-[0.6875rem] uppercase tracking-[2px] font-bold mb-2 block">
+          <span className="text-gold text-xs uppercase tracking-[2px] font-bold mb-2 block">
             {project.subtitle}
           </span>
           <p className="text-text-secondary text-sm leading-[1.7] mb-1">{project.configs}</p>
@@ -31,7 +31,7 @@ function TimelineCard({ project, align, isOngoing }) {
         </>
       ) : (
         <>
-          <span className="text-gold text-[0.6875rem] uppercase tracking-[2px] font-bold mb-3 block">
+          <span className="text-gold text-xs uppercase tracking-[2px] font-bold mb-3 block">
             {project.year} · {project.builder}
           </span>
           <p className="text-text-secondary text-sm leading-[1.7]">{project.description}</p>
@@ -46,7 +46,7 @@ function DecadeBanner({ label, isOngoing }) {
     <div className="relative flex items-center my-10 md:my-14 z-10">
       <div className="flex-1 h-px bg-gold/20" />
       <div className={`mx-4 px-10 py-4 text-base md:text-xl uppercase tracking-[4px] font-bold font-serif border whitespace-nowrap ${
-        isOngoing ? 'bg-gold text-white border-gold' : 'bg-navy text-gold border-gold'
+        isOngoing ? 'bg-gold text-navy border-gold' : 'bg-navy text-gold border-gold'
       }`}>
         {label}
       </div>

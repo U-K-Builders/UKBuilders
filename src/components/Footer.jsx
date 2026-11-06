@@ -145,7 +145,7 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="border-t border-white/8 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[900px] mx-auto text-[0.6875rem] tracking-[0.5px] text-white/25">
+      <div className="border-t border-white/8 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 max-w-[900px] mx-auto text-xs tracking-[0.5px] text-white/25">
         <span>&copy; {new Date().getFullYear()} U.K. Builders. All rights reserved.</span>
         <span>MahaRERA Registration Pending · Orlem, Malad West</span>
       </div>

@@ -1,0 +1,39 @@
+import { Link, useLocation } from 'react-router-dom';
+
+const PHONE = '+919820311177';
+const WHATSAPP = 'https://wa.me/917710038007?text=' + encodeURIComponent("Hi U.K. Builders, I'd like to know more about your projects.");
+
+/* Persistent mobile call-to-action bar: Call · WhatsApp · Enquire */
+export default function MobileActionBar() {
+  const { pathname } = useLocation();
+  if (pathname === '/admin-dashboard') return null;
+
+  const item = 'flex-1 flex flex-col items-center justify-center gap-1 min-h-[56px] text-xs tracking-[0.12em] uppercase no-underline transition-colors duration-200';
+
+  return (
+    <nav
+      aria-label="Quick contact"
+      className="on-dark md:hidden fixed bottom-0 inset-x-0 z-40 flex bg-navy border-t border-gold/40 shadow-[0_-6px_24px_rgba(0,0,0,0.35)] pb-[env(safe-area-inset-bottom)]"
+    >
+      <a href={`tel:${PHONE}`} className={`${item} text-white hover:text-gold`}>
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" />
+        </svg>
+        Call
+      </a>
+      <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className={`${item} text-white hover:text-gold border-x border-white/10`}>
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+          <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.91-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35zM12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.48-8.41z" />
+        </svg>
+        WhatsApp
+      </a>
+      <Link to="/contact" className={`${item} bg-gold text-navy font-semibold hover:bg-gold-dark`}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" aria-hidden="true">
+          <path d="M4 4h16v12H5.17L4 17.17V4z" strokeLinejoin="round" />
+          <path d="M8 9h8M8 12h5" strokeLinecap="round" />
+        </svg>
+        Enquire
+      </Link>
+    </nav>
+  );
+}

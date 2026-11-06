@@ -1,92 +1,81 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+const HERO_IMAGE = '/images/Building/Justin Night View.jpg';
+
 export default function HeroSection() {
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const el = heroRef.current;
-    if (!el) return;
-    let ticking = false;
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          el.style.backgroundPositionY = `calc(50% + ${window.scrollY * 0.3}px)`;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <div
-      ref={heroRef}
-      className="min-h-screen flex flex-col items-center justify-center relative px-5 text-center text-white bg-cover bg-center overflow-hidden hero-ken-burns"
-      style={{
-        backgroundImage: `linear-gradient(rgba(10,24,40,0.48), rgba(10,24,40,0.78)), url('/images/Building/La Serena.jpg')`,
-      }}
+    <section
+      aria-labelledby="hero-heading"
+      className="on-dark relative bg-navy text-white overflow-hidden lg:grid lg:grid-cols-[1.05fr_1fr] lg:min-h-[calc(100svh-76px)]"
     >
-      {/* Main content */}
-      <div className="relative z-10 max-w-[820px]">
-        <p
-          className="hero-item text-[0.5625rem] tracking-[5px] uppercase text-gold/80 mb-7"
-          style={{ animationDelay: '0.1s' }}
-        >
-          Mumbai · Est. 1969
+      {/* Photo: full-bleed behind the copy on mobile, right-hand column on desktop */}
+      <div className="absolute inset-0 lg:relative lg:order-2 overflow-hidden">
+        <img
+          src={HERO_IMAGE}
+          alt="Justin, U.K. Builders' signature residential tower in Orlem, Malad West, lit at night"
+          width="1379"
+          height="2000"
+          fetchPriority="high"
+          decoding="async"
+          className="hero-drift absolute inset-0 w-full h-full object-cover object-[center_30%]"
+        />
+        {/* Mobile: darken for legibility. Desktop: soft seam into the navy panel */}
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/55 to-navy/95 lg:bg-gradient-to-r lg:from-navy lg:via-navy/10 lg:to-transparent" />
+      </div>
+
+      {/* Copy */}
+      <div className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-16 xl:pl-24 lg:pr-10 py-16 sm:py-20 min-h-[calc(100svh-68px)] lg:min-h-0 lg:order-1">
+        <p className="hero-item text-xs tracking-[0.35em] uppercase text-gold mb-6" style={{ animationDelay: '0.05s' }}>
+          Mumbai · Since 1969
         </p>
 
-        <h2
-          className="hero-item text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] mb-7 font-serif font-normal leading-[1.1] tracking-[-0.5px]"
-          style={{ animationDelay: '0.3s' }}
+        <h1
+          id="hero-heading"
+          className="hero-item font-serif font-normal text-[2.5rem] leading-[1.08] sm:text-6xl xl:text-7xl tracking-[0.02em] mb-6 max-w-[11ch]"
+          style={{ animationDelay: '0.15s' }}
         >
-          Crafting Legacy<br />Residences
-        </h2>
+          Crafting Legacy Residences
+        </h1>
 
-        <p
-          className="hero-item text-lg text-white/60 max-w-[520px] mx-auto mb-12 leading-relaxed"
-          style={{ animationDelay: '0.55s' }}
-        >
-          Experience unparalleled luxury and architectural excellence in the heart of Mumbai.
+        <p className="hero-item text-lg text-white/80 max-w-[34ch] leading-relaxed mb-10" style={{ animationDelay: '0.3s' }}>
+          Five decades of homes built to last across Orlem and Malad West. Now presenting Justin and Christina.
         </p>
 
-        <div
-          className="hero-item flex flex-col sm:flex-row gap-4 justify-center"
-          style={{ animationDelay: '0.8s' }}
-        >
+        <div className="hero-item flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8" style={{ animationDelay: '0.45s' }}>
           <Link
             to="/projects/ongoing"
-            className="inline-block bg-gold text-white px-10 py-4 no-underline text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
+            className="inline-flex items-center justify-center min-h-[52px] bg-gold text-navy px-9 text-sm font-semibold tracking-[0.18em] uppercase no-underline border border-gold transition-colors duration-200 hover:bg-gold-dark hover:border-gold-dark"
           >
-            View Ongoing Projects
+            Explore Current Projects
           </Link>
           <Link
-            to="/contact"
-            className="inline-block bg-transparent text-white/80 px-10 py-4 no-underline text-sm tracking-[2px] uppercase border border-white/30 transition-all duration-300 hover:border-gold hover:text-gold"
+            to="/book-a-call"
+            className="group inline-flex items-center justify-center sm:justify-start gap-2 min-h-[44px] text-sm tracking-[0.18em] uppercase text-white/90 no-underline transition-colors duration-200 hover:text-gold"
           >
-            Get in Touch
+            Book a site visit
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </Link>
         </div>
-      </div>
 
-      {/* Bottom gradient fade into stats strip */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-navy-dark pointer-events-none z-10" />
-
-      {/* Scroll indicator */}
-      <div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 hero-item"
-        style={{ animationDelay: '1.3s' }}
-      >
-        <span className="text-[0.5rem] tracking-[3px] uppercase text-white/35">Scroll</span>
-        <div className="w-px h-10 overflow-hidden relative">
-          <div
-            className="absolute inset-0 bg-gradient-to-b from-white/60 to-transparent"
-            style={{ animation: 'scrollDrop 1.6s ease-in-out infinite' }}
-          />
-        </div>
+        {/* Proof strip */}
+        <dl className="hero-item grid grid-cols-3 gap-4 mt-16 pt-8 border-t border-white/15 max-w-[480px]" style={{ animationDelay: '0.6s' }}>
+          {[
+            ['55+', 'Years'],
+            ['50+', 'Projects'],
+            ['3,000+', 'Families'],
+          ].map(([value, label]) => (
+            <div key={label}>
+              <dt className="sr-only">{label}</dt>
+              <dd className="m-0">
+                <span className="block font-serif text-2xl sm:text-3xl text-gold leading-none">{value}</span>
+                <span className="block text-xs tracking-[0.2em] uppercase text-white/70 mt-2" aria-hidden="true">{label}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
-    </div>
+    </section>
   );
 }

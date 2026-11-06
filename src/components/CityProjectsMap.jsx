@@ -36,7 +36,7 @@ export default function CityProjectsMap({ ongoing, upcoming, completed }) {
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 text-[0.625rem] tracking-[2px] uppercase border transition-all duration-200 bg-transparent cursor-pointer ${
+            className={`px-4 py-2 text-xs tracking-[2px] uppercase border transition-all duration-200 bg-transparent cursor-pointer ${
               filter === f
                 ? 'border-gold text-gold bg-gold/10'
                 : 'border-white/20 text-white/50 hover:border-gold/40 hover:text-white/80'
@@ -119,7 +119,7 @@ export default function CityProjectsMap({ ongoing, upcoming, completed }) {
       {/* Legend */}
       <div className="flex justify-center gap-8 mt-5">
         {LEGEND.map(({ type, label }) => (
-          <span key={type} className="flex items-center gap-2 text-[0.625rem] tracking-[1.5px] uppercase text-white/50">
+          <span key={type} className="flex items-center gap-2 text-xs tracking-[1.5px] uppercase text-white/50">
             <span
               className="block w-2.5 h-2.5 rounded-full shrink-0"
               style={{ backgroundColor: STYLE[type].bg, opacity: STYLE[type].opacity }}

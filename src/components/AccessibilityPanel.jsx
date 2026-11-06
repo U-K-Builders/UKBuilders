@@ -70,7 +70,8 @@ export default function AccessibilityPanel() {
       <div className="relative" ref={ref}>
         <button
           onClick={() => setOpen(o => !o)}
-          className={`w-8 h-8 flex items-center justify-center transition-colors duration-300 bg-transparent border-none cursor-pointer shrink-0 ${open ? 'text-gold' : 'text-white/60 hover:text-gold'}`}
+          aria-expanded={open}
+          className={`w-11 h-11 flex items-center justify-center transition-colors duration-200 bg-transparent border-none cursor-pointer shrink-0 ${open ? 'text-gold' : 'text-white/75 hover:text-gold'}`}
           aria-label="Accessibility options"
           title="Accessibility options"
         >
@@ -80,12 +81,12 @@ export default function AccessibilityPanel() {
         {open && (
           <div className="absolute top-full right-0 mt-2 w-72 bg-navy border border-gold/30 shadow-[0_12px_40px_rgba(0,0,0,0.5)] z-[60]">
             <div className="px-4 py-3 border-b border-white/10">
-              <p className="text-[0.625rem] tracking-[2.5px] uppercase text-gold m-0">Accessibility</p>
+              <p className="text-xs tracking-[2.5px] uppercase text-gold m-0">Accessibility</p>
             </div>
 
             {/* Dark mode */}
             <div className="px-4 py-4 border-b border-white/10">
-              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Display</p>
+              <p className="text-xs tracking-[2px] uppercase text-white/50 mb-3">Display</p>
               <button
                 onClick={toggleDark}
                 className="w-full flex items-center justify-between px-3 py-2.5 border border-white/10 hover:border-gold/50 hover:text-white text-white/60 transition-all duration-200 bg-transparent cursor-pointer"
@@ -97,7 +98,7 @@ export default function AccessibilityPanel() {
 
             {/* Text size */}
             <div className="px-4 py-4 border-b border-white/10">
-              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Text Size</p>
+              <p className="text-xs tracking-[2px] uppercase text-white/50 mb-3">Text Size</p>
               <div className="flex gap-2">
                 {SIZE_LABELS.map((label, i) => (
                   <button
@@ -116,7 +117,7 @@ export default function AccessibilityPanel() {
               </div>
               <div className="flex gap-2 mt-1.5">
                 {SIZE_LABELS.map((label, i) => (
-                  <span key={i} className={`flex-1 text-center text-[0.5625rem] tracking-[0.5px] uppercase transition-colors duration-200 ${textSize === i ? 'text-gold' : 'text-white/30'}`}>
+                  <span key={i} className={`flex-1 text-center text-xs tracking-[0.5px] uppercase transition-colors duration-200 ${textSize === i ? 'text-gold' : 'text-white/30'}`}>
                     {label}
                   </span>
                 ))}
@@ -125,7 +126,7 @@ export default function AccessibilityPanel() {
 
             {/* Colour vision */}
             <div className="px-4 py-4">
-              <p className="text-[0.625rem] tracking-[2px] uppercase text-white/50 mb-3">Colour Vision</p>
+              <p className="text-xs tracking-[2px] uppercase text-white/50 mb-3">Colour Vision</p>
               <div className="flex flex-col gap-1.5">
                 {COLOR_MODES.map((mode, i) => (
                   <button
@@ -138,7 +139,7 @@ export default function AccessibilityPanel() {
                     }`}
                   >
                     <span className="block text-[0.75rem] tracking-[0.5px]">{mode.label}</span>
-                    <span className="block text-[0.625rem] opacity-60 mt-0.5">{mode.desc}</span>
+                    <span className="block text-xs opacity-60 mt-0.5">{mode.desc}</span>
                   </button>
                 ))}
               </div>

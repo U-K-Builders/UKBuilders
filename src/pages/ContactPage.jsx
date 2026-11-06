@@ -92,7 +92,7 @@ export default function ContactPage() {
                   </p>
                   <button
                     onClick={() => { setSubmitted(false); setFields({ name: '', email: '', phone: '', interest: PROJECT_OPTIONS[0], message: '' }); }}
-                    className="mt-6 text-sm uppercase tracking-[2px] text-gold border border-gold px-6 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+                    className="mt-6 text-sm uppercase tracking-[2px] text-gold border border-gold px-6 py-2 hover:bg-gold hover:text-navy transition-all duration-300"
                   >
                     Send Another
                   </button>
@@ -100,7 +100,7 @@ export default function ContactPage() {
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
                   <div>
-                    <label htmlFor="name" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+                    <label htmlFor="name" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
                       Full Name <span className="text-gold">*</span>
                     </label>
                     <input
@@ -117,7 +117,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+                    <label htmlFor="email" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
                       Email Address <span className="text-gold">*</span>
                     </label>
                     <input
@@ -134,7 +134,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+                    <label htmlFor="phone" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
                       Phone Number <span className="text-text-muted font-normal normal-case tracking-normal">(optional)</span>
                     </label>
                     <input
@@ -151,7 +151,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="interest" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+                    <label htmlFor="interest" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
                       Interested In
                     </label>
                     <select
@@ -168,7 +168,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-[0.6875rem] uppercase tracking-[2px] text-navy font-bold mb-2">
+                    <label htmlFor="message" className="block text-xs uppercase tracking-[2px] text-navy font-bold mb-2">
                       Message <span className="text-gold">*</span>
                     </label>
                     <textarea
@@ -185,7 +185,7 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="self-start bg-gold text-white px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
+                    className="self-start bg-gold text-navy px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
                   >
                     Send Message
                   </button>
@@ -207,7 +207,7 @@ export default function ContactPage() {
                   href="https://maps.google.com/?q=F-34+Sej+Plaza+Marve+Road+Malad+West+Mumbai+400064"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-[2px] text-gold border border-gold/50 px-4 py-2 hover:bg-gold hover:text-white transition-all duration-300"
+                  className="inline-flex items-center gap-2 text-xs uppercase tracking-[2px] text-gold border border-gold/50 px-4 py-2 hover:bg-gold hover:text-navy transition-all duration-300"
                 >
                   <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>

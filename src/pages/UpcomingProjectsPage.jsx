@@ -31,14 +31,14 @@ export default function UpcomingProjectsPage() {
               {/* Waitlist CTA */}
               <div className="bg-navy border border-gold/30 px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                  <p className="text-gold text-[0.6875rem] uppercase tracking-[3px] font-bold mb-1">Pre-launch Waitlist Open</p>
+                  <p className="text-gold text-xs uppercase tracking-[3px] font-bold mb-1">Pre-launch Waitlist Open</p>
                   <p className="text-text-light text-sm leading-[1.7]">
                     Be the first to receive pricing, floor plans and early-bird availability for {project.name}.
                   </p>
                 </div>
                 <button
                   onClick={() => setWaitlistProject(project.name)}
-                  className="shrink-0 bg-gold text-white px-8 py-3 text-[0.6875rem] uppercase tracking-[3px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 cursor-pointer"
+                  className="shrink-0 bg-gold text-navy px-8 py-3 text-xs uppercase tracking-[3px] border border-gold hover:bg-transparent hover:text-gold transition-all duration-300 cursor-pointer"
                 >
                   Notify Me
                 </button>
