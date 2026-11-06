@@ -63,10 +63,10 @@ export default function HistoryPage() {
             {/* U.K. Builders */}
             <div className="bg-navy border border-gold p-8 text-center flex flex-col">
               <span className="block text-gold font-serif text-2xl font-bold uppercase tracking-[3px] mb-1">U.K. Builders</span>
-              <span className="block text-[0.6875rem] uppercase tracking-[2px] text-text-muted mb-5">Est. 1969 · Kishore Shah</span>
+              <span className="block text-[0.6875rem] uppercase tracking-[2px] text-text-muted mb-5">Est. 1981 · Kishore Shah</span>
               <div className="w-10 h-[2px] bg-gold mx-auto mb-6" />
               <p className="text-text-light text-sm leading-[1.9] flex-1">
-                The founding company, established by Kishore Shah in 1969. Built on a foundation of trust and an uncompromising commitment to quality, U.K. Builders has delivered over 50 projects and 3,000+ homes across Malad West — making it one of the western suburbs&apos; most enduring names in residential construction.
+                The founding company, established by Kishore Shah in 1981 — formalising the construction practice he began in 1969. Built on a foundation of trust and an uncompromising commitment to quality, U.K. Builders has delivered over 50 projects and 3,000+ homes across Malad West — making it one of the western suburbs&apos; most enduring names in residential construction.
               </p>
             </div>
 

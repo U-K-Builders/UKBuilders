@@ -140,7 +140,7 @@ export default function RedevelopmentPage() {
         </h1>
         <span className="block w-[60px] h-[2px] bg-gold mx-auto mb-6" />
         <p className="text-text-muted max-w-[600px] mx-auto text-sm leading-[1.8]">
-          Transform your ageing building into a modern, spacious home — with a larger flat, full corpus fund, and zero displacement stress. Trusted by societies in Malad since 1972.
+          Transform your ageing building into a modern, spacious home — with a larger flat, full corpus fund, and zero displacement stress. Trusted by societies in Malad since 1969.
         </p>
       </div>
 

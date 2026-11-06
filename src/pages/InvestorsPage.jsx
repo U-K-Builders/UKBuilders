@@ -6,7 +6,7 @@ const HIGHLIGHTS = [
   {
     stat: '55+',
     label: 'Years of Delivered Excellence',
-    desc: 'A proven track record since 1972 across 33 completed projects — zero project abandonment, every possession honoured.',
+    desc: 'A proven track record since 1969 across 50+ completed projects — zero project abandonment, every possession honoured.',
   },
   {
     stat: '₹2 Cr+',
@@ -188,7 +188,7 @@ export default function InvestorsPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
                 { name: 'Justin', config: '2, 3 & 4 BHK', possession: '2027', carpet: '620 – 1,367 sq.ft.', note: 'Final units available' },
-                { name: 'Christina', config: '2, 3 & 4 BHK', possession: '2027', carpet: '650 – 1,470 sq.ft.', note: 'Limited inventory' },
+                { name: 'Christina', config: '2, 3 & 4 BHK', possession: '2028', carpet: '650 – 1,470 sq.ft.', note: 'Limited inventory' },
                 { name: 'Elvira', config: '1 & 2 BHK', possession: '2027', carpet: '400 – 725 sq.ft.', note: 'Compact investment entry' },
               ].map((p) => (
                 <div key={p.name} className="border border-gold/40 bg-navy text-white p-8 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300">

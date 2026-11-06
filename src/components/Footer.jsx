@@ -5,7 +5,7 @@ const MAPS_URL = 'https://www.google.com/maps/place/U.K.+Builders/@19.1919081,72
 const SOCIAL = {
   instagram: 'https://www.instagram.com/u.k.builders',
   facebook: 'https://www.facebook.com/people/UK-Builders/100089528300390/',
-  linkedin: 'https://www.linkedin.com/company/u-k-builders/',
+  linkedin: 'https://www.linkedin.com/company/u-k-builders-1981/',
   whatsapp: 'https://wa.me/917710038007',
 };
 

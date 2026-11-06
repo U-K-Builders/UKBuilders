@@ -7,7 +7,7 @@ export const ongoingProjects = [
     configs: 'Exclusive 2, 3 & 4 BHK',
     location: 'Sunder Cross Lane, Orlem, Malad West',
     lat: 19.1950, lng: 72.8355,
-    possession: '2027-12',
+    possession: '2027-08',
   },
   {
     name: 'Christina',
@@ -17,7 +17,7 @@ export const ongoingProjects = [
     configs: 'Exclusive 2, 3, & 4 BHK',
     location: 'Dominic Colony, Orlem, Malad West',
     lat: 19.1970, lng: 72.8399,
-    possession: '2028-06',
+    possession: '2028-08',
   },
 ];
 
