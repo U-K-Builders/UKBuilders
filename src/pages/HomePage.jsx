@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import SectionTitle from '../components/SectionTitle';
 import ProjectCard from '../components/ProjectCard';
-import SignatureCard from '../components/SignatureCard';
 import TestimonialCard from '../components/TestimonialCard';
 import Carousel from '../components/Carousel';
+import Carousel3D from '../components/Carousel3D';
 import TrustPillars from '../components/TrustPillars';
 import { ongoingProjects, upcomingProjects, publicCompletedProjects, completedWithPhotos } from '../data/projects';
 import { testimonials } from '../data/testimonials';
@@ -73,18 +73,42 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Legacy projects ──────────────────────────────────────────────── */}
-      <div className="py-24 px-5 bg-surface-subtle" ref={legacyRef}>
+      {/* ── Legacy projects (3D ring) ─────────────────────────────────────── */}
+      <div className="py-24 px-5 bg-navy-dark text-white overflow-hidden" ref={legacyRef}>
         <div className="max-w-[1200px] mx-auto">
           <div style={slide(legacyInView)}>
-            <SectionTitle>Legacy Projects</SectionTitle>
+            <p className="text-center text-xs uppercase tracking-[4px] text-gold mb-3">Since 1969</p>
+            <SectionTitle className="!text-white !mb-6">Legacy Projects</SectionTitle>
+            <p className="text-center text-white/70 max-w-[520px] mx-auto mb-12 leading-[1.8]">
+              Five decades of homes across Orlem and Malad West. A few of our recent buildings.
+            </p>
           </div>
           <div style={slide(legacyInView, 150)}>
-            <Carousel interval={5000} visibleCount={3}>
-              {completedWithPhotos.map((project) => (
-                <SignatureCard key={`${project.name}-${project.year}`} project={project} className="h-full" />
-              ))}
-            </Carousel>
+            <Carousel3D
+              label="Legacy projects"
+              items={completedWithPhotos}
+              getKey={(p) => `${p.name}-${p.year}`}
+              getLabel={(p) => `${p.name}, completed ${p.year}`}
+              renderItem={(project) => (
+                <article className="h-full flex flex-col bg-navy border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.45)] overflow-hidden">
+                  <div className="relative grow min-h-0 bg-white/5">
+                    <img
+                      src={project.image}
+                      alt={project.alt || project.name}
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-4 sm:p-5 text-left">
+                    <p className="text-xs uppercase tracking-[3px] text-gold mb-2">Completed {project.year}</p>
+                    <h3 className="font-serif text-white text-xl tracking-[1px] mb-2">{project.name}</h3>
+                    <p className="hidden sm:[display:-webkit-box] text-white/70 text-sm leading-[1.6] line-clamp-2">{project.description}</p>
+                  </div>
+                </article>
+              )}
+            />
           </div>
           <div className="text-center mt-12" style={slide(legacyInView, 300)}>
             <Link
