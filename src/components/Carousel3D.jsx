@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 /*
  * 3D ring carousel: cards sit on a rotating cylinder. The front card faces
- * the viewer; its neighbours turn away at `sideAngle` (60°); the rest are hidden.
+ * the viewer; its neighbours turn away at `sideAngle` (45°); the rest are hidden.
  *
  *   <Carousel3D items={projects} label="Legacy projects"
  *               getKey={(p) => p.name} renderItem={(p) => <Card … />} />
@@ -18,7 +18,7 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 
-export default function Carousel3D({ items, renderItem, getKey, getLabel, label, interval = 4500, maxCardWidth = 320, cardRatio = 1.25, sideAngle = 60 }) {
+export default function Carousel3D({ items, renderItem, getKey, getLabel, label, interval = 4500, maxCardWidth = 320, cardRatio = 1.25, sideAngle = 45 }) {
   const total = items.length;
   const [step, setStep] = useState(0);            // unbounded, so the ring never spins backwards to wrap
   const [cardWidth, setCardWidth] = useState(maxCardWidth);
