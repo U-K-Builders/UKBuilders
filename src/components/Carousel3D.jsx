@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 /*
  * 3D ring carousel: cards sit on a rotating cylinder. The front card faces
- * the viewer; its neighbours turn away at a steep angle; the rest are hidden.
+ * the viewer; its neighbours turn away at `sideAngle` (60°); the rest are hidden.
  *
  *   <Carousel3D items={projects} label="Legacy projects"
  *               getKey={(p) => p.name} renderItem={(p) => <Card … />} />
@@ -18,7 +18,7 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 
-export default function Carousel3D({ items, renderItem, getKey, getLabel, label, interval = 4500, maxCardWidth = 320, cardRatio = 1.25 }) {
+export default function Carousel3D({ items, renderItem, getKey, getLabel, label, interval = 4500, maxCardWidth = 320, cardRatio = 1.25, sideAngle = 60 }) {
   const total = items.length;
   const [step, setStep] = useState(0);            // unbounded, so the ring never spins backwards to wrap
   const [cardWidth, setCardWidth] = useState(maxCardWidth);
@@ -31,9 +31,10 @@ export default function Carousel3D({ items, renderItem, getKey, getLabel, label,
   const dragX = useRef(null);
 
   const active = mod(step, total);
-  const angle = 360 / total;
-  // Distance from the centre of the ring to each card, with a little spacing.
-  const radius = Math.round((cardWidth / 2 / Math.tan(Math.PI / total)) * 1.18);
+  // Each card is placed by its offset from the front card (d = -1, 0, 1 …),
+  // so the side cards sit at exactly `sideAngle` degrees whatever the count.
+  // Cards further than one step away are hidden. Works best with 5+ items.
+  const radius = Math.round((cardWidth / 2 / Math.tan((sideAngle / 2) * (Math.PI / 180))) * 1.18);
 
   // Fit the card size to the available width.
   useEffect(() => {
@@ -124,13 +125,13 @@ export default function Carousel3D({ items, renderItem, getKey, getLabel, label,
           style={{ width: cardWidth * 2.2 }}
         />
         <div
-          className="absolute left-1/2 top-5 motion-safe:transition-transform motion-safe:duration-[900ms] motion-safe:ease-[cubic-bezier(.22,.8,.2,1)]"
+          className="absolute left-1/2 top-5"
           style={{
             width: cardWidth,
             height: cardHeight,
             marginLeft: -cardWidth / 2,
             transformStyle: 'preserve-3d',
-            transform: `translateZ(${-radius}px) rotateY(${-step * angle}deg)`,
+            transform: `translateZ(${-radius}px)`,
           }}
         >
           {items.map((item, i) => {
@@ -147,11 +148,11 @@ export default function Carousel3D({ items, renderItem, getKey, getLabel, label,
                 aria-hidden={!isActive}
                 inert={!isActive}
                 onClick={!isActive && visible ? () => go(d) : undefined}
-                className={`absolute inset-0 motion-safe:transition-opacity motion-safe:duration-700 ${
+                className={`absolute inset-0 motion-safe:transition-[transform,opacity] motion-safe:duration-[900ms] motion-safe:ease-[cubic-bezier(.22,.8,.2,1)] ${
                   !isActive && visible ? 'cursor-pointer' : ''
                 }`}
                 style={{
-                  transform: `rotateY(${i * angle}deg) translateZ(${radius}px)`,
+                  transform: `rotateY(${d * sideAngle}deg) translateZ(${radius}px)`,
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
                   opacity: visible ? 1 : 0,
