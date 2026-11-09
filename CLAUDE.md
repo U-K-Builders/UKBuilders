@@ -49,9 +49,11 @@ See "Leads and security" below: photos live in `photos/`, web copies are generat
 
 ## Branch workflow (agreed November 2026)
 
-- `main` is the live site; every push deploys to production. Don't commit unfinished work to it.
-- Do new UI and feature work on `ui` (or a branch from it) and test on the Vercel preview.
-- Before merging into `main`, copy the current `main` to `backup/main-YYYY-MM-DD`.
+- `main` is the live site; every push deploys to production.
+- **Never push or merge to `main` without the owner's explicit approval** (they say "release" or merge the pull request themselves). Finishing a change, or a request like "push it", is not approval to go live: push to the feature branch and share the preview link.
+- Do each piece of work on its own branch, `feature/<short-name>`, made from `ui` (or from `main` if `ui` has unreleased work you shouldn't include). Every push gets a Vercel preview at `uk-builders-git-<branch-with-dashes>-uk-builders.vercel.app` (Vercel login needed).
+- `ui` collects work that is approved but not yet released.
+- When the owner approves a release: copy the current `main` to `backup/main-YYYY-MM-DD`, then merge into `main`.
 
 ## Leads and security
 

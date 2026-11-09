@@ -43,9 +43,11 @@ Secrets are added by Avi in the dashboards, never pasted into chat or files.
 
 ## 3. Website: how it works now
 
-- **Branches:** `main` = live (every push deploys). `ui` = new work, previewed
-  on Vercel. Before each release copy `main` to `backup/main-YYYY-MM-DD`, then
-  merge `ui` into `main`. Current backup: `backup/main-2026-11-06`.
+- **Branches:** `main` = live (every push deploys) and **only changes with the
+  owner's explicit approval**. Each piece of work gets its own
+  `feature/<name>` branch with its own Vercel preview. `ui` holds approved work
+  waiting for release. Before each release copy `main` to
+  `backup/main-YYYY-MM-DD`, then merge. In progress: `feature/3d-carousel`.
   Old merged branches (`ui-redesign`, `claude/*`, `archive/owner-portal-admin`)
   can be deleted.
 - **Leads:** every form → `useLeadSubmit` hook → `POST /api/lead`
