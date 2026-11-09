@@ -18,7 +18,7 @@ function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 }
 
-export default function Carousel3D({ items, renderItem, getKey, getLabel, label, interval = 4500, maxCardWidth = 320 }) {
+export default function Carousel3D({ items, renderItem, getKey, getLabel, label, interval = 4500, maxCardWidth = 320, cardRatio = 1.25 }) {
   const total = items.length;
   const [step, setStep] = useState(0);            // unbounded, so the ring never spins backwards to wrap
   const [cardWidth, setCardWidth] = useState(maxCardWidth);
@@ -91,7 +91,7 @@ export default function Carousel3D({ items, renderItem, getKey, getLabel, label,
 
   if (total === 0) return null;
 
-  const cardHeight = Math.round(cardWidth * 1.25);
+  const cardHeight = Math.round(cardWidth * cardRatio);
   const btn =
     'w-11 h-11 flex items-center justify-center border border-white/25 text-white/80 hover:border-gold hover:text-gold transition-colors duration-200 cursor-pointer bg-transparent';
 

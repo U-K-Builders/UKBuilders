@@ -86,25 +86,37 @@ export default function HomePage() {
           <div style={slide(legacyInView, 150)}>
             <Carousel3D
               label="Legacy projects"
+              maxCardWidth={290}
+              cardRatio={1.72}
               items={completedWithPhotos}
               getKey={(p) => `${p.name}-${p.year}`}
               getLabel={(p) => `${p.name}, completed ${p.year}`}
               renderItem={(project) => (
                 <article className="h-full flex flex-col bg-navy border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.45)] overflow-hidden">
-                  <div className="relative grow min-h-0 bg-white/5">
+                  <div className="relative grow min-h-0 overflow-hidden bg-navy-dark">
+                    {/* Blurred copy fills any gap; the real photo is shown whole. */}
+                    <img
+                      src={project.image}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false"
+                      className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-50"
+                    />
                     <img
                       src={project.image}
                       alt={project.alt || project.name}
                       loading="lazy"
                       decoding="async"
                       draggable="false"
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="relative w-full h-full object-contain"
                     />
                   </div>
                   <div className="p-4 sm:p-5 text-left">
                     <p className="text-xs uppercase tracking-[3px] text-gold mb-2">Completed {project.year}</p>
                     <h3 className="font-serif text-white text-xl tracking-[1px] mb-2">{project.name}</h3>
-                    <p className="hidden sm:[display:-webkit-box] text-white/70 text-sm leading-[1.6] line-clamp-2">{project.description}</p>
+                    <p className="text-white/70 text-sm leading-[1.6] line-clamp-2">{project.description}</p>
                   </div>
                 </article>
               )}
