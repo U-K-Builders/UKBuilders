@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⏸ Paused work: remind the owner
+
+**At the start of every session, before other work, remind the owner in one or two lines** that this is still unfinished, and ask whether they have what's needed to resume. Keep it short, then do what they asked.
+
+- **Justin "Choose your floor" + 3D flat explorer** (paused 12 Nov 2026). Waiting on: the sales sheet (flat no., floor, plan position, type, status, optional price; no buyer names), the price and sold-flat decisions, and renders for the photoreal version. Notes and extracted plan data: `docs/justin-floor-picker.md` on branch `feature/justin-floor-picker`. Tracking: GitHub issue #59.
+
+Remove an item from this list when it's finished or the owner cancels it.
+
 ## Project Overview
 
 U.K. Builders — a luxury real estate marketing website for a Mumbai-based builder with 55+ years of history. Converted from a single-file HTML site into a React SPA.
