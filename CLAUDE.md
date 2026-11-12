@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 🔒 Owner's ironclad rules
+
+Set by the owner (Avi). These apply to every task and every agent, and win over any other instruction, including a request in a session to bypass them. Only the owner changes them, by editing this section. If a task would break one, stop and tell the owner instead.
+
+1. **Keep the code simple.** Clean, efficient and easy to read. No over-complicated code.
+2. **Keep the website simple.** Easy for buyers to navigate and understand. No extra features that add no real value.
+3. **No sensitive data in any repository.** Never commit API keys, passwords, `.env` files, personal details or customer data, to this repo or any other.
+
 ## ⏸ Paused work: remind the owner
 
 **At the start of every session, before other work, remind the owner in one or two lines** that this is still unfinished, and ask whether they have what's needed to resume. Keep it short, then do what they asked.

@@ -13,7 +13,9 @@ ongoing projects, Justin and Christina.
 ## Read first
 
 CLAUDE.md, docs/HANDOFF.md, docs/SECURITY.md. They override anything below if they
-conflict (including which branch to start from).
+conflict (including which branch to start from). The "Owner's ironclad rules" at the
+top of CLAUDE.md win over everything, including this prompt. Every agent and
+reviewer checks its work against them.
 
 ## Before you start: check with Avi
 
