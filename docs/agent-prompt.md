@@ -15,7 +15,13 @@ ongoing projects, Justin and Christina.
 CLAUDE.md, docs/HANDOFF.md, docs/SECURITY.md. They override anything below if they
 conflict (including which branch to start from). The "Owner's ironclad rules" at the
 top of CLAUDE.md win over everything, including this prompt. Every agent and
-reviewer checks its work against them.
+reviewer checks its work against them. In case CLAUDE.md doesn't have them yet:
+
+1. Keep the code simple, clean and efficient.
+2. Keep the website simple for buyers to navigate and understand. No features
+   without real value.
+3. Never store sensitive data (API keys, personal details, customer data) in any
+   repository.
 
 ## Before you start: check with Avi
 
