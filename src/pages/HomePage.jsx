@@ -105,7 +105,7 @@ export default function HomePage() {
                     />
                   </div>
                   <div className="shrink-0 px-3 py-3 text-left">
-                    <p className="text-[0.6875rem] leading-none uppercase tracking-[3px] text-gold mb-2">Completed {project.year}</p>
+                    <p className="text-xs leading-none uppercase tracking-[3px] text-gold mb-2">Completed {project.year}</p>
                     {/* One line, sized to the card width. */}
                     <h3
                       className="font-serif text-white leading-tight whitespace-nowrap overflow-hidden text-ellipsis"

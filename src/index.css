@@ -7,6 +7,10 @@
    accessible variants so every text/background pair meets WCAG AA 4.5:1.
    ═══════════════════════════════════════════════════════════════════════════ */
 @theme {
+  /* Extra screen sizes for large monitors (Tailwind's largest is 2xl = 1536px) */
+  --breakpoint-3xl: 120rem;  /* 1920px */
+  --breakpoint-4xl: 150rem;  /* 2400px */
+
   --color-navy:      #0A1828;
   --color-navy-dark: #050e1a;
   --color-gold:      #D4A84E;   /* on dark surfaces: 8.1:1 on navy            */
@@ -160,8 +164,9 @@ button[class*="bg-gold"]:active {
 ::-webkit-scrollbar-thumb { background: rgba(131, 104, 48, 0.45); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(131, 104, 48, 0.7); }
 
-/* Leave room for the mobile action bar so it never covers content */
-@media (max-width: 767px) {
+/* Leave room for the mobile action bar so it never covers content.
+   (The bar is hidden on short landscape screens, so no padding there.) */
+@media (max-width: 767px) and (min-height: 501px) {
   body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
 }
 
