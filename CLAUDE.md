@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⏸ Paused work: remind the owner
+
+**At the start of every session, before other work, remind the owner in one or two lines** that this is still unfinished, and ask whether they have what's needed to resume. Keep it short, then do what they asked.
+
+- **Justin "Choose your floor" + 3D flat explorer** (paused 12 Nov 2026). Waiting on: the sales sheet (flat no., floor, plan position, type, status, optional price; no buyer names), the price and sold-flat decisions, and renders for the photoreal version. Notes and extracted plan data: `docs/justin-floor-picker.md` on branch `feature/justin-floor-picker`. Tracking: GitHub issue #59.
+
+Remove an item from this list when it's finished or the owner cancels it.
+
 ## Project Overview
 
 U.K. Builders — a luxury real estate marketing website for a Mumbai-based builder with 55+ years of history. Converted from a single-file HTML site into a React SPA.
@@ -49,9 +57,11 @@ See "Leads and security" below: photos live in `photos/`, web copies are generat
 
 ## Branch workflow (agreed November 2026)
 
-- `main` is the live site; every push deploys to production. Don't commit unfinished work to it.
-- Do new UI and feature work on `ui` (or a branch from it) and test on the Vercel preview.
-- Before merging into `main`, copy the current `main` to `backup/main-YYYY-MM-DD`.
+- `main` is the live site; every push deploys to production.
+- **Never push or merge to `main` without the owner's explicit approval** (they say "release" or merge the pull request themselves). Finishing a change, or a request like "push it", is not approval to go live: push to the feature branch and share the preview link.
+- Do each piece of work on its own branch, `feature/<short-name>`, made from `ui` (or from `main` if `ui` has unreleased work you shouldn't include). Every push gets a Vercel preview at `uk-builders-git-<branch-with-dashes>-uk-builders.vercel.app` (Vercel login needed).
+- `ui` collects work that is approved but not yet released.
+- When the owner approves a release: copy the current `main` to `backup/main-YYYY-MM-DD`, then merge into `main`.
 
 ## Leads and security
 
