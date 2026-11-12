@@ -163,7 +163,7 @@ export default function Carousel3D({ items, renderItem, getKey, getLabel, label,
                   className="h-full motion-safe:transition-[filter] motion-safe:duration-700"
                   style={{ filter: isActive ? 'none' : 'brightness(0.55)' }}
                 >
-                  {renderItem(item, isActive)}
+                  {renderItem(item, isActive, cardWidth)}
                 </div>
               </div>
             );

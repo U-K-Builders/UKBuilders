@@ -55,6 +55,14 @@ See "Leads and security" below: photos live in `photos/`, web copies are generat
 - Mobile nav is a hamburger menu with collapsible Projects sub-menu (state in `Header.jsx`)
 - All page components apply `.animate-fade-in` on their root div
 
+## Screen sizes (every device must work)
+
+The site is tested from 280px (folded flip-phone cover screens) to 3440px (ultra-wide monitors), including foldables (iPhone Duo, Galaxy Z Fold, tri-folds), Surface Duo, iPads in both orientations, and phones held sideways.
+- Full header menu from `xl` (1280px). Below that: menu button; the header Enquire button shows from `md` (768px).
+- Bottom Call / WhatsApp / Enquire bar: below 768px wide, but hidden on short landscape screens (`[@media(max-height:500px)]`), where Enquire moves into the header.
+- Extra breakpoints in `src/index.css`: `3xl` = 1920px, `4xl` = 2400px (used to scale the hero up on big monitors).
+- Never let text wrap inside menu items (`whitespace-nowrap`); never allow sideways page scrolling.
+
 ## Branch workflow (agreed November 2026)
 
 - `main` is the live site; every push deploys to production.

@@ -124,15 +124,17 @@ Locally, `npm run dev` serves the site but not `api/`, so forms show an error. T
 
 | Branch | Purpose |
 |---|---|
-| `main` | **The live site.** Every push deploys to production. Keep it working. |
-| `ui` | New design and feature work. Every push gets a Vercel preview (Vercel login needed). |
+| `main` | **The live site.** Every push deploys to production. Nothing goes here without the owner's approval. |
+| `feature/<name>` | One branch per piece of work (e.g. `feature/3d-carousel`). Every push gets its own Vercel preview (Vercel login needed). Never goes live by itself. |
+| `ui` | Approved work waiting to be released. |
 | `backup/main-YYYY-MM-DD` | A copy of `main` taken just before each release, so you can go back. |
 
 **Releasing new work**
 
-1. Build and test on `ui` (or a branch made from it). Check the Vercel preview on a phone and a laptop.
-2. Save the current live site: create `backup/main-<today's date>` from `main`.
-3. Merge `ui` into `main`. Vercel deploys it.
+1. Build on a `feature/<name>` branch. Check its Vercel preview on a phone and a laptop: `https://uk-builders-git-feature-<name>-uk-builders.vercel.app`.
+2. The owner approves (says "release", or merges a pull request on GitHub).
+3. Save the current live site: create `backup/main-<today's date>` from `main`.
+4. Merge into `main`. Vercel deploys it.
 4. If something breaks, either promote the previous deployment in Vercel (Deployments → ⋯ → Promote) or reset `main` to the backup branch.
 
 Older branches (`ui-redesign`, `claude/...`) are already merged and can be deleted.

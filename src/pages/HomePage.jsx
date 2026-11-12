@@ -86,37 +86,33 @@ export default function HomePage() {
           <div style={slide(legacyInView, 150)}>
             <Carousel3D
               label="Legacy projects"
-              maxCardWidth={290}
-              cardRatio={1.72}
+              maxCardWidth={300}
+              cardRatio={1.48}
               items={completedWithPhotos}
               getKey={(p) => `${p.name}-${p.year}`}
               getLabel={(p) => `${p.name}, completed ${p.year}`}
-              renderItem={(project) => (
+              renderItem={(project, isActive, cardWidth) => (
                 <article className="h-full flex flex-col bg-navy border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.45)] overflow-hidden">
+                  {/* Same frame for every photo; the photo is the focus. */}
                   <div className="relative grow min-h-0 overflow-hidden bg-navy-dark">
-                    {/* Blurred copy fills any gap; the real photo is shown whole. */}
-                    <img
-                      src={project.image}
-                      alt=""
-                      aria-hidden="true"
-                      loading="lazy"
-                      decoding="async"
-                      draggable="false"
-                      className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-50"
-                    />
                     <img
                       src={project.image}
                       alt={project.alt || project.name}
                       loading="lazy"
                       decoding="async"
                       draggable="false"
-                      className="relative w-full h-full object-contain"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
                     />
                   </div>
-                  <div className="p-4 sm:p-5 text-left">
-                    <p className="text-xs uppercase tracking-[3px] text-gold mb-2">Completed {project.year}</p>
-                    <h3 className="font-serif text-white text-xl tracking-[1px] mb-2">{project.name}</h3>
-                    <p className="text-white/70 text-sm leading-[1.6] line-clamp-2">{project.description}</p>
+                  <div className="shrink-0 px-3 py-3 text-left">
+                    <p className="text-xs leading-none uppercase tracking-[3px] text-gold mb-2">Completed {project.year}</p>
+                    {/* One line, sized to the card width. */}
+                    <h3
+                      className="font-serif text-white leading-tight whitespace-nowrap overflow-hidden text-ellipsis"
+                      style={{ fontSize: Math.min(24, Math.floor((cardWidth - 26) / 11)) }}
+                    >
+                      {project.name}
+                    </h3>
                   </div>
                 </article>
               )}

@@ -24,24 +24,24 @@ export default function HeroSection() {
       </div>
 
       {/* Copy */}
-      <div className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-16 xl:pl-24 lg:pr-10 py-16 sm:py-20 min-h-[calc(100svh-68px)] lg:min-h-0 lg:order-1">
-        <p className="hero-item text-xs tracking-[0.35em] uppercase text-gold mb-6" style={{ animationDelay: '0.05s' }}>
+      <div className="relative z-10 flex flex-col justify-center px-6 sm:px-10 lg:pl-16 xl:pl-24 3xl:pl-[8vw] lg:pr-10 py-16 sm:py-20 [@media(max-height:500px)]:py-6 min-h-[calc(100svh-68px)] lg:min-h-0 lg:order-1">
+        <p className="hero-item text-xs 3xl:text-sm tracking-[0.35em] uppercase text-gold mb-6 [@media(max-height:500px)]:mb-3" style={{ animationDelay: '0.05s' }}>
           Mumbai · Since 1969
         </p>
 
         <h1
           id="hero-heading"
-          className="hero-item font-serif font-normal text-[2.5rem] leading-[1.08] sm:text-6xl xl:text-7xl tracking-[0.02em] mb-6 max-w-[11ch]"
+          className="hero-item font-serif font-normal text-[2.5rem] leading-[1.08] sm:text-6xl xl:text-7xl 3xl:text-8xl 4xl:text-[8rem] [@media(max-height:500px)]:text-4xl tracking-[0.02em] mb-6 [@media(max-height:500px)]:mb-3 max-w-[11ch] [@media(max-height:500px)]:max-w-none"
           style={{ animationDelay: '0.15s' }}
         >
           Crafting Legacy Residences
         </h1>
 
-        <p className="hero-item text-lg text-white/80 max-w-[34ch] leading-relaxed mb-10" style={{ animationDelay: '0.3s' }}>
+        <p className="hero-item text-lg 3xl:text-xl 4xl:text-2xl text-white/80 max-w-[34ch] leading-relaxed mb-10 [@media(max-height:500px)]:mb-5 [@media(max-height:500px)]:text-base [@media(max-height:500px)]:max-w-[60ch]" style={{ animationDelay: '0.3s' }}>
           Five decades of homes built to last across Orlem and Malad West. Now presenting Justin and Christina.
         </p>
 
-        <div className="hero-item flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8" style={{ animationDelay: '0.45s' }}>
+        <div className="hero-item flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 [@media(max-height:500px)]:flex-row [@media(max-height:500px)]:items-center" style={{ animationDelay: '0.45s' }}>
           <Link
             to="/projects/ongoing"
             className="inline-flex items-center justify-center min-h-[52px] bg-gold text-navy px-9 text-sm font-semibold tracking-[0.18em] uppercase no-underline border border-gold transition-colors duration-200 hover:bg-gold-dark hover:border-gold-dark"
@@ -60,7 +60,7 @@ export default function HeroSection() {
         </div>
 
         {/* Proof strip */}
-        <dl className="hero-item grid grid-cols-3 gap-4 mt-16 pt-8 border-t border-white/15 max-w-[480px]" style={{ animationDelay: '0.6s' }}>
+        <dl className="hero-item grid grid-cols-3 gap-4 mt-16 pt-8 [@media(max-height:500px)]:hidden border-t border-white/15 max-w-[480px] 4xl:max-w-[640px]" style={{ animationDelay: '0.6s' }}>
           {[
             ['55+', 'Years'],
             ['50+', 'Projects'],
@@ -69,7 +69,7 @@ export default function HeroSection() {
             <div key={label}>
               <dt className="sr-only">{label}</dt>
               <dd className="m-0">
-                <span className="block font-serif text-2xl sm:text-3xl text-gold leading-none">{value}</span>
+                <span className="block font-serif text-2xl sm:text-3xl 4xl:text-4xl text-gold leading-none">{value}</span>
                 <span className="block text-xs tracking-[0.2em] uppercase text-white/70 mt-2" aria-hidden="true">{label}</span>
               </dd>
             </div>

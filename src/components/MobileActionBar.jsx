@@ -10,7 +10,7 @@ export default function MobileActionBar() {
   return (
     <nav
       aria-label="Quick contact"
-      className="on-dark md:hidden fixed bottom-0 inset-x-0 z-40 flex bg-navy border-t border-gold/40 shadow-[0_-6px_24px_rgba(0,0,0,0.35)] pb-[env(safe-area-inset-bottom)]"
+      className="on-dark md:hidden [@media(max-height:500px)]:hidden fixed bottom-0 inset-x-0 z-40 flex bg-navy border-t border-gold/40 shadow-[0_-6px_24px_rgba(0,0,0,0.35)] pb-[env(safe-area-inset-bottom)]"
     >
       <a href={`tel:${PHONE}`} className={`${item} text-white hover:text-gold`}>
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">

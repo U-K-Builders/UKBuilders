@@ -101,7 +101,7 @@ function NavDropdown({ group, active }) {
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((o) => !o)}
-        className={`inline-flex items-center gap-1.5 min-h-[44px] px-1 text-sm tracking-[0.12em] uppercase bg-transparent border-0 cursor-pointer transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`}
+        className={`inline-flex items-center gap-1.5 min-h-[44px] px-1 text-sm tracking-[0.12em] uppercase whitespace-nowrap bg-transparent border-0 cursor-pointer transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`}
       >
         {group.label}
         <Chevron open={open} />
@@ -168,7 +168,7 @@ export default function Header() {
   }, [mobileOpen]);
 
   const linkClass = (active) =>
-    `inline-flex items-center min-h-[44px] px-1 text-sm tracking-[0.12em] uppercase no-underline transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`;
+    `inline-flex items-center min-h-[44px] px-1 text-sm tracking-[0.12em] uppercase whitespace-nowrap no-underline transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`;
 
   const iconBtn = 'w-11 h-11 flex items-center justify-center text-white/75 hover:text-gold transition-colors duration-200 bg-transparent border-0 cursor-pointer shrink-0';
 
@@ -176,14 +176,14 @@ export default function Header() {
     <header
       className={`on-dark sticky top-0 z-50 bg-navy transition-shadow duration-300 ${scrolled ? 'shadow-[0_2px_24px_rgba(0,0,0,0.4)]' : ''}`}
     >
-      <div className={`flex items-center justify-between gap-4 px-4 sm:px-6 lg:px-12 transition-[padding] duration-300 ${scrolled ? 'py-2' : 'py-3.5'}`}>
+      <div className={`flex items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 2xl:px-12 transition-[padding] duration-300 ${scrolled ? 'py-2' : 'py-3.5'}`}>
         <Link to="/" className="flex items-center gap-3 no-underline shrink-0" aria-label="U.K. Builders home">
           <img src={LOGO} alt="" width="40" height="40" className="w-10 h-10 object-contain" />
           <span className="font-serif text-lg sm:text-xl tracking-[0.12em] uppercase text-gold leading-none">U.K. Builders</span>
         </Link>
 
         {/* Desktop navigation */}
-        <nav aria-label="Main" className="hidden lg:flex items-center gap-7">
+        <nav aria-label="Main" className="hidden xl:flex items-center gap-5 2xl:gap-7">
           {NAV.map((entry) =>
             entry.items ? (
               <NavDropdown key={entry.label} group={entry} active={entry.match(pathname)} />
@@ -202,12 +202,12 @@ export default function Header() {
           </button>
           <Link
             to="/contact"
-            className="hidden lg:inline-flex items-center min-h-[44px] ml-2 px-6 bg-gold text-navy text-sm font-semibold tracking-[0.14em] uppercase no-underline border border-gold hover:bg-gold-dark transition-colors duration-200"
+            className="hidden md:inline-flex [@media(max-height:500px)]:inline-flex items-center min-h-[44px] ml-2 px-6 whitespace-nowrap bg-gold text-navy text-sm font-semibold tracking-[0.14em] uppercase no-underline border border-gold hover:bg-gold-dark transition-colors duration-200"
           >
             Enquire
           </Link>
           <button
-            className={`${iconBtn} lg:hidden`}
+            className={`${iconBtn} xl:hidden`}
             onClick={() => setMobileOpen((o) => !o)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
@@ -227,7 +227,7 @@ export default function Header() {
         <nav
           id="mobile-menu"
           aria-label="Main"
-          className="lg:hidden absolute top-full left-0 right-0 h-[calc(100dvh-100%)] overflow-y-auto bg-navy border-t-2 border-gold pb-[calc(96px+env(safe-area-inset-bottom))]"
+          className="xl:hidden absolute top-full left-0 right-0 h-[calc(100dvh-100%)] overflow-y-auto bg-navy border-t-2 border-gold pb-[calc(96px+env(safe-area-inset-bottom))]"
         >
           <ul className="m-0 p-0 list-none">
             <li>
