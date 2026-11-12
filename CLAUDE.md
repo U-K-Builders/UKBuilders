@@ -62,6 +62,7 @@ The site is tested from 280px (folded flip-phone cover screens) to 3440px (ultra
 - Bottom Call / WhatsApp / Enquire bar: below 768px wide, but hidden on short landscape screens (`[@media(max-height:500px)]`), where Enquire moves into the header.
 - Extra breakpoints in `src/index.css`: `3xl` = 1920px, `4xl` = 2400px (used to scale the hero up on big monitors).
 - Never let text wrap inside menu items (`whitespace-nowrap`); never allow sideways page scrolling.
+- **How to test widths:** in mobile emulation a too-wide page doesn't scroll, the browser zooms out. So check `window.innerWidth` equals the width you asked for, and that every header button is on screen. Long single words in big uppercase headings are the usual culprit at 280–360px.
 
 ## Branch workflow (agreed November 2026)
 

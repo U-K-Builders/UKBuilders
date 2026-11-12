@@ -123,7 +123,7 @@ export default function Footer() {
       </div>
 
       {/* ── Nav columns ── */}
-      <div className="border-t border-white/10 mt-10 pt-12 max-w-[900px] mx-auto grid grid-cols-2 md:grid-cols-3 gap-10 text-left">
+      <div className="border-t border-white/10 mt-10 pt-12 max-w-[900px] mx-auto grid grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3 gap-10 text-left">
         {NAV_COLS.map(({ heading, links }) => (
           <div key={heading}>
             <div className="mb-5">

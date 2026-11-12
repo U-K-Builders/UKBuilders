@@ -36,13 +36,13 @@ function PossessionCountdown({ targetDate }) {
       <span className="block text-center text-xs uppercase tracking-[4px] text-gold mb-4">
         Live Countdown to Possession
       </span>
-      <div className="flex justify-center gap-3 md:gap-6">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-6">
         {units.map(({ value, label }) => (
-          <div key={label} className="bg-navy border border-gold/40 px-3 md:px-6 py-3 min-w-[68px] md:min-w-[96px] text-center">
+          <div key={label} className="bg-navy border border-gold/40 px-2 sm:px-3 md:px-6 py-3 min-w-[62px] md:min-w-[96px] text-center">
             <span className="block text-white font-serif text-2xl md:text-4xl font-black tabular-nums leading-none">
               {String(value).padStart(2, '0')}
             </span>
-            <span className="block text-xs md:text-xs uppercase tracking-[2px] text-gold mt-2">
+            <span className="block text-xs uppercase tracking-[1px] sm:tracking-[2px] text-gold mt-2">
               {label}
             </span>
           </div>
@@ -420,9 +420,9 @@ export default function ProjectDetailPage() {
             <>
               <div className={`max-w-[1400px] mx-auto grid ${gridClass} divide-x divide-gold/20`}>
                 {stats.map(({ label, value }) => (
-                  <div key={label} className="px-8 py-10 text-center flex flex-col justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(212,168,78,0.18)] cursor-default">
+                  <div key={label} className="px-3 sm:px-8 py-10 text-center flex flex-col justify-center min-w-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(212,168,78,0.18)] cursor-default">
                     <span className="block text-xs md:text-sm uppercase tracking-[3px] text-gold mb-3 font-semibold">{label}</span>
-                    <span className="block text-white text-base md:text-lg font-serif leading-snug">{value}</span>
+                    <span className="block text-white text-base md:text-lg font-serif leading-snug [overflow-wrap:anywhere]">{value}</span>
                   </div>
                 ))}
               </div>
@@ -490,7 +490,7 @@ export default function ProjectDetailPage() {
                       Sold Out
                     </span>
                   )}
-                  <span className="block gradient-text font-serif text-2xl md:text-3xl font-black tracking-[1.5px] whitespace-nowrap">{plan.type}</span>
+                  <span className="block gradient-text font-serif text-2xl md:text-3xl font-black tracking-[1.5px] text-balance">{plan.type}</span>
                   <span className={`block text-sm font-semibold uppercase tracking-[3px] mt-2 ${plan.subType ? 'text-gold' : 'invisible'}`}>{plan.subType || '—'}</span>
                   <div className="w-12 h-[2px] bg-gold mx-auto my-4" />
                   <p className="text-gold text-sm uppercase tracking-[2px] font-semibold mb-1">Carpet Area</p>

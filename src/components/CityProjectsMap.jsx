@@ -119,7 +119,7 @@ export default function CityProjectsMap({ ongoing, upcoming, completed }) {
       </div>
 
       {/* Legend */}
-      <div className="flex justify-center gap-8 mt-5">
+      <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mt-5">
         {LEGEND.map(({ type, label }) => (
           <span key={type} className="flex items-center gap-2 text-xs tracking-[1.5px] uppercase text-white/50">
             <span

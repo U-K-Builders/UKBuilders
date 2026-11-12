@@ -79,7 +79,7 @@ export default function AccessibilityPanel() {
         </button>
 
         {open && (
-          <div className="absolute top-full right-0 mt-2 w-72 bg-navy border border-gold/30 shadow-[0_12px_40px_rgba(0,0,0,0.5)] z-[60]">
+          <div className="fixed left-3 right-3 top-16 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-72 max-h-[calc(100dvh-5rem)] overflow-y-auto bg-navy border border-gold/30 shadow-[0_12px_40px_rgba(0,0,0,0.5)] z-[60]">
             <div className="px-4 py-3 border-b border-white/10">
               <p className="text-xs tracking-[2.5px] uppercase text-gold m-0">Accessibility</p>
             </div>

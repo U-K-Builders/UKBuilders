@@ -18,7 +18,7 @@ const decades = Object.keys(grouped);
 function TimelineCard({ project, align, isOngoing }) {
   return (
     <div className={`bg-white border border-border-light p-5 md:p-6 transition-shadow duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] ${align === 'right' ? 'md:text-right' : 'text-left'}`}>
-      <h3 className={`gradient-text font-serif text-lg font-black uppercase tracking-[2px] mb-1`}>
+      <h3 className={`gradient-text font-serif text-base min-[360px]:text-lg font-black uppercase tracking-[1px] min-[360px]:tracking-[2px] mb-1`}>
         {project.name}
       </h3>
       {isOngoing ? (
@@ -31,7 +31,7 @@ function TimelineCard({ project, align, isOngoing }) {
         </>
       ) : (
         <>
-          <span className="text-gold text-xs uppercase tracking-[2px] font-bold mb-3 block">
+          <span className="text-gold text-xs uppercase tracking-[1px] min-[360px]:tracking-[2px] font-bold mb-3 block">
             {project.year} · {project.builder}
           </span>
           <p className="text-text-secondary text-sm leading-[1.7]">{project.description}</p>

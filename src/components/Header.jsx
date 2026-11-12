@@ -176,10 +176,13 @@ export default function Header() {
     <header
       className={`on-dark sticky top-0 z-50 bg-navy transition-shadow duration-300 ${scrolled ? 'shadow-[0_2px_24px_rgba(0,0,0,0.4)]' : ''}`}
     >
-      <div className={`flex items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 2xl:px-12 transition-[padding] duration-300 ${scrolled ? 'py-2' : 'py-3.5'}`}>
-        <Link to="/" className="flex items-center gap-3 no-underline shrink-0" aria-label="U.K. Builders home">
+      <div className={`flex items-center justify-between gap-2 min-[400px]:gap-4 px-3 min-[400px]:px-4 sm:px-6 lg:px-8 2xl:px-12 transition-[padding] duration-300 ${scrolled ? 'py-2' : 'py-3.5'}`}>
+        <Link to="/" className="flex items-center gap-2 min-[400px]:gap-3 no-underline shrink-0" aria-label="U.K. Builders home">
           <img src={LOGO} alt="" width="40" height="40" className="w-10 h-10 object-contain" />
-          <span className="font-serif text-lg sm:text-xl tracking-[0.12em] uppercase text-gold leading-none">U.K. Builders</span>
+          {/* On phones under 400px the name stacks onto two lines so the header fits from 280px. */}
+          <span className="font-serif text-[0.9375rem] leading-[1.1] min-[400px]:text-lg min-[400px]:leading-none sm:text-xl tracking-[0.1em] min-[400px]:tracking-[0.12em] uppercase text-gold">
+            <span className="block min-[400px]:inline">U.K.</span> <span className="block min-[400px]:inline">Builders</span>
+          </span>
         </Link>
 
         {/* Desktop navigation */}
@@ -197,7 +200,8 @@ export default function Header() {
 
         <div className="flex items-center gap-1">
           <AccessibilityPanel />
-          <button onClick={toggleDark} className={iconBtn} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
+          {/* Dark mode is also in the accessibility panel; this shortcut only shows where there's room. */}
+          <button onClick={toggleDark} className={iconBtn.replace('w-11 h-11 flex', 'w-11 h-11 hidden sm:flex')} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
             {dark ? <SunIcon /> : <MoonIcon />}
           </button>
           <Link

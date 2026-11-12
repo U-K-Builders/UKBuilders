@@ -89,7 +89,7 @@ export default function OurStoryPage() {
               {/* Banner */}
               <div className="flex items-center gap-5 mb-12">
                 <div className="flex-1 h-px bg-gold/25" />
-                <div className="px-8 py-3 bg-navy border border-gold text-gold-bright font-serif font-bold text-sm uppercase tracking-[3px] whitespace-nowrap">
+                <div className="px-4 sm:px-8 py-3 bg-navy border border-gold text-gold-bright font-serif font-bold text-sm uppercase tracking-[3px] text-center sm:whitespace-nowrap">
                   {gen.label}
                 </div>
                 <div className="flex-1 h-px bg-gold/25" />
