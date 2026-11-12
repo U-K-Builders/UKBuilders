@@ -86,7 +86,7 @@ export default function HomePage() {
           <div style={slide(legacyInView, 150)}>
             <Carousel3D
               label="Legacy projects"
-              maxCardWidth={290}
+              maxCardWidth={300}
               cardRatio={1.48}
               items={completedWithPhotos}
               getKey={(p) => `${p.name}-${p.year}`}
@@ -104,12 +104,12 @@ export default function HomePage() {
                       className="absolute inset-0 w-full h-full object-cover object-center"
                     />
                   </div>
-                  <div className="shrink-0 px-4 py-3 text-left">
+                  <div className="shrink-0 px-3 py-3 text-left">
                     <p className="text-[0.6875rem] leading-none uppercase tracking-[3px] text-gold mb-2">Completed {project.year}</p>
                     {/* One line, sized to the card width. */}
                     <h3
                       className="font-serif text-white leading-tight whitespace-nowrap overflow-hidden text-ellipsis"
-                      style={{ fontSize: Math.min(20, Math.floor((cardWidth - 32) / 13)) }}
+                      style={{ fontSize: Math.min(24, Math.floor((cardWidth - 26) / 11)) }}
                     >
                       {project.name}
                     </h3>
