@@ -101,6 +101,40 @@ What it shows (metres, scale 1:100):
 sq.ft.) but the final plinth shows 6 units. Don't change the site until the
 owner confirms which units are sold as shops and gives their RERA carpet areas.
 
+## Christina: floor plan set ("brochure", 12.08.26)
+
+File `Christina_Bldg_12.08.26.pdf`, 11 A3 pages, architect Aashish Solanki,
+developer UK Properties. Coloured sales plans for every level with each unit's
+area (R/A, sq.ft.). No phone numbers or emails in it. Not committed: the owner
+hasn't yet said whether it may be offered as a public download.
+
+| Level | Use | Unit areas (R/A sq.ft.) |
+|---|---|---|
+| Ground | 6 units (some labelled Clinic / M.P. room), entrance lobby, 4 car parks | 333.50, 349.75, 280.00, 280.00, 345.50, 331.75 |
+| 1st–4th | Typical parking podium, 15 cars each (60) | – |
+| 5th | Amenity podium: fitness centre (649.75), indoor play (628.75), society office, multipurpose area, lawns, jogging track | – |
+| 6th, 8th–10th | 4 flats | 649.75, 628.75, 650.00, 779.50 |
+| 7th (refuge) | 3 flats + refuge | 649.75, 628.75, 650.00 |
+| 11th | 4 flats | 649.75, 628.75, 650.00, 779.50 |
+| 12th | 4 flats | 670.50, 670.50, 800.50, 650.00 |
+| 13th | 4 flats | 670.50, 670.50, 697.00, 697.00 |
+| 14th (refuge) | 3 flats + refuge | 670.50, 670.50, 854.75 |
+| 15th–18th | 4 flats | 670.50, 670.50, 697.00, 697.00 |
+| Terrace | Barbecue deck, part terrace | – |
+
+Totals: 50 flats + 6 ground-floor units; 64 car parks (60 podium + 4 ground).
+Confirms "5 podium + 13 storeys" (4 parking podiums + amenity podium; flats on
+6th–18th). Core: 2 lifts, fire lift, smoke-check lobby, staircase, 4 flats per
+floor around it.
+
+The ground-floor page (12.08.26) is older than the final plinth layout
+(23.09.26); the unit sizes match. The plinth layout stays the reference.
+
+**Don't match the site yet (owner to confirm):** the site lists 5 shops (6
+units here); site flat types A 650 / B 671 / C 697 / D 801 / 3 BHK 855 / Jodi
+1,320–1,470, while the plans also have 628.75, 649.75 and 779.50. The sales
+sheet will map each unit to its type.
+
 ## Still needed from the owner
 
 **For Christina:** its signed approved plan (PDF), its sales sheet and its
