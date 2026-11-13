@@ -206,11 +206,15 @@ export const projectDetails = {
       { type: '2 BHK + 2 BHK', subType: 'Jodi', carpet: '1,320 – 1,470 sq.ft.', beds: 4, baths: 4 },
     ],
     shops: [
-      { type: 'Shop 1', carpet: '280 sq.ft.' },
-      { type: 'Shop 2', carpet: '332 sq.ft.' },
-      { type: 'Shop 3', carpet: '334 sq.ft.' },
-      { type: 'Shop 4', carpet: '346 sq.ft.' },
-      { type: 'Shop 5', carpet: '350 sq.ft.' },
+      // Six ground-floor shops, confirmed by the owner (13 Nov 2026). Areas are the
+      // R/A figures from the Christina plan set (12.08.26); unit sizes match the
+      // final plinth layout (23.09.26).
+      { type: 'Shop 1', carpet: '333.50 sq.ft.' },
+      { type: 'Shop 2', carpet: '349.75 sq.ft.' },
+      { type: 'Shop 3', carpet: '280.00 sq.ft.' },
+      { type: 'Shop 4', carpet: '280.00 sq.ft.' },
+      { type: 'Shop 5', carpet: '345.50 sq.ft.' },
+      { type: 'Shop 6', carpet: '331.75 sq.ft.' },
     ],
     constructionPhotos: [],
     neighbourhood: ORLEM_NEIGHBOURHOOD,
