@@ -131,9 +131,21 @@ The ground-floor page (12.08.26) is older than the final plinth layout
 **Settled 13 Nov:** the owner confirmed **six shops**; the site now lists all six
 with these areas (branch feature/hotfix-small-phones-dark-mode).
 
-**Doesn't match the site yet (owner to confirm):** site flat types A 650 / B 671 / C 697 / D 801 / 3 BHK 855 / Jodi
-1,320–1,470, while the plans also have 628.75, 649.75 and 779.50. The sales
-sheet will map each unit to its type.
+**Settled 13 Nov:** the owner confirmed the plan set is correct. The site now
+lists all nine Christina flat types from it (branch
+feature/hotfix-small-phones-dark-mode):
+
+| Area (sq.ft.) | Type | Floors | Notes |
+|---|---|---|---|
+| 628.75 | 2 BHK | 6–11 (flat 02) | |
+| 649.75 | 2 BHK | 6–11 (flat 01) | |
+| 650.00 | 2 BHK, Type A | 6–12 (flat 04) | dining |
+| 670.50 | 2 BHK, Type B | 12–18 (flats 01, 02) | |
+| 697.00 | 2 BHK, Type C | 13, 15–18 (flats 03, 04) | dining, 4' balcony |
+| 779.50 | 3 BHK | 6, 8–11 (flat 03) | dining, powder room |
+| 800.50 | 2 BHK, Type D | 12 (flat 03) | dining, part terrace |
+| 854.75 | 3 BHK | 14 (flat 04) | 4' balconies |
+| 1,320–1,470 | 2 BHK + 2 BHK, Jodi | – | combined flats |
 
 ## Still needed from the owner
 
