@@ -1,6 +1,9 @@
+// Careers page (/careers): why join, current openings, application form
+// ('career' lead).
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLeadSubmit from '../hooks/useLeadSubmit';
+import { CONTACT } from '../data/site';
 
 const OPENINGS = [
   {
@@ -169,7 +172,7 @@ export default function CareersPage() {
                     </div>
                   </div>
                   <a
-                    href="mailto:careers@ukbuilders.in?subject=Application: "
+                    href={`${CONTACT.email.href}?subject=${encodeURIComponent(`Application: ${job.title}`)}`}
                     className="shrink-0 inline-block bg-gold text-navy px-7 py-3 text-xs tracking-[2px] uppercase no-underline border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
                   >
                     Apply Now

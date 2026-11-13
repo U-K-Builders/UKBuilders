@@ -1,4 +1,5 @@
-// Line icons (Lucide-style, 24×24, stroke = currentColor). Decorative by default.
+// Line icons (Lucide-style, 24×24, stroke = currentColor), decorative by default.
+// Used by ProjectDetailPage (interior finishes) and ResourcesPage.
 const PATHS = {
   globe: (
     <>

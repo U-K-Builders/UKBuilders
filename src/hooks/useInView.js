@@ -1,3 +1,5 @@
+// Tells a section when it scrolls into view, for fade-in animations. Used by
+// HomePage and TrustPillars.
 import { useEffect, useRef, useState } from 'react';
 
 export function useInView(threshold = 0.15) {

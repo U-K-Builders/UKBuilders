@@ -1,3 +1,5 @@
+// Compact card for a completed project (photo, year, name, description). Used
+// by CompletedProjectsPage.
 export default function SignatureCard({ project, className = '', onPhotoClick }) {
   return (
     <div className={`group bg-white border border-border-light box-border flex flex-col text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(10,24,40,0.12)] overflow-hidden ${className}`}>

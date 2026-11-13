@@ -1,3 +1,6 @@
+// The whole site: shared Header/Footer/MobileActionBar around every page,
+// the route list, per-route titles (RouteMeta) and scroll reset on
+// navigation (ScrollToTop). Rendered by src/main.jsx.
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
@@ -23,6 +26,11 @@ import InvestorsPage from './pages/InvestorsPage';
 import RedevelopmentPage from './pages/RedevelopmentPage';
 import ContractorsPage from './pages/ContractorsPage';
 import CareersPage from './pages/CareersPage';
+import PrivacyPage from './pages/PrivacyPage';
+import DisclaimerPage from './pages/DisclaimerPage';
+import AreaPage from './pages/AreaPage';
+import { areas } from './data/areas';
+import { LABELS } from './data/navigation';
 import PageTransition from './components/PageTransition';
 
 function RouteMeta() {
@@ -52,7 +60,7 @@ export default function App() {
   return (
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-gold focus:text-navy focus:px-4 focus:py-3 focus:font-semibold">
-        Skip to content
+        {LABELS.skipToContent}
       </a>
       <ScrollToTop />
       <RouteMeta />
@@ -76,6 +84,11 @@ export default function App() {
         <Route path="/redevelopment" element={<RedevelopmentPage />} />
         <Route path="/contractors" element={<ContractorsPage />} />
         <Route path="/careers" element={<CareersPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/disclaimer" element={<DisclaimerPage />} />
+        {areas.map((area) => (
+          <Route key={area.slug} path={`/${area.slug}`} element={<AreaPage area={area} />} />
+        ))}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </main>

@@ -1,3 +1,4 @@
+// Map of completed projects on the history page. Used by HistoryPage.
 import { useState, useCallback } from 'react';
 import Map, { Marker, Popup } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';

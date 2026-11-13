@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+// "Page not found" screen for any address that has no route (the `*` route
+// in src/App.jsx). Owned by feature/navigation-design.
+import Button from '../components/Button';
 
 export default function NotFoundPage() {
   return (
@@ -14,18 +16,8 @@ export default function NotFoundPage() {
         The page you are looking for may have been moved or does not exist. Let us guide you back home.
       </p>
       <div className="flex flex-wrap justify-center gap-4">
-        <Link
-          to="/"
-          className="bg-gold text-navy px-10 py-4 no-underline text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
-        >
-          Go Home
-        </Link>
-        <Link
-          to="/contact"
-          className="bg-transparent text-gold px-10 py-4 no-underline text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-gold hover:text-navy"
-        >
-          Contact Us
-        </Link>
+        <Button to="/">Go Home</Button>
+        <Button to="/contact" variant="secondary">Contact Us</Button>
       </div>
     </div>
   );

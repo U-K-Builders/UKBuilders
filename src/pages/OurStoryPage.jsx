@@ -1,3 +1,4 @@
+// Our story page (/our-story): the family, the firms and their values.
 import { Link } from 'react-router-dom';
 
 const GENERATIONS = [

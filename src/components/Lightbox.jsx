@@ -1,3 +1,5 @@
+// Full-screen photo viewer (click or Escape to close). Used by
+// ProjectDetailPage, CompletedProjectsPage and GalleryPage.
 import { useEffect } from 'react';
 
 export default function Lightbox({ src, alt, onClose }) {

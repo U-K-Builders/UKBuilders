@@ -1,3 +1,5 @@
+// Dark/light mode switch (follows the phone's setting until the visitor
+// chooses). Used by Header and AccessibilityPanel.
 import { useState, useEffect } from 'react';
 
 export function useTheme() {
@@ -13,7 +15,7 @@ export function useTheme() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
-    try { localStorage.setItem('ukb-theme', dark ? 'dark' : 'light'); } catch {}
+    try { localStorage.setItem('ukb-theme', dark ? 'dark' : 'light'); } catch { /* storage blocked: the choice just won't persist */ }
   }, [dark]);
 
   return [dark, () => setDark((d) => !d)];

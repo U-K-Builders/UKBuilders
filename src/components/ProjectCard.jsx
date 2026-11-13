@@ -1,5 +1,11 @@
+// Large card for an ongoing project: name, months to possession and %
+// complete (Ongoing page only), photo, configurations, location, MahaRERA
+// number and View details / Book a visit buttons. Used on HomePage and
+// OngoingProjectsPage. Owned by feature/navigation-design.
 import { Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
+import { RERA } from '../data/site';
+import ReraBadge from './ReraBadge';
 
 function getMonthsToHandover(possession) {
   if (!possession) return null;
@@ -99,7 +105,7 @@ export default function ProjectCard({ project, showCountdown = true }) {
             {project.configs}
           </span>
         </div>
-        <div className="mb-8">
+        <div className="mb-6">
           <span className="block text-navy text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-2 border-b-2 border-gold pb-1 w-fit">
             Location
           </span>
@@ -107,6 +113,14 @@ export default function ProjectCard({ project, showCountdown = true }) {
             {project.location}
           </span>
         </div>
+        {RERA.projects[slug] && (
+          <div className="mb-8">
+            <span className="block text-navy text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-2 border-b-2 border-gold pb-1 w-fit">
+              {RERA.label}
+            </span>
+            <ReraBadge slug={slug} showLabel={false} className="text-lg md:text-[1.375rem] text-text-dark font-serif font-normal py-1 [overflow-wrap:anywhere]" />
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3">

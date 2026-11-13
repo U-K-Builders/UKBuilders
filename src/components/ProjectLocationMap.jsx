@@ -1,3 +1,5 @@
+// Small map with one pin for a project's location. Used by ProjectDetailPage
+// (Location).
 import { useState } from 'react';
 import Map, { Marker, Popup, NavigationControl } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';

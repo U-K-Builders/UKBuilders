@@ -1,3 +1,6 @@
+// Accessibility menu in the Header (button + panel): dark mode, text size and
+// colour-vision filters. Settings: hooks/useAccessibility.js and
+// hooks/useTheme.js.
 import { useState, useEffect, useRef } from 'react';
 import { useAccessibility } from '../hooks/useAccessibility';
 import { useTheme } from '../hooks/useTheme';
@@ -71,7 +74,7 @@ export default function AccessibilityPanel() {
         <button
           onClick={() => setOpen(o => !o)}
           aria-expanded={open}
-          className={`w-11 h-11 flex items-center justify-center transition-colors duration-200 bg-transparent border-none cursor-pointer shrink-0 ${open ? 'text-gold' : 'text-white/75 hover:text-gold'}`}
+          className={`w-12 h-12 flex items-center justify-center transition-colors duration-200 bg-transparent border-none cursor-pointer shrink-0 ${open ? 'text-gold' : 'text-white/75 hover:text-gold'}`}
           aria-label="Accessibility options"
           title="Accessibility options"
         >

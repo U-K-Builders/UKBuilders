@@ -1,3 +1,5 @@
+// Completed projects page (/projects/completed): cards for completed
+// buildings that have a photo.
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SignatureCard from '../components/SignatureCard';

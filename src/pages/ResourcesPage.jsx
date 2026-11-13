@@ -1,6 +1,9 @@
+// Buyer guides page (/resources): guide downloads ('guide_download' lead),
+// FAQs and a call button.
 import { useState } from 'react';
 import useLeadSubmit from '../hooks/useLeadSubmit';
 import Icon from '../components/Icon';
+import { CONTACT } from '../data/site';
 
 const GUIDES = [
   {
@@ -242,7 +245,7 @@ export default function ResourcesPage() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="tel:+919820311177"
+            href={CONTACT.phone.href}
             className="inline-block bg-gold text-navy px-10 py-4 text-sm tracking-[2px] uppercase border border-gold transition-all duration-300 hover:bg-transparent hover:text-gold"
           >
             Call Us

@@ -1,6 +1,9 @@
+// Investors page (/investors): why invest, current projects and an inquiry
+// form ('investor' lead).
 import { useState } from 'react';
 import useLeadSubmit from '../hooks/useLeadSubmit';
 import { Link } from 'react-router-dom';
+import { CONTACT, RERA } from '../data/site';
 
 // TODO (Avi, Nov 2026): these claims were removed until they're verified with a
 // source. Restore only with evidence: "₹2 Cr+ typical capital appreciation",
@@ -17,7 +20,7 @@ const HIGHLIGHTS = [
   {
     stat: 'RERA',
     label: 'MahaRERA Registered',
-    desc: 'Justin (PR1180002500760) and Christina (PR1180002600221) are registered with MahaRERA.',
+    desc: `Justin (${RERA.projects.justin.number}) and Christina (${RERA.projects.christina.number}) are registered with MahaRERA.`,
   },
 ];
 
@@ -178,8 +181,8 @@ export default function InvestorsPage() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[
-                { name: 'Justin', config: '2, 3 & 4 BHK', possession: 'August 2027', carpet: '620 – 1,367 sq.ft.', note: 'MahaRERA PR1180002500760' },
-                { name: 'Christina', config: '2, 3 & 4 BHK', possession: 'August 2028', carpet: '650 – 1,470 sq.ft.', note: 'MahaRERA PR1180002600221' },
+                { name: 'Justin', config: '2, 3 & 4 BHK', possession: 'August 2027', carpet: '620 – 1,367 sq.ft.', note: `${RERA.label} ${RERA.projects.justin.number}` },
+                { name: 'Christina', config: '2, 3 & 4 BHK', possession: 'August 2028', carpet: '650 – 1,470 sq.ft.', note: `${RERA.label} ${RERA.projects.christina.number}` },
               ].map((p) => (
                 <div key={p.name} className="border border-gold/40 bg-navy text-white p-8 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300">
                   <span className="block text-xs uppercase tracking-[3px] text-gold mb-1">{p.note}</span>
@@ -213,8 +216,8 @@ export default function InvestorsPage() {
                 </p>
                 <div className="bg-navy text-white p-8 border border-gold">
                   <span className="block text-xs uppercase tracking-[3px] text-gold mb-4">Direct Line</span>
-                  <p className="text-text-light text-sm mb-1"><a href="tel:+919820311177" className="hover:text-gold transition-colors duration-300">+91 98203 11177</a></p>
-                  <p className="text-text-light text-sm"><a href="mailto:u.k.builders1981@gmail.com" className="hover:text-gold transition-colors duration-300">u.k.builders1981@gmail.com</a></p>
+                  <p className="text-text-light text-sm mb-1"><a href={CONTACT.phone.href} className="hover:text-gold transition-colors duration-300">{CONTACT.phone.display}</a></p>
+                  <p className="text-text-light text-sm"><a href={CONTACT.email.href} className="hover:text-gold transition-colors duration-300">{CONTACT.email.display}</a></p>
                 </div>
               </div>
               <div className="bg-surface-light border border-border-light p-8">

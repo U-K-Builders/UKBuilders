@@ -1,3 +1,5 @@
+// Map of schools, hospitals, places of worship and landmarks around a
+// project. Used by ProjectDetailPage (Neighbourhood Guide).
 import { useState, useCallback } from 'react';
 import Map, { Marker, Popup, NavigationControl } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';

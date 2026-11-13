@@ -1,3 +1,5 @@
+// "Register interest" pop-up form on a project page (name, phone, flat type,
+// message); sends an 'enquiry' lead. Used by ProjectDetailPage.
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import useDialog from '../hooks/useDialog';

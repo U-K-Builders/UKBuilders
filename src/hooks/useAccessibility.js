@@ -1,3 +1,5 @@
+// Text-size and colour-vision settings (saved in the browser). Used by
+// AccessibilityPanel; index.html applies them before the page draws.
 import { useState, useEffect } from 'react';
 
 const SIZE_CLASSES  = ['', 'acc-text-lg', 'acc-text-xl'];
@@ -28,7 +30,7 @@ export function useAccessibility() {
     try {
       localStorage.setItem('ukb-textsize',  String(state.textSize));
       localStorage.setItem('ukb-colormode', String(state.colorMode));
-    } catch {}
+    } catch { /* storage blocked (e.g. private browsing): settings just won't persist */ }
   }, [state]);
 
   const setTextSize  = (v) => setState(s => ({ ...s, textSize:  Math.max(0, Math.min(2, v)) }));

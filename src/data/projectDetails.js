@@ -1,3 +1,14 @@
+// Full details for each project page (/projects/<slug>): specs, floor plans,
+// amenities, finishes, shops, neighbourhood and map position. Read by
+// ProjectDetailPage and ProjectCard. MahaRERA numbers come from site.js and
+// construction progress from progress.js, so each fact lives in one place.
+// Hidden projects (see projects.js) keep their data here but are never shown.
+// TODO(owner): confirm amenities and finishes against each building's
+// registered specifications, and Justin's 81,000 sq.ft. and Christina's
+// "5 Podium + 13 Storey" (docs/audit-2026-11.md, "Needs from Avi", item 3).
+import { RERA } from './site';
+import { progress } from './progress';
+
 const AMENITIES = [
   'High-Speed Elevators',
   '24/7 Security & CCTV',
@@ -141,8 +152,9 @@ export const projectDetails = {
     location: 'C.T.S. No. 390/B, Sunder Cross Lane, Orlem, Malad West',
     lat: 19.1950,
     lng: 72.8355,
-    rera: 'PR1180002500760',
-    progressPercent: 60,
+    rera: RERA.projects.justin.number,
+    progressPercent: progress.justin.percent,
+    progressUpdated: progress.justin.updated,
     configs: '2, 3 & 4 BHK',
     buildingSpec: '6 Podium + 12 Storey',
     builtUpArea: '81,000 sq.ft.',
@@ -151,7 +163,6 @@ export const projectDetails = {
     possessionDate: '2027-08-31',
     amenities: JUSTIN_AMENITIES,
     moodBoard: SIGNATURE_MOOD_BOARD,
-    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', subType: 'Type A', carpet: '620 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK', subType: 'Type B', carpet: '678 sq.ft.', beds: 2, baths: 2 },
@@ -164,17 +175,7 @@ export const projectDetails = {
     ],
     constructionPhotos: [],
     neighbourhood: ORLEM_NEIGHBOURHOOD,
-    progress: [
-      { label: 'Foundation & Excavation', date: 'Q3 2025', status: 'done' },
-      { label: 'Plinth Level', date: 'Q4 2025', status: 'done' },
-      { label: 'Structure: 5th Floor', date: 'Q1 2026', status: 'done' },
-      { label: 'Structure: 10th Floor', date: 'Q2 2026', status: 'active' },
-      { label: 'Structure: 15th Floor', date: 'Q3 2026', status: 'upcoming' },
-      { label: 'RCC Complete', date: 'Q4 2026', status: 'upcoming' },
-      { label: 'Facade & Brickwork', date: 'Q1 2027', status: 'upcoming' },
-      { label: 'Interior Finishing', date: 'Q2 2027', status: 'upcoming' },
-      { label: 'Possession', date: 'Q3 2027', status: 'upcoming' },
-    ],
+    progress: progress.justin.steps,
   },
 
   christina: {
@@ -186,8 +187,9 @@ export const projectDetails = {
     location: 'C.T.S. No. 50, 50/1 to 50/5, Dominic Colony, Orlem, Malad West',
     lat: 19.1970,
     lng: 72.8399,
-    rera: 'PR1180002600221',
-    progressPercent: 15,
+    rera: RERA.projects.christina.number,
+    progressPercent: progress.christina.percent,
+    progressUpdated: progress.christina.updated,
     configs: '2, 3 & 4 BHK',
     buildingSpec: '5 Podium + 13 Storey',
     builtUpArea: '105,000 sq.ft.',
@@ -196,7 +198,6 @@ export const projectDetails = {
     possessionDate: '2028-08-31',
     amenities: JUSTIN_AMENITIES,
     moodBoard: SIGNATURE_MOOD_BOARD,
-    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', subType: 'Type A', carpet: '650 sq.ft.', beds: 2, baths: 2 },
       { type: '2 BHK', subType: 'Type B', carpet: '671 sq.ft.', beds: 2, baths: 2 },
@@ -214,17 +215,7 @@ export const projectDetails = {
     ],
     constructionPhotos: [],
     neighbourhood: ORLEM_NEIGHBOURHOOD,
-    progress: [
-      { label: 'Foundation & Excavation', date: 'Q2 2026', status: 'active' },
-      { label: 'Plinth Level', date: 'Q3 2026', status: 'upcoming' },
-      { label: 'Structure: 5th Floor', date: 'Q1 2027', status: 'upcoming' },
-      { label: 'Structure: 10th Floor', date: 'Q2 2027', status: 'upcoming' },
-      { label: 'Structure: 15th Floor', date: 'Q3 2027', status: 'upcoming' },
-      { label: 'RCC Complete', date: 'Q4 2027', status: 'upcoming' },
-      { label: 'Facade & Brickwork', date: 'Q1 2028', status: 'upcoming' },
-      { label: 'Interior Finishing', date: 'Q1 2028', status: 'upcoming' },
-      { label: 'Possession', date: 'Q3 2028', status: 'upcoming' },
-    ],
+    progress: progress.christina.steps,
   },
 
   elvira: {
@@ -242,7 +233,6 @@ export const projectDetails = {
     possession: '2027',
     amenities: AMENITIES,
     moodBoard: PREMIUM_MOOD_BOARD,
-    beforeAfterPhotos: null,
     floorPlans: [
       { type: '1 BHK', carpet: '400 – 450 sq.ft.', beds: 1, baths: 1 },
       { type: '2 BHK', carpet: '655 – 725 sq.ft.', beds: 2, baths: 2 },
@@ -250,14 +240,7 @@ export const projectDetails = {
     shops: null,
     constructionPhotos: [],
     neighbourhood: ORLEM_NEIGHBOURHOOD,
-    progress: [
-      { label: 'Foundation & Excavation', date: 'Q2 2024', status: 'done' },
-      { label: 'Plinth Level', date: 'Q4 2024', status: 'done' },
-      { label: 'Structure: 5th Floor', date: 'Q2 2025', status: 'done' },
-      { label: 'RCC Complete', date: 'Q4 2025', status: 'done' },
-      { label: 'Facade & Finishing', date: 'Q2 2026', status: 'active' },
-      { label: 'Possession', date: '2027', status: 'upcoming' },
-    ],
+    progress: progress.elvira.steps,
   },
 
   'new-life': {
@@ -275,7 +258,6 @@ export const projectDetails = {
     possession: '2028',
     amenities: AMENITIES,
     moodBoard: PREMIUM_MOOD_BOARD,
-    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', carpet: '620 – 690 sq.ft.', beds: 2, baths: 2 },
       { type: '3 BHK', carpet: '920 – 1,010 sq.ft.', beds: 3, baths: 3 },
@@ -299,7 +281,6 @@ export const projectDetails = {
     possession: '2028',
     amenities: AMENITIES,
     moodBoard: SIGNATURE_MOOD_BOARD,
-    beforeAfterPhotos: null,
     floorPlans: [
       { type: '2 BHK', carpet: '650 – 730 sq.ft.', beds: 2, baths: 2 },
       { type: '3 BHK', carpet: '960 – 1,080 sq.ft.', beds: 3, baths: 3 },

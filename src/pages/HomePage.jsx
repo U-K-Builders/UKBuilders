@@ -1,14 +1,16 @@
+// Home page (/): hero, trust pillars, ongoing projects, city map, legacy
+// projects carousel and (once permitted) buyer testimonials.
+// Owned by feature/navigation-design (Phase 3); the sections it imports belong
+// to their own branches (see docs/HANDOFF.md, "Phase 3 file ownership").
 import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import SectionTitle from '../components/SectionTitle';
 import ProjectCard from '../components/ProjectCard';
-import TestimonialCard from '../components/TestimonialCard';
-import Carousel from '../components/Carousel';
 import Carousel3D from '../components/Carousel3D';
 import TrustPillars from '../components/TrustPillars';
+import Testimonials from '../components/Testimonials';
 import { ongoingProjects, upcomingProjects, publicCompletedProjects, completedWithPhotos } from '../data/projects';
-import { testimonials } from '../data/testimonials';
 import { useInView } from '../hooks/useInView';
 
 const CityProjectsMap = lazy(() => import('../components/CityProjectsMap'));
@@ -25,8 +27,6 @@ export default function HomePage() {
   const [ongoingRef,      ongoingInView]      = useInView(0.1);
   const [mapRef,          mapInView]          = useInView(0.1);
   const [legacyRef,       legacyInView]       = useInView(0.1);
-  const [testimonialsRef, testimonialsInView] = useInView(0.1);
-
 
   return (
     <div className="animate-fade-in">
@@ -129,19 +129,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Testimonials ─────────────────────────────────────────────────── */}
-      <div className="bg-navy text-white py-24 overflow-hidden" ref={testimonialsRef}>
-        <div style={slide(testimonialsInView)}>
-          <SectionTitle className="!text-white">Client Experiences</SectionTitle>
-        </div>
-        <div style={slide(testimonialsInView, 150)}>
-          <Carousel interval={5000} visibleCount={3}>
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={i} testimonial={t} />
-            ))}
-          </Carousel>
-        </div>
-      </div>
+      {/* ── Testimonials (renders nothing until a quote is permitted) ─────── */}
+      <Testimonials />
     </div>
   );
 }

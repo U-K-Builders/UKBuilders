@@ -1,3 +1,5 @@
+// Project timeline (/timeline): every completed project by year, oldest
+// first, then ongoing projects.
 import { timelineCompletedProjects, ongoingProjects, upcomingProjects } from '../data/projects';
 
 const chronological = [...timelineCompletedProjects].sort((a, b) => a.year - b.year);

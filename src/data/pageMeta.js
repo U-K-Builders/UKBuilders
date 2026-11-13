@@ -1,5 +1,8 @@
-// Per-route <title> and meta description. Keep descriptions under ~155 characters.
-export const SITE_NAME = 'U.K. Builders';
+// Per-route <title> and meta description, applied by usePageMeta from
+// RouteMeta in src/App.jsx (project pages set their own in ProjectDetailPage).
+// Keep descriptions under ~155 characters. Owned by feature/security-speed.
+import { CONTACT } from './site';
+import { areas } from './areas';
 
 export const DEFAULT_META = {
   title: 'U.K. Builders | Residential Developer in Malad West, Mumbai since 1969',
@@ -43,7 +46,7 @@ export const PAGE_META = {
   },
   '/contact': {
     title: 'Contact Us | U.K. Builders',
-    description: 'Call +91 98203 11177, WhatsApp us, or visit our office at Sej Plaza, Marve Road, Malad West, Mumbai 400 064.',
+    description: `Call ${CONTACT.phone.display}, WhatsApp us, or visit our office at Sej Plaza, Marve Road, Malad West, Mumbai 400 064.`,
   },
   '/book-a-call': {
     title: 'Book a Video Call | U.K. Builders',
@@ -65,6 +68,15 @@ export const PAGE_META = {
     title: 'Careers | U.K. Builders',
     description: 'Join U.K. Builders: site, engineering, sales and office roles in Malad West, Mumbai.',
   },
+  '/privacy': {
+    title: 'Privacy Policy | U.K. Builders',
+    description: 'How U.K. Builders uses the details you share when you enquire about our homes.',
+  },
+  '/disclaimer': {
+    title: 'Disclaimer | U.K. Builders',
+    description: 'Disclaimer for the U.K. Builders website.',
+  },
+  ...Object.fromEntries(areas.map((a) => [`/${a.slug}`, a.meta])),
 };
 
 export const NOT_FOUND_META = {

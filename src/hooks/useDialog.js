@@ -1,3 +1,5 @@
+// Shared pop-up behaviour (focus trap, Escape, scroll lock). Used by
+// EnquiryModal and WaitlistModal.
 import { useEffect, useRef } from 'react';
 
 const FOCUSABLE =

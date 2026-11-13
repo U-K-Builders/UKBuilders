@@ -1,4 +1,4 @@
-# U.K. Builders: handoff (6 November 2026)
+# U.K. Builders: handoff (6 November 2026, updated 13 November)
 
 Read this first if you are a new Claude Code session (or a person) picking up
 the work. It covers both repositories. Owner: Avi (GitHub `rishonavi`).
@@ -43,7 +43,9 @@ Owner answers (13 Nov 2026), so nobody invents these:
 **Vercel environment variables (website):** `SUPABASE_URL` ✅,
 `LEAD_ALERT_EMAIL` = u.k.builders1981@gmail.com ✅,
 `LEAD_ALERT_FROM` = `U.K. Builders Website <onboarding@resend.dev>` ✅,
-`SUPABASE_SECRET_KEY` ❌ **missing**, `RESEND_API_KEY` ❌ missing.
+`SUPABASE_SECRET_KEY` ✅ and `RESEND_API_KEY` ✅ (both Production only,
+marked Sensitive; confirmed by the November 2026 audit). Forms on preview
+links therefore say "temporarily unavailable"; that's expected.
 Secrets are added by Avi in the dashboards, never pasted into chat or files.
 
 ---
@@ -54,7 +56,8 @@ Secrets are added by Avi in the dashboards, never pasted into chat or files.
   owner's explicit approval**. Each piece of work gets its own
   `feature/<name>` branch with its own Vercel preview. `ui` holds approved work
   waiting for release. Before each release copy `main` to
-  `backup/main-YYYY-MM-DD`, then merge. In progress: `feature/3d-carousel`.
+  `backup/main-YYYY-MM-DD`, then merge. Phase 3 branches build on
+  `feature/foundation` (see "Phase 3 file ownership" below).
   Old merged branches (`ui-redesign`, `claude/*`, `archive/owner-portal-admin`)
   can be deleted.
 - **Leads:** every form → `useLeadSubmit` hook → `POST /api/lead`
@@ -73,8 +76,8 @@ Secrets are added by Avi in the dashboards, never pasted into chat or files.
   (deep gold on light, bright on navy); use `text-gold-bright` for gold text on
   an element that itself has a navy background. An axe-core audit of all pages
   (desktop and mobile) found **0 WCAG A/AA violations** on release.
-- **Project visibility** (`src/data/projects.js`): `hidden: true` (New Life,
-  Madonna) means shown nowhere; `timelineOnly: true` (Shanti Niketan) means
+- **Project visibility** (`src/data/projects.js`): `hidden: true` (Elvira, New
+  Life, Madonna) means shown nowhere; `timelineOnly: true` (Shanti Niketan) means
   Timeline only. Completed projects without a photo appear only on the Timeline;
   the Completed page shows the 5 with photos.
 - **Photos:** live only in `photos/` (full resolution, metadata stripped; see
@@ -83,8 +86,55 @@ Secrets are added by Avi in the dashboards, never pasted into chat or files.
 - **Removed from the public site:** `/owner-portal`, `/admin-dashboard`, the
   client-side login and the hardcoded encryption key. They now live in the
   portal repo under `legacy-from-public-site/`.
-- **Lint:** 6 known, older errors (empty catch blocks, setState-in-effect in
-  `Carousel.jsx`, refs in `BeforeAfterSlider.jsx`). They don't break the build.
+- **Lint:** `npx eslint src api scripts` reports 0 errors (the 6 older ones
+  were fixed or removed with dead code on `feature/foundation`). Plain
+  `npm run lint` also scans `.claude/worktrees`, so use the command above.
+- **Testimonials:** all six quotes are hidden (`permitted: false` in
+  `src/data/testimonials.js`) until Avi confirms each with the buyer's written
+  permission, project and year. The home-page section disappears when none is
+  permitted.
+
+### How to edit site content
+
+Change the data file, not the component. Anything still unknown is `null`
+with a `TODO(owner)` comment; components show nothing for it, so never fill
+one in with a guess.
+
+| To change… | Edit |
+|---|---|
+| Phone, WhatsApp, email, office address and map link, social links, company facts (since 1969, founded 1981, 50+ projects, 3,000+ families), GSTIN, contact person, visit hours | `src/data/site.js` (`COMPANY`, `CONTACT`, `SOCIAL`) |
+| MahaRERA numbers and QR images | `src/data/site.js` (`RERA`); QR images go in `photos/rera/` |
+| Consent line under forms | `src/data/site.js` (`CONSENT`) |
+| Footer small print (copyright, disclaimer line, Privacy/Disclaimer links) | `src/data/site.js` (`LEGAL`) |
+| Menu items, footer link columns, button labels (Call, WhatsApp, Enquire…) | `src/data/navigation.js` |
+| Which projects appear (cards, maps, dropdowns, timeline), hiding a project | `src/data/projects.js` |
+| A project page: specs, floor plans, amenities, finishes, shops, neighbourhood | `src/data/projectDetails.js` |
+| Construction progress (stages, %, date confirmed) | `src/data/progress.js` |
+| Buyer quotes (and permission to show them) | `src/data/testimonials.js` |
+| Area pages (/flats-in-malad-west, /flats-in-orlem) | `src/data/areas.js` |
+| Page titles and Google descriptions | `src/data/pageMeta.js` (project pages: built from `projectDetails.js`) |
+| Photos | `photos/` (then `npm run images`, or just `npm run dev`/`build`) |
+| Colours, fonts, text sizes, spacing | `src/index.css` (`@theme` tokens; see CLAUDE.md "Tailwind Setup") |
+| Other page text | still inside the page in `src/pages/` (move it to `src/data/` when you touch it) |
+
+### Phase 3 file ownership
+
+Four branches are built in parallel on top of `feature/foundation`. To avoid
+merge conflicts, each file has one owner; only that branch edits it. If you
+need a change in someone else's file, ask the lead to coordinate.
+
+| Branch | Owns |
+|---|---|
+| **A** `feature/navigation-design` | `Header.jsx`, `Footer.jsx` (layout), `MobileActionBar.jsx`, `AccessibilityPanel.jsx`, `src/data/navigation.js`, `HomePage.jsx`, `HeroSection.jsx`, `ProjectCard.jsx`, `OngoingProjectsPage.jsx`, `ProjectDetailPage.jsx` (layout), `CompletedProjectsPage.jsx`, `SignatureCard.jsx`, `TimelinePage.jsx`, `Carousel3D.jsx`, `SectionTitle.jsx`, `PageTransition.jsx`, `ScrollToTopButton.jsx`, `Lightbox.jsx`, `Icon.jsx`, `NotFoundPage.jsx`, `Button.jsx`, `src/index.css`, `useTheme.js`, `useAccessibility.js`, `useInView.js`; and which of the other pages stay (OurStory, History, Gallery, Upcoming, Investors, Redevelopment, Contractors, Careers, Resources, Book a call) and their layout |
+| **B** `feature/trust` | `TrustPillars.jsx`, `Testimonials.jsx`, `TestimonialCard.jsx`, `src/data/testimonials.js`, `ReraBadge.jsx`, `src/data/progress.js`, `PrivacyPage.jsx`, `DisclaimerPage.jsx`, footer legal content in `src/data/site.js` (`LEGAL`, `RERA` QR images, `COMPANY.gstin`), `photos/rera/`, unverified claims in `src/data/projectDetails.js` and the extra pages' text |
+| **C** `feature/enquiry-flow` | All forms (`ContactPage.jsx`, `VirtualCallPage.jsx`, the forms inside `ProjectDetailPage.jsx` and the extra pages; best moved into their own components first), `EnquiryModal.jsx`, `WaitlistModal.jsx`, `useLeadSubmit.js`, `useDialog.js`, `api/lead.js` (alert step), `EmiCalculator.jsx` (already placed on the project page), brochure and site-visit flow, `ConsentNote.jsx` and its placement, `CONSENT` in `src/data/site.js` |
+| **D** `feature/security-speed` | `vercel.json`, `package.json` / `package-lock.json` (dependencies), `index.html`, fonts, `scripts/build-images.mjs`, `public/` (sitemap, robots, removing `_headers`/`_redirects`), `AreaPage.jsx`, `src/data/areas.js`, `src/data/pageMeta.js`, `usePageMeta.js`, the four map components, meta tags, analytics, lazy-loading routes in `src/App.jsx` |
+
+Shared rules: `src/App.jsx` belongs to D; A adds or removes a route only when
+it adds or deletes a page, in its own small commit. `CONTACT` and `COMPANY` in
+`src/data/site.js` change only when Avi confirms a fact, by whichever branch
+receives it. Inside a page owned by A, C changes only the form and A only the
+layout around it.
 
 ---
 
@@ -94,8 +144,8 @@ Tracking issue: **#49 Launch checklist**.
 
 | # | Task | Blocked on |
 |---|---|---|
-| **50** | **Add `SUPABASE_SECRET_KEY` to Vercel. Until then, live forms show an error** | Avi (dashboard) |
-| 54 | Create a Resend account **with u.k.builders1981@gmail.com**, add `RESEND_API_KEY` | Avi |
+| 50 | Add `SUPABASE_SECRET_KEY` to Vercel: **set** (audit, 12 Nov). Close after one real test enquiry from the live site arrives | Avi (test enquiry) |
+| 54 | Resend account **with u.k.builders1981@gmail.com**: `RESEND_API_KEY` **set**; check the alert email arrives with that test enquiry | Avi |
 | 51 | MahaRERA QR codes next to RERA numbers (legal requirement) | Avi to download from the MahaRERA portal and attach the images in a Claude session |
 | 52 | Update Justin and Christina construction progress (still says Q2 2026) | Avi to send current stages and photos |
 | 53 | Check the new live site on phone and laptop | Avi |

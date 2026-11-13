@@ -1,3 +1,5 @@
+// Pre-launch waitlist pop-up form; sends a 'waitlist' lead. Used by
+// UpcomingProjectsPage.
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import useDialog from '../hooks/useDialog';

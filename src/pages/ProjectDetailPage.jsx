@@ -1,12 +1,19 @@
+// Project page (/projects/<slug>, e.g. /projects/justin): hero, key facts,
+// amenities, shops, floor plans, finishes, site photos, maps, construction
+// progress and the site-visit form. Data: src/data/projectDetails.js.
+// Layout owned by feature/navigation-design; the forms in it by
+// feature/enquiry-flow (see docs/HANDOFF.md, "Phase 3 file ownership").
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projectDetails } from '../data/projectDetails';
 import { upcomingProjects } from '../data/projects';
+import { CONTACT, RERA } from '../data/site';
 import useLeadSubmit from '../hooks/useLeadSubmit';
 import Lightbox from '../components/Lightbox';
 import EnquiryModal from '../components/EnquiryModal';
-import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import Icon from '../components/Icon';
+import ReraBadge from '../components/ReraBadge';
+import EmiCalculator from '../components/EmiCalculator';
 import usePageMeta from '../hooks/usePageMeta';
 import { NOT_FOUND_META } from '../data/pageMeta';
 
@@ -406,12 +413,12 @@ export default function ProjectDetailPage() {
             { label: 'Built Up Area', value: project.builtUpArea },
             { label: 'Location', value: project.location },
             { label: 'Est. Possession', value: project.possession },
-            { label: 'RERA', value: project.rera || 'Pending Registration' },
+            { label: RERA.label, value: <ReraBadge slug={project.slug} showLabel={false} /> },
           ] : [
             { label: 'Configurations', value: project.configs },
             { label: 'Location', value: project.location },
             { label: 'Est. Possession', value: project.possession },
-            { label: 'RERA', value: project.rera || 'Pending Registration' },
+            { label: RERA.label, value: <ReraBadge slug={project.slug} showLabel={false} /> },
           ];
           const gridClass = stats.length === 6
             ? 'grid-cols-2 md:grid-cols-3'
@@ -468,7 +475,7 @@ export default function ProjectDetailPage() {
                     <p className="text-text-muted text-xs uppercase tracking-[2px] mb-1">Carpet Area</p>
                     <p className="text-text-light text-base font-serif mb-6">{shop.carpet}</p>
                     <a
-                      href="mailto:u.k.builders1981@gmail.com"
+                      href={CONTACT.email.href}
                       className="inline-block text-xs uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-navy transition-all duration-300"
                     >
                       Enquire Now
@@ -505,7 +512,7 @@ export default function ProjectDetailPage() {
                     </span>
                   ) : (
                     <a
-                      href="mailto:u.k.builders1981@gmail.com"
+                      href={CONTACT.email.href}
                       className="inline-block text-xs uppercase tracking-[2px] text-gold border border-gold px-5 py-2 hover:bg-gold hover:text-navy transition-all duration-300"
                     >
                       Request Floor Plan
@@ -516,7 +523,10 @@ export default function ProjectDetailPage() {
             </div>
           </section>
 
-{/* Interior Finishes / Mood Board */}
+          {/* EMI calculator: renders nothing yet (feature/enquiry-flow fills it) */}
+          <EmiCalculator project={project} />
+
+          {/* Interior Finishes / Mood Board */}
           {project.moodBoard && (
             <section>
               <SectionHeading>Interior Finishes</SectionHeading>
@@ -537,22 +547,6 @@ export default function ProjectDetailPage() {
                   </div>
                 ))}
               </div>
-            </section>
-          )}
-
-          {/* Before / After Slider */}
-          {project.beforeAfterPhotos?.before?.src && project.beforeAfterPhotos?.after?.src && (
-            <section>
-              <SectionHeading>Before &amp; After</SectionHeading>
-              <div className="w-full h-[420px] border border-border-light overflow-hidden">
-                <BeforeAfterSlider
-                  before={project.beforeAfterPhotos.before}
-                  after={project.beforeAfterPhotos.after}
-                  beforeLabel={project.beforeAfterPhotos.beforeLabel || 'Before'}
-                  afterLabel={project.beforeAfterPhotos.afterLabel || 'After'}
-                />
-              </div>
-              <p className="text-text-muted text-xs mt-2">Drag the handle to compare</p>
             </section>
           )}
 
@@ -676,6 +670,9 @@ export default function ProjectDetailPage() {
           {project.progress && (
             <section>
               <SectionHeading>Construction Progress</SectionHeading>
+              {project.progressUpdated && (
+                <p className="text-text-tertiary text-small -mt-4 mb-6">Updated {project.progressUpdated}</p>
+              )}
               <ProgressStepper steps={project.progress} />
               <MilestoneSubscribeForm
                 projectName={project.name}
@@ -695,10 +692,10 @@ export default function ProjectDetailPage() {
                 <div className="bg-navy text-white p-8 border border-gold">
                   <span className="block text-xs uppercase tracking-[3px] text-gold mb-4">Get in Touch</span>
                   <p className="text-text-light text-sm leading-[1.8] mb-2">
-                    <a href="tel:+919820311177" className="hover:text-gold transition-colors duration-300">+91 98203 11177</a>
+                    <a href={CONTACT.phone.href} className="hover:text-gold transition-colors duration-300">{CONTACT.phone.display}</a>
                   </p>
                   <p className="text-text-light text-sm leading-[1.8]">
-                    <a href="mailto:u.k.builders1981@gmail.com" className="hover:text-gold transition-colors duration-300">u.k.builders1981@gmail.com</a>
+                    <a href={CONTACT.email.href} className="hover:text-gold transition-colors duration-300">{CONTACT.email.display}</a>
                   </p>
                 </div>
               </div>

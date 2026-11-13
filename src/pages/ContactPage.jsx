@@ -1,6 +1,9 @@
+// Contact page (/contact): contact form ('contact' lead) and office, email
+// and phone details from site.js.
 import { useState } from 'react';
 import useLeadSubmit from '../hooks/useLeadSubmit';
 import { ongoingProjects } from '../data/projects';
+import { CONTACT } from '../data/site';
 
 // Only projects the public may see (never hidden or unregistered ones).
 const PROJECT_OPTIONS = [
@@ -199,14 +202,14 @@ export default function ContactPage() {
             <div className="flex flex-col gap-8">
               <div className="bg-navy text-white p-8 border border-gold">
                 <span className="block text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-3 text-gold">
-                  Corporate Office
+                  {CONTACT.office.label}
                 </span>
                 <p className="text-text-light leading-[1.8] mb-4">
-                  F-34, Sej Plaza, Marve Road,<br />
-                  Malad West, Mumbai - 400 064
+                  {CONTACT.office.street},<br />
+                  {CONTACT.office.area}
                 </p>
                 <a
-                  href="https://maps.google.com/?q=F-34+Sej+Plaza+Marve+Road+Malad+West+Mumbai+400064"
+                  href={CONTACT.office.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-xs uppercase tracking-[2px] text-gold border border-gold/50 px-4 py-2 hover:bg-gold hover:text-navy transition-all duration-300"
@@ -222,8 +225,8 @@ export default function ContactPage() {
                 <span className="block text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-3 text-gold">
                   Email
                 </span>
-                <a href="mailto:u.k.builders1981@gmail.com" className="text-text-light no-underline hover:text-gold transition-colors duration-300">
-                  u.k.builders1981@gmail.com
+                <a href={CONTACT.email.href} className="text-text-light no-underline hover:text-gold transition-colors duration-300">
+                  {CONTACT.email.display}
                 </a>
               </div>
 
@@ -231,8 +234,8 @@ export default function ContactPage() {
                 <span className="block text-[0.8125rem] font-extrabold uppercase tracking-[3px] mb-3 text-gold">
                   Phone
                 </span>
-                <a href="tel:+919820311177" className="text-text-light no-underline hover:text-gold transition-colors duration-300">
-                  +91 98203 11177
+                <a href={CONTACT.phone.href} className="text-text-light no-underline hover:text-gold transition-colors duration-300">
+                  {CONTACT.phone.display}
                 </a>
               </div>
             </div>

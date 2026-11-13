@@ -1,3 +1,5 @@
+// Brief navy fade over the page on every route change. Rendered once in
+// App.jsx.
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 

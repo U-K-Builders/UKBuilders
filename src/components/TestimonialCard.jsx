@@ -1,3 +1,5 @@
+// One buyer quote card. Used by Testimonials (home page), which shows only
+// permitted quotes.
 export default function TestimonialCard({ testimonial }) {
   return (
     <div className="bg-white/5 p-6 md:p-10 border-l-2 border-gold box-border text-left h-full flex flex-col justify-between gap-6">

@@ -1,3 +1,5 @@
+// Rotating 3D ring of cards. Used for "Legacy projects" on HomePage (details
+// below).
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /*

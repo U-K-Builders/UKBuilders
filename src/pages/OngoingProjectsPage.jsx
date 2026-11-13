@@ -1,3 +1,5 @@
+// Ongoing projects page (/projects/ongoing): search, filters and a
+// ProjectCard per ongoing project.
 import { useState, useMemo } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import { ongoingProjects } from '../data/projects';

@@ -1,3 +1,5 @@
+// Sets the page title and description tags. Used by App.jsx (RouteMeta) and
+// ProjectDetailPage.
 import { useEffect } from 'react';
 import { DEFAULT_META } from '../data/pageMeta';
 

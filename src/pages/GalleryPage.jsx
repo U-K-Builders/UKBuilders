@@ -1,3 +1,4 @@
+// Photo gallery (/gallery) of project photos with a lightbox.
 import { useState } from 'react';
 import Lightbox from '../components/Lightbox';
 

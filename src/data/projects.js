@@ -1,3 +1,6 @@
+// Project lists (ongoing, upcoming, completed) for cards, maps, dropdowns and
+// the timeline. Visibility flags: `hidden` (shown nowhere) and
+// `timelineOnly`. Full project-page details are in projectDetails.js.
 export const ongoingProjects = [
   {
     name: 'Justin',

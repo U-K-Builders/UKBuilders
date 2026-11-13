@@ -1,3 +1,4 @@
+// Company history page (/history) with a map of completed projects.
 import { lazy, Suspense } from 'react';
 import { publicCompletedProjects } from '../data/projects';
 

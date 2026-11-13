@@ -1,7 +1,10 @@
+// Sends every website form to /api/lead (api/lead.js), with spam traps. Used
+// by all forms.
 import { useRef, useState } from 'react';
+import { CONTACT } from '../data/site';
 
 const FALLBACK_ERROR =
-  'Sorry, we could not send your details. Please check your connection, or call +91 98203 11177.';
+  `Sorry, we could not send your details. Please check your connection, or call ${CONTACT.phone.display}.`;
 
 /**
  * Sends a form to /api/lead. Usage:

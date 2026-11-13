@@ -1,3 +1,5 @@
+// Upcoming projects page (/projects/upcoming, not in the menu): shows only
+// projects not marked `hidden`, else a note linking to ongoing projects.
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';

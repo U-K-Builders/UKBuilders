@@ -1,5 +1,8 @@
+// Society redevelopment page (/redevelopment): process, benefits and an
+// inquiry form ('redevelopment' lead).
 import { useState } from 'react';
 import useLeadSubmit from '../hooks/useLeadSubmit';
+import { CONTACT } from '../data/site';
 
 const PROCESS_STEPS = [
   {
@@ -200,8 +203,8 @@ export default function RedevelopmentPage() {
                 </p>
                 <div className="bg-navy text-white p-8 border border-gold">
                   <span className="block text-xs uppercase tracking-[3px] text-gold mb-4">Speak to Our Team</span>
-                  <p className="text-text-light text-sm mb-1"><a href="tel:+919820311177" className="hover:text-gold transition-colors duration-300">+91 98203 11177</a></p>
-                  <p className="text-text-light text-sm"><a href="mailto:u.k.builders1981@gmail.com" className="hover:text-gold transition-colors duration-300">u.k.builders1981@gmail.com</a></p>
+                  <p className="text-text-light text-sm mb-1"><a href={CONTACT.phone.href} className="hover:text-gold transition-colors duration-300">{CONTACT.phone.display}</a></p>
+                  <p className="text-text-light text-sm"><a href={CONTACT.email.href} className="hover:text-gold transition-colors duration-300">{CONTACT.email.display}</a></p>
                 </div>
               </div>
               <div className="bg-surface-light border border-border-light p-8">

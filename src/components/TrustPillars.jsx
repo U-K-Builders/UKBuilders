@@ -1,3 +1,5 @@
+// Four "why trust us" points under the home hero (since 1969, MahaRERA,
+// design, families). Used by HomePage. Owned by feature/trust.
 import { useInView } from '../hooks/useInView';
 
 function slide(inView, delay = 0) {

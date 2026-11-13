@@ -1,3 +1,5 @@
+// "Back to top" button that appears after scrolling down. Rendered once in
+// App.jsx.
 import { useState, useEffect } from 'react';
 
 export default function ScrollToTopButton() {

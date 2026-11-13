@@ -1,7 +1,10 @@
+// Book a video call page (/book-a-call): booking form ('video_call' lead) and
+// call details.
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import useLeadSubmit from '../hooks/useLeadSubmit';
 import { ongoingProjects } from '../data/projects';
+import { CONTACT } from '../data/site';
 
 // Only projects the public may see (never hidden or unregistered ones).
 const PROJECTS = [...ongoingProjects.filter((p) => !p.hidden).map((p) => p.name), 'General Enquiry'];
@@ -175,9 +178,9 @@ export default function VirtualCallPage() {
             </div>
             <p className="text-text-muted text-xs mb-8">
               Need to reschedule? Call{' '}
-              <a href="tel:+919820311177" className="text-gold hover:underline">+91 98203 11177</a>
+              <a href={CONTACT.phone.href} className="text-gold hover:underline">{CONTACT.phone.display}</a>
               {' '}or email{' '}
-              <a href="mailto:u.k.builders1981@gmail.com" className="text-gold hover:underline">u.k.builders1981@gmail.com</a>
+              <a href={CONTACT.email.href} className="text-gold hover:underline">{CONTACT.email.display}</a>
             </p>
             <button
               onClick={() => { setSubmitted(false); setFields({ name: '', email: '', phone: '', country: '', project: PROJECTS[0], date: '', timezone: '330', slot: '', message: '' }); }}
@@ -340,15 +343,16 @@ export default function VirtualCallPage() {
 
             <div className="bg-surface-light border border-border-light p-8">
               <span className="block text-xs uppercase tracking-[3px] text-navy font-bold mb-3">Prefer to Call Us?</span>
-              <p className="text-text-secondary text-sm leading-[1.8] mb-4">Available Mon–Sat, 10 AM to 6 PM IST.</p>
-              <a href="tel:+919820311177" className="flex items-center gap-2 text-gold font-serif text-lg hover:underline mb-2">
+              {/* Hours come from site.js; hidden until the owner confirms them. */}
+              {CONTACT.visitHours && <p className="text-text-secondary text-sm leading-[1.8] mb-4">{CONTACT.visitHours}</p>}
+              <a href={CONTACT.phone.href} className="flex items-center gap-2 text-gold font-serif text-lg hover:underline mb-2">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0" aria-hidden="true">
                   <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
                 </svg>
-                +91 98203 11177
+                {CONTACT.phone.display}
               </a>
-              <a href="mailto:u.k.builders1981@gmail.com" className="text-sm text-text-secondary hover:text-gold transition-colors duration-300">
-                u.k.builders1981@gmail.com
+              <a href={CONTACT.email.href} className="text-sm text-text-secondary hover:text-gold transition-colors duration-300">
+                {CONTACT.email.display}
               </a>
             </div>
 

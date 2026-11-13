@@ -1,51 +1,16 @@
+// Site header on every page: logo, main menu (full menu from 1280px; a menu
+// button below that), accessibility and dark-mode buttons, and Enquire
+// (from 768px, and on short landscape screens where the bottom bar hides).
+// Menu items and labels: src/data/navigation.js.
+// Owned by feature/navigation-design (Phase 3), which redesigns it.
 import { useState, useEffect, useRef, useId } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../hooks/useTheme';
 import AccessibilityPanel from './AccessibilityPanel';
+import Button from './Button';
+import { MAIN_NAV, ENQUIRE_PATH, LABELS } from '../data/navigation';
 
 const LOGO = '/images/logo/uk-builders-logo-square.png';
-
-/* Single source of truth for desktop and mobile navigation */
-const NAV = [
-  {
-    label: 'Projects',
-    match: (p) => p.startsWith('/projects') || p === '/gallery',
-    items: [
-      { to: '/projects/ongoing', label: 'Ongoing Projects' },
-      { to: '/projects/upcoming', label: 'Upcoming Projects', adminOnly: true },
-      { to: '/projects/completed', label: 'Completed Projects' },
-      { to: '/gallery', label: 'Photo Gallery' },
-    ],
-  },
-  {
-    label: 'About',
-    match: (p) => ['/our-story', '/history', '/timeline'].includes(p),
-    items: [
-      { to: '/our-story', label: 'Our Legacy' },
-      { to: '/history', label: 'Company History' },
-      { to: '/timeline', label: 'Project Timeline' },
-    ],
-  },
-  {
-    label: 'Work With Us',
-    match: (p) => ['/investors', '/redevelopment', '/contractors', '/careers'].includes(p),
-    items: [
-      { to: '/redevelopment', label: 'Redevelopment' },
-      { to: '/investors', label: 'For Investors' },
-      { to: '/contractors', label: 'For Contractors' },
-      { to: '/careers', label: 'Careers' },
-    ],
-  },
-  { to: '/resources', label: 'Buyer Guides' },
-  {
-    label: 'Contact',
-    match: (p) => ['/contact', '/book-a-call'].includes(p),
-    items: [
-      { to: '/contact', label: 'Contact Us' },
-      { to: '/book-a-call', label: 'Book a Video Call' },
-    ],
-  },
-];
 
 function Chevron({ open }) {
   return (
@@ -77,7 +42,6 @@ function NavDropdown({ group, active }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const menuId = useId();
-  const items = group.items.filter((i) => !i.adminOnly);
 
   useEffect(() => {
     if (!open) return;
@@ -101,32 +65,22 @@ function NavDropdown({ group, active }) {
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((o) => !o)}
-        className={`inline-flex items-center gap-1.5 min-h-[44px] px-1 text-sm tracking-[0.12em] uppercase whitespace-nowrap bg-transparent border-0 cursor-pointer transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`}
+        className={`inline-flex items-center gap-1.5 min-h-tap px-1 text-sm tracking-[0.12em] uppercase whitespace-nowrap bg-transparent border-0 cursor-pointer transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`}
       >
         {group.label}
         <Chevron open={open} />
       </button>
       {open && (
         <ul id={menuId} className="animate-dropdown absolute top-full left-0 m-0 p-0 list-none bg-navy min-w-[240px] shadow-[0_12px_32px_rgba(0,0,0,0.45)] border-t-2 border-gold z-50">
-          {items.map((item) => (
-            <li key={item.to || item.label}>
-              {item.onClick ? (
-                <button
-                  type="button"
-                  onClick={() => { setOpen(false); item.onClick(); }}
-                  className="w-full text-left flex items-center min-h-[48px] px-5 text-sm tracking-[0.08em] uppercase bg-transparent border-0 cursor-pointer text-red-300 hover:bg-white/5"
-                >
-                  {item.label}
-                </button>
-              ) : (
-                <Link
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center min-h-[48px] px-5 text-sm tracking-[0.08em] uppercase no-underline text-white border-b border-white/5 hover:bg-white/5 hover:text-gold transition-colors duration-200"
-                >
-                  {item.label}
-                </Link>
-              )}
+          {group.items.map((item) => (
+            <li key={item.to}>
+              <Link
+                to={item.to}
+                onClick={() => setOpen(false)}
+                className="flex items-center min-h-tap px-5 text-sm tracking-[0.08em] uppercase no-underline whitespace-nowrap text-white border-b border-white/5 hover:bg-white/5 hover:text-gold transition-colors duration-200"
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
@@ -168,16 +122,16 @@ export default function Header() {
   }, [mobileOpen]);
 
   const linkClass = (active) =>
-    `inline-flex items-center min-h-[44px] px-1 text-sm tracking-[0.12em] uppercase whitespace-nowrap no-underline transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`;
+    `inline-flex items-center min-h-tap px-1 text-sm tracking-[0.12em] uppercase whitespace-nowrap no-underline transition-colors duration-200 ${active ? 'text-gold' : 'text-white hover:text-gold'}`;
 
-  const iconBtn = 'w-11 h-11 flex items-center justify-center text-white/75 hover:text-gold transition-colors duration-200 bg-transparent border-0 cursor-pointer shrink-0';
+  const iconBtn = 'w-12 h-12 items-center justify-center text-white/75 hover:text-gold transition-colors duration-200 bg-transparent border-0 cursor-pointer shrink-0';
 
   return (
     <header
       className={`on-dark sticky top-0 z-50 bg-navy transition-shadow duration-300 ${scrolled ? 'shadow-[0_2px_24px_rgba(0,0,0,0.4)]' : ''}`}
     >
       <div className={`flex items-center justify-between gap-2 min-[400px]:gap-4 px-3 min-[400px]:px-4 sm:px-6 lg:px-8 2xl:px-12 transition-[padding] duration-300 ${scrolled ? 'py-2' : 'py-3.5'}`}>
-        <Link to="/" className="flex items-center gap-2 min-[400px]:gap-3 no-underline shrink-0" aria-label="U.K. Builders home">
+        <Link to="/" className="flex items-center gap-2 min-[400px]:gap-3 no-underline shrink-0" aria-label={LABELS.homeAria}>
           <img src={LOGO} alt="" width="40" height="40" className="w-10 h-10 object-contain" />
           {/* On phones under 400px the name stacks onto two lines so the header fits from 280px. */}
           <span className="font-serif text-[0.9375rem] leading-[1.1] min-[400px]:text-lg min-[400px]:leading-none sm:text-xl tracking-[0.1em] min-[400px]:tracking-[0.12em] uppercase text-gold">
@@ -186,8 +140,8 @@ export default function Header() {
         </Link>
 
         {/* Desktop navigation */}
-        <nav aria-label="Main" className="hidden xl:flex items-center gap-5 2xl:gap-7">
-          {NAV.map((entry) =>
+        <nav aria-label={LABELS.mainMenu} className="hidden xl:flex items-center gap-5 2xl:gap-7">
+          {MAIN_NAV.map((entry) =>
             entry.items ? (
               <NavDropdown key={entry.label} group={entry} active={entry.match(pathname)} />
             ) : (
@@ -201,21 +155,19 @@ export default function Header() {
         <div className="flex items-center gap-1">
           <AccessibilityPanel />
           {/* Dark mode is also in the accessibility panel; this shortcut only shows where there's room. */}
-          <button onClick={toggleDark} className={iconBtn.replace('w-11 h-11 flex', 'w-11 h-11 hidden sm:flex')} aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}>
+          <button type="button" onClick={toggleDark} className={`${iconBtn} hidden sm:flex`} aria-label={dark ? LABELS.lightMode : LABELS.darkMode}>
             {dark ? <SunIcon /> : <MoonIcon />}
           </button>
-          <Link
-            to="/contact"
-            className="hidden md:inline-flex [@media(max-height:500px)]:inline-flex items-center min-h-[44px] ml-2 px-6 whitespace-nowrap bg-gold text-navy text-sm font-semibold tracking-[0.14em] uppercase no-underline border border-gold hover:bg-gold-dark transition-colors duration-200"
-          >
-            Enquire
-          </Link>
+          <div className="hidden md:block [@media(max-height:500px)]:block ml-2">
+            <Button to={ENQUIRE_PATH} className="whitespace-nowrap">{LABELS.enquire}</Button>
+          </div>
           <button
-            className={`${iconBtn} xl:hidden`}
+            type="button"
+            className={`${iconBtn} flex xl:hidden`}
             onClick={() => setMobileOpen((o) => !o)}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            aria-label={mobileOpen ? LABELS.closeMenu : LABELS.openMenu}
           >
             <span className="relative block w-6 h-4" aria-hidden="true">
               <span className={`absolute left-0 w-6 h-[2px] bg-gold transition-all duration-300 ${mobileOpen ? 'top-[7px] rotate-45' : 'top-0'}`} />
@@ -230,16 +182,16 @@ export default function Header() {
       {mobileOpen && (
         <nav
           id="mobile-menu"
-          aria-label="Main"
+          aria-label={LABELS.mainMenu}
           className="xl:hidden absolute top-full left-0 right-0 h-[calc(100dvh-100%)] overflow-y-auto bg-navy border-t-2 border-gold pb-[calc(96px+env(safe-area-inset-bottom))]"
         >
           <ul className="m-0 p-0 list-none">
             <li>
               <Link to="/" className="flex items-center min-h-[56px] px-6 text-base tracking-[0.1em] uppercase no-underline text-white border-b border-white/10" aria-current={pathname === '/' ? 'page' : undefined}>
-                Home
+                {LABELS.home}
               </Link>
             </li>
-            {NAV.map((entry) => {
+            {MAIN_NAV.map((entry) => {
               if (!entry.items) {
                 return (
                   <li key={entry.to}>
@@ -265,9 +217,9 @@ export default function Header() {
                   </button>
                   {open && (
                     <ul id={panelId} className="m-0 p-0 list-none bg-white/5">
-                      {entry.items.filter((i) => !i.adminOnly).map((item) => (
+                      {entry.items.map((item) => (
                         <li key={item.to}>
-                          <Link to={item.to} className={`flex items-center min-h-[48px] pl-10 pr-6 text-sm tracking-[0.08em] uppercase no-underline ${pathname === item.to ? 'text-gold' : 'text-white/85'}`}>
+                          <Link to={item.to} className={`flex items-center min-h-tap pl-10 pr-6 text-sm tracking-[0.08em] uppercase no-underline ${pathname === item.to ? 'text-gold' : 'text-white/85'}`}>
                             {item.label}
                           </Link>
                         </li>
@@ -279,9 +231,7 @@ export default function Header() {
             })}
           </ul>
           <div className="px-6 pt-8">
-            <Link to="/contact" className="flex items-center justify-center min-h-[52px] bg-gold text-navy text-sm font-semibold tracking-[0.16em] uppercase no-underline">
-              Enquire Now
-            </Link>
+            <Button to={ENQUIRE_PATH} className="w-full">{LABELS.enquireNow}</Button>
           </div>
         </nav>
       )}

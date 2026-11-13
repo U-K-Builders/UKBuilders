@@ -1,3 +1,5 @@
+// Home page hero: Justin photo, headline, main buttons and the 55+ / 50+ /
+// 3,000+ facts strip. Used by HomePage.
 import { Link } from 'react-router-dom';
 
 const HERO_IMAGE = '/images/buildings/justin-night-view.jpg';

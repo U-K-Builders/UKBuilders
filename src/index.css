@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   U.K. Builders design system
-   Typography: Cinzel (display) + Josefin Sans (body), the ui-ux-pro-max
-   "Real Estate Luxury" pairing. Palette: the existing navy/gold brand, with
-   accessible variants so every text/background pair meets WCAG AA 4.5:1.
+   U.K. Builders design system: the site's global styles and design tokens.
+   Loaded once by src/main.jsx; every component uses these through Tailwind
+   classes (e.g. `bg-navy`, `text-body`, `min-h-tap`).
+   Typography: Cinzel (display headings) + Josefin Sans (everything else).
+   Palette: the navy/gold brand, with accessible variants so every
+   text/background pair meets WCAG AA 4.5:1.
    ═══════════════════════════════════════════════════════════════════════════ */
 @theme {
   /* Extra screen sizes for large monitors (Tailwind's largest is 2xl = 1536px) */
@@ -19,9 +21,39 @@
   --color-gold-bright: #D4A84E; /* always-bright gold: use for gold text on an
                                    element that itself has a navy background */
 
+  /* `font-serif` and `font-display` are the same: Cinzel, an all-capitals
+     display face. Use it for large headings only, never for body text. */
   --font-serif:   'Cinzel', Georgia, serif;
   --font-display: 'Cinzel', Georgia, serif;
   --font-sans:    'Josefin Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Type scale (classes `text-small` … `text-display`). Body copy is 18px;
+     nothing on the site should be smaller than 16px (`text-small`).
+     Tailwind's own `text-xs`/`text-sm` (12/14px) are still used by older
+     pages; Phase 3 moves them onto this scale. */
+  --text-small:   1rem;      /* 16px: labels, captions, legal lines (the minimum) */
+  --text-small--line-height: 1.5;
+  --text-body:    1.125rem;  /* 18px: paragraphs */
+  --text-body--line-height: 1.65;
+  --text-lead:    1.25rem;   /* 20px: intro paragraphs */
+  --text-lead--line-height: 1.6;
+  --text-title:   1.5rem;    /* 24px: card and small section titles */
+  --text-title--line-height: 1.3;
+  --text-heading: 2.25rem;   /* 36px: section headings */
+  --text-heading--line-height: 1.2;
+  --text-display: 3.5rem;    /* 56px: page headings */
+  --text-display--line-height: 1.08;
+
+  /* Spacing (classes like `min-h-tap`, `px-gutter`, `py-section`) */
+  --spacing-tap:     3rem;   /* 48px: minimum height/width of anything tappable */
+  --spacing-gutter:  1.25rem;/* 20px: page side padding on phones */
+  --spacing-stack:   1.5rem; /* 24px: gap between related blocks */
+  --spacing-section: 6rem;   /* 96px: vertical padding of a page section */
+
+  /* Corners: the brand is square-edged; only icons and pills are round */
+  --radius-button: 0px;
+  --radius-card:   0px;
+  --radius-pill:   9999px;
 
   /* Neutral text scale (all ≥ 4.5:1 on white and on the cream surfaces) */
   --color-text-dark:      #333333;
@@ -75,6 +107,10 @@
 :is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark, .dark) .text-gold:is(:hover, :focus-visible) {
   color: var(--color-gold);
 }
+
+/* Gold outline buttons that fill gold on hover switch to navy text
+   (the adaptive-gold rules above would otherwise keep gold text on gold). */
+.text-gold.hover\:text-navy:hover { color: var(--color-navy); }
 
 /* Muted text inside (or on) dark containers */
 :is(.bg-navy, .bg-navy-dark, [class*="bg-navy"], .on-dark) .text-text-muted,
