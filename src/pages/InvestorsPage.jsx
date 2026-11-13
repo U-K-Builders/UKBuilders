@@ -182,7 +182,7 @@ export default function InvestorsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[
                 { name: 'Justin', config: '2, 3 & 4 BHK', possession: 'August 2027', carpet: '620 – 1,367 sq.ft.', note: `${RERA.label} ${RERA.projects.justin.number}` },
-                { name: 'Christina', config: '2, 3 & 4 BHK', possession: 'August 2028', carpet: '650 – 1,470 sq.ft.', note: `${RERA.label} ${RERA.projects.christina.number}` },
+                { name: 'Christina', config: '2, 3 & 4 BHK', possession: 'August 2028', carpet: '628.75 – 1,470 sq.ft.', note: `${RERA.label} ${RERA.projects.christina.number}` },
               ].map((p) => (
                 <div key={p.name} className="border border-gold/40 bg-navy text-white p-8 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300">
                   <span className="block text-xs uppercase tracking-[3px] text-gold mb-1">{p.note}</span>

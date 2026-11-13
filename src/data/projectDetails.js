@@ -35,6 +35,20 @@ const JUSTIN_AMENITIES = [
   'Premium Branded Fittings',
 ];
 
+// Christina amenities: only what the Christina plan set (12.08.26) shows.
+const CHRISTINA_AMENITIES = [
+  'Fitness Centre (5th-floor amenity podium)',
+  'Indoor Play Area',
+  'Multipurpose Area',
+  'Landscaped Lawns',
+  'Jogging Track',
+  'Society Office',
+  'Barbecue Deck on the Terrace',
+  'Two Passenger Lifts and a Fire Lift',
+  '64 Car Parking Spaces',
+  'Watchman Cabin at the Entrance',
+];
+
 const ORLEM_NEIGHBOURHOOD = {
   schools: [
     { name: 'Pinnacle High International School',      lat: 19.1942, lng: 72.8381, distance: '~0.4 km' },
@@ -196,22 +210,33 @@ export const projectDetails = {
     floors: 13,
     possession: 'August 2028',
     possessionDate: '2028-08-31',
-    amenities: JUSTIN_AMENITIES,
+    amenities: CHRISTINA_AMENITIES,
     moodBoard: SIGNATURE_MOOD_BOARD,
+    // Areas, bedrooms, toilets and floors from the Christina plan set (12.08.26),
+    // which the owner confirmed is correct (13 Nov 2026). Flats are on floors
+    // 6–18; the 7th and 14th are refuge floors with 3 flats each. Sold-out
+    // flags are from earlier sales data; the sales sheet will update them.
     floorPlans: [
-      { type: '2 BHK', subType: 'Type A', carpet: '650 sq.ft.', beds: 2, baths: 2 },
-      { type: '2 BHK', subType: 'Type B', carpet: '671 sq.ft.', beds: 2, baths: 2 },
-      { type: '2 BHK', subType: 'Type C', carpet: '697 sq.ft.', beds: 2, baths: 2 },
-      { type: '2 BHK', subType: 'Type D', carpet: '801 sq.ft.', beds: 2, baths: 2, soldOut: true },
-      { type: '3 BHK', carpet: '855 sq.ft.', beds: 3, baths: 3, soldOut: true },
+      { type: '2 BHK', subType: 'Floors 6–11', carpet: '628.75 sq.ft.', beds: 2, baths: 2 },
+      { type: '2 BHK', subType: 'Floors 6–11', carpet: '649.75 sq.ft.', beds: 2, baths: 2 },
+      { type: '2 BHK', subType: 'Type A · Floors 6–12', carpet: '650.00 sq.ft.', beds: 2, baths: 2 },
+      { type: '2 BHK', subType: 'Type B · Floors 12–18', carpet: '670.50 sq.ft.', beds: 2, baths: 2 },
+      { type: '2 BHK', subType: 'Type C · Floors 13, 15–18', carpet: '697.00 sq.ft.', beds: 2, baths: 2 },
+      { type: '3 BHK', subType: 'Floors 6, 8–11', carpet: '779.50 sq.ft.', beds: 3, baths: 2 },
+      { type: '2 BHK', subType: 'Type D · 12th Floor, with Terrace', carpet: '800.50 sq.ft.', beds: 2, baths: 2, soldOut: true },
+      { type: '3 BHK', subType: '14th Floor', carpet: '854.75 sq.ft.', beds: 3, baths: 2, soldOut: true },
       { type: '2 BHK + 2 BHK', subType: 'Jodi', carpet: '1,320 – 1,470 sq.ft.', beds: 4, baths: 4 },
     ],
     shops: [
-      { type: 'Shop 1', carpet: '280 sq.ft.' },
-      { type: 'Shop 2', carpet: '332 sq.ft.' },
-      { type: 'Shop 3', carpet: '334 sq.ft.' },
-      { type: 'Shop 4', carpet: '346 sq.ft.' },
-      { type: 'Shop 5', carpet: '350 sq.ft.' },
+      // Six ground-floor shops, confirmed by the owner (13 Nov 2026). Areas are the
+      // R/A figures from the Christina plan set (12.08.26); unit sizes match the
+      // final plinth layout (23.09.26).
+      { type: 'Shop 1', carpet: '333.50 sq.ft.' },
+      { type: 'Shop 2', carpet: '349.75 sq.ft.' },
+      { type: 'Shop 3', carpet: '280.00 sq.ft.' },
+      { type: 'Shop 4', carpet: '280.00 sq.ft.' },
+      { type: 'Shop 5', carpet: '345.50 sq.ft.' },
+      { type: 'Shop 6', carpet: '331.75 sq.ft.' },
     ],
     constructionPhotos: [],
     neighbourhood: ORLEM_NEIGHBOURHOOD,
