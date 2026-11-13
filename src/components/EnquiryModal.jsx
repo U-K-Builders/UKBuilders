@@ -128,7 +128,7 @@ export default function EnquiryModal({ projectName, floorPlans, onClose }) {
                 >
                   <option value="">No preference</option>
                   {floorPlans.filter((plan) => !plan.soldOut).map((plan) => {
-                    const label = plan.subType ? `${plan.type} — ${plan.subType}` : plan.type;
+                    const label = `${plan.subType ? `${plan.type} — ${plan.subType}` : plan.type}${plan.carpet ? ` (${plan.carpet})` : ''}`;
                     return <option key={label} value={label}>{label}</option>;
                   })}
                 </select>
