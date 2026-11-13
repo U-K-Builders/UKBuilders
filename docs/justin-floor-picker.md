@@ -97,9 +97,7 @@ What it shows (metres, scale 1:100):
   watchman cabin at the entry/exit on Dominic Road No. 3.
 - Building footprint about 22.09 × 20.86 m.
 
-**Open question:** the site (`projectDetails.js`) lists 5 shops (280–350
-sq.ft.) but the final plinth shows 6 units. Don't change the site until the
-owner confirms which units are sold as shops and gives their RERA carpet areas.
+**Settled 13 Nov:** all 6 units are shops (owner). Areas are in the plan set below.
 
 ## Christina: floor plan set ("brochure", 12.08.26)
 
@@ -130,8 +128,10 @@ floor around it.
 The ground-floor page (12.08.26) is older than the final plinth layout
 (23.09.26); the unit sizes match. The plinth layout stays the reference.
 
-**Don't match the site yet (owner to confirm):** the site lists 5 shops (6
-units here); site flat types A 650 / B 671 / C 697 / D 801 / 3 BHK 855 / Jodi
+**Settled 13 Nov:** the owner confirmed **six shops**; the site now lists all six
+with these areas (branch feature/hotfix-small-phones-dark-mode).
+
+**Doesn't match the site yet (owner to confirm):** site flat types A 650 / B 671 / C 697 / D 801 / 3 BHK 855 / Jodi
 1,320–1,470, while the plans also have 628.75, 649.75 and 779.50. The sales
 sheet will map each unit to its type.
 
