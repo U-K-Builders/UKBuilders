@@ -2,26 +2,22 @@ import { useState } from 'react';
 import useLeadSubmit from '../hooks/useLeadSubmit';
 import { Link } from 'react-router-dom';
 
+// TODO (Avi, Nov 2026): these claims were removed until they're verified with a
+// source. Restore only with evidence: "₹2 Cr+ typical capital appreciation",
+// "100% on-time delivery record", "zero project abandonment", rental of
+// "₹55,000 – ₹1.10 Lac per month" and "gross yields of 3.5 – 4.5%",
+// "₹500 Cr+ development pipeline", "14 storeys, ~100 units" and the
+// "Final units available" / "Limited inventory" labels.
 const HIGHLIGHTS = [
   {
     stat: '55+',
-    label: 'Years of Delivered Excellence',
-    desc: 'A proven track record since 1969 across 50+ completed projects — zero project abandonment, every possession honoured.',
-  },
-  {
-    stat: '₹2 Cr+',
-    label: 'Typical Capital Appreciation',
-    desc: 'Orlem, Malad West has consistently outpaced Mumbai\'s average appreciation owing to its scarcity of FSI-eligible land.',
-  },
-  {
-    stat: '100%',
-    label: 'On-Time Delivery Record',
-    desc: 'Every completed project was handed over within the committed timeline, protecting the capital and rental plans of our investors.',
+    label: 'Years of Building',
+    desc: 'Building homes in Orlem and Malad West since 1969, with 50+ projects completed.',
   },
   {
     stat: 'RERA',
-    label: 'Compliant & Transparent',
-    desc: 'All ongoing projects are RERA-registered or pending registration, with full disclosure of construction progress and financials.',
+    label: 'MahaRERA Registered',
+    desc: 'Justin (PR1180002500760) and Christina (PR1180002600221) are registered with MahaRERA.',
   },
 ];
 
@@ -31,16 +27,8 @@ const REASONS = [
     body: 'Orlem, Malad West sits at the nexus of the Western Express Highway, Link Road, and Mindspace business district — giving residents both connectivity and calm.',
   },
   {
-    title: 'Premium Rental Yields',
-    body: '2 & 3 BHK units in the Orlem pocket command ₹55,000 – ₹1.10 Lac per month in rent, translating to gross yields of 3.5 – 4.5% — above the Mumbai average.',
-  },
-  {
     title: 'NRI-Friendly Process',
     body: 'We handle POA registration, NRE/NRO fund routing, Form 13 TDS certificates, and FEMA compliance so your investment is seamless from abroad.',
-  },
-  {
-    title: 'Exclusive Inventory',
-    body: 'Our projects are small-format (14 storeys, ~100 units) — meaning limited supply, higher exclusivity, and sustained resale premiums.',
   },
 ];
 
@@ -146,7 +134,7 @@ export default function InvestorsPage() {
         </h1>
         <span className="block w-[60px] h-[2px] bg-gold mx-auto mb-6" />
         <p className="text-text-muted max-w-[600px] mx-auto text-sm leading-[1.8]">
-          Five decades of on-time delivery, a prime Orlem micro-market, and a development pipeline of ₹500 Cr+ — a compelling case for the discerning real estate investor.
+          Building homes in Orlem and Malad West since 1969. Explore our MahaRERA-registered projects, Justin and Christina.
         </p>
       </div>
 
@@ -155,7 +143,7 @@ export default function InvestorsPage() {
 
           {/* Stats */}
           <section>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {HIGHLIGHTS.map((h) => (
                 <div key={h.stat} className="border border-border-light bg-white p-8 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 text-center">
                   <span className="block gradient-text font-serif text-4xl font-black mb-2">{h.stat}</span>
@@ -188,11 +176,10 @@ export default function InvestorsPage() {
               Current Investment Opportunities
               <span className="block w-[50px] h-[2px] bg-gold mt-3 mb-8" />
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[
-                { name: 'Justin', config: '2, 3 & 4 BHK', possession: '2027', carpet: '620 – 1,367 sq.ft.', note: 'Final units available' },
-                { name: 'Christina', config: '2, 3 & 4 BHK', possession: '2028', carpet: '650 – 1,470 sq.ft.', note: 'Limited inventory' },
-                { name: 'Elvira', config: '1 & 2 BHK', possession: '2027', carpet: '400 – 725 sq.ft.', note: 'Compact investment entry' },
+                { name: 'Justin', config: '2, 3 & 4 BHK', possession: 'August 2027', carpet: '620 – 1,367 sq.ft.', note: 'MahaRERA PR1180002500760' },
+                { name: 'Christina', config: '2, 3 & 4 BHK', possession: 'August 2028', carpet: '650 – 1,470 sq.ft.', note: 'MahaRERA PR1180002600221' },
               ].map((p) => (
                 <div key={p.name} className="border border-gold/40 bg-navy text-white p-8 hover:border-gold hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300">
                   <span className="block text-xs uppercase tracking-[3px] text-gold mb-1">{p.note}</span>

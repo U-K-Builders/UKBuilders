@@ -22,6 +22,13 @@ Aug 2028, RERA `PR1180002600221`. Phone +91 98203 11177, WhatsApp
 +91 77100 38007, email u.k.builders1981@gmail.com, office F-34 Sej Plaza,
 Marve Road, Malad West, Mumbai 400 064.
 
+Owner answers (13 Nov 2026), so nobody invents these:
+- The businesses are **partnership firms** (U.K. Builders, U.K. Properties): there is **no CIN**. Show the firm name and GSTIN instead. GSTIN: TODO, Avi will provide.
+- **Elvira** is not yet MahaRERA registered (in progress), so it is hidden everywhere (`hidden: true` in `src/data/projects.js`). Unhide only with its RERA number.
+- **Investor figures** (appreciation, on-time %, yields, pipeline) are unverified and removed; the list is in a TODO at the top of `src/pages/InvestorsPage.jsx`. Restore only with a source.
+- Contact person and details, the privacy decisions, and which extra pages to keep (Investors, Redevelopment, Contractors, Careers, Buyer Guides, Video Call): TODO, Avi will provide.
+- The old admin password from the removed client-side login is being changed by Avi wherever it was reused.
+
 ---
 
 ## 2. Accounts and infrastructure

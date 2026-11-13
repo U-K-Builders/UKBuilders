@@ -1,8 +1,10 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import useLeadSubmit from '../hooks/useLeadSubmit';
+import { ongoingProjects } from '../data/projects';
 
-const PROJECTS = ['Justin', 'Christina', 'Elvira', 'New Life', 'Madonna', 'General Enquiry'];
+// Only projects the public may see (never hidden or unregistered ones).
+const PROJECTS = [...ongoingProjects.filter((p) => !p.hidden).map((p) => p.name), 'General Enquiry'];
 
 const TIMEZONES = [
   { label: 'India — IST (UTC+5:30)', offset: 330 },

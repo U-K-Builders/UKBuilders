@@ -25,8 +25,8 @@ const PILLARS = [
         <path d="M9 12l2 2 4-4" />
       </svg>
     ),
-    title: 'RERA Compliant',
-    desc: 'All projects fully registered and compliant with Maharashtra RERA regulations.',
+    title: 'MahaRERA Registered',
+    desc: 'Our ongoing projects, Justin and Christina, are registered with MahaRERA.',
   },
   {
     icon: (

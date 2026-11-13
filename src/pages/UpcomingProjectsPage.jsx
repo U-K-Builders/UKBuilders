@@ -22,6 +22,19 @@ export default function UpcomingProjectsPage() {
 
       <div className="py-16 md:py-24 px-5 bg-surface-subtle">
         <div className="max-w-[1200px] mx-auto flex flex-col gap-16">
+          {visibleProjects.length === 0 && (
+            <div className="text-center max-w-[560px] mx-auto">
+              <p className="text-text-secondary text-lg leading-[1.8] mb-8">
+                New projects will be announced here once they are registered with MahaRERA. Meanwhile, homes are available in our two ongoing projects.
+              </p>
+              <Link
+                to="/projects/ongoing"
+                className="inline-flex items-center min-h-[48px] px-8 bg-gold text-navy text-sm font-semibold tracking-[0.14em] uppercase no-underline border border-gold hover:bg-gold-dark transition-colors duration-200"
+              >
+                See Justin and Christina
+              </Link>
+            </div>
+          )}
           {visibleProjects.map((project) => (
             <div key={project.name} className="flex flex-col gap-4">
               <ProjectCard project={project} />

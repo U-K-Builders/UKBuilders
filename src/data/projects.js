@@ -24,6 +24,10 @@ export const ongoingProjects = [
 export const upcomingProjects = [
   {
     name: 'Elvira',
+    // MahaRERA registration in progress (Nov 2026). The law doesn't allow
+    // advertising before registration: remove `hidden` once it's registered
+    // and add the RERA number to projectDetails.js.
+    hidden: true,
     subtitle: 'Coming Soon',
     image: null,
     alt: 'Elvira Building View',

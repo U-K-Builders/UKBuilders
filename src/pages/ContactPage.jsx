@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import useLeadSubmit from '../hooks/useLeadSubmit';
+import { ongoingProjects } from '../data/projects';
 
+// Only projects the public may see (never hidden or unregistered ones).
 const PROJECT_OPTIONS = [
-  'Justin',
-  'Christina',
-  'Elvira',
-  'New Life',
-  'Madonna',
+  ...ongoingProjects.filter((p) => !p.hidden).map((p) => p.name),
   'General Inquiry',
   'Investment Opportunity',
 ];
