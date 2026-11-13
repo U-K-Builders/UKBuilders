@@ -77,6 +77,30 @@ RERA carpet areas (carpet + balcony) matched to the site's flat types by area.
 RERA statements exist for: Flat 1 at 8th–9th and 10th–13th; Flat 2 at 7th–9th,
 10th–13th and 14th; Flats 3 & 4 at 7th–10th, 11th–13th and 14th–18th.
 
+## Christina: plinth (ground floor) layout — FINAL
+
+**Owner's rule (13 Nov 2026): the plinth layout dated 23.09.26 is the final
+ground-floor drawing for Christina. Use it even if other ground-floor drawings
+are shared later.** (File `CHRISTINA - PLINTH LAYOUT 23.09.26.pdf`, architect
+Concrete Designs; private, never commit it: it carries the society's details
+and the architect's personal phone numbers.)
+
+What it shows (metres, scale 1:100):
+- **6 ground-floor units** facing Dominic Road No. 3, each with a toilet:
+  Unit 1 3.66 × 6.71, Unit 2 3.81 × 6.86, Unit 3 3.05 × 6.86,
+  Unit 4 3.05 × 6.86, Unit 5 3.81 × 6.71, Unit 6 3.66 × 6.71.
+  These are dimensions, not RERA carpet areas.
+- Entrance lobby 6.37 × 6.28 (+1.05 m level); 2 lifts (1.82 × 3.16 each); fire
+  lift 2.51 × 1.83; smoke-check lobby 1.52 × 1.83; staircase.
+- 6.00 m two-way ramp up to the 1st podium; 6.00 m driveway; substation space
+  4.57 × 5.72; electrical panel 2.24 × 5.33; underground water tank below;
+  watchman cabin at the entry/exit on Dominic Road No. 3.
+- Building footprint about 22.09 × 20.86 m.
+
+**Open question:** the site (`projectDetails.js`) lists 5 shops (280–350
+sq.ft.) but the final plinth shows 6 units. Don't change the site until the
+owner confirms which units are sold as shops and gives their RERA carpet areas.
+
 ## Still needed from the owner
 
 **For Christina:** its signed approved plan (PDF), its sales sheet and its
