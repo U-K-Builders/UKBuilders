@@ -1,4 +1,19 @@
-# Justin: "Choose your floor" and 3D flat explorer (PAUSED)
+# Justin and Christina: "Choose your floor" and 3D flat explorer (PAUSED)
+
+> **13 Nov 2026: the owner wants this for BOTH ongoing projects, Justin and
+> Christina.** Build it once as a shared component driven by per-project data
+> (`src/data/`), not two copies. A third reference video added two features:
+> - **Day / night** versions of each room render (toggle).
+> - **Furnished / bare shell** versions of each room (toggle or slider), so a
+>   buyer sees the room styled and as handed over.
+> Both need two renders per room from the visualiser (four if both toggles are
+> used), so confirm with the owner which ones are worth the render cost.
+>
+> **Christina needs its own documents** (nothing received yet): the approved
+> plan PDF (like Justin's), the sales sheet, and renders. Christina facts on
+> record: MahaRERA PR1180002600221, possession Aug 2028, 105,000 sq.ft
+> built-up; the site lists 5 podium + 13 storeys (unconfirmed by the owner);
+> flat types 2 BHK A/B/C/D, 3 BHK, Jodi, 5 shops (`src/data/projectDetails.js`).
 
 **Status:** paused on 12 November 2026 at the owner's request. Waiting on the
 items in "Still needed" below. Remind the owner about this whenever they start
@@ -63,6 +78,13 @@ RERA statements exist for: Flat 1 at 8th–9th and 10th–13th; Flat 2 at 7th–
 10th–13th and 14th; Flats 3 & 4 at 7th–10th, 11th–13th and 14th–18th.
 
 ## Still needed from the owner
+
+**For Christina:** its signed approved plan (PDF), its sales sheet and its
+renders, the same as listed for Justin below.
+
+**For both:** whether to have day/night and furnished/bare views (each doubles
+the room renders).
+
 
 1. **Sales sheet** (Excel): one row per flat: flat number as sold (e.g. 1101),
    floor, plan position (Flat 1–4), type (A / B / C / 3 BHK / Jodi), status
